@@ -145,27 +145,6 @@ body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer
 .sec-num{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:2.8rem;display:flex;align-items:center;gap:1rem;}
 .sec-num::after{content:'';flex:1;height:1px;background:var(--line);max-width:70px;}
 
-/* ─── PILLAR TILES (hover overlay) ────────────────────── */
-.tile-grid{padding:0 2rem 5rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;position:relative;z-index:2;}
-.tile-flip{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;-webkit-tap-highlight-color:transparent;}
-.tile-front{position:absolute;inset:0;display:flex;flex-direction:column;}
-.tile-front img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .6s ease;filter:brightness(.55) saturate(.7);}
-.tile-flip:hover .tile-front img,.tile-flip.flipped .tile-front img{transform:scale(1.06);filter:brightness(.25) saturate(.4);}
-.tile-title{position:absolute;bottom:1.8rem;left:1.6rem;right:1.6rem;font-family:var(--display);font-size:clamp(1.6rem,3vw,2.4rem);color:var(--fg);letter-spacing:.04em;line-height:1;z-index:2;transition:opacity .4s var(--ease),transform .4s var(--ease);}
-.tile-flip:hover .tile-title,.tile-flip.flipped .tile-title{opacity:0;transform:translateY(8px);}
-.tile-overlay{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:2.2rem 1.8rem;background:linear-gradient(to top,rgba(10,11,13,.96) 0%,rgba(10,11,13,.5) 50%,rgba(10,11,13,.1) 100%);opacity:0;transform:translateY(12px);transition:opacity .45s var(--ease),transform .45s var(--ease);}
-.tile-flip:hover .tile-overlay,.tile-flip.flipped .tile-overlay{opacity:1;transform:translateY(0);}
-.tile-kpi{font-family:var(--display);font-size:2rem;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:.5rem;}
-.tile-overlay-title{font-family:var(--display);font-size:1.3rem;color:var(--fg);letter-spacing:.04em;margin-bottom:.8rem;line-height:1;}
-.tile-overlay p{font-size:.85rem;color:rgba(237,233,224,.68);line-height:1.72;margin:0;}
-/* Touch devices */
-@media(hover:none){
-  .tile-flip.flipped .tile-front img{transform:scale(1.06);filter:brightness(.25) saturate(.4);}
-  .tile-flip.flipped .tile-overlay{opacity:1;transform:translateY(0);}
-  .tile-flip.flipped .tile-title{opacity:0;}
-}
-@media(max-width:700px){.tile-grid{grid-template-columns:1fr;gap:2px;}}
-
 /* ─── EXPERIENCE CARDS (replaces Services accordion) ──── */
 #section-experience{padding:4.5rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
 .exp-layout{max-width:1200px;margin:0 auto;}
