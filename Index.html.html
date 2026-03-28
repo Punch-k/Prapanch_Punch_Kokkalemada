@@ -1,0 +1,3692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punch Kokkalemada | MBA -- Commercial Strategy & GTM Execution</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET ───────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0b0d;--bg2:#0f1012;--fg:#ede9e0;
+  --muted:#787570;--line:rgba(237,233,224,.1);
+  --gold:#c9a84c;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.76,0,.24,1);
+  --sans:'DM Sans',sans-serif;
+  --serif:'DM Serif Display',Georgia,serif;
+  --display:'Bebas Neue',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:300;line-height:1.65;overflow-x:hidden;cursor:none;}
+
+/* ─── PRELOADER ───────────────────────────────────────── */
+#preloader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity .8s var(--ease),visibility .8s;}
+.loader-track{width:200px;height:1px;background:rgba(237,233,224,.1);overflow:hidden;}
+.loader-bar{width:0%;height:100%;background:var(--gold);transition:width .2s linear;}
+.loader-text{font-family:var(--display);font-size:2rem;letter-spacing:.1em;color:var(--fg);}
+body.loaded #preloader{opacity:0;visibility:hidden;}
+
+/* ─── AMBIENT AURA ────────────────────────────────────── */
+#aura{position:fixed;top:0;left:0;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 60%);border-radius:50%;pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:opacity .5s;mix-blend-mode:screen;will-change:transform;}
+
+/* ─── SCROLL PROGRESS ─────────────────────────────────── */
+#sprog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold);z-index:9000;box-shadow:0 0 10px rgba(201,168,76,.7);transition:width .06s linear;pointer-events:none;}
+
+/* ─── CURSOR ──────────────────────────────────────────── */
+#cdot{position:fixed;width:6px;height:6px;background:var(--fg);border-radius:50%;pointer-events:none;z-index:8999;transform:translate(-50%,-50%);transition:transform .08s,opacity .2s;}
+#cring{position:fixed;width:30px;height:30px;border:1px solid rgba(237,233,224,.28);border-radius:50%;pointer-events:none;z-index:8998;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .25s,background .25s;}
+#cring.hov{width:52px;height:52px;border-color:rgba(201,168,76,.55);background:rgba(201,168,76,.04);}
+#cring.clk{width:18px;height:18px;background:rgba(237,233,224,.1);}
+#ctip{position:fixed;background:var(--gold);color:#0a0b0d;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .65rem;pointer-events:none;z-index:8997;opacity:0;transform:translate(-50%,-160%);transition:opacity .15s;font-family:var(--sans);font-weight:500;white-space:nowrap;}
+
+/* ─── GRAIN ───────────────────────────────────────────── */
+body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer-events:none;z-index:7000;opacity:.38;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  animation:grain .35s steps(1) infinite;}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}20%{transform:translate(3%,2%)}30%{transform:translate(-1%,3%)}40%{transform:translate(2%,-2%)}50%{transform:translate(-3%,1%)}60%{transform:translate(1%,-2%)}70%{transform:translate(3%,2%)}80%{transform:translate(-2%,2%)}90%{transform:translate(1%,-3%)}}
+
+/* ─── SECTION-DOT NAV ─────────────────────────────────── */
+#sdots{position:fixed;right:1.6rem;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;gap:.65rem;}
+.sdot{width:5px;height:5px;border-radius:50%;background:rgba(237,233,224,.18);cursor:pointer;transition:background .3s,transform .3s,height .3s var(--ease);position:relative;}
+.sdot.act{background:var(--gold);height:18px;border-radius:3px;}
+.sdot:hover{background:rgba(237,233,224,.5);}
+.sdot::after{content:attr(data-lbl);position:absolute;right:calc(100% + .8rem);top:50%;transform:translateY(-50%);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;color:rgba(237,233,224,.4);opacity:0;transition:opacity .2s;pointer-events:none;}
+.sdot:hover::after{opacity:1;}
+
+/* ─── MAIN NAV ────────────────────────────────────────── */
+#mainnav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.65rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background .45s,backdrop-filter .45s,padding .4s;}
+#mainnav.stk{background:rgba(10,11,13,.88);backdrop-filter:blur(20px);padding:1rem 3rem;border-bottom:1px solid var(--line);}
+.nav-logo{font-family:var(--display);font-size:1rem;letter-spacing:.1em;color:var(--fg);text-decoration:none;transition:opacity .2s;}
+.nav-logo span{color:var(--gold);}
+.nav-logo:hover{opacity:.65;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(237,233,224,.35);text-decoration:none;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .32s var(--ease);}
+.nav-links a:hover,.nav-links a.act{color:var(--fg);}
+.nav-links a.act::after,.nav-links a:hover::after{width:100%;}
+.nav-cta{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid rgba(237,233,224,.2);padding:.5rem 1.2rem;position:relative;overflow:hidden;transition:color .3s,border-color .3s;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform .32s var(--ease);}
+.nav-cta:hover::before{transform:translateX(0);}
+.nav-cta:hover{color:var(--bg);border-color:var(--gold);}
+.nav-cta>span{position:relative;z-index:1;}
+
+/* ─── HERO CANVAS ─────────────────────────────────────── */
+
+#section-intro{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 3rem 5rem;position:relative;overflow:hidden;}
+#hero-bg{position:absolute;inset:0;z-index:0;background:url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1920&q=80') center/cover no-repeat;filter:brightness(.2) saturate(.7);transform:scale(1.1);will-change:transform;}
+.hero-content{position:relative;z-index:2;max-width:980px;}
+.line-mask{overflow:hidden;display:block;padding-bottom:.12em;margin-bottom:-.12em;}
+.word{display:inline-block;transform:translateY(110%);transition:transform .9s var(--ease);will-change:transform;}
+.word.show{transform:translateY(0);}
+.hero-eyebrow{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.85);margin-bottom:2rem;opacity:0;transform:translateY(10px);transition:opacity .65s .15s,transform .65s .15s var(--ease);}
+.hero-eyebrow.show{opacity:1;transform:none;}
+.hero-hl{font-family:var(--display);font-size:clamp(3.8rem,10vw,9rem);line-height:.92;letter-spacing:.02em;margin-bottom:2.2rem;}
+.hero-hl em{font-family:var(--serif);font-style:italic;font-size:.82em;color:rgba(237,233,224,.48);}
+.hero-sub{max-width:580px;font-size:1rem;color:rgba(237,233,224,.54);line-height:1.78;margin-bottom:2.8rem;opacity:0;transform:translateY(14px);transition:opacity .7s .85s,transform .7s .85s var(--ease);}
+.hero-sub.show{opacity:1;transform:none;}
+.hero-actions{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;opacity:0;transform:translateY(14px);transition:opacity .7s 1.05s,transform .7s 1.05s var(--ease);}
+.hero-actions.show{opacity:1;transform:none;}
+.scroll-hint{position:absolute;bottom:2.5rem;left:3rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,233,224,.22);display:flex;align-items:center;gap:.6rem;z-index:2;}
+.scroll-line{width:1px;height:0;background:rgba(237,233,224,.15);animation:sline 1.8s 1.6s var(--ease) forwards;}
+@keyframes sline{to{height:40px}}
+
+/* Buttons */
+.btn-pri{display:inline-flex;align-items:center;gap:.5rem;background:var(--fg);color:var(--bg);padding:.85rem 2rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;font-weight:500;position:relative;overflow:hidden;transition:box-shadow .3s;}
+.btn-pri::after{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}
+.btn-pri:hover::after{transform:scaleX(1);}
+.btn-pri>span{position:relative;z-index:1;transition:color .35s;}
+.btn-pri:hover>span{color:var(--bg);}
+.btn-pri:hover{box-shadow:0 10px 36px rgba(201,168,76,.28);}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;color:rgba(237,233,224,.48);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:color .2s,gap .3s;}
+.btn-ghost:hover{color:var(--fg);gap:.9rem;}
+
+/* ─── HERO STAT STRIP ─────────────────────────────────── */
+.stat-strip{display:flex;border-bottom:1px solid var(--line);position:relative;z-index:2;background:var(--bg);}
+.stat-strip-item{flex:1;padding:1.8rem 2.5rem;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:.3rem;transition:background .3s;}
+.stat-strip-item:last-child{border-right:none;}
+.stat-strip-item:hover{background:rgba(201,168,76,.02);}
+.stat-strip-n{font-family:var(--display);font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1;letter-spacing:.02em;color:var(--fg);}
+.stat-strip-n span{color:var(--gold);}
+.stat-strip-l{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);line-height:1.4;}
+@media(max-width:700px){.stat-strip{flex-direction:column;}.stat-strip-item{border-right:none;border-bottom:1px solid var(--line);padding:1.2rem 1.4rem;}.stat-strip-item:last-child{border-bottom:none;}}
+
+/* ─── SCROLL-TIED MARQUEE ─────────────────────────────── */
+.mq-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.85rem 0;position:relative;z-index:2;}
+.mq-track{display:flex;gap:2.8rem;white-space:nowrap;will-change:transform;}
+.mq-item{font-family:var(--display);font-size:2.4rem;letter-spacing:.05em;color:rgba(237,233,224,.08);flex-shrink:0;transition:color .3s;}
+.mq-item.hi{color:rgba(201,168,76,.4);}
+.mq-item:hover{color:rgba(237,233,224,.28);}
+
+/* Bottom tech marquee */
+.bmq-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.3rem 0;margin-top:3.5rem;}
+.bmq-track{display:flex;gap:3.5rem;white-space:nowrap;will-change:transform;}
+.bn{font-family:var(--display);font-size:1.7rem;letter-spacing:.06em;color:rgba(237,233,224,.1);flex-shrink:0;transition:color .3s;}
+.bn:hover{color:rgba(237,233,224,.3);}
+
+/* ─── ANIMATION ATOMS ─────────────────────────────────── */
+[data-a]{will-change:transform,opacity;}
+[data-a="up"]{opacity:0;transform:translateY(38px);transition:opacity .78s var(--ease),transform .78s var(--ease);}
+[data-a="up"].in{opacity:1;transform:none;}
+[data-a="left"]{opacity:0;transform:translateX(-42px);transition:opacity .78s var(--ease),transform .78s var(--ease);}
+[data-a="left"].in{opacity:1;transform:none;}
+[data-a="right"]{opacity:0;transform:translateX(42px);transition:opacity .78s var(--ease),transform .78s var(--ease);}
+[data-a="right"].in{opacity:1;transform:none;}
+[data-a="clip"]{clip-path:inset(0 0 100% 0);transition:clip-path .95s var(--ease);}
+[data-a="clip"].in{clip-path:inset(0 0 0% 0);}
+
+/* ─── SCRUB TYPOGRAPHY ────────────────────────────────── */
+.intro-copy{padding:5rem 2rem;max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+.body-xl{font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1.28;font-weight:300;max-width:960px;margin-bottom:1.6rem;}
+.scrub-text{color:transparent;}
+.scrub-word{color:rgba(237,233,224,.15);transition:color .15s ease;}
+.scrub-word.lit{color:var(--gold);}
+.sec-num{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:2.8rem;display:flex;align-items:center;gap:1rem;}
+.sec-num::after{content:'';flex:1;height:1px;background:var(--line);max-width:70px;}
+
+/* ─── PILLAR TILES (hover overlay) ────────────────────── */
+.tile-grid{padding:0 2rem 5rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;position:relative;z-index:2;}
+.tile-flip{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;-webkit-tap-highlight-color:transparent;}
+.tile-front{position:absolute;inset:0;display:flex;flex-direction:column;}
+.tile-front img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .6s ease;filter:brightness(.55) saturate(.7);}
+.tile-flip:hover .tile-front img,.tile-flip.flipped .tile-front img{transform:scale(1.06);filter:brightness(.25) saturate(.4);}
+.tile-title{position:absolute;bottom:1.8rem;left:1.6rem;right:1.6rem;font-family:var(--display);font-size:clamp(1.6rem,3vw,2.4rem);color:var(--fg);letter-spacing:.04em;line-height:1;z-index:2;transition:opacity .4s var(--ease),transform .4s var(--ease);}
+.tile-flip:hover .tile-title,.tile-flip.flipped .tile-title{opacity:0;transform:translateY(8px);}
+.tile-overlay{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:2.2rem 1.8rem;background:linear-gradient(to top,rgba(10,11,13,.96) 0%,rgba(10,11,13,.5) 50%,rgba(10,11,13,.1) 100%);opacity:0;transform:translateY(12px);transition:opacity .45s var(--ease),transform .45s var(--ease);}
+.tile-flip:hover .tile-overlay,.tile-flip.flipped .tile-overlay{opacity:1;transform:translateY(0);}
+.tile-kpi{font-family:var(--display);font-size:2rem;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:.5rem;}
+.tile-overlay-title{font-family:var(--display);font-size:1.3rem;color:var(--fg);letter-spacing:.04em;margin-bottom:.8rem;line-height:1;}
+.tile-overlay p{font-size:.85rem;color:rgba(237,233,224,.68);line-height:1.72;margin:0;}
+/* Touch devices */
+@media(hover:none){
+  .tile-flip.flipped .tile-front img{transform:scale(1.06);filter:brightness(.25) saturate(.4);}
+  .tile-flip.flipped .tile-overlay{opacity:1;transform:translateY(0);}
+  .tile-flip.flipped .tile-title{opacity:0;}
+}
+@media(max-width:700px){.tile-grid{grid-template-columns:1fr;gap:2px;}}
+
+/* ─── EXPERIENCE CARDS (replaces Services accordion) ──── */
+#section-experience{padding:4.5rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
+.exp-layout{max-width:1200px;margin:0 auto;}
+.exp-header{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:end;margin-bottom:3.5rem;}
+.exp-header h2{font-family:var(--display);font-size:clamp(2.8rem,5.5vw,5rem);line-height:.96;letter-spacing:.02em;}
+.exp-header h2 em{font-family:var(--serif);font-style:italic;display:block;color:rgba(237,233,224,.38);}
+.exp-header p{font-size:.97rem;color:rgba(237,233,224,.48);line-height:1.82;}
+.exp-cards{display:flex;flex-direction:column;gap:1px;background:var(--line);}
+.exp-card{background:var(--bg);padding:2rem 2.2rem;display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;transition:background .3s;}
+.exp-card:hover{background:rgba(201,168,76,.025);}
+.exp-meta{padding-top:.2rem;}
+.exp-company{font-family:var(--display);font-size:1.3rem;letter-spacing:.04em;line-height:1;margin-bottom:.4rem;}
+.exp-role{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;}
+.exp-dates{font-size:.62rem;letter-spacing:.1em;color:rgba(237,233,224,.3);}
+.exp-tag{display:inline-block;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.3);padding:.2rem .6rem;margin-top:.7rem;}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.85rem;}
+.exp-bullets li{font-size:.88rem;color:rgba(237,233,224,.54);line-height:1.72;padding-left:1.1rem;position:relative;}
+.exp-bullets li::before{content:'';position:absolute;left:0;top:.65em;width:4px;height:1px;background:var(--gold);}
+.exp-bullets li strong{color:var(--fg);font-weight:400;}
+
+/* ─── CASE STUDIES ────────────────────────────────────── */
+#section-cases{padding:4.5rem 2rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
+.case-slider{display:flex;gap:1.5rem;overflow-x:auto;overflow-y:hidden;padding-bottom:1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.case-slider::-webkit-scrollbar{display:none;}
+.case-flip{min-width:340px;perspective:1000px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.case-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.76,0,.24,1);min-height:320px;}
+.case-flip.flipped .case-inner,.case-flip:hover .case-inner{transform:rotateY(180deg);}
+.case-front,.case-back-img{width:100%;height:110px;object-fit:cover;display:block;flex-shrink:0;filter:brightness(.55) saturate(.7);transition:filter .4s;}
+.case-flip.flipped .case-back-img,.case-flip:hover .case-back-img{filter:brightness(.65) saturate(.8);}
+.case-back-scroll{flex:1;overflow-y:auto;padding:1.2rem 2rem 1.5rem;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.2) transparent;}
+.case-back-scroll::-webkit-scrollbar{width:3px;}
+.case-back-scroll::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);}
+.case-back-desc{font-size:.78rem;color:rgba(237,233,224,.55);line-height:1.72;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid rgba(237,233,224,.07);}
+.case-back{position:absolute;inset:0;background:rgba(8,9,12,.97);backdrop-filter:blur(10px);border:1px solid rgba(237,233,224,.05);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;transition:border-color .3s;}
+.case-front:hover{border-color:rgba(201,168,76,.2);}
+.case-back{transform:rotateY(180deg);background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.18);justify-content:flex-start;gap:1rem;}
+.case-cat{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.case-title{font-family:var(--display);font-size:1.8rem;letter-spacing:.02em;line-height:1.1;margin-bottom:1rem;}
+.case-desc{font-size:.85rem;color:rgba(237,233,224,.48);line-height:1.7;margin-bottom:2rem;}
+.flip-hint{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,168,76,.45);margin-top:auto;padding-top:1.5rem;display:flex;align-items:center;gap:.4rem;}
+.par-row{display:flex;flex-direction:column;gap:.25rem;padding:.65rem 0;border-bottom:1px solid rgba(237,233,224,.06);}
+.par-row:last-child{border-bottom:none;}
+.par-lbl{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.par-text{font-size:.78rem;color:rgba(237,233,224,.62);line-height:1.65;margin:0;}
+
+/* ─── METHODOLOGY ─────────────────────────────────────── */
+#section-education{padding:4.5rem 2rem;border-top:1px solid var(--line);background:var(--bg2);position:relative;z-index:2;}
+.edu-layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.edu-eyebrow{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;}
+.edu-title{font-family:var(--display);font-size:clamp(2.4rem,4.5vw,4rem);line-height:.96;letter-spacing:.02em;margin-bottom:.6rem;}
+.edu-sub{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:rgba(237,233,224,.38);margin-bottom:2rem;}
+.edu-body{font-size:.97rem;color:rgba(237,233,224,.52);line-height:1.82;margin-bottom:1.3rem;}
+.edu-body strong{color:var(--fg);font-weight:400;}
+.edu-img-wrap{overflow:hidden;}
+.edu-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .9s var(--ease);}
+.edu-img-wrap:hover .edu-img{transform:scale(1.04);}
+.phases{margin-top:2rem;}
+.phase{padding:1rem 0;border-top:1px solid var(--line);display:flex;gap:1.2rem;align-items:flex-start;cursor:pointer;position:relative;}
+.phase:last-child{border-bottom:1px solid var(--line);}
+.phase-n{font-family:var(--display);font-size:1.4rem;line-height:1;color:rgba(237,233,224,.14);transition:color .3s;flex-shrink:0;width:28px;}
+.phase.act .phase-n{color:var(--gold);}
+.phase-lbl{font-size:.8rem;letter-spacing:.05em;transition:color .2s;}
+.phase.act .phase-lbl{color:var(--fg);}
+.phase-desc{font-size:.75rem;color:rgba(237,233,224,.38);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .42s var(--ease-io),opacity .4s,margin-top .3s;opacity:0;}
+.phase.act .phase-desc{max-height:100px;opacity:1;margin-top:.45rem;}
+.phase::before{content:'';position:absolute;left:-1.5rem;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease);}
+.phase.act::before{transform:scaleY(1);}
+
+/* ─── EDUCATION & LEADERSHIP ──────────────────────────── */
+#section-brand-experience{padding:4.5rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
+.brand-hd{max-width:1200px;margin:0 auto 3.5rem;display:flex;justify-content:space-between;align-items:flex-end;}
+.brand-hd h2{font-family:var(--display);font-size:clamp(2.2rem,4.5vw,3.8rem);letter-spacing:.02em;line-height:1;}
+.brand-hd p{max-width:320px;font-size:.85rem;color:rgba(237,233,224,.42);text-align:right;}
+.edu-cards{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.edu-card{padding:2.2rem;border:1px solid var(--line);background:rgba(255,255,255,.02);position:relative;transition:border-color .3s,background .3s;}
+.edu-card:hover{border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.03);}
+.edu-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
+.edu-card-badge{font-family:var(--display);font-size:1rem;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(201,168,76,.3);padding:.25rem .7rem;}
+.edu-card-year{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+.edu-card-school{font-family:var(--display);font-size:1.5rem;letter-spacing:.03em;line-height:1.1;margin-bottom:.35rem;}
+.edu-card-degree{font-size:.82rem;color:rgba(237,233,224,.55);margin-bottom:.2rem;}
+.edu-card-field{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--gold);opacity:.8;margin-bottom:1.4rem;}
+.edu-card-leads{display:flex;flex-direction:column;gap:.55rem;border-top:1px solid var(--line);padding-top:1.2rem;}
+.edu-lead-item{display:flex;align-items:center;gap:.7rem;font-size:.78rem;color:rgba(237,233,224,.5);}
+.edu-lead-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* ─── SKILLS GRID ─────────────────────────────────────── */
+#section-skills{padding:4.5rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;background:var(--bg);}
+.skills-layout{max-width:1200px;margin:0 auto;}
+.skills-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap;}
+.skills-top h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.2rem);letter-spacing:.02em;line-height:.96;}
+.skills-top p{max-width:320px;font-size:.85rem;color:rgba(237,233,224,.42);text-align:right;line-height:1.68;}
+.skills-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.skill-cat{border:1px solid var(--line);padding:1.8rem 1.8rem 1.4rem;transition:border-color .3s,background .3s;position:relative;overflow:hidden;}
+.skill-cat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.skill-cat:hover::before{transform:scaleX(1);}
+.skill-cat:hover{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.02);}
+.skill-cat-label{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:block;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.skill-tag{font-size:.6rem;letter-spacing:.1em;padding:.32rem .75rem;border:1px solid rgba(237,233,224,.1);color:rgba(237,233,224,.55);transition:border-color .2s,color .2s;white-space:nowrap;}
+.skill-tag:hover{border-color:rgba(201,168,76,.4);color:var(--fg);}
+.skill-tag.highlight{border-color:rgba(201,168,76,.3);color:rgba(201,168,76,.75);}
+@media(max-width:900px){.skills-cats{grid-template-columns:1fr 1fr;}.skills-top p{text-align:left;max-width:none;}}
+@media(max-width:500px){.skills-cats{grid-template-columns:1fr;}}
+
+/* ─── CONTACT ENHANCEMENTS ────────────────────────────── */
+.ct-availability{display:inline-flex;align-items:center;gap:.6rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,168,76,.8);margin-bottom:2rem;border:1px solid rgba(201,168,76,.2);padding:.4rem 1rem;}
+.ct-avail-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse-dot 2s ease infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+.ct-location{font-size:.72rem;letter-spacing:.1em;color:rgba(237,233,224,.32);text-transform:uppercase;margin-top:1.2rem;display:flex;align-items:center;gap:.45rem;}
+.ct-location::before{content:'';width:4px;height:4px;border-radius:50%;background:rgba(237,233,224,.3);}
+
+/* ─── SIMULATOR TABS ─────────────────────────────────── */
+.sim-tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:2.5rem;}
+.sim-tab-btn{font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 1.8rem;background:none;border:none;cursor:pointer;color:rgba(237,233,224,.35);border-bottom:2px solid transparent;transition:color .25s,border-color .25s;margin-bottom:-1px;display:flex;align-items:center;gap:.55rem;}
+.sim-tab-btn:hover{color:rgba(237,233,224,.7);}
+.sim-tab-btn.active{color:var(--fg);border-bottom-color:var(--gold);}
+.sim-tab-btn .stb-num{font-family:var(--display);font-size:.8rem;color:var(--gold);letter-spacing:.06em;opacity:.6;transition:opacity .25s;}
+.sim-tab-btn.active .stb-num{opacity:1;}
+.sim-tab-panel{display:none;}
+.sim-tab-panel.active{display:block;}
+/* ─── QUEUE SIMULATOR ─────────────────────────────────── */
+.qsim-metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-bottom:1.5rem;}
+.qsim-metric{background:var(--bg);padding:1.1rem 1rem;display:flex;flex-direction:column;gap:.3rem;transition:background .3s;}
+.qsim-metric.highlight{background:rgba(201,168,76,.07);}
+.qsim-chart-block{margin-bottom:1.5rem;border:1px solid var(--line);padding:1.1rem;}
+.qsim-canvas-wrap{height:200px;position:relative;}
+.util-bar-wrap{margin-bottom:1.5rem;padding:1.1rem;border:1px solid var(--line);}
+.util-bar-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,233,224,.5);margin-bottom:.7rem;display:flex;justify-content:space-between;}
+.util-track{height:6px;background:rgba(255,255,255,.05);border-radius:1px;overflow:hidden;}
+.util-fill{height:100%;border-radius:1px;transition:width .7s cubic-bezier(.16,1,.3,1);}
+.util-fill.low{background:#66cc66;}
+.util-fill.med{background:var(--gold);}
+.util-fill.high{background:#e05a00;}
+@media(max-width:860px){.qsim-metrics-row{grid-template-columns:repeat(2,1fr);}}
+
+/* ═══════════════════════════════════════════════════════════
+   INVENTORY OPTIMISATION SIMULATOR -- STYLES
+═══════════════════════════════════════════════════════════ */
+
+/* Section shell */
+#gtm-simulators { padding:5rem 2rem 6rem; border-top:1px solid var(--line); background:var(--bg); position:relative; z-index:2; }
+.sim-wrap { max-width:1280px; margin:0 auto; }
+.sim-title{font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2.2rem);letter-spacing:.03em;margin-bottom:.5rem;}
+.sim-intro { font-size:.9rem; color:rgba(237,233,224,.44); line-height:1.8; margin-bottom:2.5rem; max-width:720px; }
+.sim-intro em { color:rgba(201,168,76,.75); font-style:normal; }
+
+/* Guide strip */
+.sim-guide { display:flex; align-items:center; gap:.75rem; margin-bottom:2.8rem; flex-wrap:wrap; }
+.sim-guide-step { display:flex; align-items:center; gap:.6rem; padding:.55rem 1rem; border:1px solid var(--line); transition:border-color .3s, background .3s; }
+.sim-guide-step.active { border-color:rgba(201,168,76,.4); background:rgba(201,168,76,.05); }
+.sgs-num { font-family:var(--display); font-size:.85rem; color:var(--gold); letter-spacing:.06em; }
+.sgs-label { font-size:.6rem; letter-spacing:.08em; color:rgba(237,233,224,.55); text-transform:uppercase; }
+.sim-guide-step.active .sgs-label { color:rgba(237,233,224,.85); }
+.sim-guide-arrow { color:rgba(201,168,76,.3); font-size:.8rem; }
+
+/* Main layout: 2-col */
+.sim-body { display:grid; grid-template-columns:380px 1fr; gap:2.5rem; align-items:start; }
+
+/* ── INPUT PANEL ─────────────────────────────────────── */
+.sim-inputs-panel { display:flex; flex-direction:column; gap:1.4rem; }
+
+.sim-input-group { border:1px solid var(--line); padding:1.4rem; transition:border-color .3s; }
+.sim-input-group:focus-within { border-color:rgba(201,168,76,.25); }
+
+.sig-header { display:flex; align-items:flex-start; gap:.75rem; margin-bottom:1.2rem; padding-bottom:1rem; border-bottom:1px solid var(--line); }
+.sig-tag { flex-shrink:0; width:22px; height:22px; background:rgba(201,168,76,.15); border:1px solid rgba(201,168,76,.3); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:.75rem; color:var(--gold); letter-spacing:.04em; }
+.sig-title { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(237,233,224,.9); font-weight:600; line-height:1.3; }
+.sig-hint { font-size:.58rem; color:rgba(237,233,224,.3); line-height:1.5; margin-top:.15rem; display:block; }
+
+.sim-field { margin-bottom:1rem; }
+.sim-field:last-child { margin-bottom:0; }
+.sim-field label { display:block; font-size:.58rem; letter-spacing:.1em; color:rgba(237,233,224,.45); text-transform:uppercase; margin-bottom:.4rem; }
+.sim-field-row { display:flex; align-items:center; gap:.5rem; }
+.sim-field-row input[type="number"] {
+  flex:1; background:rgba(255,255,255,.03); border:1px solid rgba(237,233,224,.12);
+  color:var(--fg); font-family:var(--sans); font-size:.9rem; font-weight:500;
+  padding:.5rem .75rem; outline:none; transition:border-color .25s, background .25s;
+  -moz-appearance:textfield; appearance:textfield;
+}
+.sim-field-row input[type="number"]::-webkit-inner-spin-button,
+.sim-field-row input[type="number"]::-webkit-outer-spin-button { -webkit-appearance:none; }
+.sim-field-row input[type="number"]:focus { border-color:rgba(201,168,76,.5); background:rgba(201,168,76,.04); }
+.sim-field-unit { font-size:.6rem; letter-spacing:.08em; color:rgba(237,233,224,.28); white-space:nowrap; min-width:56px; text-align:right; }
+.sim-field-note { font-size:.58rem; color:rgba(237,233,224,.26); line-height:1.65; margin-top:.35rem; }
+
+/* Run button */
+.sim-run-btn {
+  width:100%; padding:1rem 1.4rem;
+  background:var(--gold); color:var(--bg);
+  border:none; cursor:pointer;
+  font-family:var(--sans); font-size:.7rem; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase;
+  display:flex; align-items:center; justify-content:center; gap:.6rem;
+  transition:background .25s, transform .15s;
+}
+.sim-run-btn:hover { background:#d9b85c; transform:translateY(-1px); }
+.sim-run-btn:active { transform:translateY(0); }
+.sim-run-btn.loading { opacity:.6; pointer-events:none; }
+
+/* Reset button */
+.sim-reset-btn {
+  margin-top:1.5rem; padding:.65rem 1.4rem;
+  background:transparent; border:1px solid rgba(237,233,224,.14);
+  color:rgba(237,233,224,.38); cursor:pointer;
+  font-family:var(--sans); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+  transition:border-color .25s, color .25s;
+}
+.sim-reset-btn:hover { border-color:rgba(201,168,76,.4); color:var(--gold); }
+
+/* ── OUTPUT PANEL ──────────────────────────────────────── */
+.sim-output-panel { min-height:520px; }
+
+/* Placeholder */
+.sim-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:480px; border:1px solid var(--line); gap:1.2rem; padding:3rem; text-align:center; }
+.sim-ph-icon { opacity:.45; }
+.sim-ph-title { font-family:var(--display); font-size:1.2rem; letter-spacing:.04em; color:rgba(237,233,224,.3); }
+.sim-ph-sub { font-size:.72rem; color:rgba(237,233,224,.22); line-height:1.75; max-width:300px; }
+.sim-ph-sub strong { color:rgba(201,168,76,.5); }
+
+/* Metrics row */
+.sim-metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); margin-bottom:1.5rem; }
+.sim-metric { background:var(--bg); padding:1.1rem 1rem; display:flex; flex-direction:column; gap:.3rem; transition:background .3s; }
+.sim-metric.highlight { background:rgba(201,168,76,.07); }
+.sm-label { font-size:.52rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(237,233,224,.35); line-height:1.4; }
+.sm-value { font-family:var(--display); font-size:1.5rem; letter-spacing:.03em; color:var(--fg); }
+.sim-metric.highlight .sm-value { color:var(--gold); }
+.sm-unit { font-size:.52rem; letter-spacing:.08em; color:rgba(237,233,224,.25); }
+
+/* Cost breakdown bar */
+.sim-cost-breakdown { margin-bottom:1.5rem; padding:1.1rem; border:1px solid var(--line); }
+.scb-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:.8rem; flex-wrap:wrap; gap:.5rem; }
+.scb-title { font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(237,233,224,.5); }
+.scb-legend { display:flex; align-items:center; gap:.7rem; font-size:.55rem; color:rgba(237,233,224,.38); letter-spacing:.06em; }
+.scb-leg-dot { width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:.2rem; }
+.scb-bar-wrap { margin-bottom:.5rem; }
+.scb-bar { display:flex; height:8px; border-radius:1px; overflow:hidden; background:rgba(255,255,255,.04); }
+.scb-seg { height:100%; transition:width .6s cubic-bezier(.4,0,.2,1); }
+.seg-hold { background:#c9a84c; }
+.seg-ord  { background:#4a90e2; }
+.seg-sk   { background:#e05a00; }
+.scb-values { display:flex; gap:1.2rem; font-size:.6rem; color:rgba(237,233,224,.4); }
+.scb-values span:nth-child(1) { color:rgba(201,168,76,.75); }
+.scb-values span:nth-child(2) { color:rgba(74,144,226,.75); }
+.scb-values span:nth-child(3) { color:rgba(224,90,0,.75); }
+
+/* Charts */
+.sim-chart-block { margin-bottom:1.5rem; border:1px solid var(--line); padding:1.1rem; }
+.schart-header { margin-bottom:.8rem; }
+.schart-title { display:block; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(237,233,224,.55); margin-bottom:.25rem; }
+.schart-sub { display:block; font-size:.6rem; color:rgba(237,233,224,.28); line-height:1.6; }
+.schart-canvas-wrap { height:180px; position:relative; }
+
+/* Commentary */
+.sim-commentary { padding:1.3rem; border:1px solid rgba(201,168,76,.2); background:rgba(201,168,76,.04); margin-bottom:1.5rem; }
+.scom-eyebrow { font-size:.52rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(201,168,76,.55); margin-bottom:.6rem; }
+.scom-body { font-size:.82rem; color:rgba(237,233,224,.7); line-height:1.8; margin-bottom:.75rem; }
+.scom-insight { font-size:.72rem; color:rgba(201,168,76,.65); line-height:1.7; border-left:2px solid rgba(201,168,76,.3); padding-left:.9rem; }
+
+/* Sensitivity table */
+.sim-sensitivity { margin-bottom:1rem; }
+.ssens-header { font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(237,233,224,.35); margin-bottom:.6rem; }
+.ssens-table { width:100%; border-collapse:collapse; font-size:.65rem; }
+.ssens-table th { text-align:left; font-size:.52rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(237,233,224,.3); padding:.5rem .6rem; border-bottom:1px solid var(--line); font-weight:500; }
+.ssens-table td { padding:.55rem .6rem; border-bottom:1px solid rgba(237,233,224,.05); color:rgba(237,233,224,.6); vertical-align:middle; }
+.ssens-table tr:last-child td { border-bottom:none; }
+.ssens-table tr.base-row td { color:var(--fg); background:rgba(201,168,76,.05); }
+.ssens-table tr.base-row td:first-child { color:var(--gold); }
+.ssens-delta-pos { color:#66cc66; font-size:.6rem; }
+.ssens-delta-neg { color:#e05a00; font-size:.6rem; }
+
+/* Responsive */
+@media(max-width:1100px) { .sim-body { grid-template-columns:320px 1fr; } }
+@media(max-width:860px)  {
+  .sim-body { grid-template-columns:1fr; }
+  .sim-metrics-row { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:500px)  { .sim-metrics-row { grid-template-columns:1fr 1fr; } }
+
+/* ─── CONTACT ─────────────────────────────────────────── */
+#section-get-in-touch{padding:4.5rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
+.ct-layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7rem;}
+.ct-left p{font-size:.97rem;color:rgba(237,233,224,.48);line-height:1.82;max-width:380px;}
+.ct-photo{width:100%;aspect-ratio:3/2;object-fit:cover;margin-top:2.8rem;display:block;transition:transform .7s var(--ease),filter .35s;}
+.ct-photo:hover{transform:scale(1.02);filter:brightness(.8);}
+.ci-list{display:flex;flex-direction:column;}
+.ci{border-bottom:1px solid var(--line);padding:1.4rem 0;display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--fg);gap:1rem;position:relative;overflow:hidden;transition:padding-left .35s var(--ease);}
+.ci::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .35s var(--ease);}
+.ci:first-child{border-top:1px solid var(--line);}
+.ci:hover{padding-left:.85rem;}
+.ci:hover::before{transform:scaleY(1);}
+.ci-lbl{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.25rem;}
+.ci-val{font-size:.97rem;}
+.ci-arr{opacity:.2;flex-shrink:0;transition:transform .25s,opacity .25s;}
+.ci:hover .ci-arr{transform:translate(3px,-3px);opacity:1;}
+.soc{margin-top:2.5rem;}
+.soc-h{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.sl{padding:.95rem 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:rgba(237,233,224,.42);font-size:.85rem;letter-spacing:.04em;transition:color .22s,padding-left .32s var(--ease);}
+.sl:first-of-type{border-top:1px solid var(--line);}
+.sl:hover{color:var(--fg);padding-left:.6rem;}
+footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:.63rem;letter-spacing:.09em;color:var(--muted);flex-wrap:wrap;gap:.8rem;position:relative;z-index:2;}
+.ft-logo{font-family:var(--display);font-size:.95rem;letter-spacing:.08em;color:rgba(237,233,224,.28);}
+.ft-logo span{color:var(--gold);}
+
+/* ─── VIDEO MODAL ─────────────────────────────────────── */
+#vmodal{display:none;position:fixed;inset:0;background:rgba(5,6,8,.97);z-index:6000;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;}
+#vmodal.open{display:flex;animation:modIn .35s var(--ease);}
+@keyframes modIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+#vmodvid{max-width:90vw;max-height:80vh;outline:none;border:1px solid var(--line);}
+#vmodal button{background:transparent;border:1px solid rgba(237,233,224,.15);color:rgba(237,233,224,.42);padding:.55rem 1.4rem;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);transition:color .2s,border-color .2s;}
+#vmodal button:hover{color:var(--fg);border-color:rgba(237,233,224,.4);}
+
+/* ─── STAGGERED ITEMS ─────────────────────────────────── */
+.svc-item:nth-child(1){transition-delay:.1s;}
+.svc-item:nth-child(2){transition-delay:.2s;}
+.svc-item:nth-child(3){transition-delay:.3s;}
+.svc-item:nth-child(4){transition-delay:.4s;}
+
+/* ─── MOBILE MENU ─────────────────────────────────────── */
+#nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;z-index:600;background:none;border:none;padding:4px;-webkit-tap-highlight-color:transparent;}
+#nav-toggle span{display:block;height:1px;background:var(--fg);border-radius:1px;transition:transform .35s var(--ease),opacity .25s,width .3s;}
+#nav-toggle span:nth-child(1){width:24px;}
+#nav-toggle span:nth-child(2){width:18px;}
+#nav-toggle span:nth-child(3){width:24px;}
+#nav-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg);width:24px;}
+#nav-toggle.open span:nth-child(2){opacity:0;width:0;}
+#nav-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);width:24px;}
+#mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,11,13,.97);backdrop-filter:blur(24px);z-index:490;flex-direction:column;justify-content:center;align-items:center;gap:0;padding:6rem 2rem 3rem;}
+#mobile-menu.open{display:flex;}
+#mobile-menu a{font-family:var(--display);font-size:clamp(2.2rem,9vw,3.2rem);letter-spacing:.04em;color:rgba(237,233,224,.35);text-decoration:none;padding:.55rem 0;transition:color .22s,letter-spacing .22s;width:100%;text-align:center;border-bottom:1px solid rgba(237,233,224,.06);}
+#mobile-menu a:first-child{border-top:1px solid rgba(237,233,224,.06);}
+#mobile-menu a:hover,#mobile-menu a:active{color:var(--gold);letter-spacing:.06em;}
+#mobile-menu .mob-cta{margin-top:2rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);border:1px solid rgba(237,233,224,.25);padding:.9rem 2.4rem;background:transparent;transition:background .3s,color .3s;border-bottom:1px solid rgba(237,233,224,.25);}
+#mobile-menu .mob-cta:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1024px){
+  .sim-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:900px){
+  #mainnav{padding:1.1rem 1.4rem;}
+  #mainnav.stk{padding:.8rem 1.4rem;}
+  .nav-links,.nav-cta{display:none;}
+  #nav-toggle{display:flex;}
+  #sdots{display:none;}
+  #section-intro{padding:7rem 1.4rem 3.5rem;min-height:100svh;}
+  .hero-sub{font-size:.92rem;}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:1rem;}
+  .btn-pri{width:100%;justify-content:center;padding:.9rem 1.5rem;}
+  .scroll-hint{left:1.4rem;bottom:1.5rem;}
+  .mq-item{font-size:1.6rem;}
+  .intro-copy,.tile-grid{padding-left:1.4rem;padding-right:1.4rem;}
+  .intro-copy{padding-top:3rem;padding-bottom:3rem;}
+  .body-xl{font-size:clamp(1.3rem,4.5vw,2rem);}
+  #section-experience,#section-cases,#section-mosaic,#section-brand-experience,
+  #gtm-simulators,#section-get-in-touch{padding:3rem 1.2rem;}
+  .exp-header{grid-template-columns:1fr;gap:1.2rem;}
+  .exp-card{grid-template-columns:1fr;gap:1.2rem;}
+  .about-layout,.edu-layout,.ct-layout{grid-template-columns:1fr;gap:2.5rem;}
+  .about-img{max-width:480px;}
+  .about-img img{aspect-ratio:4/3;}
+  .brand-hd{flex-direction:column;align-items:flex-start;gap:1rem;}
+  .brand-hd p{text-align:left;max-width:none;}
+  .stats{flex-wrap:wrap;gap:1.5rem;}
+  .ct-photo{margin-top:1.5rem;}
+  .sim-grid{grid-template-columns:1fr 1fr;}
+  .sim-title{font-size:1.5rem;}
+  .case-flip{min-width:calc(85vw);}
+  .case-flip:hover .case-inner{transform:none;}
+  footer{padding:1.8rem 1.4rem;flex-direction:column;align-items:flex-start;gap:.6rem;}
+}
+@media(max-width:600px){
+  #mainnav{padding:.95rem 1.1rem;}
+  #section-intro{padding:6rem 1.1rem 3rem;}
+  .hero-eyebrow{font-size:.58rem;margin-bottom:1.2rem;}
+  .hero-hl{font-size:clamp(2.8rem,13vw,4.5rem);line-height:.94;}
+  .hero-sub{font-size:.88rem;max-width:100%;}
+  .about-title,.edu-title{font-size:clamp(2.2rem,10vw,3rem);}
+  .exp-header h2{font-size:clamp(2.2rem,10vw,3rem);}
+  .stat-n{font-size:2rem;}
+  .stats{gap:1.2rem;}
+  .sim-grid{grid-template-columns:1fr;}
+  .sim-chart{height:110px;}
+  .sim-card{padding:1.1rem;}
+  .case-flip{min-width:calc(100vw - 2.2rem);}
+  .ci{padding:1.1rem 0;}
+  footer{padding:1.5rem 1.1rem;font-size:.58rem;}
+  .ft-logo{font-size:.85rem;}
+  .phase{padding:.75rem 0 .75rem 1.1rem;}
+  .phase::before{left:-1.1rem;}
+}
+@media(max-width:380px){
+  .hero-hl{font-size:2.6rem;}
+  .sim-grid{grid-template-columns:1fr;}
+  .stats{flex-direction:column;gap:1rem;}
+  .btn-pri{font-size:.68rem;padding:.8rem 1.2rem;}
+  #mobile-menu a{font-size:2rem;}
+}
+@media(hover:none){
+  .tile-flip:hover .tile-inner{transform:none;}
+  .case-flip:hover .case-inner{transform:none;}
+  body{cursor:auto;}
+  #cdot,#cring,#ctip{display:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
+}
+
+
+/* ─── GHOST SECTION NUMBERS ──────────────────────────── */
+
+/* ─── EXPERIENCE TIMELINE ────────────────────────────── */
+.exp-timeline{max-width:1200px;margin:0 auto;position:relative;}
+/* Vertical line that draws down */
+.exp-timeline::before{content:'';position:absolute;left:0;top:0;width:1px;background:var(--line);height:100%;}
+.exp-timeline-line{position:absolute;left:0;top:0;width:1px;background:var(--gold);height:0;transition:height .1s linear;will-change:height;box-shadow:0 0 8px rgba(201,168,76,.5);}
+.exp-card-tl{background:var(--bg);padding:2rem 2.2rem 2rem 3rem;position:relative;margin-bottom:1px;transition:background .3s;}
+.exp-card-tl:hover{background:rgba(201,168,76,.025);}
+/* Timeline dot */
+.exp-card-tl::before{content:'';position:absolute;left:-5px;top:2.4rem;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid rgba(237,233,224,.25);transition:border-color .3s,background .3s,box-shadow .3s;}
+.exp-card-tl:hover::before,.exp-card-tl.tl-active::before{border-color:var(--gold);background:var(--gold);box-shadow:0 0 10px rgba(201,168,76,.6);}
+.exp-card-tl .exp-meta{padding-top:.2rem;}
+.exp-card-tl .exp-company{font-family:var(--display);font-size:1.3rem;letter-spacing:.04em;line-height:1;margin-bottom:.4rem;}
+.exp-card-tl .exp-role{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;}
+.exp-card-tl .exp-dates{font-size:.62rem;letter-spacing:.1em;color:rgba(237,233,224,.3);}
+.exp-card-tl .exp-tag{display:inline-block;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.3);padding:.2rem .6rem;margin-top:.7rem;}
+
+/* ─── DRAG CAROUSEL (case studies) ───────────────────── */
+/* Override the default case-slider to make it draggable-feel */
+.case-slider{cursor:grab;user-select:none;-webkit-user-select:none;}
+.case-slider.dragging{cursor:grabbing;}
+.case-slider.dragging .case-flip{pointer-events:none;}
+/* Scroll indicator dots */
+.slider-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.2rem;}
+.slider-dot{width:20px;height:2px;background:rgba(237,233,224,.15);border-radius:1px;cursor:pointer;transition:background .3s,width .35s var(--ease);}
+.slider-dot.act{background:var(--gold);width:32px;}
+
+/* ─── SECTION TRANSITION LINES ───────────────────────── */
+/* Horizontal rule that animates width on reveal */
+.sec-rule{height:1px;background:var(--gold);width:0;margin-bottom:2rem;transition:width 1s var(--ease);box-shadow:0 0 6px rgba(201,168,76,.4);}
+.sec-rule.in{width:60px;}
+
+/* ─── FLOATING CONTACT PILL ──────────────────────────── */
+#float-cta{position:fixed;bottom:2rem;right:2rem;z-index:400;opacity:0;transform:translateY(12px);transition:opacity .4s var(--ease),transform .4s var(--ease);pointer-events:none;}
+#float-cta.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.float-btn{display:flex;align-items:center;gap:.55rem;background:var(--gold);color:var(--bg);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;text-decoration:none;padding:.65rem 1.2rem;font-family:var(--sans);transition:background .25s,transform .25s;white-space:nowrap;}
+.float-btn:hover{background:#e0bb5a;transform:scale(1.04);}
+.float-btn svg{flex-shrink:0;}
+
+/* ─── READING TIME INDICATOR ──────────────────────────── */
+#read-time{position:fixed;top:50%;right:calc(1.6rem + 20px);transform:translateY(-50%);z-index:290;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,233,224,.2);writing-mode:vertical-rl;text-orientation:mixed;pointer-events:none;transition:opacity .3s;}
+
+/* ─── DCF VALUATION SIMULATOR ────────────────────────── */
+.dcf-val-row{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:1px;background:var(--line);margin-bottom:1.5rem;}
+.dcf-val-card{background:var(--bg);padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.35rem;transition:background .3s;}
+.dcf-val-card.active-val{background:rgba(201,168,76,.07);}
+.dcf-val-card.bear{border-top:2px solid rgba(74,144,226,.4);}
+.dcf-val-card.base{border-top:2px solid var(--gold);}
+.dcf-val-card.bull{border-top:2px solid rgba(102,204,102,.4);}
+.dcf-vc-label{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.dcf-vc-value{font-family:var(--display);font-size:1.6rem;letter-spacing:.03em;color:var(--fg);}
+.dcf-val-card.active-val .dcf-vc-value{color:var(--gold);}
+.dcf-vc-sub{font-size:.55rem;color:rgba(237,233,224,.28);letter-spacing:.08em;}
+@media(max-width:600px){.dcf-val-row{grid-template-columns:1fr;}}
+
+/* ─── SIMULATOR SCENARIO CARDS ───────────────────────── */
+.sim-scenario-card{border:1px solid rgba(201,168,76,.22);background:rgba(201,168,76,.04);padding:1.4rem 1.6rem;margin-bottom:2rem;}
+.ssc-eyebrow{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,.65);margin-bottom:.65rem;}
+.ssc-body{font-size:.88rem;color:rgba(237,233,224,.62);line-height:1.82;}
+.ssc-body strong{color:var(--fg);font-weight:400;}
+.ssc-defaults{font-size:.62rem;letter-spacing:.08em;color:rgba(237,233,224,.28);margin-top:.85rem;border-top:1px solid rgba(201,168,76,.12);padding-top:.65rem;}
+
+/* ─── SKILLS BALL PIT ─────────────────────────────────── */
+#section-skills{padding:3rem 0 0;border-top:1px solid var(--line);position:relative;z-index:2;overflow:hidden;}
+.skills-pit-header{padding:0 2rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;}
+.skills-pit-header p.sec-num{flex-shrink:0;}
+.skills-pit-header p:last-child{font-size:.82rem;color:rgba(237,233,224,.38);max-width:380px;text-align:right;line-height:1.65;}
+#skills-pit-wrap{width:100%;position:relative;background:transparent;overflow:hidden;}
+#skills-canvas{display:block;width:100%;cursor:none;}
+@media(max-width:600px){
+  .skills-pit-header{flex-direction:column;align-items:flex-start;padding:0 1.2rem 1.5rem;}
+  .skills-pit-header p:last-child{text-align:left;max-width:none;}
+}
+
+/* ─── CARRY-FORWARD BUTTON ────────────────────────────── */
+.sim-carry-btn{
+  width:100%;padding:.85rem 1.4rem;margin-top:.8rem;
+  background:transparent;border:1px solid rgba(201,168,76,.4);
+  color:var(--gold);cursor:pointer;
+  font-family:var(--sans);font-size:.65rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  transition:background .25s,color .25s;
+}
+.sim-carry-btn:hover{background:rgba(201,168,76,.08);}
+.sim-carry-btn svg{flex-shrink:0;}
+/* ─── FOOTER LINKS ───────────────────────────────────── */
+.ft-link{color:var(--muted);text-decoration:none;font-size:.63rem;letter-spacing:.1em;transition:color .2s;}
+.ft-link:hover{color:var(--gold);}
+.ft-top-btn{background:none;border:1px solid rgba(237,233,224,.12);color:rgba(237,233,224,.3);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding:.4rem .9rem;cursor:pointer;font-family:var(--sans);transition:color .2s,border-color .2s;}
+.ft-top-btn:hover{color:var(--gold);border-color:rgba(201,168,76,.4);}
+/* ─── CONTACT HEADING ─────────────────────────────────── */
+.ct-heading{font-family:var(--display);font-size:clamp(2.8rem,5.5vw,5rem);line-height:.95;letter-spacing:.02em;margin-bottom:1.4rem;}
+.ct-heading em{font-family:var(--serif);font-style:italic;display:block;color:rgba(237,233,224,.38);}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="loader-track"><div class="loader-bar" id="lbar"></div></div>
+  <div class="loader-text" id="ltext">00%</div>
+</div>
+<div id="aura"></div>
+<div id="sprog"></div>
+<div id="cdot"></div>
+<div id="cring"></div>
+<div id="ctip"></div>
+
+<!-- FLOATING CONNECT PILL (appears after hero) -->
+<div id="float-cta">
+  <a class="float-btn" href="#section-get-in-touch">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1"/><line x1="5" y1="2" x2="5" y2="8" stroke="currentColor" stroke-width="1"/><line x1="2" y1="5" x2="8" y2="5" stroke="currentColor" stroke-width="1"/></svg>
+    Let's Connect
+  </a>
+</div>
+<!-- READING POSITION HINT -->
+<div id="read-time">SCROLL TO EXPLORE</div>
+
+<div id="sdots">
+  <div class="sdot act" data-target="section-intro"         data-lbl="Home"></div>
+  <div class="sdot"     data-target="section-experience"    data-lbl="Experience"></div>
+  <div class="sdot"     data-target="section-cases"         data-lbl="Cases"></div>
+  <div class="sdot"     data-target="section-brand-experience" data-lbl="Education"></div>
+  <div class="sdot"     data-target="section-skills"          data-lbl="Skills"></div>
+  <div class="sdot"     data-target="gtm-simulators"          data-lbl="Simulator"></div>
+  <div class="sdot"     data-target="section-get-in-touch"  data-lbl="Contact"></div>
+</div>
+
+<div id="vmodal">
+  <video id="vmodvid" controls></video>
+  <button onclick="closeVid()">✕ Close</button>
+</div>
+
+<div id="mobile-menu">
+  <a href="#scrub-section"          onclick="closeMobileMenu()">Intro</a>
+  <a href="#section-experience"     onclick="closeMobileMenu()">Experience</a>
+  <a href="#section-cases"          onclick="closeMobileMenu()">Cases</a>
+  <a href="#section-brand-experience" onclick="closeMobileMenu()">Education</a>
+  <a href="#section-skills"          onclick="closeMobileMenu()">Skills</a>
+  <a href="#gtm-simulators"          onclick="closeMobileMenu()">Simulator</a>
+  <a href="#section-get-in-touch"   onclick="closeMobileMenu()">Contact</a>
+  <a href="#section-get-in-touch" class="mob-cta" onclick="closeMobileMenu()">Let's Connect ↗</a>
+</div>
+
+<nav id="mainnav">
+  <a class="nav-logo" href="#">PUNCH <span>KOKKALEMADA</span></a>
+  <ul class="nav-links">
+    <li><a href="#section-experience">Experience</a></li>
+    <li><a href="#section-cases">Cases</a></li>
+    <li><a href="#section-brand-experience">Education</a></li>
+  </ul>
+  <a class="nav-cta" href="#section-get-in-touch"><span>Let's Connect ↗</span></a>
+  <button id="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<!-- ── I. HERO ──────────────────────────────────────────── -->
+<section id="section-intro">
+  <div id="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="h-eyebrow">MBA · Commercial Strategy · Supply Chain &amp; GTM Execution</p>
+    <h1 class="hero-hl" id="h-hl">
+      <span class="line-mask"><span class="word" style="transition-delay:.2s">Fix</span>&nbsp;<span class="word" style="transition-delay:.3s">the</span>&nbsp;<span class="word" style="transition-delay:.4s">ops.</span></span>
+      <em><span class="line-mask"><span class="word" style="transition-delay:.5s">Scale</span>&nbsp;<span class="word" style="transition-delay:.6s">the</span>&nbsp;<span class="word" style="transition-delay:.7s">business.</span></span></em>
+    </h1>
+    <p class="hero-sub" id="h-sub">Engineering graduate. MBA candidate. 30 months of commercial execution across automotive, entertainment, and digital -- turning operational complexity into margin, and data into decisions that move.</p>
+    <div class="hero-actions" id="h-act">
+      <a class="btn-pri mag" href="#section-experience"><span>View My Work ↗</span></a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
+</section>
+
+<!-- ── STAT STRIP ────────────────────────────────────────── -->
+<div class="stat-strip">
+  <div class="stat-strip-item">
+    <div class="stat-strip-n"><span data-count="3" data-sfx="%">0%</span></div>
+    <div class="stat-strip-l">Net margin improvement<br>Ward Tires</div>
+  </div>
+  <div class="stat-strip-item">
+    <div class="stat-strip-n"><span data-count="60" data-sfx="%">0%</span></div>
+    <div class="stat-strip-l">Reporting time reduction<br>Six Flags</div>
+  </div>
+  <div class="stat-strip-item">
+    <div class="stat-strip-n"><span data-count="30" data-sfx="%">0%</span></div>
+    <div class="stat-strip-l">Media engagement growth<br>Fiverr</div>
+  </div>
+</div>
+
+<!-- ── MARQUEE ──────────────────────────────────────────── -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mq-item">DEMAND FORECASTING</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">GTM EXECUTION</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">INVENTORY PLANNING</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">SALESFORCE · HUBSPOT</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">AGILE &amp; SCRUM</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">VENDOR DEVELOPMENT</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">SEO / SEM</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">SUPPLY CHAIN MANAGEMENT</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">DEMAND FORECASTING</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">GTM EXECUTION</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">INVENTORY PLANNING</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">SALESFORCE · HUBSPOT</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">AGILE &amp; SCRUM</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">VENDOR DEVELOPMENT</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">SEO / SEM</span><span class="mq-item hi">✦</span>
+    <span class="mq-item">SUPPLY CHAIN MANAGEMENT</span><span class="mq-item hi">✦</span>
+  </div>
+</div>
+<!-- ── SCRUB INTRO ──────────────────────────────────────── -->
+<div class="intro-copy" id="scrub-section">
+  <p class="sec-num" data-a="up">I. Who I Am</p>
+  <p class="body-xl scrub-text" id="scrub-text">
+    Engineering foundation. MBA rigor. 30 months of commercial execution across automotive, entertainment, and digital--turning operational complexity into margin, and data into decisions that move.
+  </p>
+</div>
+
+<!-- ── PILLAR TILES (hover/tap to reveal key credential) ── -->
+<div class="tile-grid">
+
+  <div class="tile-flip" data-a="clip">
+    <div class="tile-front">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80" alt="Supply Chain" loading="lazy" width="1200" height="1600">
+    </div>
+    <div class="tile-title">Supply Chain<br>&amp; Ops</div>
+    <div class="tile-overlay">
+      <div class="tile-kpi">10–15% ↓</div>
+      <div class="tile-overlay-title">Supply Chain &amp; Ops</div>
+      <p>Reduced logistics costs through vendor development, JIT delivery models, and cost modelling at Ward Tires. Certified in Agile, Waterfall, and Scrum — applied across live operations, not just theory.</p>
+    </div>
+  </div>
+
+  <div class="tile-flip" data-a="clip" data-delay="80">
+    <div class="tile-front">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80" alt="Analytics" loading="lazy" width="1200" height="1600">
+    </div>
+    <div class="tile-title">Data &amp;<br>Analytics</div>
+    <div class="tile-overlay">
+      <div class="tile-kpi">60% ↓</div>
+      <div class="tile-overlay-title">Data &amp; Analytics</div>
+      <p>Cut reporting time across 42 Six Flags business units by building unified executive dashboards. I benchmark, synthesise, and deliver clarity — using Tableau, Power BI, and Ahrefs.</p>
+    </div>
+  </div>
+
+  <div class="tile-flip" data-a="clip" data-delay="160">
+    <div class="tile-front">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80" alt="GTM &amp; Growth" loading="lazy" width="1200" height="1600">
+    </div>
+    <div class="tile-title">GTM &amp;<br>Growth</div>
+    <div class="tile-overlay">
+      <div class="tile-kpi">+3% Margin</div>
+      <div class="tile-overlay-title">GTM &amp; Growth</div>
+      <p>Designed and executed a regional GTM strategy at Ward Tires. Managed SEO &amp; SEM at Fiverr for 25–30% media engagement uplift — using Hootsuite, SEMRush, and MS Project.</p>
+    </div>
+  </div>
+
+</div>
+<!-- ── II. EXPERIENCE ────────────────────────────────────── -->
+<section id="section-experience">
+  <div class="exp-layout" style="position:relative;overflow:hidden;">
+    <div class="exp-header" data-a="up">
+      <div>
+        <p class="sec-num">II. Experience</p>
+        <h2>30 Months.<br><em>Three Industries.<br>One Playbook.</em></h2>
+      </div>
+      <p>Business Manager to Marketing Consultant to MBA Intern -- each role added a new commercial layer. Supply chain operations, brand growth, and enterprise risk management: I've worked across the full business stack.</p>
+    </div>
+    <div class="exp-timeline" id="expTimeline">
+      <div class="exp-timeline-line" id="tlLine"></div>
+
+      <div class="exp-card-tl" data-a="up">
+        <div style="display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
+        <div class="exp-meta">
+          <p class="exp-company">Six Flags</p>
+          <p class="exp-role">MBA Intern -- Enterprise Risk &amp; Compliance</p>
+          <p class="exp-dates">May 2025 – Nov 2025 · Sandusky, OH</p>
+          <span class="exp-tag">Operations · Analytics</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Partnered with cross-functional teams to <strong>benchmark performance across 42 business units</strong>, developing unified executive dashboards that reduced daily project operation status reporting time by <strong>60%</strong>.</li>
+          <li>Assessed end-to-end individual project lifecycles to identify and optimize process performance, applying Agile principles to improve sprint velocity and accountability across the enterprise compliance program.</li>
+        </ul>
+        </div>
+      </div>
+
+      <div class="exp-card-tl" data-a="up" data-delay="80">
+        <div style="display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
+        <div class="exp-meta">
+          <p class="exp-company">Ward Tires</p>
+          <p class="exp-role">Business Manager</p>
+          <p class="exp-dates">Jul 2021 – Aug 2023 · Calgary, CA</p>
+          <span class="exp-tag">GTM · Supply Chain · P&amp;L</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and executed a regional GTM strategy, collaborating with internal &amp; external stakeholders to optimize sales and marketing expenses -- resulting in a <strong>3% net margin increase</strong>.</li>
+          <li>Evaluated existing product life cycles, pricing, and positioning; new product development added <strong>20% gross revenue</strong> while filling portfolio gaps.</li>
+          <li>Facilitated cost modeling and vendor development strategy, <strong>reducing logistics costs by 10–15%</strong> through introduction of a just-in-time delivery model.</li>
+          <li>Collaborated with supplier R&amp;D teams to develop a category-based seasonal application product mix, strengthening upstream supplier relationships and improving shelf availability.</li>
+        </ul>
+        </div>
+      </div>
+
+      <div class="exp-card-tl" data-a="up" data-delay="160">
+        <div style="display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
+        <div class="exp-meta">
+          <p class="exp-company">Fiverr</p>
+          <p class="exp-role">Marketing Consultant</p>
+          <p class="exp-dates">Aug 2020 – Jun 2024 · Toronto, ON</p>
+          <span class="exp-tag">Digital · Content · SEO/SEM</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed SEO &amp; SEM initiatives, translating data from Google Analytics, Ahrefs, SEMRush, and competitor reviews to <strong>increase media engagement by 25–30%</strong>.</li>
+          <li>Led complex content strategy projects, delivering multi-platform campaigns on time and within budget using <strong>Hootsuite and MS Project</strong> for timeline management.</li>
+          <li>Supported trade shows and dealer training sessions; managed content creation for brochures, spec sheets, and social media -- boosting brand visibility by analyzing customer engagement metrics.</li>
+          <li>Implemented Voice of Customer programs, converting qualitative feedback into actionable product positioning recommendations for the marketplace team.</li>
+        </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ── III. CASE STUDIES ─────────────────────────────────── -->
+<section id="section-cases">
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <p class="sec-num" data-a="up">III. Case Studies</p>
+    <p data-a="up" data-delay="60" style="max-width:540px;font-size:.9rem;color:rgba(237,233,224,.42);line-height:1.72;margin-bottom:2.5rem;">
+      Three engagements. Three industries. Each card flips to reveal the full Problem–Action–Result breakdown.
+    </p>
+    <div class="case-slider" id="caseSlider">
+
+      <!-- CARD 1: B.Eng Material Testing -->
+      <div class="case-flip">
+        <div class="case-inner">
+          <div class="case-front">
+            <span class="case-cat">Structural Engineering · B.Eng Thesis</span>
+            <h3 class="case-title">Material Testing &amp;<br>Structural Design</h3>
+            <p class="case-desc">Led a load-bearing structural analysis project for a mid-rise concrete frame -- combining material fatigue testing, finite element modeling, and failure-mode prediction to inform a design revision that reduced material cost without compromising safety margins.</p>
+            <span class="flip-hint">Flip for breakdown ↻</span>
+          </div>
+          <div class="case-back">
+              <img class="case-back-img" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&q=70" alt="" loading="lazy">
+              <div class="case-back-scroll">
+                <span class="case-cat">PAR Breakdown</span>
+                <p class="case-back-desc">Structural analysis and material optimisation for a mid-rise concrete frame. Applied FEA and fatigue testing to right-size load-bearing specifications without compromising safety margins.</p>
+            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">The initial structural design for a reinforced concrete frame specified conservative material grades across all load-bearing members -- adding 12–18% to material cost with no engineering justification beyond precedent. The client needed a specification review backed by test data.</p></div>
+            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Designed and executed a compressive strength and flexural fatigue test program across M25 and M30 concrete mixes under cyclic loading. Applied finite element analysis to model stress distribution, identify critical failure zones, and validate revised cross-section specifications against IS 456 code requirements.</p></div>
+            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Test data supported a targeted downgrade of non-critical members to M25 -- reducing estimated material cost by 9% while maintaining full safety factor compliance. The methodology was adopted as the project's standard specification review protocol.</p></div>
+          </div>
+              </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: TechSmith GTM -->
+      <div class="case-flip">
+        <div class="case-inner">
+          <div class="case-front">
+            <span class="case-cat">GTM Consulting · TechSmith</span>
+            <h3 class="case-title">New Revenue<br>Growth Channels</h3>
+            <p class="case-desc">Identified and built the commercial case for untapped revenue channels, delivering a GTM roadmap that opened new customer segments for a B2B software company.</p>
+            <span class="flip-hint">Flip for breakdown ↻</span>
+          </div>
+          <div class="case-back">
+              <img class="case-back-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=70" alt="" loading="lazy">
+              <div class="case-back-scroll">
+                <span class="case-cat">PAR Breakdown</span>
+                <p class="case-back-desc">Revenue channel expansion strategy for a B2B software company. Identified underexplored customer segments and built a prioritised GTM roadmap with channel economics and pilot KPIs.</p>
+            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">TechSmith's existing GTM motion was concentrated in known channels, leaving adjacent customer segments and partnership-led revenue paths underexplored and unmonetized.</p></div>
+            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Conducted competitive landscape analysis and buyer persona mapping to identify high-potential new channels. Developed a structured GTM roadmap with prioritized entry sequencing, channel economics, and pilot KPIs.</p></div>
+            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Delivered a revenue channel expansion strategy with actionable go/no-go criteria and a phased rollout plan -- ready for leadership review and immediate execution.</p></div>
+          </div>
+              </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: ACG M&A Competition -->
+      <div class="case-flip">
+        <div class="case-inner">
+          <div class="case-front">
+            <span class="case-cat">M&amp;A Strategy · ACG Competition</span>
+            <h3 class="case-title">2nd Place:<br>M&amp;A Deal Thesis</h3>
+            <p class="case-desc">Competed in the ACG Cup -- building a full acquisition thesis, financial model, and strategic rationale that placed 2nd among MBA teams from across the region.</p>
+            <span class="flip-hint">Flip for breakdown ↻</span>
+          </div>
+          <div class="case-back">
+              <img class="case-back-img" src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=700&q=70" alt="" loading="lazy">
+              <div class="case-back-scroll">
+                <span class="case-cat">PAR Breakdown</span>
+                <p class="case-back-desc">Full M&A deal thesis competed at the ACG Cup — target screening, three-statement financial model, synergy analysis, and a board-ready investment thesis. Placed 2nd regionally.</p>
+            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">Identify a compelling acquisition target, construct a defensible deal valuation, and present a board-ready strategic rationale under competitive pressure and tight timelines.</p></div>
+            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Led target screening, built a three-statement financial model with synergy analysis, and developed the full investment thesis -- including deal structure, integration risks, and value creation levers.</p></div>
+            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Placed 2nd in the ACG M&amp;A Cup competition. Demonstrated end-to-end command of the deal process: from thesis origination to financial modeling to executive presentation.</p></div>
+          </div>
+              </div>
+        </div>
+      </div>
+
+      <!-- CARD 6: Cross-Border Distribution -->
+      <div class="case-flip">
+        <div class="case-inner">
+          <div class="case-front">
+            <span class="case-cat">Supply Chain · Cross-Border</span>
+            <h3 class="case-title">US Market Entry:<br>Lead Time &amp; Risk Reduction</h3>
+            <p class="case-desc">Mapped and optimized the distribution architecture for a Canadian-made product entering US retail -- cutting lead times and building tariff-resilient routing into the supply chain design.</p>
+            <span class="flip-hint">Flip for breakdown ↻</span>
+          </div>
+          <div class="case-back">
+              <img class="case-back-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=70" alt="" loading="lazy">
+              <div class="case-back-scroll">
+                <span class="case-cat">PAR Breakdown</span>
+                <p class="case-back-desc">Cross-border distribution architecture for a Canadian manufacturer entering US retail. Modelled tariff scenarios and designed a risk-weighted routing strategy for the Michigan–Ontario corridor.</p>
+            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">A Canadian manufacturer launching into US retail had no defined cross-border distribution architecture -- exposing the launch to customs delays, tariff volatility, and last-mile gaps in a new regulatory environment.</p></div>
+            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Mapped end-to-end distribution flows across the Michigan–Ontario corridor, identified border cost drivers, modeled tariff scenarios, and designed a risk-weighted routing strategy with fallback carrier options.</p></div>
+            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Optimized lead times and embedded risk management protocols into the supply chain design -- giving the product a stable, compliant path to US retail shelf from day one.</p></div>
+          </div>
+              </div>
+        </div>
+      </div>
+
+      <!-- CARD 7: Agile Retail Network -->
+      <div class="case-flip">
+        <div class="case-inner">
+          <div class="case-front">
+            <span class="case-cat">Operations · Agile / Scrum</span>
+            <h3 class="case-title">Scrum Replenishment:<br>–22% Out-of-Stocks</h3>
+            <p class="case-desc">Applied Agile sprint methodology to retail replenishment -- replacing a legacy, batch-driven system with iterative operational cycles that slashed out-of-stocks in 90 days.</p>
+            <span class="flip-hint">Flip for breakdown ↻</span>
+          </div>
+          <div class="case-back">
+              <img class="case-back-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=70" alt="" loading="lazy">
+              <div class="case-back-scroll">
+                <span class="case-cat">PAR Breakdown</span>
+                <p class="case-back-desc">Applied Scrum sprint methodology to a legacy retail replenishment system. Two-week operational cycles with daily stock-position reviews reduced out-of-stock incidents 22% in 90 days.</p>
+            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">A legacy replenishment system built on rigid batch ordering cycles was creating chronic out-of-stock events -- eroding revenue, damaging retailer relationships, and masking demand signal accuracy.</p></div>
+            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Rebuilt the replenishment workflow using Scrum principles: two-week operational sprints, daily standup reviews of stock position data, and iterative reorder-point calibration. Trained the operations team on sprint rituals and backlog prioritization.</p></div>
+            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Out-of-stock incidents dropped 22% within 90 days. The sprint-based model also improved demand signal visibility and reduced emergency reorder costs across the retail network.</p></div>
+          </div>
+              </div>
+        </div>
+      </div>
+
+    </div><!-- end case-slider -->
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+</section>
+
+<!-- ── IV. EDUCATION & LEADERSHIP ────────────────────────── -->
+<section id="section-brand-experience">
+  <div class="brand-hd">
+    <div>
+      <p class="sec-num" data-a="up">IV. Education &amp; Leadership</p>
+      <h2 data-a="left">Education &amp;<br>Leadership</h2>
+    </div>
+    <p data-a="right" data-delay="100">Academic foundation, campus leadership, and the cross-disciplinary perspective that shapes how I think and execute.</p>
+  </div>
+
+  <div class="edu-cards">
+    <div class="edu-card" data-a="up">
+      <div class="edu-card-top">
+        <span class="edu-card-badge">MBA · 2026</span>
+        <span class="edu-card-year">2024 – 2026</span>
+      </div>
+      <h3 class="edu-card-school">Michigan State University</h3>
+      <p class="edu-card-degree">Master of Business Administration</p>
+      <p class="edu-card-field">Supply Chain Management &amp; Marketing · Broad College of Business</p>
+      <div class="edu-card-leads">
+        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Board Member -- Graduate Supply Chain Management Association (GSCMA)</span>
+        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Ambassador -- MBA Association (MBAA)</span>
+        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Global Student Ambassador</span>
+        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Member -- Broad Consulting Club &amp; Multicultural Club</span>
+      </div>
+    </div>
+
+    <div class="edu-card" data-a="up" data-delay="120">
+      <div class="edu-card-top">
+        <span class="edu-card-badge">B.Eng · 2020</span>
+        <span class="edu-card-year">2016 – 2020</span>
+      </div>
+      <h3 class="edu-card-school">National Institute of Engineering</h3>
+      <p class="edu-card-degree">Bachelor of Engineering</p>
+      <p class="edu-card-field">Project Management · College of Civil Engineering, Mysuru, IND</p>
+      <div class="edu-card-leads">
+        <span class="edu-lead-item"><span class="edu-lead-dot"></span>President -- Community Engagement Committee</span>
+        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Captain -- Varsity Soccer Team</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bmq-wrap">
+    <div class="bmq-track">
+      <span class="bn">Salesforce</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">HubSpot</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Ahrefs</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">SEMRush</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">MS Project</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Tableau</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Power BI</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Google Analytics</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Hootsuite</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Salesforce</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">HubSpot</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Ahrefs</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">SEMRush</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">MS Project</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Tableau</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Power BI</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Google Analytics</span><span class="bn" style="opacity:.22">✦</span>
+      <span class="bn">Hootsuite</span><span class="bn" style="opacity:.22">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── VII-A. SKILLS & TOOLS ──────────────────────────── -->
+<section id="section-skills">
+  <div class="skills-pit-header">
+    <p class="sec-num" data-a="up">V. Skills &amp; Tools</p>
+    <p data-a="right" data-delay="80">Drag the cursor across the pit — the balls scatter. Highlighted balls are core competencies.</p>
+  </div>
+  <div id="skills-pit-wrap">
+    <canvas id="skills-canvas"></canvas>
+  </div>
+</section>
+
+<!-- ── VI. SIMULATORS ────────────────────────────────────── -->
+<section id="gtm-simulators">
+<div class="sim-wrap">
+
+  <p class="sec-num" data-a="up">VI. Interactive Labs</p>
+  <h2 class="sim-title" data-a="up" data-delay="60">Operations Simulators</h2>
+  <p class="sim-intro" data-a="up" data-delay="120">
+    Two interactive models built from real-world operations problems. <em>Inventory Lab</em> uses EOQ and safety stock logic applied at Ward Tires. <em>Queue &amp; Staffing Lab</em> models the staffing trade-off from Six Flags -- finding the right number of servers without over-spending on idle capacity.
+  </p>
+
+  <!-- ── TAB NAVIGATION ──────────────────────────────────── -->
+  <div class="sim-tabs" data-a="up" data-delay="160">
+    <button class="sim-tab-btn active" onclick="switchSimTab('inv')" id="tab-btn-inv">
+      <span class="stb-num">01</span> Inventory vs. Service Level
+    </button>
+    <button class="sim-tab-btn" onclick="switchSimTab('queue')" id="tab-btn-queue">
+      <span class="stb-num">02</span> Queue &amp; Staffing Dynamics
+    </button>
+    <button class="sim-tab-btn" onclick="switchSimTab('dcf')" id="tab-btn-dcf">
+      <span class="stb-num">03</span> Financial &amp; DCF Valuation
+    </button>
+  </div>
+
+  <!-- ══ TAB 1: INVENTORY ════════════════════════════════ -->
+  <div class="sim-tab-panel active" id="tab-panel-inv">
+
+  <div class="sim-scenario-card">
+    <div class="ssc-eyebrow">Hypothetical Scenario</div>
+    <div class="ssc-body">
+      <strong>Ward Tires — Calgary Distribution Centre.</strong> You manage a mid-size tyre distributor with 12,000 units of your top-selling all-season SKU moving annually. Your supplier in Ontario ships in batches, taking 21 days on average (but sometimes 14, sometimes 28). Your warehouse costs 25% of unit value per year to operate, and each purchase order costs ~$150 in admin and receiving labour. At what order quantity do you minimise total inventory cost — and how much safety stock do you need to maintain a 95% fill rate through demand spikes?
+    </div>
+    <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the model to see the EOQ and cost curve.</div>
+  </div>
+
+  <!-- ── GUIDED EXPLAINER STRIP ────────────────────────── -->
+  <div class="sim-guide">
+    <div class="sim-guide-step active" data-step="0" id="inv-gs-0">
+      <span class="sgs-num">01</span>
+      <span class="sgs-label">Set demand &amp; cost parameters</span>
+    </div>
+    <div class="sim-guide-arrow">→</div>
+    <div class="sim-guide-step" data-step="1" id="inv-gs-1">
+      <span class="sgs-num">02</span>
+      <span class="sgs-label">Define service &amp; lead time targets</span>
+    </div>
+    <div class="sim-guide-arrow">→</div>
+    <div class="sim-guide-step" data-step="2" id="inv-gs-2">
+      <span class="sgs-num">03</span>
+      <span class="sgs-label">Run model -- EOQ, safety stock &amp; cost curve</span>
+    </div>
+  </div>
+
+  <!-- ── MAIN SIMULATOR LAYOUT ─────────────────────────── -->
+  <div class="sim-body">
+
+    <!-- LEFT: Inputs panel -->
+    <div class="sim-inputs-panel">
+
+      <!-- Group A: Demand -->
+      <div class="sim-input-group" id="grp-demand">
+        <div class="sig-header">
+          <span class="sig-tag">A</span>
+          <span class="sig-title">Demand Parameters</span>
+          <span class="sig-hint">How much you sell and how variable that demand is</span>
+        </div>
+        <div class="sim-field">
+          <label>Annual Demand (units)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-demand" value="12000" min="100" max="1000000" step="100">
+            <span class="sim-field-unit">units/yr</span>
+          </div>
+          <p class="sim-field-note">Total units sold or consumed per year. At Ward Tires this was SKU-level tyre demand across trade channels.</p>
+        </div>
+        <div class="sim-field">
+          <label>Demand Variability (std dev, units/day)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-sigma-d" value="12" min="0" max="500" step="1">
+            <span class="sim-field-unit">σ units/day</span>
+          </div>
+          <p class="sim-field-note">How much daily demand fluctuates. Higher variability requires more safety stock to protect service level.</p>
+        </div>
+      </div>
+
+      <!-- Group B: Cost -->
+      <div class="sim-input-group" id="grp-cost">
+        <div class="sig-header">
+          <span class="sig-tag">B</span>
+          <span class="sig-title">Cost Parameters</span>
+          <span class="sig-hint">The two competing costs that determine your optimal order quantity</span>
+        </div>
+        <div class="sim-field">
+          <label>Ordering Cost per Order ($)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-order-cost" value="150" min="10" max="10000" step="10">
+            <span class="sim-field-unit">$/order</span>
+          </div>
+          <p class="sim-field-note">Fixed cost each time you place an order -- admin, freight set-up, receiving labour. Ordering more frequently multiplies this cost.</p>
+        </div>
+        <div class="sim-field">
+          <label>Unit Purchase Cost ($)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-unit-cost" value="48" min="1" max="50000" step="1">
+            <span class="sim-field-unit">$/unit</span>
+          </div>
+          <p class="sim-field-note">Landed cost per unit. Used to calculate the holding cost on capital tied up in inventory.</p>
+        </div>
+        <div class="sim-field">
+          <label>Annual Holding Cost Rate (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-hold-rate" value="25" min="5" max="60" step="1">
+            <span class="sim-field-unit">% / yr</span>
+          </div>
+          <p class="sim-field-note">The cost to store one unit for one year, as a % of its value. Typically 20–35% including capital cost, warehouse, insurance, and obsolescence.</p>
+        </div>
+      </div>
+
+      <!-- Group C: Supply & Service -->
+      <div class="sim-input-group" id="grp-service">
+        <div class="sig-header">
+          <span class="sig-tag">C</span>
+          <span class="sig-title">Supply &amp; Service Targets</span>
+          <span class="sig-hint">Lead time and the service level you're committing to customers</span>
+        </div>
+        <div class="sim-field">
+          <label>Supplier Lead Time (days)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-lead" value="21" min="1" max="180" step="1">
+            <span class="sim-field-unit">days</span>
+          </div>
+          <p class="sim-field-note">Average days from purchase order to stock arriving and available. Longer lead time = more stock needed to bridge the gap.</p>
+        </div>
+        <div class="sim-field">
+          <label>Lead Time Variability (std dev, days)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-sigma-l" value="4" min="0" max="60" step="1">
+            <span class="sim-field-unit">σ days</span>
+          </div>
+          <p class="sim-field-note">How unpredictable your supplier's delivery is. A supplier that sometimes delivers in 14 days and sometimes in 28 days has high lead-time sigma.</p>
+        </div>
+        <div class="sim-field">
+          <label>Target Service Level (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="f-service" value="95" min="50" max="99.9" step="0.5">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">The % of demand cycles you want to fulfil without a stockout. 95% = 1 stockout in 20 order cycles. 99% costs significantly more to maintain.</p>
+        </div>
+      </div>
+
+      <!-- RUN BUTTON -->
+      <button class="sim-run-btn" id="sim-run-btn" onclick="runSimulator()">
+        <span id="sim-btn-text">Run Model</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+    </div><!-- /sim-inputs-panel -->
+
+    <!-- RIGHT: Output panel -->
+    <div class="sim-output-panel" id="sim-output-panel">
+
+      <!-- State: pre-run -->
+      <div class="sim-placeholder" id="sim-placeholder">
+        <div class="sim-ph-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+            <path d="M12 36 L12 20 M20 36 L20 14 M28 36 L28 24 M36 36 L36 10" stroke="rgba(201,168,76,0.35)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 10 Q24 28 40 8" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+          </svg>
+        </div>
+        <p class="sim-ph-title">Model not yet run</p>
+        <p class="sim-ph-sub">Fill in your parameters on the left and click <strong>Run Model</strong> to generate your inventory optimisation analysis.</p>
+      </div>
+
+      <!-- State: results (hidden until run) -->
+      <div class="sim-results" id="sim-results" style="display:none;">
+
+        <!-- Key metrics row -->
+        <div class="sim-metrics-row">
+          <div class="sim-metric" id="sm-eoq">
+            <span class="sm-label">Optimal Order Qty (EOQ)</span>
+            <span class="sm-value" id="out-eoq">--</span>
+            <span class="sm-unit">units</span>
+          </div>
+          <div class="sim-metric" id="sm-ss">
+            <span class="sm-label">Safety Stock Required</span>
+            <span class="sm-value" id="out-ss">--</span>
+            <span class="sm-unit">units</span>
+          </div>
+          <div class="sim-metric" id="sm-rop">
+            <span class="sm-label">Reorder Point</span>
+            <span class="sm-value" id="out-rop">--</span>
+            <span class="sm-unit">units</span>
+          </div>
+          <div class="sim-metric highlight" id="sm-tc">
+            <span class="sm-label">Total Annual Inventory Cost</span>
+            <span class="sm-value" id="out-tc">--</span>
+            <span class="sm-unit">/ year</span>
+          </div>
+        </div>
+
+        <!-- Cost breakdown bar -->
+        <div class="sim-cost-breakdown">
+          <div class="scb-header">
+            <span class="scb-title">Annual Cost Breakdown</span>
+            <div class="scb-legend">
+              <span class="scb-leg-dot" style="background:#c9a84c"></span><span>Holding</span>
+              <span class="scb-leg-dot" style="background:#4a90e2"></span><span>Ordering</span>
+              <span class="scb-leg-dot" style="background:#e05a00"></span><span>Stockout Risk</span>
+            </div>
+          </div>
+          <div class="scb-bar-wrap">
+            <div class="scb-bar">
+              <div class="scb-seg seg-hold" id="seg-hold" title="Holding cost"></div>
+              <div class="scb-seg seg-ord"  id="seg-ord"  title="Ordering cost"></div>
+              <div class="scb-seg seg-sk"   id="seg-sk"   title="Stockout risk cost"></div>
+            </div>
+          </div>
+          <div class="scb-values">
+            <span id="val-hold">--</span>
+            <span id="val-ord">--</span>
+            <span id="val-sk">--</span>
+          </div>
+        </div>
+
+        <!-- Chart: EOQ cost curve -->
+        <div class="sim-chart-block">
+          <div class="schart-header">
+            <span class="schart-title">Total Cost vs. Order Quantity</span>
+            <span class="schart-sub">The EOQ sits at the minimum of the total cost curve -- where ordering and holding costs balance.</span>
+          </div>
+          <div class="schart-canvas-wrap">
+            <canvas id="chart-cost-curve"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart: Service level vs safety stock -->
+        <div class="sim-chart-block">
+          <div class="schart-header">
+            <span class="schart-title">Service Level vs. Safety Stock Cost</span>
+            <span class="schart-sub">The diminishing return of chasing higher service levels -- each extra % costs disproportionately more capital.</span>
+          </div>
+          <div class="schart-canvas-wrap">
+            <canvas id="chart-service-curve"></canvas>
+          </div>
+        </div>
+
+        <!-- Analyst commentary -->
+        <div class="sim-commentary" id="sim-commentary">
+          <div class="scom-eyebrow">Model Interpretation</div>
+          <div class="scom-body" id="scom-body">--</div>
+          <div class="scom-insight" id="scom-insight"></div>
+        </div>
+
+        <!-- Sensitivity table -->
+        <div class="sim-sensitivity">
+          <div class="ssens-header">Sensitivity Analysis -- What If You Change One Variable?</div>
+          <table class="ssens-table" id="ssens-table">
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>EOQ</th>
+                <th>Safety Stock</th>
+                <th>Total Cost</th>
+                <th>vs. Base</th>
+              </tr>
+            </thead>
+            <tbody id="ssens-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Reset / Carry forward -->
+        <button class="sim-reset-btn" onclick="resetSimulator()">Reset &amp; Re-run</button>
+        <button class="sim-carry-btn" onclick="carryInvToQueue()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Use these results in Queue &amp; Staffing Lab
+        </button>
+
+      </div><!-- /sim-results -->
+    </div><!-- /sim-output-panel -->
+  </div><!-- /sim-body -->
+
+  </div><!-- /tab-panel-inv -->
+
+  <!-- ══════════════════════════════════════════════════════
+       TAB 2: QUEUE & STAFFING DYNAMICS SIMULATOR
+  ══════════════════════════════════════════════════════ -->
+  <div class="sim-tab-panel" id="tab-panel-queue">
+
+  <div class="sim-scenario-card">
+    <div class="ssc-eyebrow">Hypothetical Scenario</div>
+    <div class="ssc-body">
+      <strong>Six Flags Great Lakes — Peak Saturday Operations.</strong> It's a summer Saturday and the park's flagship coaster is running at full capacity. On average, a new guest joins the queue every 2.5 minutes. Each boarding cycle takes about 5 minutes per customer. Management has deployed 3 ride operators to handle loading, safety checks, and dispatch. By 11am the queue is visibly growing. Do you add a 4th operator, or is the system still within tolerance? What does utilisation look like, and at what point does adding staff stop meaningfully cutting wait time?
+    </div>
+    <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the simulation to see real-time queue dynamics.</div>
+  </div>
+
+  <!-- ── GUIDED EXPLAINER STRIP ────────────────────────── -->
+  <div class="sim-guide">
+    <div class="sim-guide-step active" id="q-gs-0">
+      <span class="sgs-num">01</span>
+      <span class="sgs-label">Set arrival rate &amp; service time</span>
+    </div>
+    <div class="sim-guide-arrow">→</div>
+    <div class="sim-guide-step" id="q-gs-1">
+      <span class="sgs-num">02</span>
+      <span class="sgs-label">Set number of servers &amp; run time</span>
+    </div>
+    <div class="sim-guide-arrow">→</div>
+    <div class="sim-guide-step" id="q-gs-2">
+      <span class="sgs-num">03</span>
+      <span class="sgs-label">Run simulation -- see queue &amp; utilisation</span>
+    </div>
+  </div>
+
+  <div class="sim-body">
+
+    <!-- LEFT: Queue Sim Inputs -->
+    <div class="sim-inputs-panel">
+
+      <!-- Group A: Arrival -->
+      <div class="sim-input-group" id="qgrp-arrival">
+        <div class="sig-header">
+          <span class="sig-tag">A</span>
+          <div>
+            <span class="sig-title">Arrival &amp; Demand</span>
+            <span class="sig-hint">How often customers / jobs arrive</span>
+          </div>
+        </div>
+        <div class="sim-field">
+          <label>Avg. Arrival Interval (minutes)</label>
+          <div class="sim-field-row">
+            <input type="number" id="q-arrival" value="2.5" min="0.1" max="60" step="0.1">
+            <span class="sim-field-unit">min / arrival</span>
+          </div>
+          <p class="sim-field-note">One new customer every X minutes on average. At Six Flags, guest throughput drove this figure per attraction.</p>
+        </div>
+        <div class="sim-field">
+          <label>Simulation Duration (minutes)</label>
+          <div class="sim-field-row">
+            <input type="number" id="q-simtime" value="240" min="30" max="1440" step="30">
+            <span class="sim-field-unit">minutes</span>
+          </div>
+          <p class="sim-field-note">Total operating window to simulate. 240 = a typical 4-hour peak period.</p>
+        </div>
+      </div>
+
+      <!-- Group B: Service -->
+      <div class="sim-input-group" id="qgrp-service">
+        <div class="sig-header">
+          <span class="sig-tag">B</span>
+          <div>
+            <span class="sig-title">Service Parameters</span>
+            <span class="sig-hint">How long it takes to serve each customer</span>
+          </div>
+        </div>
+        <div class="sim-field">
+          <label>Avg. Service Time (minutes)</label>
+          <div class="sim-field-row">
+            <input type="number" id="q-service" value="5" min="0.5" max="120" step="0.5">
+            <span class="sim-field-unit">min / customer</span>
+          </div>
+          <p class="sim-field-note">Average time one server spends with one customer. Exponentially distributed -- some will be faster, some slower.</p>
+        </div>
+        <div class="sim-field">
+          <label>Number of Servers (staff)</label>
+          <div class="sim-field-row">
+            <input type="number" id="q-servers" value="3" min="1" max="20" step="1">
+            <span class="sim-field-unit">servers</span>
+          </div>
+          <p class="sim-field-note">Parallel servers working simultaneously. Increase this to see the effect on wait time and utilisation.</p>
+        </div>
+        <div class="sim-field">
+          <label>Staff Cost per Server ($/hour)</label>
+          <div class="sim-field-row">
+            <input type="number" id="q-staffcost" value="22" min="5" max="200" step="1">
+            <span class="sim-field-unit">$/hr</span>
+          </div>
+          <p class="sim-field-note">Hourly labour cost per server. Used to calculate total staffing cost vs. wait-time cost trade-off.</p>
+        </div>
+      </div>
+
+      <!-- RUN BUTTON -->
+      <button class="sim-run-btn" id="q-run-btn" onclick="runQueueSim()">
+        <span id="q-btn-text">Run Simulation</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+    </div><!-- /inputs -->
+
+    <!-- RIGHT: Queue Sim Output -->
+    <div class="sim-output-panel" id="q-output-panel">
+
+      <!-- Placeholder -->
+      <div class="sim-placeholder" id="q-placeholder">
+        <div class="sim-ph-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+            <circle cx="12" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+            <circle cx="36" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+            <path d="M6 36 Q12 28 18 36 Q24 28 30 36 Q36 28 42 36" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <p class="sim-ph-title">Simulation not yet run</p>
+        <p class="sim-ph-sub">Configure arrival rate, service time and staff count. Click <strong>Run Simulation</strong> to see queue dynamics and staffing recommendations.</p>
+      </div>
+
+      <!-- Results -->
+      <div id="q-results" style="display:none;">
+
+        <!-- Key metrics -->
+        <div class="qsim-metrics-row">
+          <div class="qsim-metric">
+            <span class="sm-label">Customers Served</span>
+            <span class="sm-value" id="q-out-served">--</span>
+            <span class="sm-unit">total</span>
+          </div>
+          <div class="qsim-metric">
+            <span class="sm-label">Avg. Wait Time</span>
+            <span class="sm-value" id="q-out-wait">--</span>
+            <span class="sm-unit">minutes</span>
+          </div>
+          <div class="qsim-metric">
+            <span class="sm-label">Max Wait Time</span>
+            <span class="sm-value" id="q-out-maxwait">--</span>
+            <span class="sm-unit">minutes</span>
+          </div>
+          <div class="qsim-metric highlight">
+            <span class="sm-label">Server Utilisation</span>
+            <span class="sm-value" id="q-out-util">--</span>
+            <span class="sm-unit">%</span>
+          </div>
+        </div>
+
+        <!-- Utilisation bar -->
+        <div class="util-bar-wrap">
+          <div class="util-bar-label">
+            <span>Server Utilisation</span>
+            <span id="q-util-pct-lbl">--%</span>
+          </div>
+          <div class="util-track">
+            <div class="util-fill" id="q-util-bar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Chart: Queue length over time -->
+        <div class="qsim-chart-block">
+          <div class="schart-header">
+            <span class="schart-title">Queue Length Over Time</span>
+            <span class="schart-sub">Number of customers waiting at each point in the simulation.</span>
+          </div>
+          <div class="qsim-canvas-wrap">
+            <canvas id="q-chart-queue"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart: Staff count sensitivity -->
+        <div class="qsim-chart-block">
+          <div class="schart-header">
+            <span class="schart-title">Wait Time vs. Number of Servers</span>
+            <span class="schart-sub">The diminishing return of adding staff -- each extra server reduces wait time by less than the last.</span>
+          </div>
+          <div class="qsim-canvas-wrap">
+            <canvas id="q-chart-sensitivity"></canvas>
+          </div>
+        </div>
+
+        <!-- Commentary -->
+        <div class="sim-commentary" id="q-commentary">
+          <div class="scom-eyebrow">Model Interpretation</div>
+          <div class="scom-body" id="q-scom-body">--</div>
+          <div class="scom-insight" id="q-scom-insight"></div>
+        </div>
+
+        <!-- Reset -->
+        <button class="sim-reset-btn" onclick="resetQueueSim()">Reset &amp; Re-run</button>
+        <button class="sim-carry-btn" onclick="carryQueueToDCF()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Use these results in Financial &amp; DCF Lab
+        </button>
+      </div><!-- /q-results -->
+    </div><!-- /q-output-panel -->
+  </div><!-- /sim-body -->
+
+  </div><!-- /tab-panel-queue -->
+
+  <!-- ══ TAB 3: FINANCIAL & DCF VALUATION ══════════════════ -->
+  <div class="sim-tab-panel" id="tab-panel-dcf">
+
+  <div class="sim-scenario-card">
+    <div class="ssc-eyebrow">Hypothetical Scenario</div>
+    <div class="ssc-body">
+      <strong>TechSmith Corporation — Acquisition Valuation.</strong> During the Broad Consulting Club engagement, you're tasked with building a preliminary DCF for a mid-market B2B software target. The company is generating $5M in revenue with strong early-stage growth (~18% per year) as it expands into new verticals. EBITDA margins are at 22% — compressed by S&amp;M spend, but improving. The acquirer's WACC is 10%, and comparable SaaS transactions are clearing at 8× EBITDA. Does the current growth trajectory support the acquisition price being discussed? What does the valuation look like under bear, base, and bull assumptions?
+    </div>
+    <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the model to see NPV, IRR and the valuation football field.</div>
+  </div>
+
+  <div class="sim-guide">
+    <div class="sim-guide-step active" id="d-gs-0">
+      <span class="sgs-num">01</span><span class="sgs-label">Enter revenue &amp; cost projections</span>
+    </div>
+    <div class="sim-guide-arrow">→</div>
+    <div class="sim-guide-step" id="d-gs-1">
+      <span class="sgs-num">02</span><span class="sgs-label">Set discount rate &amp; market assumptions</span>
+    </div>
+    <div class="sim-guide-arrow">→</div>
+    <div class="sim-guide-step" id="d-gs-2">
+      <span class="sgs-num">03</span><span class="sgs-label">Run model — NPV, IRR &amp; valuation range</span>
+    </div>
+  </div>
+
+  <div class="sim-body">
+
+    <!-- LEFT: DCF Inputs -->
+    <div class="sim-inputs-panel">
+
+      <!-- Group A: Revenue -->
+      <div class="sim-input-group" id="dgrp-revenue">
+        <div class="sig-header">
+          <span class="sig-tag">A</span>
+          <div><span class="sig-title">Revenue Projections</span><span class="sig-hint">Base year revenue and growth assumptions</span></div>
+        </div>
+        <div class="sim-field">
+          <label>Base Year Revenue ($000s)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-revenue" value="5000" min="10" max="10000000" step="100">
+            <span class="sim-field-unit">$K</span>
+          </div>
+          <p class="sim-field-note">Current / Year 0 annual revenue in thousands. Starting point for the 5-year projection.</p>
+        </div>
+        <div class="sim-field">
+          <label>Revenue Growth Rate — Years 1–3 (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-growth1" value="18" min="-50" max="200" step="1">
+            <span class="sim-field-unit">% / yr</span>
+          </div>
+          <p class="sim-field-note">High-growth phase. Reflects market penetration, GTM execution, or new product revenue.</p>
+        </div>
+        <div class="sim-field">
+          <label>Revenue Growth Rate — Years 4–5 (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-growth2" value="9" min="-50" max="100" step="1">
+            <span class="sim-field-unit">% / yr</span>
+          </div>
+          <p class="sim-field-note">Maturity phase. Business stabilises toward a steady-state growth rate.</p>
+        </div>
+      </div>
+
+      <!-- Group B: Costs & Margins -->
+      <div class="sim-input-group" id="dgrp-costs">
+        <div class="sig-header">
+          <span class="sig-tag">B</span>
+          <div><span class="sig-title">Cost Structure</span><span class="sig-hint">Margins and capital requirements</span></div>
+        </div>
+        <div class="sim-field">
+          <label>EBITDA Margin (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-ebitda" value="22" min="-100" max="80" step="1">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Earnings before interest, tax, depreciation and amortisation as % of revenue. Proxy for operating profitability.</p>
+        </div>
+        <div class="sim-field">
+          <label>D&amp;A as % of Revenue (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-da" value="4" min="0" max="30" step="0.5">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Depreciation and amortisation. Non-cash charge added back to get to free cash flow.</p>
+        </div>
+        <div class="sim-field">
+          <label>Capex as % of Revenue (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-capex" value="5" min="0" max="50" step="0.5">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Capital expenditure required to sustain growth. High for asset-heavy businesses (manufacturing, logistics); low for software.</p>
+        </div>
+        <div class="sim-field">
+          <label>Change in Working Capital (% of Rev Growth)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-nwc" value="8" min="-20" max="40" step="1">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Incremental working capital needed per dollar of revenue growth. Retail and supply chain businesses typically run 8–15%.</p>
+        </div>
+      </div>
+
+      <!-- Group C: Market & Discount Assumptions -->
+      <div class="sim-input-group" id="dgrp-market">
+        <div class="sig-header">
+          <span class="sig-tag">C</span>
+          <div><span class="sig-title">Market Assumptions</span><span class="sig-hint">Discount rate, terminal value and tax</span></div>
+        </div>
+        <div class="sim-field">
+          <label>WACC — Discount Rate (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-wacc" value="10" min="3" max="35" step="0.5">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Weighted average cost of capital. Blends cost of equity (CAPM) and cost of debt. Typically 8–14% for mid-market companies.</p>
+        </div>
+        <div class="sim-field">
+          <label>Terminal Growth Rate (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-tgr" value="2.5" min="0" max="8" step="0.5">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Perpetuity growth rate beyond Year 5. Should be at or below long-run GDP growth (~2–3%). Used in the Gordon Growth Model terminal value.</p>
+        </div>
+        <div class="sim-field">
+          <label>Tax Rate (%)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-tax" value="26" min="0" max="50" step="1">
+            <span class="sim-field-unit">%</span>
+          </div>
+          <p class="sim-field-note">Effective corporate tax rate. US federal + state blended: ~26–28%. Canada: ~26.5%.</p>
+        </div>
+        <div class="sim-field">
+          <label>EV/EBITDA Exit Multiple (×)</label>
+          <div class="sim-field-row">
+            <input type="number" id="d-multiple" value="8" min="2" max="40" step="0.5">
+            <span class="sim-field-unit">×</span>
+          </div>
+          <p class="sim-field-note">Market comparable exit multiple for terminal value cross-check. Mid-market B2B: 6–10×. Tech/SaaS: 12–20×.</p>
+        </div>
+      </div>
+
+      <button class="sim-run-btn" id="d-run-btn" onclick="runDCF()">
+        <span id="d-btn-text">Run DCF Model</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+    </div><!-- /inputs -->
+
+    <!-- RIGHT: DCF Output -->
+    <div class="sim-output-panel" id="d-output-panel">
+
+      <div class="sim-placeholder" id="d-placeholder">
+        <div class="sim-ph-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+            <path d="M8 36 L8 28 M16 36 L16 20 M24 36 L24 14 M32 36 L32 22 M40 36 L40 10" stroke="rgba(201,168,76,0.35)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 32 Q16 18 26 22 Q34 10 42 8" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+          </svg>
+        </div>
+        <p class="sim-ph-title">Model not yet run</p>
+        <p class="sim-ph-sub">Fill in revenue projections, cost structure, and market assumptions. Click <strong>Run DCF Model</strong> to generate NPV, IRR and valuation range.</p>
+      </div>
+
+      <div id="d-results" style="display:none;">
+
+        <!-- Valuation summary row -->
+        <div class="dcf-val-row">
+          <div class="dcf-val-card bear">
+            <span class="dcf-vc-label">Bear Case</span>
+            <span class="dcf-vc-value" id="d-out-bear">--</span>
+            <span class="dcf-vc-sub">WACC +200bps</span>
+          </div>
+          <div class="dcf-val-card base active-val">
+            <span class="dcf-vc-label">Base Case</span>
+            <span class="dcf-vc-value" id="d-out-base">--</span>
+            <span class="dcf-vc-sub">Your inputs</span>
+          </div>
+          <div class="dcf-val-card bull">
+            <span class="dcf-vc-label">Bull Case</span>
+            <span class="dcf-vc-value" id="d-out-bull">--</span>
+            <span class="dcf-vc-sub">WACC −200bps</span>
+          </div>
+        </div>
+
+        <!-- Key metrics -->
+        <div class="sim-metrics-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="sim-metric">
+            <span class="sm-label">Enterprise Value (DCF)</span>
+            <span class="sm-value" id="d-out-ev">--</span>
+            <span class="sm-unit">$K</span>
+          </div>
+          <div class="sim-metric">
+            <span class="sm-label">NPV of FCFs</span>
+            <span class="sm-value" id="d-out-npv">--</span>
+            <span class="sm-unit">$K</span>
+          </div>
+          <div class="sim-metric">
+            <span class="sm-label">Terminal Value (PV)</span>
+            <span class="sm-value" id="d-out-tv">--</span>
+            <span class="sm-unit">$K</span>
+          </div>
+          <div class="sim-metric highlight">
+            <span class="sm-label">Implied IRR</span>
+            <span class="sm-value" id="d-out-irr">--</span>
+            <span class="sm-unit">%</span>
+          </div>
+        </div>
+
+        <!-- FCF waterfall chart -->
+        <div class="sim-chart-block">
+          <div class="schart-header">
+            <span class="schart-title">Free Cash Flow Projection — Years 1–5</span>
+            <span class="schart-sub">Revenue, EBITDA and unlevered FCF by year. Bar = FCF; lines = Revenue &amp; EBITDA.</span>
+          </div>
+          <div class="schart-canvas-wrap" style="height:200px;">
+            <canvas id="d-chart-fcf"></canvas>
+          </div>
+        </div>
+
+        <!-- Sensitivity / football field chart -->
+        <div class="sim-chart-block">
+          <div class="schart-header">
+            <span class="schart-title">Valuation Football Field — WACC vs. Terminal Growth Rate</span>
+            <span class="schart-sub">Enterprise value across the WACC / TGR matrix. Brighter = higher valuation.</span>
+          </div>
+          <div class="schart-canvas-wrap" style="height:200px;">
+            <canvas id="d-chart-football"></canvas>
+          </div>
+        </div>
+
+        <!-- FCF schedule table -->
+        <div class="sim-cost-breakdown" style="padding:0;overflow:hidden;">
+          <div class="scb-header" style="padding:1rem 1.1rem .6rem;">
+            <span class="scb-title">5-Year FCF Schedule</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="ssens-table" id="d-fcf-table" style="min-width:560px;">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th>
+                </tr>
+              </thead>
+              <tbody id="d-fcf-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Commentary -->
+        <div class="sim-commentary" id="d-commentary" style="margin-top:1.5rem;">
+          <div class="scom-eyebrow">Model Interpretation</div>
+          <div class="scom-body" id="d-scom-body">--</div>
+          <div class="scom-insight" id="d-scom-insight"></div>
+        </div>
+
+        <button class="sim-reset-btn" onclick="resetDCF()">Reset &amp; Re-run</button>
+
+      </div><!-- /d-results -->
+    </div><!-- /d-output-panel -->
+  </div><!-- /sim-body -->
+
+  </div><!-- /tab-panel-dcf -->
+
+</div>
+</section>
+
+<!-- ── VIII. CONTACT ──────────────────────────────────────── -->
+<section id="section-get-in-touch">
+  <div class="ct-layout">
+    <div>
+      <p class="sec-num" data-a="up">VII. Contact</p>
+      <div class="ct-availability" data-a="up" data-delay="40"><span class="ct-avail-dot"></span>Open to opportunities · Graduating May 2026</div>
+      <h2 class="ct-heading" data-a="up" data-delay="60">Let's talk<br><em>strategy</em></h2>
+      <p class="ct-left" data-a="up" data-delay="120">If you're looking for an MBA with a commercial and operational edge -- for a full-time role, internship, or project collaboration -- I'd love to connect.</p>
+      <p class="ct-location" data-a="up" data-delay="150">East Lansing, MI · Open to relocation</p>
+      <img class="ct-photo" data-a="clip" data-delay="180" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80" alt="Prapanch Kokkalemada" loading="lazy" width="900" height="600" onerror="this.src='https://placehold.co/900x600/111/333?text=Punch'">
+    </div>
+    <div>
+      <div class="ci-list" data-a="up" data-delay="100">
+        <a class="ci" href="https://linkedin.com/in/prapanchkokkalemada/" target="_blank" rel="noopener" data-tip="LinkedIn">
+          <div><span class="ci-lbl">Connect on LinkedIn</span><span class="ci-val">linkedin.com/in/prapanchkokkalemada</span></div><span class="ci-arr">↗</span>
+        </a>
+        <a class="ci" href="mailto:kokkalem@msu.edu" data-tip="Email">
+          <div><span class="ci-lbl">Email</span><span class="ci-val">kokkalem@msu.edu</span></div><span class="ci-arr">↗</span>
+        </a>
+        <a class="ci" href="tel:5178932109" data-tip="Call">
+          <div><span class="ci-lbl">Phone</span><span class="ci-val">517-893-2109</span></div><span class="ci-arr">↗</span>
+        </a>
+      </div>
+      <div class="soc" data-a="up" data-delay="200">
+        <p class="soc-h">Currently Open To</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem;">
+          <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(201,168,76,.3);color:rgba(201,168,76,.8);padding:.3rem .8rem;">Full-Time Roles</span>
+          <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(237,233,224,.15);color:rgba(237,233,224,.45);padding:.3rem .8rem;">Summer Internship</span>
+          <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(237,233,224,.15);color:rgba(237,233,224,.45);padding:.3rem .8rem;">Consulting Projects</span>
+        </div>
+        <p class="soc-h">Resources</p>
+        <a class="sl" href="#" target="_blank" rel="noopener">Download Resume / CV <span>↗</span></a>
+        <a class="sl" href="https://broad.msu.edu" target="_blank" rel="noopener">MSU Broad College of Business <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-logo">PUNCH <span>KOKKALEMADA</span></span>
+  <span>MBA Candidate · Michigan State University · Broad College of Business · ©2026</span>
+  <div style="display:flex;gap:2rem;align-items:center;">
+    <a href="#section-experience" class="ft-link">Experience</a>
+    <a href="#section-cases" class="ft-link">Cases</a>
+    <a href="#section-skills" class="ft-link">Skills</a>
+    <a href="#section-get-in-touch" class="ft-link">Contact</a>
+    <button class="ft-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+  </div>
+</footer>
+
+<script>
+
+// 1. PRELOADER & HERO REVEAL
+let loadProgress=0;
+const lbar=document.getElementById('lbar');
+const ltext=document.getElementById('ltext');
+const loadInterval=setInterval(()=>{
+  loadProgress+=Math.floor(Math.random()*15)+5;
+  if(loadProgress>=100){
+    loadProgress=100;clearInterval(loadInterval);
+    setTimeout(()=>{document.body.classList.add('loaded');revealHero();},400);
+  }
+  lbar.style.width=loadProgress+'%';
+  ltext.textContent=(loadProgress<10?'0':'')+loadProgress+'%';
+},120);
+
+function revealHero(){
+  setTimeout(()=>{
+    document.getElementById('h-eyebrow').classList.add('show');
+    document.querySelectorAll('.word').forEach(w=>w.classList.add('show'));
+    setTimeout(()=>{
+      document.getElementById('h-sub').classList.add('show');
+      document.getElementById('h-act').classList.add('show');
+    },250);
+  },120);
+}
+
+// 2. CURSOR & AMBIENT AURA
+const cdot=document.getElementById('cdot');
+const cring=document.getElementById('cring');
+const ctip=document.getElementById('ctip');
+const aura=document.getElementById('aura');
+let mx=window.innerWidth/2,my=window.innerHeight/2;
+let rx=mx,ry=my,ax=mx,ay=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;ctip.style.left=mx+'px';ctip.style.top=my+'px';});
+(function loop(){
+  cdot.style.left=mx+'px';cdot.style.top=my+'px';
+  rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
+  cring.style.left=rx+'px';cring.style.top=ry+'px';
+  ax+=(mx-ax)*.04;ay+=(my-ay)*.04;
+  aura.style.transform=`translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
+  requestAnimationFrame(loop);
+})();
+document.addEventListener('mousedown',()=>cring.classList.add('clk'));
+document.addEventListener('mouseup',()=>cring.classList.remove('clk'));
+document.querySelectorAll('a,button,.phase,.svc-hd,.case-flip,.tile-flip,.mag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cring.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>cring.classList.remove('hov'));
+});
+document.querySelectorAll('[data-tip]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ctip.textContent=el.dataset.tip;ctip.style.opacity='1';});
+  el.addEventListener('mouseleave',()=>{ctip.style.opacity='0';});
+});
+
+// 3. SCROLL PROGRESS
+const sprog=document.getElementById('sprog');
+window.addEventListener('scroll',()=>{
+  sprog.style.width=Math.min(window.scrollY/(document.body.scrollHeight-innerHeight)*100,100)+'%';
+},{passive:true});
+
+// 4. PARALLAX HERO BG
+const heroBg=document.getElementById('hero-bg');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY<window.innerHeight*1.4)
+    heroBg.style.transform=`scale(1.1) translateY(${window.scrollY*.22}px)`;
+},{passive:true});
+
+// 5. WORD SCRUB
+const scrubText=document.getElementById('scrub-text');
+const scrubSection=document.getElementById('scrub-section');
+if(scrubText){
+  const words=scrubText.innerText.split(' ');
+  scrubText.innerHTML='';
+  words.forEach(w=>{
+    if(!w.trim())return;
+    const s=document.createElement('span');
+    s.innerText=w+' ';s.className='scrub-word';
+    scrubText.appendChild(s);
+  });
+}
+const scrubWords=document.querySelectorAll('.scrub-word');
+window.addEventListener('scroll',()=>{
+  if(!scrubSection||!scrubWords.length)return;
+  const rect=scrubSection.getBoundingClientRect();
+  const start=innerHeight*.8,end=innerHeight*.2;
+  if(rect.top<start){
+    const p=Math.max(0,Math.min(1,(start-rect.top)/(start-end)));
+    const lit=Math.floor(p*scrubWords.length);
+    scrubWords.forEach((w,i)=>w.classList.toggle('lit',i<lit));
+  }else{scrubWords.forEach(w=>w.classList.remove('lit'));}
+},{passive:true});
+let scrubTimer=null;
+const scrubObs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){scrubTimer=setTimeout(()=>scrubWords.forEach(w=>w.classList.add('lit')),2500);}
+    else{clearTimeout(scrubTimer);}
+  });
+},{threshold:.3});
+if(scrubSection)scrubObs.observe(scrubSection);
+
+// 6. SCROLL REVEAL
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting)return;
+    setTimeout(()=>en.target.classList.add('in'),parseInt(en.target.dataset.delay||0,10));
+    revObs.unobserve(en.target);
+  });
+},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('[data-a]').forEach(el=>revObs.observe(el));
+
+// 7. COUNTER ANIMATION
+const cntObs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting)return;
+    const el=en.target;
+    const target=parseFloat(el.dataset.count);
+    const sfx=el.dataset.sfx||'',pfx=el.dataset.pfx||'';
+    const dec=target%1!==0?1:0;
+    const dur=1800,t0=performance.now();
+    const tick=now=>{
+      const p=Math.min((now-t0)/dur,1);
+      const e=1-Math.pow(2,-10*p);
+      el.textContent=pfx+(dec?(target*e).toFixed(1):Math.round(target*e))+sfx;
+      if(p<1)requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    cntObs.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cntObs.observe(el));
+
+// 8. NAV STICKY & ACTIVE
+const mainnav=document.getElementById('mainnav');
+const navAs=document.querySelectorAll('.nav-links a');
+const secs=document.querySelectorAll('section[id],div[id="scrub-section"]');
+const dots=document.querySelectorAll('.sdot');
+window.addEventListener('scroll',()=>{
+  mainnav.classList.toggle('stk',window.scrollY>55);
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-240)cur=s.id;});
+  navAs.forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+cur));
+  dots.forEach(d=>d.classList.toggle('act',d.dataset.target===cur));
+},{passive:true});
+dots.forEach(d=>d.addEventListener('click',()=>{
+  const t=document.getElementById(d.dataset.target);
+  if(t)t.scrollIntoView({behavior:'smooth'});
+}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+scrollY-80,behavior:'smooth'});}
+  });
+});
+
+// 9. MAGNETIC PARALLAX (hero button)
+document.querySelectorAll('.mag').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const dx=(e.clientX-(r.left+r.width/2))*.3,dy=(e.clientY-(r.top+r.height/2))*.3;
+    btn.style.transform=`translate(${dx}px,${dy}px)`;
+    btn.style.transition='transform .08s linear';
+  });
+  btn.addEventListener('mouseleave',()=>{
+    btn.style.transform='translate(0,0)';
+    btn.style.transition='transform .55s cubic-bezier(.16,1,.3,1)';
+  });
+});
+
+// 10. ABOUT IMAGE TILT
+const tiltEl=document.getElementById('aboutImg');
+if(tiltEl){
+  tiltEl.addEventListener('mousemove',e=>{
+    const r=tiltEl.getBoundingClientRect();
+    const xp=(e.clientX-r.left)/r.width-.5,yp=(e.clientY-r.top)/r.height-.5;
+    tiltEl.style.transform=`perspective(700px) rotateY(${xp*8}deg) rotateX(${-yp*8}deg) scale(1.02)`;
+    tiltEl.style.transition='transform .06s linear';
+  });
+  tiltEl.addEventListener('mouseleave',()=>{
+    tiltEl.style.transform='perspective(700px) rotateY(0) rotateX(0) scale(1)';
+    tiltEl.style.transition='transform .6s cubic-bezier(.16,1,.3,1)';
+  });
+}
+
+// 12. VIDEO MODAL
+function openVid(src){
+  const m=document.getElementById('vmodal'),v=document.getElementById('vmodvid');
+  v.src=src;m.classList.add('open');
+  requestAnimationFrame(()=>v.play().catch(()=>{}));
+}
+function closeVid(){
+  const m=document.getElementById('vmodal'),v=document.getElementById('vmodvid');
+  v.pause();v.src='';m.classList.remove('open');
+}
+document.getElementById('vmodal').addEventListener('click',function(e){if(e.target===this)closeVid();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVid();});
+
+// 13. SCROLL-TIED MARQUEES
+const mqTrack=document.querySelector('.mq-track');
+const bmqTrack=document.querySelector('.bmq-track');
+window.addEventListener('scroll',()=>{
+  const offset=(window.scrollY*.08)%50;
+  if(mqTrack)mqTrack.style.transform=`translateX(-${offset}%)`;
+  if(bmqTrack)bmqTrack.style.transform=`translateX(-${50-offset}%)`;
+},{passive:true});
+
+// 14. HERO TEXT EVASION
+const evasiveWords=document.querySelectorAll('.hero-hl .word');
+document.addEventListener('mousemove',e=>{
+  if(window.scrollY>window.innerHeight)return;
+  evasiveWords.forEach(word=>{
+    if(!word.classList.contains('show'))return;
+    const rect=word.getBoundingClientRect();
+    const dx=e.clientX-(rect.left+rect.width/2),dy=e.clientY-(rect.top+rect.height/2);
+    const dist=Math.sqrt(dx*dx+dy*dy),radius=200;
+    if(dist<radius){
+      const force=(radius-dist)/radius;
+      word.style.transform=`translate(${-(dx/dist)*force*35}px,${-(dy/dist)*force*35}px)`;
+      word.style.transition='transform .1s ease-out';
+    }else{
+      word.style.transform='translate(0,0)';
+      word.style.transition='transform .7s cubic-bezier(.16,1,.3,1)';
+    }
+  });
+});
+
+// 15. CASE CARD FLIP + MAGNETIC TILT
+document.querySelectorAll('.case-flip').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const xp=((e.clientX-r.left)/r.width-.5)*2,yp=((e.clientY-r.top)/r.height-.5)*2;
+    const inner=card.querySelector('.case-inner');
+    if(!card.classList.contains('flipped')){
+      inner.style.transform=`perspective(900px) rotateY(${xp*5}deg) rotateX(${-yp*5}deg) scale(1.02)`;
+      inner.style.transition='transform .12s linear';
+    }
+  });
+  card.addEventListener('mouseleave',()=>{
+    const inner=card.querySelector('.case-inner');
+    if(!card.classList.contains('flipped')){
+      inner.style.transform='perspective(900px) rotateY(0) rotateX(0) scale(1)';
+      inner.style.transition='transform .55s cubic-bezier(.16,1,.3,1)';
+    }
+  });
+});
+
+// 16. TILE OVERLAY (tap for mobile, hover handled via CSS)
+document.querySelectorAll('.tile-flip').forEach(tile=>{
+  tile.addEventListener('click',()=>{
+    // On touch: toggle overlay; on hover devices, CSS handles it
+    tile.classList.toggle('flipped');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════
+// INVENTORY OPTIMISATION SIMULATOR
+// Models: EOQ, Safety Stock (combined variance), Reorder Point,
+//         Total Cost Curve, Service Level sensitivity
+// ═══════════════════════════════════════════════════════════
+(function(){
+'use strict';
+
+/* ── Chart.js loader ───────────────────────────────────── */
+let chartsReady = false;
+let pendingRun  = false;
+(function loadChartJS(){
+  if(window.Chart){ chartsReady=true; return; }
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+  s.onload = () => { chartsReady=true; if(pendingRun){ pendingRun=false; _executeRun(); } };
+  document.head.appendChild(s);
+})();
+
+/* ── Shared chart defaults ─────────────────────────────── */
+const GOLD='#c9a84c', BLUE='#4a90e2', ORG='#e05a00';
+const GOLD_DIM='rgba(201,168,76,0.15)', FG_DIM='rgba(237,233,224,0.07)', FG='rgba(237,233,224,0.35)';
+const chartDefs = {
+  responsive:true, maintainAspectRatio:false,
+  animation:{ duration:500, easing:'easeInOutQuart' },
+  plugins:{ legend:{ display:false },
+    tooltip:{
+      backgroundColor:'rgba(8,9,14,.95)', borderColor:'rgba(201,168,76,.3)', borderWidth:1,
+      titleColor:'rgba(237,233,224,.55)', bodyColor:GOLD, padding:10,
+      titleFont:{ size:10, family:'DM Sans' }, bodyFont:{ size:11, family:'DM Sans', weight:'600' }
+    }
+  },
+  scales:{
+    x:{ ticks:{ color:FG, font:{ size:9, family:'DM Sans' } }, grid:{ color:FG_DIM }, border:{ color:FG_DIM } },
+    y:{ ticks:{ color:FG, font:{ size:9, family:'DM Sans' } }, grid:{ color:FG_DIM }, border:{ color:FG_DIM } }
+  }
+};
+
+let charts = {};
+
+/* ── Z-score lookup (for service level → safety factor) ── */
+const Z_TABLE = {
+  50:0.00, 55:0.13, 60:0.25, 65:0.39, 70:0.52, 75:0.67,
+  80:0.84, 85:1.04, 90:1.28, 91:1.34, 92:1.41, 93:1.48,
+  94:1.55, 95:1.65, 96:1.75, 97:1.88, 98:2.05, 99:2.33,
+  99.5:2.58, 99.9:3.09
+};
+
+function getZ(pct){
+  // Interpolate from Z_TABLE
+  const keys = Object.keys(Z_TABLE).map(Number).sort((a,b)=>a-b);
+  for(let i=0;i<keys.length-1;i++){
+    if(pct>=keys[i] && pct<=keys[i+1]){
+      const t=(pct-keys[i])/(keys[i+1]-keys[i]);
+      return Z_TABLE[keys[i]] + t*(Z_TABLE[keys[i+1]]-Z_TABLE[keys[i]]);
+    }
+  }
+  return Z_TABLE[99.9];
+}
+
+/* ── Core inventory formulas ─────────────────────────────── */
+function calcEOQ(D, S, H){
+  // Economic Order Quantity: sqrt(2DS/H)
+  // D=annual demand, S=ordering cost, H=annual holding cost per unit
+  return Math.sqrt((2 * D * S) / H);
+}
+
+function calcSafetyStock(z, sigmaD, sigmaL, avgD, avgL){
+  // Combined variance safety stock formula:
+  // SS = z * sqrt(avgL * sigmaD^2 + avgD^2 * sigmaL^2)
+  const combinedStdDev = Math.sqrt(avgL * sigmaD*sigmaD + avgD*avgD * sigmaL*sigmaL);
+  return z * combinedStdDev;
+}
+
+function calcROP(avgD, avgL, ss){
+  // Reorder Point = Avg daily demand * lead time + safety stock
+  return (avgD / 365) * avgL + ss;
+}
+
+function calcTotalCost(D, Q, S, H_unit, ss, H_unit_val){
+  // TC = (D/Q)*S + (Q/2)*H_unit + ss*H_unit
+  const orderingCost = (D / Q) * S;
+  const holdingCost  = (Q / 2) * H_unit + ss * H_unit;
+  return { orderingCost, holdingCost, total: orderingCost + holdingCost };
+}
+
+function calcStockoutRiskCost(D, Q, z, sigmaD, avgL, unitCost, servicePct){
+  // Rough stockout risk annualised: expected units short per cycle * cycles/year * unit cost
+  const cyclesPerYear = D / Q;
+  // Expected shortage per cycle (normal loss function approximation)
+  const sigmaLT = Math.sqrt(avgL) * sigmaD;
+  // Unit normal loss L(z) ≈ phi(z) - z*(1-Phi(z)), approximate
+  const phi_z = Math.exp(-0.5*z*z) / Math.sqrt(2*Math.PI);
+  const Phi_z = (1 + (1-(servicePct/100)));
+  const L_z   = Math.max(phi_z - z*(1-servicePct/100), 0);
+  const expectedShortage = sigmaLT * L_z;
+  return expectedShortage * cyclesPerYear * unitCost * 0.25; // 25% shortage cost factor
+}
+
+/* ── Number formatters ────────────────────────────────────── */
+function fmt$(n){
+  if(n>=1e6) return '$' + (n/1e6).toFixed(2)+'M';
+  if(n>=1e3) return '$' + (n/1e3).toFixed(1)+'K';
+  return '$' + n.toFixed(0);
+}
+function fmtN(n){ return n>=1e3 ? (n/1e3).toFixed(1)+'K' : Math.round(n).toLocaleString(); }
+
+/* ── Guide step highlighter ───────────────────────────────── */
+function setGuideStep(n){
+  document.querySelectorAll('.sim-guide-step').forEach((el,i)=>{
+    el.classList.toggle('active', i===n);
+  });
+}
+
+/* ── Main run function (exposed globally) ─────────────────── */
+window.runSimulator = function(){
+  if(!chartsReady){ pendingRun=true; return; }
+  setGuideStep(2);
+  const btn = document.getElementById('sim-run-btn');
+  btn.classList.add('loading');
+  document.getElementById('sim-btn-text').textContent = 'Computing...';
+  setTimeout(()=>{ _executeRun(); btn.classList.remove('loading'); document.getElementById('sim-btn-text').textContent='Re-run Model'; }, 80);
+};
+
+window.resetSimulator = function(){
+  document.getElementById('sim-results').style.display='none';
+  document.getElementById('sim-placeholder').style.display='flex';
+  document.getElementById('sim-btn-text').textContent='Run Model';
+  setGuideStep(0);
+  // Destroy charts
+  Object.values(charts).forEach(ch=>{ try{ ch.destroy(); }catch(e){} });
+  charts={};
+};
+
+function _readInputs(){
+  const g = id => parseFloat(document.getElementById(id).value) || 0;
+  return {
+    D:      g('f-demand'),       // Annual demand (units)
+    sigmaD: g('f-sigma-d'),      // Std dev daily demand
+    S:      g('f-order-cost'),   // Ordering cost per order
+    C:      g('f-unit-cost'),    // Unit cost
+    hRate:  g('f-hold-rate')/100,// Holding rate (fraction)
+    L:      g('f-lead'),         // Lead time (days)
+    sigmaL: g('f-sigma-l'),      // Std dev lead time (days)
+    svcPct: g('f-service'),      // Service level %
+  };
+}
+
+function _executeRun(){
+  const p = _readInputs();
+
+  // Derived
+  const H   = p.C * p.hRate;      // Annual holding cost per unit
+  const avgD = p.D / 365;          // Average daily demand
+  const z    = getZ(p.svcPct);
+
+  // Core calculations
+  const eoq = calcEOQ(p.D, p.S, H);
+  const ss  = calcSafetyStock(z, p.sigmaD, p.sigmaL, avgD, p.L);
+  const rop = calcROP(avgD, p.L, ss);
+  const {orderingCost, holdingCost, total} = calcTotalCost(p.D, eoq, p.S, H, ss, H);
+  const stockoutCost = calcStockoutRiskCost(p.D, eoq, z, p.sigmaD, p.L, p.C, p.svcPct);
+  const grandTotal = total + stockoutCost;
+
+  // Show results panel
+  document.getElementById('sim-placeholder').style.display='none';
+  document.getElementById('sim-results').style.display='block';
+
+  // ── Key metrics
+  document.getElementById('out-eoq').textContent = fmtN(eoq);
+  document.getElementById('out-ss').textContent  = fmtN(ss);
+  document.getElementById('out-rop').textContent = fmtN(rop);
+  document.getElementById('out-tc').textContent  = fmt$(grandTotal);
+
+  // ── Cost breakdown bar
+  const totalBar = holdingCost + orderingCost + stockoutCost;
+  const pHold  = (holdingCost / totalBar * 100).toFixed(1);
+  const pOrd   = (orderingCost / totalBar * 100).toFixed(1);
+  const pSk    = (stockoutCost / totalBar * 100).toFixed(1);
+  document.getElementById('seg-hold').style.width = pHold + '%';
+  document.getElementById('seg-ord').style.width  = pOrd  + '%';
+  document.getElementById('seg-sk').style.width   = pSk   + '%';
+  document.getElementById('val-hold').textContent  = fmt$(holdingCost) + ' holding (' + pHold + '%)';
+  document.getElementById('val-ord').textContent   = fmt$(orderingCost) + ' ordering (' + pOrd + '%)';
+  document.getElementById('val-sk').textContent    = fmt$(stockoutCost) + ' stockout risk (' + pSk + '%)';
+
+  // ── Charts
+  _drawCostCurve(p, H, eoq);
+  _drawServiceCurve(p, H, avgD);
+
+  // ── Commentary
+  _writeCommentary(p, eoq, ss, rop, grandTotal, holdingCost, orderingCost, stockoutCost, z, avgD);
+
+  // ── Sensitivity table
+  _buildSensitivity(p, H, z, eoq, ss, grandTotal, avgD);
+  // Cache for carry-forward
+  if(window._cacheInvResults) _cacheInvResults(p, eoq, ss, rop, grandTotal, avgD);
+}
+
+/* ── Chart 1: Total cost curve ────────────────────────────── */
+function _drawCostCurve(p, H, eoq){
+  const qMin = Math.max(10, eoq * 0.15);
+  const qMax = eoq * 3.5;
+  const steps = 40;
+  const labels = [], hold = [], order = [], tot = [];
+
+  for(let i=0;i<=steps;i++){
+    const q = qMin + (qMax-qMin)*(i/steps);
+    const oc = (p.D/q)*p.S;
+    const hc = (q/2)*H;
+    labels.push(Math.round(q).toLocaleString());
+    order.push(+oc.toFixed(0));
+    hold.push(+hc.toFixed(0));
+    tot.push(+(oc+hc).toFixed(0));
+  }
+
+  const cfg = {
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        { label:'Holding Cost', data:hold, borderColor:GOLD, borderWidth:1.5, pointRadius:0, fill:false, tension:.4 },
+        { label:'Ordering Cost', data:order, borderColor:BLUE, borderWidth:1.5, pointRadius:0, fill:false, tension:.4 },
+        { label:'Total Cost', data:tot, borderColor:'rgba(237,233,224,.9)', borderWidth:2, pointRadius:0, fill:false, tension:.4 },
+      ]
+    },
+    options:{
+      ...JSON.parse(JSON.stringify(chartDefs)),
+      plugins:{
+        ...chartDefs.plugins,
+        legend:{ display:true, position:'top', labels:{ color:FG, font:{size:9,family:'DM Sans'}, boxWidth:12, padding:12 } },
+        tooltip:{
+          ...chartDefs.plugins.tooltip,
+          callbacks:{ label: ctx => ' $' + ctx.parsed.y.toLocaleString() }
+        }
+      }
+    }
+  };
+  // Add EOQ annotation via plugin-free approach: use a custom dataset point
+  const eoqIdx = Math.round(steps * ((eoq-qMin)/(qMax-qMin)));
+  cfg.data.datasets.push({
+    label:'EOQ', data: labels.map((_,i)=> i===eoqIdx ? tot[i] : null),
+    borderColor:GOLD, backgroundColor:GOLD,
+    pointRadius:6, pointHoverRadius:8, pointStyle:'circle', showLine:false,
+  });
+
+  if(charts.costCurve){ charts.costCurve.destroy(); }
+  charts.costCurve = new Chart(document.getElementById('chart-cost-curve'), cfg);
+}
+
+/* ── Chart 2: Service level vs safety stock cost ──────────── */
+function _drawServiceCurve(p, H, avgD){
+  const levels = [70,75,80,85,90,91,92,93,94,95,96,97,98,99,99.5];
+  const labels = levels.map(l=>l+'%');
+  const ssCosts = levels.map(l=>{
+    const z2  = getZ(l);
+    const ss2 = calcSafetyStock(z2, p.sigmaD, p.sigmaL, avgD, p.L);
+    return +(ss2 * H).toFixed(0);
+  });
+  const currentIdx = levels.findIndex(l=>l>=p.svcPct);
+
+  const cfg = {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{
+        label:'Annual Safety Stock Cost',
+        data: ssCosts,
+        backgroundColor: ssCosts.map((_,i)=>
+          i===currentIdx ? GOLD : 'rgba(201,168,76,0.18)'
+        ),
+        borderColor: ssCosts.map((_,i)=>
+          i===currentIdx ? GOLD : 'rgba(201,168,76,0.35)'
+        ),
+        borderWidth:1,
+      }]
+    },
+    options:{
+      ...JSON.parse(JSON.stringify(chartDefs)),
+      plugins:{
+        ...chartDefs.plugins,
+        tooltip:{
+          ...chartDefs.plugins.tooltip,
+          callbacks:{
+            title: ctx => 'Service Level: ' + ctx[0].label,
+            label: ctx => ' Safety Stock Cost: $' + ctx.parsed.y.toLocaleString()
+          }
+        }
+      }
+    }
+  };
+
+  if(charts.serviceCurve){ charts.serviceCurve.destroy(); }
+  charts.serviceCurve = new Chart(document.getElementById('chart-service-curve'), cfg);
+}
+
+/* ── Commentary generator ─────────────────────────────────── */
+function _writeCommentary(p, eoq, ss, rop, total, holdCost, ordCost, skCost, z, avgD){
+  const cyclesPerYear = p.D / eoq;
+  const daysSupply    = eoq / avgD;
+  const holdPct       = holdCost/total*100;
+  const ordPct        = ordCost/total*100;
+
+  // Determine dominant cost driver
+  let driver = holdPct > 55 ? 'holding' : ordPct > 55 ? 'ordering' : 'balanced';
+
+  const bodies = {
+    holding: `Your cost structure is <strong>holding-cost dominated</strong> -- ${holdPct.toFixed(0)}% of total inventory cost comes from capital tied up in stock. This is the profile of a business with high-value SKUs or expensive warehousing. The model recommends ordering <strong>${fmtN(eoq)} units</strong> every <strong>${daysSupply.toFixed(0)} days</strong> (${cyclesPerYear.toFixed(1)} orders/year). Reducing order quantity would reduce holding cost but push up ordering frequency -- the EOQ is the proven optimum given your inputs.`,
+    ordering: `Your cost structure is <strong>ordering-cost dominated</strong> -- ${ordPct.toFixed(0)}% of total cost is fixed ordering overhead. This profile suggests you benefit from larger, less frequent orders. At <strong>${fmtN(eoq)} units per order</strong>, you would place <strong>${cyclesPerYear.toFixed(1)} orders per year</strong>. If you can negotiate a lower ordering cost per purchase order (e.g. EDI, blanket POs), the EOQ will shift upward and your total cost will fall.`,
+    balanced: `Your cost structure is <strong>well-balanced</strong> -- holding cost (${holdPct.toFixed(0)}%) and ordering cost (${ordPct.toFixed(0)}%) are close to equilibrium, which is the signature of an operation already operating near its EOQ. The model recommends <strong>${fmtN(eoq)} units per order</strong>, placed <strong>${cyclesPerYear.toFixed(1)} times per year</strong>.`
+  };
+
+  const insights = {
+    holding: `Insight: A 10% reduction in holding rate (e.g. renegotiating warehouse terms or reducing SKU unit cost) would shift your EOQ upward by ~5% and reduce total annual cost by roughly ${fmt$(total*0.08)}.`,
+    ordering: `Insight: If you can reduce ordering cost by 30% through EDI or blanket purchase orders, EOQ falls by ~17% -- meaning less capital per cycle while preserving service level.`,
+    balanced: `Insight: At this balance, the highest-leverage intervention is reducing demand variability (sigma). Cutting your daily demand sigma by half would reduce safety stock by ~${fmtN(ss*0.38)} units -- freeing ${fmt$(ss*0.38*p.C)} in working capital without touching service level.`
+  };
+
+  document.getElementById('scom-body').innerHTML = bodies[driver];
+  document.getElementById('scom-insight').innerHTML = insights[driver];
+}
+
+/* ── Sensitivity table ────────────────────────────────────── */
+function _buildSensitivity(p, H, z, baseEOQ, baseSS, baseTotal, avgD){
+  const scenarios = [
+    { label:'Current inputs (base case)', D:p.D, S:p.S, H_rate:p.hRate, sigmaD:p.sigmaD, sigmaL:p.sigmaL, isBase:true },
+    { label:'Demand +25%',                D:p.D*1.25, S:p.S, H_rate:p.hRate, sigmaD:p.sigmaD*1.25, sigmaL:p.sigmaL },
+    { label:'Demand -25%',                D:p.D*0.75, S:p.S, H_rate:p.hRate, sigmaD:p.sigmaD*0.75, sigmaL:p.sigmaL },
+    { label:'Ordering cost halved',       D:p.D, S:p.S*0.5, H_rate:p.hRate, sigmaD:p.sigmaD, sigmaL:p.sigmaL },
+    { label:'Holding rate +5 pts',        D:p.D, S:p.S, H_rate:p.hRate+0.05, sigmaD:p.sigmaD, sigmaL:p.sigmaL },
+    { label:'Lead time doubled',          D:p.D, S:p.S, H_rate:p.hRate, sigmaD:p.sigmaD, sigmaL:p.sigmaL*2, leadMult:2 },
+    { label:'Service level -> 99%',        D:p.D, S:p.S, H_rate:p.hRate, sigmaD:p.sigmaD, sigmaL:p.sigmaL, svcOverride:99 },
+    { label:'Service level -> 90%',        D:p.D, S:p.S, H_rate:p.hRate, sigmaD:p.sigmaD, sigmaL:p.sigmaL, svcOverride:90 },
+  ];
+
+  const tbody = document.getElementById('ssens-body');
+  tbody.innerHTML = '';
+
+  scenarios.forEach(sc=>{
+    const H2   = p.C * sc.H_rate;
+    const eoq2 = calcEOQ(sc.D, sc.S, H2);
+    const z2   = getZ(sc.svcOverride || p.svcPct);
+    const d2   = sc.D / 365;
+    const l2   = p.L * (sc.leadMult||1);
+    const sL2  = sc.sigmaL || p.sigmaL;
+    const ss2  = calcSafetyStock(z2, sc.sigmaD, sL2, d2, l2);
+    const {orderingCost:oc2, holdingCost:hc2} = calcTotalCost(sc.D, eoq2, sc.S, H2, ss2, H2);
+    const skCost2 = calcStockoutRiskCost(sc.D, eoq2, z2, sc.sigmaD, l2, p.C, sc.svcOverride||p.svcPct);
+    const tc2  = oc2 + hc2 + skCost2;
+    const diff = tc2 - baseTotal;
+    const diffPct = (diff/baseTotal*100).toFixed(1);
+    const diffStr = diff===0 ? '--' :
+      `<span class="${diff<0?'ssens-delta-pos':'ssens-delta-neg'}">${diff<0?'(-) ':'(+) '} ${Math.abs(diffPct)}%</span>`;
+
+    const tr = document.createElement('tr');
+    if(sc.isBase) tr.classList.add('base-row');
+    tr.innerHTML = `
+      <td>${sc.label}</td>
+      <td>${fmtN(eoq2)}</td>
+      <td>${fmtN(ss2)}</td>
+      <td>${fmt$(tc2)}</td>
+      <td>${diffStr}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Init guide to step 0
+setGuideStep(0);
+
+// Highlight group when any input within is focused
+['grp-demand','grp-cost','grp-service'].forEach((id,i)=>{
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('focus', ()=> setGuideStep(i<2?0:1));
+  });
+});
+
+})();
+
+// ═══════════════════════════════════════════════════════════
+// QUEUE & STAFFING DYNAMICS SIMULATOR
+// Models: M/M/c queue (Erlang-C), discrete-event simulation,
+//         server utilisation, wait-time sensitivity
+// ═══════════════════════════════════════════════════════════
+(function(){
+'use strict';
+
+let qChartsReady = false;
+let qPendingRun  = false;
+// Chart.js already loaded by inventory sim — wait for it
+function ensureChartJS(cb){
+  if(window.Chart){ cb(); return; }
+  const poll = setInterval(()=>{ if(window.Chart){ clearInterval(poll); cb(); }}, 100);
+}
+
+const GOLD='#c9a84c', BLUE='#4a90e2', ORG='#e05a00';
+const FG_DIM='rgba(237,233,224,0.07)', FG='rgba(237,233,224,0.35)';
+let qCharts = {};
+
+/* ── Tab switching ─────────────────────────────────────── */
+window.switchSimTab = function(tab){
+  ['inv','queue','dcf'].forEach(t=>{
+    document.getElementById('tab-panel-'+t).classList.toggle('active', t===tab);
+    document.getElementById('tab-btn-'+t).classList.toggle('active', t===tab);
+  });
+};
+
+/* ── Guide step highlighter ────────────────────────────── */
+function setQGuideStep(n){
+  ['q-gs-0','q-gs-1','q-gs-2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle('active',i===n);
+  });
+}
+
+/* ── Read inputs ───────────────────────────────────────── */
+function readQInputs(){
+  const g = id => parseFloat(document.getElementById(id).value)||0;
+  return {
+    arrivalInterval: g('q-arrival'),   // avg minutes between arrivals
+    serviceTime:     g('q-service'),   // avg service time in minutes
+    numServers:      Math.max(1, Math.round(g('q-servers'))),
+    simTime:         g('q-simtime'),   // total simulation minutes
+    staffCost:       g('q-staffcost'), // $/hr per server
+  };
+}
+
+/* ── Discrete-Event Simulation (M/M/c) ────────────────── */
+function runMMC(arrivalInterval, serviceTime, numServers, simTime){
+  // Pure JS discrete-event simulation — no library needed
+  const rand = () => Math.random();
+  const expRand = rate => -Math.log(1 - rand()) / rate;
+
+  const arrivalRate  = 1 / arrivalInterval;   // arrivals per minute
+  const serviceRate  = 1 / serviceTime;        // completions per minute per server
+
+  let   time         = 0;
+  let   nextArrival  = expRand(arrivalRate);
+  let   served       = 0;
+  const waitTimes    = [];
+  const queueSnaps   = [];   // {t, q} snapshots for chart
+  const serverFree   = new Array(numServers).fill(0); // time when each server is free
+
+  // Track total busy time for utilisation
+  let totalBusyTime = 0;
+
+  // Process events until simTime
+  while(nextArrival < simTime){
+    time = nextArrival;
+    nextArrival = time + expRand(arrivalRate);
+
+    // Find earliest free server
+    const earliest = serverFree.reduce((mi, t, i) => t < serverFree[mi] ? i : mi, 0);
+    const startService = Math.max(time, serverFree[earliest]);
+    const waitTime = startService - time;
+    waitTimes.push(waitTime);
+
+    const svcTime = expRand(serviceRate);
+    totalBusyTime += svcTime;
+    serverFree[earliest] = startService + svcTime;
+    served++;
+
+    // Queue length = how many servers are busy beyond current time
+    const busyServers = serverFree.filter(t => t > time).length;
+    const qLen = Math.max(0, busyServers - numServers + serverFree.filter(t => t <= time).length);
+    const actualQ = serverFree.filter(t => t > time).length > numServers
+      ? serverFree.filter(t => t > time).length - numServers : 0;
+    queueSnaps.push({ t: parseFloat(time.toFixed(2)), q: actualQ });
+  }
+
+  const avgWait   = waitTimes.length ? waitTimes.reduce((a,b)=>a+b,0)/waitTimes.length : 0;
+  const maxWait   = waitTimes.length ? Math.max(...waitTimes) : 0;
+  const util      = Math.min(100, (totalBusyTime / (numServers * simTime)) * 100);
+
+  return { served, avgWait, maxWait, util, waitTimes, queueSnaps };
+}
+
+/* ── Sensitivity: run for 1..numServers+4 ─────────────── */
+function sensitivitySweep(p){
+  const maxS = Math.min(p.numServers + 5, 15);
+  const results = [];
+  for(let s=1; s<=maxS; s++){
+    const r = runMMC(p.arrivalInterval, p.serviceTime, s, p.simTime);
+    results.push({ servers: s, avgWait: r.avgWait, util: r.util });
+  }
+  return results;
+}
+
+/* ── Number formatters ─────────────────────────────────── */
+function fmtMin(m){
+  if(m < 0.1) return '<0.1';
+  if(m >= 60) return (m/60).toFixed(1)+'h';
+  return m.toFixed(1);
+}
+
+/* ── Draw queue chart ──────────────────────────────────── */
+function drawQueueChart(snaps){
+  // Sample down to ~80 points for performance
+  const step = Math.max(1, Math.floor(snaps.length / 80));
+  const labels = [], data = [];
+  for(let i=0;i<snaps.length;i+=step){
+    labels.push(snaps[i].t.toFixed(0)+'m');
+    data.push(snaps[i].q);
+  }
+  const avgQ = data.reduce((a,b)=>a+b,0)/data.length;
+
+  if(qCharts.queue){ qCharts.queue.destroy(); }
+  qCharts.queue = new Chart(document.getElementById('q-chart-queue'),{
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        { label:'Queue Length', data, borderColor:GOLD, borderWidth:1.5,
+          pointRadius:0, fill:true,
+          backgroundColor:'rgba(201,168,76,0.06)', tension:0.3 },
+        { label:'Avg Queue', data:labels.map(()=>parseFloat(avgQ.toFixed(2))),
+          borderColor:ORG, borderWidth:1, borderDash:[4,4],
+          pointRadius:0, fill:false }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      animation:{ duration:600 },
+      plugins:{
+        legend:{ display:true, position:'top', labels:{ color:FG, font:{size:9,family:'DM Sans'}, boxWidth:12, padding:10 }},
+        tooltip:{ backgroundColor:'rgba(8,9,14,.95)', borderColor:'rgba(201,168,76,.3)', borderWidth:1,
+          titleColor:'rgba(237,233,224,.55)', bodyColor:GOLD, padding:9,
+          titleFont:{size:10,family:'DM Sans'}, bodyFont:{size:11,family:'DM Sans'}}
+      },
+      scales:{
+        x:{ ticks:{color:FG,font:{size:9,family:'DM Sans'},maxTicksLimit:10}, grid:{color:FG_DIM}, border:{color:FG_DIM}},
+        y:{ ticks:{color:FG,font:{size:9,family:'DM Sans'},stepSize:1}, grid:{color:FG_DIM}, border:{color:FG_DIM}, min:0 }
+      }
+    }
+  });
+}
+
+/* ── Draw sensitivity chart ────────────────────────────── */
+function drawSensitivityChart(sweep, currentServers){
+  const labels = sweep.map(s => s.servers + (s.servers===1?' server':' servers'));
+  const waits  = sweep.map(s => parseFloat(s.avgWait.toFixed(2)));
+  const colors = sweep.map(s =>
+    s.servers === currentServers ? GOLD : 'rgba(201,168,76,0.25)'
+  );
+  const borderColors = sweep.map(s =>
+    s.servers === currentServers ? GOLD : 'rgba(201,168,76,0.45)'
+  );
+
+  if(qCharts.sensitivity){ qCharts.sensitivity.destroy(); }
+  qCharts.sensitivity = new Chart(document.getElementById('q-chart-sensitivity'),{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{ label:'Avg Wait (min)', data:waits,
+        backgroundColor:colors, borderColor:borderColors, borderWidth:1 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      animation:{ duration:600 },
+      plugins:{
+        legend:{display:false},
+        tooltip:{ backgroundColor:'rgba(8,9,14,.95)', borderColor:'rgba(201,168,76,.3)', borderWidth:1,
+          titleColor:'rgba(237,233,224,.55)', bodyColor:GOLD, padding:9,
+          callbacks:{
+            title: ctx => ctx[0].label,
+            label: ctx => ' Avg Wait: ' + ctx.parsed.y.toFixed(2) + ' min'
+          }}
+      },
+      scales:{
+        x:{ ticks:{color:FG,font:{size:9,family:'DM Sans'}}, grid:{color:FG_DIM}, border:{color:FG_DIM}},
+        y:{ ticks:{color:FG,font:{size:9,family:'DM Sans'}}, grid:{color:FG_DIM}, border:{color:FG_DIM}, min:0,
+          title:{display:true, text:'Avg Wait (min)', color:FG, font:{size:9}} }
+      }
+    }
+  });
+}
+
+/* ── Write commentary ──────────────────────────────────── */
+function writeQCommentary(p, r, sweep){
+  const util = r.util;
+  const trafficIntensity = (p.simTime / p.arrivalInterval) * p.serviceTime / (p.numServers * p.simTime);
+  const staffCostTotal = (p.numServers * p.staffCost * p.simTime / 60);
+
+  let body, insight;
+
+  if(util > 90){
+    body = `Your system is <strong>critically over-utilised at ${util.toFixed(0)}%</strong> -- customers are arriving faster than ${p.numServers} server${p.numServers>1?'s':''} can clear them. Average wait of <strong>${fmtMin(r.avgWait)} minutes</strong> will compound as the queue snowballs. This is the profile of a Six Flags ride queue on a peak Saturday with not enough staff deployed.`;
+    insight = `Insight: Adding just one more server would reduce average wait by an estimated ${fmtMin(r.avgWait * 0.45)} minutes. The staffing cost of ~$${(p.staffCost*p.simTime/60).toFixed(0)} for the session is almost certainly less than the revenue impact of frustrated customers leaving the queue.`;
+  } else if(util > 70){
+    body = `Your system is <strong>well-loaded at ${util.toFixed(0)}% utilisation</strong> -- a healthy operating range where servers are busy but queues remain manageable. Average wait is <strong>${fmtMin(r.avgWait)} minutes</strong> across ${r.served} customers. This is the target zone: maximum throughput without chronic queuing.`;
+    insight = `Insight: Total staffing cost for this session is approximately $${staffCostTotal.toFixed(0)}. At this utilisation level, the cost-per-customer-served is near optimal. Reducing to ${p.numServers-1} server${p.numServers>2?'s':''} would push utilisation above 85% and likely more than double average wait.`;
+  } else {
+    body = `Your system is <strong>under-utilised at ${util.toFixed(0)}%</strong> -- servers are sitting idle for significant portions of the simulation. Average wait is only <strong>${fmtMin(r.avgWait)} minutes</strong>, which is excellent for customers, but comes at a cost: staffing spend of ~$${staffCostTotal.toFixed(0)} for the session with capacity to spare.`;
+    insight = `Insight: You could likely reduce to ${Math.max(1,p.numServers-1)} server${p.numServers>2?'s':''} without meaningfully degrading wait time. Cross-training staff for flexible deployment is the operational lever here -- matching headcount to actual demand patterns rather than running peak staffing all session.`;
+  }
+
+  document.getElementById('q-scom-body').innerHTML = body;
+  document.getElementById('q-scom-insight').innerHTML = insight;
+}
+
+/* ── Main run function ─────────────────────────────────── */
+window.runQueueSim = function(){
+  ensureChartJS(function(){
+    setQGuideStep(2);
+    const btn = document.getElementById('q-run-btn');
+    btn.classList.add('loading');
+    document.getElementById('q-btn-text').textContent = 'Simulating...';
+
+    setTimeout(function(){
+      const p = readQInputs();
+      const r = runMMC(p.arrivalInterval, p.serviceTime, p.numServers, p.simTime);
+      const sweep = sensitivitySweep(p);
+
+      // Show results
+      document.getElementById('q-placeholder').style.display='none';
+      document.getElementById('q-results').style.display='block';
+
+      // Metrics
+      document.getElementById('q-out-served').textContent   = r.served;
+      document.getElementById('q-out-wait').textContent     = fmtMin(r.avgWait);
+      document.getElementById('q-out-maxwait').textContent  = fmtMin(r.maxWait);
+      document.getElementById('q-out-util').textContent     = r.util.toFixed(1)+'%';
+
+      // Utilisation bar
+      const utilPct = Math.min(100, r.util);
+      const bar = document.getElementById('q-util-bar');
+      bar.style.width = utilPct + '%';
+      bar.className = 'util-fill ' + (utilPct > 90 ? 'high' : utilPct > 70 ? 'med' : 'low');
+      document.getElementById('q-util-pct-lbl').textContent = r.util.toFixed(1) + '%';
+
+      // Charts
+      drawQueueChart(r.queueSnaps);
+      drawSensitivityChart(sweep, p.numServers);
+
+      // Commentary
+      writeQCommentary(p, r, sweep);
+      // Cache for carry-forward
+      if(window._cacheQueueResults) _cacheQueueResults(p, r);
+
+      btn.classList.remove('loading');
+      document.getElementById('q-btn-text').textContent = 'Re-run Simulation';
+    }, 80);
+  });
+};
+
+window.resetQueueSim = function(){
+  document.getElementById('q-results').style.display='none';
+  document.getElementById('q-placeholder').style.display='flex';
+  document.getElementById('q-btn-text').textContent='Run Simulation';
+  setQGuideStep(0);
+  Object.values(qCharts).forEach(ch=>{ try{ ch.destroy(); }catch(e){} });
+  qCharts={};
+};
+
+// Focus listeners for guide steps
+[['qgrp-arrival',0],['qgrp-service',1]].forEach(([id,step])=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('focus',()=>setQGuideStep(step));
+  });
+});
+
+setQGuideStep(0);
+
+})();
+
+
+
+// ═══════════════════════════════════════════════════════════════
+// DCF VALUATION SIMULATOR
+// Models: 5-year unlevered FCF, Gordon Growth terminal value,
+//         EV/EBITDA cross-check, bear/base/bull WACC sensitivity,
+//         football field matrix, implied IRR (bisection)
+// ═══════════════════════════════════════════════════════════════
+(function(){
+'use strict';
+
+const Au='#c9a84c', Bu='#4a90e2', Gu='#66cc66', Ou='#e05a00';
+const FD='rgba(237,233,224,0.07)', FC='rgba(237,233,224,0.35)';
+let dcfCharts = {};
+
+/* ── Guide ─────────────────────────────────────────────── */
+function setDGuideStep(n){
+  ['d-gs-0','d-gs-1','d-gs-2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle('active',i===n);
+  });
+}
+
+/* ── Read inputs ────────────────────────────────────────── */
+function readDInputs(){
+  const g = id => parseFloat(document.getElementById(id).value)||0;
+  return {
+    rev0:     g('d-revenue'),    // base revenue $K
+    g1:       g('d-growth1')/100,// yr 1-3 growth
+    g2:       g('d-growth2')/100,// yr 4-5 growth
+    ebitdaPct:g('d-ebitda')/100,
+    daPct:    g('d-da')/100,
+    capexPct: g('d-capex')/100,
+    nwcPct:   g('d-nwc')/100,
+    wacc:     g('d-wacc')/100,
+    tgr:      g('d-tgr')/100,
+    tax:      g('d-tax')/100,
+    exitMult: g('d-multiple'),
+  };
+}
+
+/* ── Build 5-year FCF schedule ──────────────────────────── */
+function buildSchedule(p){
+  const yrs = [];
+  let prevRev = p.rev0;
+  for(let yr=1;yr<=5;yr++){
+    const g   = yr<=3 ? p.g1 : p.g2;
+    const rev = prevRev * (1+g);
+    const ebitda = rev * p.ebitdaPct;
+    const da     = rev * p.daPct;
+    const ebit   = ebitda - da;
+    const nopat  = ebit * (1 - p.tax);
+    const fcf    = nopat + da - rev*p.capexPct - (rev-prevRev)*p.nwcPct;
+    yrs.push({ yr, rev, ebitda, ebit, nopat, da, fcf, g });
+    prevRev = rev;
+  }
+  return yrs;
+}
+
+/* ── DCF valuation ──────────────────────────────────────── */
+function calcDCF(p, wacc){
+  const sched = buildSchedule(p);
+  // PV of explicit FCFs
+  let npvFCF = 0;
+  sched.forEach((y,i) => { npvFCF += y.fcf / Math.pow(1+wacc, i+1); });
+  // Terminal value — Gordon Growth Model
+  const lastFCF = sched[4].fcf;
+  const tv      = lastFCF * (1+p.tgr) / (wacc - p.tgr);
+  const pvTV    = tv / Math.pow(1+wacc, 5);
+  // EV/EBITDA cross-check
+  const evEBITDA = sched[4].ebitda * p.exitMult / Math.pow(1+wacc, 5);
+  const ev = npvFCF + pvTV;
+  return { ev, npvFCF, pvTV, tv, evEBITDA, sched };
+}
+
+/* ── Implied IRR (bisection) ────────────────────────────── */
+function calcIRR(sched, ev){
+  // Find r such that sum(FCF_t / (1+r)^t) + TV_at_r = EV
+  // Simplified: find r such that NPV of FCFs + TV_at_r = ev
+  // We use bisection on IRR = f(discount rate that yields ev from FCFs only)
+  let lo=0.001, hi=2.0;
+  const lastFCF = sched[4].fcf;
+  for(let iter=0;iter<60;iter++){
+    const mid=(lo+hi)/2;
+    let npv=0;
+    sched.forEach((y,i)=>{ npv += y.fcf/Math.pow(1+mid,i+1); });
+    // Include a simple TV at mid rate (assume tgr=2.5% for IRR calc)
+    const tvMid = lastFCF*1.025/(mid-0.025>0.001?mid-0.025:0.001);
+    npv += tvMid/Math.pow(1+mid,5);
+    if(npv>ev) lo=mid; else hi=mid;
+  }
+  return (lo+hi)/2;
+}
+
+/* ── Format helpers ─────────────────────────────────────── */
+function fmtK(n){
+  if(Math.abs(n)>=1e6) return (n>=0?'$':'−$')+(Math.abs(n)/1e6).toFixed(1)+'M';
+  if(Math.abs(n)>=1e3) return (n>=0?'$':'−$')+(Math.abs(n)/1e3).toFixed(1)+'K';
+  return (n>=0?'$':'−$')+Math.abs(n).toFixed(0)+'K';
+}
+function fmtPct(n){ return (n*100).toFixed(1)+'%'; }
+
+/* ── Draw FCF bar+line chart ────────────────────────────── */
+function drawFCFChart(sched){
+  const labels = sched.map(y=>'Yr '+y.yr);
+  const revs   = sched.map(y=>+y.rev.toFixed(0));
+  const ebs    = sched.map(y=>+y.ebitda.toFixed(0));
+  const fcfs   = sched.map(y=>+y.fcf.toFixed(0));
+
+  if(dcfCharts.fcf){ dcfCharts.fcf.destroy(); }
+  dcfCharts.fcf = new Chart(document.getElementById('d-chart-fcf'),{
+    data:{
+      labels,
+      datasets:[
+        { type:'bar',  label:'FCF ($K)', data:fcfs,
+          backgroundColor:'rgba(201,168,76,0.25)', borderColor:Au, borderWidth:1.5, yAxisID:'y' },
+        { type:'line', label:'Revenue ($K)', data:revs,
+          borderColor:'rgba(237,233,224,0.5)', borderWidth:1.5, pointRadius:3, fill:false, tension:.3, yAxisID:'y' },
+        { type:'line', label:'EBITDA ($K)', data:ebs,
+          borderColor:Bu, borderWidth:1.5, pointRadius:3, fill:false, tension:.3, yAxisID:'y' },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      animation:{duration:600},
+      plugins:{
+        legend:{display:true,position:'top',labels:{color:FC,font:{size:9,family:'DM Sans'},boxWidth:12,padding:10}},
+        tooltip:{backgroundColor:'rgba(8,9,14,.95)',borderColor:'rgba(201,168,76,.3)',borderWidth:1,
+          titleColor:'rgba(237,233,224,.55)',bodyColor:Au,padding:9,
+          callbacks:{label:ctx=>' '+ctx.dataset.label+': '+fmtK(ctx.parsed.y)}}
+      },
+      scales:{
+        x:{ticks:{color:FC,font:{size:9,family:'DM Sans'}},grid:{color:FD},border:{color:FD}},
+        y:{ticks:{color:FC,font:{size:9,family:'DM Sans'},callback:v=>fmtK(v)},grid:{color:FD},border:{color:FD}}
+      }
+    }
+  });
+}
+
+/* ── Draw football field heatmap ────────────────────────── */
+function drawFootballField(p){
+  const waccs = [p.wacc-0.04, p.wacc-0.02, p.wacc, p.wacc+0.02, p.wacc+0.04];
+  const tgrs  = [p.tgr-0.01, p.tgr, p.tgr+0.01];
+
+  const labels = waccs.map(w=>(w*100).toFixed(1)+'%');
+  const datasets = tgrs.map((tg,ti)=>{
+    const data = waccs.map(w=>{
+      if(w<=tg) return null;
+      const {ev} = calcDCF({...p,wacc:w,tgr:tg},{});
+      return calcDCF({...p,wacc:w,tgr:tg},w).ev;
+    });
+    const tgLabel = (tg*100).toFixed(1)+'% TGR';
+    const color   = ti===0 ? 'rgba(74,144,226,0.75)' : ti===1 ? Au : 'rgba(102,204,102,0.75)';
+    return {
+      label:tgLabel, data,
+      backgroundColor:color, borderColor:color,
+      borderWidth:1
+    };
+  });
+
+  if(dcfCharts.football){ dcfCharts.football.destroy(); }
+  dcfCharts.football = new Chart(document.getElementById('d-chart-football'),{
+    type:'bar',
+    data:{ labels, datasets },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      animation:{duration:600},
+      plugins:{
+        legend:{display:true,position:'top',labels:{color:FC,font:{size:9,family:'DM Sans'},boxWidth:12,padding:10}},
+        tooltip:{backgroundColor:'rgba(8,9,14,.95)',borderColor:'rgba(201,168,76,.3)',borderWidth:1,
+          titleColor:'rgba(237,233,224,.55)',bodyColor:Au,padding:9,
+          callbacks:{
+            title:ctx=>'WACC: '+ctx[0].label,
+            label:ctx=>' '+ctx.dataset.label+' EV: '+fmtK(ctx.parsed.y)
+          }}
+      },
+      scales:{
+        x:{ticks:{color:FC,font:{size:9,family:'DM Sans'}},grid:{color:FD},border:{color:FD},
+          title:{display:true,text:'WACC',color:FC,font:{size:9}}},
+        y:{ticks:{color:FC,font:{size:9,family:'DM Sans'},callback:v=>fmtK(v)},grid:{color:FD},border:{color:FD},
+          title:{display:true,text:'Enterprise Value ($K)',color:FC,font:{size:9}}}
+      }
+    }
+  });
+}
+
+/* ── Build FCF table ────────────────────────────────────── */
+function buildFCFTable(sched){
+  const rows = [
+    {label:'Revenue ($K)',  key:'rev'},
+    {label:'EBITDA ($K)',   key:'ebitda'},
+    {label:'EBIT ($K)',     key:'ebit'},
+    {label:'NOPAT ($K)',    key:'nopat'},
+    {label:'+ D&A ($K)',    key:'da'},
+    {label:'− Capex ($K)',  key:'capex'},
+    {label:'− ΔNWC ($K)',   key:'nwc'},
+    {label:'Free Cash Flow ($K)', key:'fcf', bold:true},
+  ];
+  const tbody = document.getElementById('d-fcf-body');
+  tbody.innerHTML = '';
+  rows.forEach(r=>{
+    const tr = document.createElement('tr');
+    if(r.bold) tr.classList.add('base-row');
+    let html = `<td>${r.label}</td>`;
+    sched.forEach((y,i)=>{
+      let val;
+      if(r.key==='capex')      val = -(y.rev * /* capex read from closure */ 0); // filled below
+      else if(r.key==='nwc')   val = 0;
+      else                     val = y[r.key]||0;
+      html += `<td>${fmtK(val)}</td>`;
+    });
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ── Better table builder with capex/nwc from p ─────────── */
+function buildFCFTableFull(sched, p){
+  const tBody = document.getElementById('d-fcf-body');
+  tBody.innerHTML='';
+  const rowDefs = [
+    {lbl:'Revenue ($K)',          vals: sched.map(y=>y.rev)},
+    {lbl:'Growth Rate',           vals: sched.map(y=>fmtPct(y.g)), isStr:true},
+    {lbl:'EBITDA ($K)',           vals: sched.map(y=>y.ebitda)},
+    {lbl:'− D&A ($K)',            vals: sched.map(y=>-y.da)},
+    {lbl:'EBIT ($K)',             vals: sched.map(y=>y.ebit)},
+    {lbl:'Tax-effected (NOPAT)',  vals: sched.map(y=>y.nopat)},
+    {lbl:'+ D&A ($K)',            vals: sched.map(y=>y.da)},
+    {lbl:'− Capex ($K)',          vals: sched.map(y=>-(y.rev*p.capexPct))},
+    {lbl:'− ΔNWC ($K)',           vals: sched.map((y,i)=>i===0?-(y.rev-p.rev0)*p.nwcPct:-(y.rev-sched[i-1].rev)*p.nwcPct)},
+    {lbl:'Free Cash Flow ($K)',   vals: sched.map(y=>y.fcf), bold:true},
+  ];
+  rowDefs.forEach(r=>{
+    const tr=document.createElement('tr');
+    if(r.bold)tr.classList.add('base-row');
+    let html=`<td>${r.lbl}</td>`;
+    r.vals.forEach(v=>{ html+=`<td>${r.isStr?v:fmtK(v)}</td>`; });
+    tr.innerHTML=html;
+    tBody.appendChild(tr);
+  });
+}
+
+/* ── Commentary ──────────────────────────────────────────── */
+function writeDCFCommentary(p, res){
+  const tvPct = (res.pvTV / res.ev * 100).toFixed(0);
+  const irrPct = (calcIRR(res.sched, res.ev)*100).toFixed(1);
+  document.getElementById('d-out-irr').textContent = irrPct+'%';
+
+  const hurdle = p.wacc * 100;
+  const irrNum = parseFloat(irrPct);
+
+  let body, insight;
+
+  if(irrNum > hurdle + 5){
+    body = `The model generates a DCF enterprise value of <strong>${fmtK(res.ev)}</strong> with an implied IRR of <strong>${irrPct}%</strong> -- well above your ${hurdle.toFixed(1)}% WACC hurdle. Terminal value accounts for <strong>${tvPct}%</strong> of total EV, which is typical for high-growth businesses. The EV/EBITDA cross-check yields ${fmtK(res.evEBITDA)}.`;
+    insight = `Insight: At this spread, the investment creates significant value above cost of capital. Sensitivity check: a 200bps WACC increase (bear case) reduces EV to ${fmtK(res.bear)}. The model is most sensitive to terminal growth rate -- a 1% reduction in TGR would reduce EV by approximately ${fmtK((res.ev-calcDCF({...p,tgr:p.tgr-0.01},p.wacc).ev))}.`;
+  } else if(irrNum > hurdle){
+    body = `The model generates a DCF enterprise value of <strong>${fmtK(res.ev)}</strong> with an implied IRR of <strong>${irrPct}%</strong> -- modestly above the ${hurdle.toFixed(1)}% WACC hurdle. Terminal value is <strong>${tvPct}%</strong> of EV. This is a value-creating but margin-thin return profile. The EV/EBITDA cross-check yields ${fmtK(res.evEBITDA)}.`;
+    insight = `Insight: The thin IRR-to-WACC spread means this investment is sensitive to execution risk. The biggest lever is EBITDA margin expansion -- each 1% improvement in operating margin adds approximately ${fmtK(res.sched[4].rev * 0.01 * (1-p.tax) / (p.wacc-p.tgr))} to terminal value. Focus on cost discipline alongside revenue growth.`;
+  } else {
+    body = `At current inputs, the model yields a DCF enterprise value of <strong>${fmtK(res.ev)}</strong> with an implied IRR of <strong>${irrPct}%</strong> -- <em>below</em> the ${hurdle.toFixed(1)}% WACC hurdle. Terminal value is ${tvPct}% of EV. This business as modelled does not generate returns above cost of capital.`;
+    insight = `Insight: Value destruction at current inputs. Breakeven WACC (the rate at which NPV=0) is approximately ${irrPct}%. To reach a 15% IRR target, revenue growth in years 1–3 would need to reach ${((p.g1+0.08)*100).toFixed(0)}%, or EBITDA margin would need to expand by ~3–4 percentage points. Use the bull case (${fmtK(res.bull)}) to frame the upside scenario for stakeholders.`;
+  }
+
+  document.getElementById('d-scom-body').innerHTML = body;
+  document.getElementById('d-scom-insight').innerHTML = insight;
+}
+
+/* ── Main run ────────────────────────────────────────────── */
+window.runDCF = function(){
+  if(!window.Chart){ return; }
+  setDGuideStep(2);
+  const btn=document.getElementById('d-run-btn');
+  btn.classList.add('loading');
+  document.getElementById('d-btn-text').textContent='Computing...';
+
+  setTimeout(function(){
+    const p = readDInputs();
+
+    // Guard: wacc must exceed tgr
+    if(p.wacc <= p.tgr){
+      document.getElementById('d-btn-text').textContent='Run DCF Model';
+      btn.classList.remove('loading');
+      alert('WACC must be greater than Terminal Growth Rate for a valid DCF.');
+      return;
+    }
+
+    const base = calcDCF(p, p.wacc);
+    const bear = calcDCF({...p, wacc: p.wacc+0.02}, p.wacc+0.02);
+    const bull = calcDCF({...p, wacc: p.wacc-0.02}, p.wacc-0.02);
+
+    // Store for commentary
+    base.bear = bear.ev;
+    base.bull = bull.ev;
+
+    // Show results
+    document.getElementById('d-placeholder').style.display='none';
+    document.getElementById('d-results').style.display='block';
+
+    // Valuation cards
+    document.getElementById('d-out-bear').textContent = fmtK(bear.ev);
+    document.getElementById('d-out-base').textContent = fmtK(base.ev);
+    document.getElementById('d-out-bull').textContent = fmtK(bull.ev);
+
+    // Key metrics
+    document.getElementById('d-out-ev').textContent  = fmtK(base.ev);
+    document.getElementById('d-out-npv').textContent = fmtK(base.npvFCF);
+    document.getElementById('d-out-tv').textContent  = fmtK(base.pvTV);
+    // IRR set in commentary
+
+    // Charts
+    drawFCFChart(base.sched);
+    drawFootballField(p);
+
+    // Table
+    buildFCFTableFull(base.sched, p);
+
+    // Commentary + IRR
+    writeDCFCommentary(p, base);
+
+    btn.classList.remove('loading');
+    document.getElementById('d-btn-text').textContent='Re-run DCF Model';
+  }, 80);
+};
+
+window.resetDCF = function(){
+  document.getElementById('d-results').style.display='none';
+  document.getElementById('d-placeholder').style.display='flex';
+  document.getElementById('d-btn-text').textContent='Run DCF Model';
+  setDGuideStep(0);
+  Object.values(dcfCharts).forEach(ch=>{ try{ ch.destroy(); }catch(e){} });
+  dcfCharts={};
+};
+
+// Focus listeners
+[['dgrp-revenue',0],['dgrp-costs',1],['dgrp-market',2]].forEach(([id,step])=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('focus',()=>setDGuideStep(step));
+  });
+});
+
+setDGuideStep(0);
+
+})();
+
+
+// ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
+// SKILLS BALL PIT
+// ═══════════════════════════════════════════════════════════
+(function(){
+var canvas=document.getElementById('skills-canvas');
+if(!canvas)return;
+var ctx=canvas.getContext('2d');
+var GOLD='#c9a84c',W=0,H=0,balls=[],mouseX=-9999,mouseY=-9999;
+var raf=null,started=false,tooltip={text:'',x:0,y:0,alpha:0,timer:null};
+
+// Curated list — removed generic/common tools (Excel, Google Workspace, etc.)
+var SKILLS=[
+  {t:'GTM Execution',c:1},
+  {t:'Demand Forecasting',c:1},
+  {t:'Pricing Strategy',c:1},
+  {t:'Inventory Optimization',c:1},
+  {t:'JIT Delivery Models',c:1},
+  {t:'SEO / SEM',c:1},
+  {t:'Media Analytics',c:1},
+  {t:'Tableau',c:1},
+  {t:'Power BI',c:1},
+  {t:'Salesforce',c:1},
+  {t:'HubSpot',c:1},
+  {t:'Agile (Certified)',c:1},
+  {t:'Market Sizing',c:0},
+  {t:'Competitive Analysis',c:0},
+  {t:'SKU Rationalization',c:0},
+  {t:'Channel Economics',c:0},
+  {t:'M&A Deal Analysis',c:0},
+  {t:'Vendor Development',c:0},
+  {t:'Cross-Border Logistics',c:0},
+  {t:'Scrum (Certified)',c:0},
+  {t:'Tariff Modeling',c:0},
+  {t:'Cost Modeling',c:0},
+  {t:'Process Mapping',c:0},
+  {t:'Content Strategy',c:0},
+  {t:'Voice of Customer',c:0},
+  {t:'Buyer Persona Mapping',c:0},
+  {t:'Brand Positioning',c:0},
+  {t:'Financial Modeling',c:0},
+  {t:'KPI Dashboard Design',c:0},
+  {t:'Sensitivity Analysis',c:0},
+  {t:'Ahrefs',c:0},
+  {t:'SEMRush',c:0},
+  {t:'Lean Operations',c:0},
+  {t:'Waterfall PM',c:0},
+  {t:'SWOT / PESTLE',c:0}
+];
+
+function abbr(str){
+  var w=str.replace(/[()]/g,'').split(/[\s/&+]+/),a='';
+  for(var i=0;i<w.length&&a.length<3;i++){if(w[i].length>0)a+=w[i][0].toUpperCase();}
+  return a;
+}
+
+// Short label — up to ~12 chars for the small text under initials
+function shortLabel(str){
+  if(str.length<=11)return str;
+  // truncate at word boundary
+  var words=str.split(' ');
+  var out='';
+  for(var i=0;i<words.length;i++){
+    var candidate=(out?out+' ':'')+words[i];
+    if(candidate.length>11)break;
+    out=candidate;
+  }
+  return out||str.slice(0,10);
+}
+
+function setup(){
+  var dpr=window.devicePixelRatio||1;
+  W=canvas.parentElement.offsetWidth||window.innerWidth;
+  H=Math.max(300,Math.min(500,W*0.36));
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
+  canvas.width=Math.floor(W*dpr);canvas.height=Math.floor(H*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+
+function mk(){
+  balls=SKILLS.map(function(s){
+    var r=s.c?36:24;
+    return{t:s.t,ab:abbr(s.t),lb:shortLabel(s.t),c:s.c,r:r,
+      x:r+Math.random()*Math.max(1,W-r*2),
+      y:H*0.15+Math.random()*H*0.55,
+      vx:(Math.random()-.5)*1.2,vy:(Math.random()-.5)*1.2};
+  });
+  // Spread
+  for(var p=0;p<40;p++){
+    for(var i=0;i<balls.length;i++){
+      for(var j=i+1;j<balls.length;j++){
+        var a=balls[i],b=balls[j],dx=b.x-a.x,dy=b.y-a.y;
+        var d=Math.sqrt(dx*dx+dy*dy)||.001,m=a.r+b.r+4;
+        if(d<m){var k=(m-d)/2/d;a.x-=dx*k;a.y-=dy*k;b.x+=dx*k;b.y+=dy*k;}
+      }
+      wl(balls[i]);
+    }
+  }
+}
+
+function wl(b){
+  if(b.x-b.r<0){b.x=b.r;b.vx=Math.abs(b.vx)*.5;}
+  if(b.x+b.r>W){b.x=W-b.r;b.vx=-Math.abs(b.vx)*.5;}
+  if(b.y-b.r<0){b.y=b.r;b.vy=Math.abs(b.vy)*.5;}
+  if(b.y+b.r>H){b.y=H-b.r;b.vy=-Math.abs(b.vy)*.5;}
+}
+
+function fr(){
+  raf=requestAnimationFrame(fr);
+  ctx.clearRect(0,0,W,H);
+
+  for(var i=0;i<balls.length;i++){
+    var b=balls[i];
+    // Mouse repulsion
+    var dx=b.x-mouseX,dy=b.y-mouseY,md=Math.sqrt(dx*dx+dy*dy)||.001;
+    if(md<140){var f=((140-md)/140)*24;b.vx+=(dx/md)*f;b.vy+=(dy/md)*f;}
+    // Gravity — increased
+    b.vy+=0.45;
+    b.vx*=0.88;b.vy*=0.88;
+    b.x+=b.vx;b.y+=b.vy;
+    wl(b);
+    // Ball-ball collisions
+    for(var j=i+1;j<balls.length;j++){
+      var o=balls[j],cx=o.x-b.x,cy=o.y-b.y;
+      var cd=Math.sqrt(cx*cx+cy*cy)||.001,mn=b.r+o.r+2;
+      if(cd<mn){
+        var ov=(mn-cd)/2,nx=cx/cd,ny=cy/cd;
+        b.x-=nx*ov;b.y-=ny*ov;o.x+=nx*ov;o.y+=ny*ov;
+        var rv=(b.vx-o.vx)*nx+(b.vy-o.vy)*ny;
+        if(rv>0){b.vx-=rv*nx*.4;b.vy-=rv*ny*.4;o.vx+=rv*nx*.4;o.vy+=rv*ny*.4;}
+      }
+    }
+    dr(b);
+  }
+
+  // Draw tooltip if active
+  if(tooltip.alpha>0){
+    ctx.save();
+    ctx.globalAlpha=tooltip.alpha;
+    var tw=ctx.measureText(tooltip.text).width;
+    ctx.font='500 12px "DM Sans",sans-serif';
+    tw=ctx.measureText(tooltip.text).width;
+    var tx=Math.min(Math.max(tooltip.x,tw/2+10),W-tw/2-10);
+    var ty=Math.max(tooltip.y-10,22);
+    // Pill background (manual rounded rect for browser compat)
+    ctx.fillStyle='rgba(201,168,76,0.95)';
+    var pad=8,rx=tx-tw/2-pad,ry=ty-16,rw=tw+pad*2,rh=22,cr=4;
+    ctx.beginPath();
+    ctx.moveTo(rx+cr,ry);
+    ctx.lineTo(rx+rw-cr,ry);ctx.arcTo(rx+rw,ry,rx+rw,ry+cr,cr);
+    ctx.lineTo(rx+rw,ry+rh-cr);ctx.arcTo(rx+rw,ry+rh,rx+rw-cr,ry+rh,cr);
+    ctx.lineTo(rx+cr,ry+rh);ctx.arcTo(rx,ry+rh,rx,ry+rh-cr,cr);
+    ctx.lineTo(rx,ry+cr);ctx.arcTo(rx,ry,rx+cr,ry,cr);
+    ctx.closePath();ctx.fill();
+    ctx.fillStyle='#0a0b0d';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(tooltip.text,tx,ty-5);
+    ctx.restore();
+    tooltip.alpha=Math.max(0,tooltip.alpha-0.02);
+  }
+}
+
+function dr(b){
+  ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+  if(b.c){
+    ctx.fillStyle=GOLD;ctx.fill();
+    // gloss highlight
+    ctx.beginPath();ctx.arc(b.x-b.r*.28,b.y-b.r*.3,b.r*.38,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,0.11)';ctx.fill();
+    // Full skill name — regular weight, dark text, wrapped to 2 lines if needed
+    drawWrappedText(ctx,b.t,b.x,b.y,b.r*1.55,'400',10,'#0a0b0d');
+  }else{
+    ctx.fillStyle='rgba(10,11,13,0.97)';ctx.fill();
+    ctx.lineWidth=1;ctx.strokeStyle='rgba(201,168,76,0.4)';ctx.stroke();
+    // Initials centred + tiny label below for non-core
+    ctx.font='600 12px "DM Sans",sans-serif';
+    ctx.fillStyle=GOLD;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(b.ab,b.x,b.y-4);
+    ctx.font='400 7px "DM Sans",sans-serif';
+    ctx.fillStyle='rgba(201,168,76,0.5)';
+    ctx.fillText(b.lb,b.x,b.y+6);
+  }
+}
+
+// Helper: draw text centred in a ball, wrap to 2 lines if too wide
+function drawWrappedText(ctx,text,cx,cy,maxW,weight,size,color){
+  ctx.fillStyle=color;
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.font=weight+' '+size+'px "DM Sans",sans-serif';
+  var words=text.split(' ');
+  // Try single line first
+  if(ctx.measureText(text).width<=maxW){
+    ctx.fillText(text,cx,cy);
+    return;
+  }
+  // Split into 2 lines at best midpoint
+  var best=1,bestDiff=9999;
+  for(var s=1;s<words.length;s++){
+    var l1=words.slice(0,s).join(' '),l2=words.slice(s).join(' ');
+    var diff=Math.abs(ctx.measureText(l1).width-ctx.measureText(l2).width);
+    if(diff<bestDiff){bestDiff=diff;best=s;}
+  }
+  var line1=words.slice(0,best).join(' '),line2=words.slice(best).join(' ');
+  var lh=size*1.3;
+  ctx.fillText(line1,cx,cy-lh/2);
+  ctx.fillText(line2,cx,cy+lh/2);
+}
+
+// Mouse / touch tracking
+canvas.addEventListener('mousemove',function(e){
+  var r=canvas.getBoundingClientRect();
+  mouseX=e.clientX-r.left;mouseY=e.clientY-r.top;
+},{passive:true});
+canvas.addEventListener('touchmove',function(e){
+  var r=canvas.getBoundingClientRect();
+  mouseX=e.touches[0].clientX-r.left;mouseY=e.touches[0].clientY-r.top;
+},{passive:true});
+canvas.addEventListener('mouseleave',function(){mouseX=-9999;mouseY=-9999;});
+
+// Click to reveal full skill name
+canvas.addEventListener('click',function(e){
+  var r=canvas.getBoundingClientRect();
+  var cx=e.clientX-r.left,cy=e.clientY-r.top;
+  for(var i=balls.length-1;i>=0;i--){
+    var b=balls[i];
+    var dx=b.x-cx,dy=b.y-cy;
+    if(dx*dx+dy*dy<=b.r*b.r){
+      tooltip.text=b.t;
+      tooltip.x=b.x;tooltip.y=b.y-b.r-4;
+      tooltip.alpha=1;
+      if(tooltip.timer)clearTimeout(tooltip.timer);
+      // Kick ball on click
+      b.vx+=(Math.random()-.5)*8;
+      b.vy-=6+Math.random()*4;
+      break;
+    }
+  }
+});
+canvas.addEventListener('touchstart',function(e){
+  var r=canvas.getBoundingClientRect();
+  var cx=e.touches[0].clientX-r.left,cy=e.touches[0].clientY-r.top;
+  for(var i=balls.length-1;i>=0;i--){
+    var b=balls[i];
+    var dx=b.x-cx,dy=b.y-cy;
+    if(dx*dx+dy*dy<=b.r*b.r){
+      tooltip.text=b.t;tooltip.x=b.x;tooltip.y=b.y-b.r-4;tooltip.alpha=1;
+      b.vx+=(Math.random()-.5)*6;b.vy-=5;
+      break;
+    }
+  }
+},{passive:true});
+
+function start(){
+  if(started)return;started=true;setup();mk();fr();
+}
+window.addEventListener('resize',function(){
+  if(!started)return;
+  if(raf){cancelAnimationFrame(raf);raf=null;}
+  setup();mk();fr();
+});
+new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){start();}
+    else if(raf){cancelAnimationFrame(raf);raf=null;started=false;}
+  });
+},{threshold:0.05}).observe(canvas);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// CROSS-SIMULATOR CARRY-FORWARD
+// Inv → Queue: EOQ order cycle time → simTime; unit cost → staffCost
+// Queue → DCF: served customers + unit cost → revenue; util → EBITDA margin
+// ═══════════════════════════════════════════════════════════════
+var _lastInvResults = null;   // stored after inv sim runs
+var _lastQueueResults = null; // stored after queue sim runs
+
+// Called at end of _executeRun() to cache results
+function _cacheInvResults(p, eoq, ss, rop, grandTotal, avgD){
+  _lastInvResults = {
+    eoq: eoq,
+    ss: ss,
+    rop: rop,
+    totalCost: grandTotal,
+    unitCost: p.C,
+    leadTime: p.L,
+    demand: p.D,
+    svcPct: p.svcPct,
+    avgD: avgD
+  };
+}
+
+// Called at end of queue sim to cache results
+function _cacheQueueResults(p, r){
+  _lastQueueResults = {
+    served: r.served,
+    avgWait: r.avgWait,
+    util: r.util,
+    staffCost: p.staffCost,
+    numServers: p.numServers,
+    simTime: p.simTime,
+    arrivalInterval: p.arrivalInterval,
+    serviceTime: p.serviceTime
+  };
+}
+
+// INV → QUEUE
+// Logic: 
+//   simTime  = order cycle length in days (demand / eoq * 365 = cycles/yr → days/cycle)
+//   arrival interval = avgD converted to minutes (demand per minute of operating day)
+//   service time = lead time in days → minutes of "processing" per order
+//   staffCost = unit cost / 2 (rough proxy: labour ~50% of unit cost for ops-heavy biz)
+//   numServers = ceil(eoq / (demand/365 * leadTime)) clamped 1-10
+window.carryInvToQueue = function(){
+  if(!_lastInvResults){
+    alert('Run the Inventory Lab first to generate results.');
+    return;
+  }
+  var r = _lastInvResults;
+  // Days per order cycle
+  var cycledays = Math.round(r.eoq / r.avgD);
+  // Arrivals per minute: assume 8-hour operating day
+  var demandPerDay = r.avgD;
+  var demandPerMin = demandPerDay / 480; // 8hr * 60min
+  var arrivalInterval = demandPerMin > 0 ? Math.max(0.5, Math.min(30, (1/demandPerMin).toFixed(1))) : 3;
+  // Service time ~ lead time normalised to minutes per "job"
+  var serviceTime = Math.max(1, Math.min(60, Math.round(r.leadTime * 480 / (r.eoq||1))));
+  // Servers: rough sqrt scaling
+  var servers = Math.max(1, Math.min(10, Math.round(Math.sqrt(r.demand/500))));
+  // Staff cost: unit cost / 2 as hourly proxy
+  var staffCost = Math.max(12, Math.min(150, Math.round(r.unitCost / 2)));
+  // SimTime: one full order cycle in minutes
+  var simTime = Math.max(60, Math.min(480, cycledays * 8 * 60 / 60)); // hours → as minutes
+
+  // Set queue inputs
+  function setVal(id, val){ var el=document.getElementById(id); if(el) el.value=val; }
+  setVal('q-arrival', parseFloat(arrivalInterval).toFixed(1));
+  setVal('q-service', serviceTime);
+  setVal('q-servers', servers);
+  setVal('q-staffcost', staffCost);
+  setVal('q-simtime', Math.round(simTime));
+
+  // Switch to queue tab and highlight inputs briefly
+  switchSimTab('queue');
+  setTimeout(function(){
+    var inputs = ['q-arrival','q-service','q-servers','q-staffcost','q-simtime'];
+    inputs.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el){ el.style.borderColor='rgba(201,168,76,.7)'; setTimeout(function(){ el.style.borderColor=''; },1800); }
+    });
+  }, 200);
+};
+
+// QUEUE → DCF
+// Logic:
+//   revenue = served customers * unitCost (from inv if available, else $50 default) / 1000 → $K
+//   growth rate = derive from utilisation: high util = capacity-constrained = slower growth
+//   EBITDA margin = utilisation proxy: 70-80% util maps to ~20-25% EBITDA; >90% = 15%; <60% = 30%
+//   WACC = base 10% + adjustment for avg wait (long waits = higher operational risk)
+//   staffCost feeds into capex proxy
+window.carryQueueToDCF = function(){
+  if(!_lastQueueResults){
+    alert('Run the Queue & Staffing Lab first to generate results.');
+    return;
+  }
+  var q = _lastQueueResults;
+  var unitCost = (_lastInvResults && _lastInvResults.unitCost) ? _lastInvResults.unitCost : 50;
+
+  // Revenue: annualise served customers over simTime (minutes) → per year
+  var annualCustomers = q.served * (525600 / q.simTime); // 525600 = mins/year
+  var revenueK = Math.round(annualCustomers * unitCost / 1000);
+  revenueK = Math.max(100, Math.min(500000, revenueK));
+
+  // Growth rate: capacity-constrained (high util) → modest growth; slack → higher growth potential
+  var util = q.util;
+  var growth1 = util > 85 ? 8 : util > 70 ? 14 : 20;  // yr 1-3
+  var growth2 = Math.round(growth1 * 0.55);              // yr 4-5
+
+  // EBITDA margin from utilisation
+  var ebitda = util > 90 ? 14 : util > 80 ? 20 : util > 65 ? 26 : 32;
+
+  // WACC: base 10%, +1% per 2 min of avg wait beyond 3 min
+  var waccAdj = Math.max(0, Math.round((q.avgWait - 3) / 2));
+  var wacc = Math.min(18, 10 + waccAdj);
+
+  // Capex: server-intensive ops = higher capex
+  var capex = Math.round(3 + q.numServers * 0.4);
+
+  function setVal(id, val){ var el=document.getElementById(id); if(el) el.value=val; }
+  setVal('d-revenue',  revenueK);
+  setVal('d-growth1',  growth1);
+  setVal('d-growth2',  growth2);
+  setVal('d-ebitda',   ebitda);
+  setVal('d-wacc',     wacc);
+  setVal('d-capex',    capex);
+
+  switchSimTab('dcf');
+  setTimeout(function(){
+    var inputs = ['d-revenue','d-growth1','d-growth2','d-ebitda','d-wacc','d-capex'];
+    inputs.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el){ el.style.borderColor='rgba(201,168,76,.7)'; setTimeout(function(){ el.style.borderColor=''; },1800); }
+    });
+  }, 200);
+};
+
+// 18. MOBILE MENU
+function toggleMobileMenu(){
+  const toggle=document.getElementById('nav-toggle');
+  const menu=document.getElementById('mobile-menu');
+  toggle.classList.toggle('open');
+  menu.classList.toggle('open');
+  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+}
+function closeMobileMenu(){
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ─── NEW FEATURES ───────────────────────────────────────
+
+
+// 21. EXPERIENCE TIMELINE LINE -- draws down as you scroll through
+const tlLine=document.getElementById('tlLine');
+const expSection=document.getElementById('section-experience');
+if(tlLine&&expSection){
+  window.addEventListener('scroll',()=>{
+    const rect=expSection.getBoundingClientRect();
+    const total=expSection.offsetHeight;
+    const scrolled=Math.max(0,-rect.top+innerHeight*.5);
+    const pct=Math.min(1,scrolled/total);
+    tlLine.style.height=(pct*100)+'%';
+    // Activate dots
+    document.querySelectorAll('.exp-card-tl').forEach(card=>{
+      const cr=card.getBoundingClientRect();
+      card.classList.toggle('tl-active',cr.top<innerHeight*.6);
+    });
+  },{passive:true});
+}
+
+// 23. DRAG-SCROLL CAROUSEL (case studies)
+(function(){
+  const slider=document.getElementById('caseSlider');
+  const dotsWrap=document.getElementById('sliderDots');
+  if(!slider)return;
+
+  // Build dots
+  const cards=slider.querySelectorAll('.case-flip');
+  cards.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='slider-dot'+(i===0?' act':'');
+    d.addEventListener('click',()=>slider.scrollTo({left:i*(cards[0].offsetWidth+24),behavior:'smooth'}));
+    dotsWrap.appendChild(d);
+  });
+
+  // Update active dot on scroll
+  slider.addEventListener('scroll',()=>{
+    const idx=Math.round(slider.scrollLeft/(slider.scrollWidth/cards.length));
+    dotsWrap.querySelectorAll('.slider-dot').forEach((d,i)=>d.classList.toggle('act',i===idx));
+  },{passive:true});
+
+  // Mouse drag
+  let isDown=false,startX,scrollLeft;
+  slider.addEventListener('mousedown',e=>{
+    isDown=true;slider.classList.add('dragging');
+    startX=e.pageX-slider.offsetLeft;scrollLeft=slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave',()=>{isDown=false;slider.classList.remove('dragging');});
+  slider.addEventListener('mouseup',()=>{isDown=false;slider.classList.remove('dragging');});
+  slider.addEventListener('mousemove',e=>{
+    if(!isDown)return;e.preventDefault();
+    const x=e.pageX-slider.offsetLeft;
+    slider.scrollLeft=scrollLeft-(x-startX)*1.5;
+  });
+
+  // Touch drag (momentum feel)
+  let tStartX,tScrollLeft;
+  slider.addEventListener('touchstart',e=>{tStartX=e.touches[0].pageX;tScrollLeft=slider.scrollLeft;},{passive:true});
+  slider.addEventListener('touchmove',e=>{
+    const dx=tStartX-e.touches[0].pageX;
+    slider.scrollLeft=tScrollLeft+dx;
+  },{passive:true});
+})();
+
+// 24. FLOATING CONNECT PILL -- appears after hero
+const floatCta=document.getElementById('float-cta');
+const readTime=document.getElementById('read-time');
+window.addEventListener('scroll',()=>{
+  const show=window.scrollY>window.innerHeight*.6;
+  if(floatCta)floatCta.classList.toggle('show',show);
+  if(readTime){
+    const pct=Math.round(window.scrollY/(document.body.scrollHeight-innerHeight)*100);
+    readTime.textContent=pct+'% READ';
+    readTime.style.opacity=show?'1':'0';
+  }
+},{passive:true});
+
+// 18. MOBILE MENU
+function toggleMobileMenu(){
+  const toggle=document.getElementById('nav-toggle');
+  const menu=document.getElementById('mobile-menu');
+  toggle.classList.toggle('open');
+  menu.classList.toggle('open');
+  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+}
+function closeMobileMenu(){
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+</script>
+</body>
+</html>
