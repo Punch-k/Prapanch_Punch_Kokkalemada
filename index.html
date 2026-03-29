@@ -921,61 +921,58 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
     <p data-a="up" data-delay="60" style="max-width:540px;font-size:.9rem;color:rgba(237,233,224,.42);line-height:1.72;margin-bottom:2.5rem;">
       Three engagements. Three industries. Each card flips to reveal the full Problem–Action–Result breakdown.
     </p>
-    <style>
-    .fan-container {
+      <style>
+    .tw-card-container {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 5rem 0 8rem 0;
+        gap: 1.5rem; /* Spacing between cards */
+        padding: 5rem 2rem 8rem 2rem;
         width: 100%;
     }
-    .fan-card {
+
+    .tw-card {
         position: relative;
-        width: 240px;
+        width: 220px;
         height: 380px;
-        border-radius: 16px;
+        border-radius: 0.75rem; /* Tailwind's rounded-xl */
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        transform-origin: bottom center;
-        border: 1px solid var(--line);
-        text-decoration: none;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Tailwind's duration-500 */
+        transform-origin: bottom center; /* Tailwind's origin-bottom */
         cursor: pointer;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
     }
-    
-    /* Negative margins make them overlap like a hand of cards */
-    .fan-card:not(:first-child) {
-        margin-left: -60px;
-    }
-    
-    .fan-card img {
+
+    .tw-card img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: grayscale(100%) brightness(0.5);
-        transition: all 0.6s var(--ease);
+        filter: grayscale(80%) brightness(0.6);
+        transition: all 0.5s ease;
     }
-    
-    /* The staggered fan rotations */
-    .fan-1 { transform: rotate(-12deg) translateY(10px); z-index: 1; }
-    .fan-2 { transform: rotate(-6deg) translateY(0px); z-index: 2; }
-    .fan-3 { transform: rotate(0deg) translateY(-5px); z-index: 3; }
-    .fan-4 { transform: rotate(6deg) translateY(0px); z-index: 4; }
-    .fan-5 { transform: rotate(12deg) translateY(10px); z-index: 5; }
 
-    /* The Hover Effect: Stand up, move up, zoom in, full color */
-    .fan-card:hover {
-        transform: rotate(0deg) translateY(-50px) scale(1.15) !important;
-        z-index: 10;
-        border-color: var(--gold);
-        box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    }
-    .fan-card:hover img {
-        filter: grayscale(0%) brightness(0.9);
-        transform: scale(1.05);
+    /* The alternating rotations from the Tailwind tutorial */
+    .tw-rot-1 { transform: rotate(6deg); }
+    .tw-rot-2 { transform: rotate(-12deg); }
+    .tw-rot-3 { transform: rotate(6deg); }
+    .tw-rot-4 { transform: rotate(-12deg); }
+    .tw-rot-5 { transform: rotate(6deg); }
+
+    /* The Hover Effect: Straighten (rotate-0), move up (-translate-y-12), and scale up */
+    .tw-card:hover {
+        transform: rotate(0deg) translateY(-3rem) scale(1.25);
+        z-index: 50;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
     
-    .fan-content {
+    .tw-card:hover img {
+        filter: grayscale(0%) brightness(1);
+    }
+
+    /* Text Overlay */
+    .tw-content {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -983,52 +980,55 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
         padding: 2rem 1.5rem 1.5rem;
         background: linear-gradient(to top, rgba(10,11,13,0.95) 20%, transparent);
     }
-    .fan-cat { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem;}
-    .fan-title { font-family: var(--display); font-size: 1.6rem; line-height: 1.1; margin: 0; color: var(--fg); letter-spacing: 0.03em;}
+    .tw-cat { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem;}
+    .tw-title { font-family: var(--display); font-size: 1.5rem; line-height: 1.1; margin: 0; color: var(--fg); letter-spacing: 0.03em;}
 
-    /* Makes them stack normally on small phone screens */
-    @media (max-width: 900px) {
-        .fan-container { flex-wrap: wrap; gap: 2rem; padding: 2rem 0; }
-        .fan-card:not(:first-child) { margin-left: 0; }
-        .fan-card { transform: none !important; margin-bottom: 1rem; }
-        .fan-card img { filter: grayscale(0%) brightness(0.7); }
+    /* Mobile fallback */
+    @media (max-width: 1000px) {
+        .tw-card-container { flex-wrap: wrap; gap: 2rem; }
+        .tw-card { transform: none !important; margin-bottom: 1rem; }
+        .tw-card:hover { transform: translateY(-1rem) scale(1.05) !important; }
     }
 </style>
 
-<div class="fan-container">
-    <a href="#_" class="fan-card fan-1">
+<div class="tw-card-container">
+    <a href="#_" class="tw-card tw-rot-1">
         <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=700&auto=format&fit=crop" alt="Material Testing">
-        <div class="fan-content">
-            <span class="fan-cat">B.Eng Thesis</span>
-            <h3 class="fan-title">MATERIAL TESTING & DESIGN</h3>
+        <div class="tw-content">
+            <span class="tw-cat">B.Eng Thesis</span>
+            <h3 class="tw-title">MATERIAL TESTING</h3>
         </div>
     </a>
-    <a href="#_" class="fan-card fan-2">
+    
+    <a href="#_" class="tw-card tw-rot-2">
         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" alt="TechSmith GTM">
-        <div class="fan-content">
-            <span class="fan-cat">TechSmith</span>
-            <h3 class="fan-title">NEW REVENUE CHANNELS</h3>
+        <div class="tw-content">
+            <span class="tw-cat">TechSmith</span>
+            <h3 class="tw-title">NEW REVENUE CHANNELS</h3>
         </div>
     </a>
-    <a href="#_" class="fan-card fan-3">
+    
+    <a href="#_" class="tw-card tw-rot-3">
         <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=700&auto=format&fit=crop" alt="M&A Deal Thesis">
-        <div class="fan-content">
-            <span class="fan-cat">ACG Competition</span>
-            <h3 class="fan-title">M&amp;A DEAL THESIS</h3>
+        <div class="tw-content">
+            <span class="tw-cat">ACG Competition</span>
+            <h3 class="tw-title">M&amp;A DEAL THESIS</h3>
         </div>
     </a>
-    <a href="#_" class="fan-card fan-4">
+    
+    <a href="#_" class="tw-card tw-rot-4">
         <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop" alt="Cross-Border Supply Chain">
-        <div class="fan-content">
-            <span class="fan-cat">Cross-Border</span>
-            <h3 class="fan-title">US MARKET ENTRY</h3>
+        <div class="tw-content">
+            <span class="tw-cat">Cross-Border</span>
+            <h3 class="tw-title">US MARKET ENTRY</h3>
         </div>
     </a>
-    <a href="#_" class="fan-card fan-5">
+    
+    <a href="#_" class="tw-card tw-rot-5">
         <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=700&auto=format&fit=crop" alt="Scrum Replenishment">
-        <div class="fan-content">
-            <span class="fan-cat">Agile Operations</span>
-            <h3 class="fan-title">SCRUM REPLENISH</h3>
+        <div class="tw-content">
+            <span class="tw-cat">Agile Operations</span>
+            <h3 class="tw-title">SCRUM REPLENISH</h3>
         </div>
     </a>
 </div>
