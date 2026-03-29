@@ -158,10 +158,10 @@ body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer
 .exp-bullets li strong{color:var(--fg);font-weight:400;}
 
 /* ─── CASE STUDIES ────────────────────────────────────── */
-#section-cases{padding:4.5rem 2rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
+#section-cases{padding:4.5rem 2rem 2rem;border-top:2px solid var(--line);position:relative;z-index:2;}
 .case-slider{display:flex;gap:1.5rem;overflow-x:auto;overflow-y:hidden;padding-bottom:1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .case-slider::-webkit-scrollbar{display:none;}
-.case-flip{min-width:940px;perspective:1000px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.case-flip{min-width:440px;perspective:1000px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .case-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.76,0,.24,1);min-height:320px;}
 .case-flip.flipped .case-inner,.case-flip:hover .case-inner{transform:rotateY(180deg);}
 .case-front,.case-back-img{width:100%;height:110px;object-fit:cover;display:block;flex-shrink:0;filter:brightness(.55) saturate(.7);transition:filter .4s;}
