@@ -28,23 +28,27 @@ body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:30
 .loader-text{font-family:var(--display);font-size:2rem;letter-spacing:.1em;color:var(--fg);}
 body.loaded #preloader{opacity:0;visibility:hidden;}
 
+/* ─── AMBIENT AURA ────────────────────────────────────── */
+#aura{position:fixed;top:0;left:0;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 60%);border-radius:50%;pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:opacity .5s;mix-blend-mode:screen;will-change:transform;}
+
 /* ─── LIVE SMOKE BACKGROUND ───────────────────────────── */
 #smoke-bg {
     position: fixed;
     inset: -20%;
     width: 140%;
     height: 140%;
-    z-index: 1; /* Sits behind content, above base bg */
+    z-index: -1; /* Pushed firmly to the background */
     pointer-events: none;
     overflow: hidden;
-    opacity: 0.6; /* Keeps it subtle and professional */
-    filter: blur(120px); /* Creates the "smoke" texture */
+    opacity: 0.8; /* Cranked up visibility */
+    filter: blur(80px); /* Reduced the blur so it doesn't wash out completely */
 }
 
 .smoke-plume {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 65%);
+    /* Increased the gold opacity from 0.08 to 0.25 so it actually shows up */
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.25) 0%, transparent 70%);
     animation: drift 25s infinite alternate ease-in-out;
     will-change: transform;
 }
