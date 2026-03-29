@@ -105,14 +105,14 @@ body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer
 @media(max-width:700px){.stat-strip{flex-direction:column;}.stat-strip-item{border-right:none;border-bottom:1px solid var(--line);padding:1.2rem 1.4rem;}.stat-strip-item:last-child{border-bottom:none;}}
 
 /* ─── SCROLL-TIED MARQUEE ─────────────────────────────── */
-.mq-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.85rem 0;position:relative;z-index:2;}
+.mq-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.5rem 0;position:relative;z-index:2;}
 .mq-track{display:flex;gap:2.8rem;white-space:nowrap;will-change:transform;}
 .mq-item{font-family:var(--display);font-size:2.4rem;letter-spacing:.05em;color:rgba(237,233,224,.08);flex-shrink:0;transition:color .3s;}
 .mq-item.hi{color:rgba(201,168,76,.4);}
 .mq-item:hover{color:rgba(237,233,224,.28);}
 
 /* Bottom tech marquee */
-.bmq-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.3rem 0;margin-top:3.5rem;}
+.bmq-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1rem 0;margin-top:3rem;}
 .bmq-track{display:flex;gap:3.5rem;white-space:nowrap;will-change:transform;}
 .bn{font-family:var(--display);font-size:1.7rem;letter-spacing:.06em;color:rgba(237,233,224,.1);flex-shrink:0;transition:color .3s;}
 .bn:hover{color:rgba(237,233,224,.3);}
