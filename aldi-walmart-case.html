@@ -107,6 +107,83 @@
         }
         .nav-btn:hover::before { left: 0; }
         .nav-btn:hover { color: var(--bg); box-shadow: 0 0 20px rgba(201,168,76,0.5); }
+    /* ─── 6. ARTICLE CAROUSEL (AWWWARDS STYLE) ─── */
+        .carousel-container {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%); /* Forces it to bleed edge-to-edge */
+            height: 500px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            /* This is the physics for the "settling" effect */
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); 
+        }
+
+        .carousel-card {
+            flex: 0 0 clamp(280px, 30vw, 400px);
+            height: 400px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.2, 1);
+            transform: scale(0.85); /* Shrunk by default */
+            opacity: 0.3; /* Dimmed by default */
+            cursor: pointer;
+        }
+
+        /* THE POP-UP EFFECT FOR THE CENTER CARD */
+        .carousel-card.active {
+            transform: scale(1);
+            opacity: 1;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border-color: var(--gold);
+            z-index: 10;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 55%;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: all 0.8s ease;
+        }
+
+        .carousel-card.active .card-image { filter: grayscale(0%); }
+
+        .card-content { padding: 1.5rem; height: 45%; display: flex; flex-direction: column; justify-content: center; }
+        .card-content h4 { font-family: var(--display); font-size: 1.8rem; color: var(--gold); margin: 0 0 0.5rem 0; }
+        .card-content p { font-size: 0.95rem; color: rgba(237,233,224,0.8); margin: 0; line-height: 1.5; }
+
+        /* THE ARROWS */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 11, 13, 0.85);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .carousel-btn:hover { background: var(--gold); color: var(--bg); transform: translateY(-50%) scale(1.1); }
+        .left-btn { left: 5vw; }
+        .right-btn { right: 5vw; }
     </style>
 </head>
 <body>
