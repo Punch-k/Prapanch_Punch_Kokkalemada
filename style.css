@@ -615,119 +615,40 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
 /* ─── CONTACT HEADING ─────────────────────────────────── */
 .ct-heading{font-family:var(--display);font-size:clamp(2.8rem,5.5vw,5rem);line-height:.95;letter-spacing:.02em;margin-bottom:1.4rem;}
 .ct-heading em{font-family:var(--serif);font-style:italic;display:block;color:rgba(237,233,224,.38);}
-/* ─── VIII. PLAYFUL AWWWARDS CONTACT ─── */
-.playful-contact-section {
-    padding: 8rem 2rem;
-    background: var(--bg);
-    border-top: 1px solid var(--line);
+/* ─── VIII. CONTACT (CLEAN & SQUARED) ─── */
+.contact-section { padding: 8rem 2rem; background: var(--bg); border-top: 1px solid var(--line); }
+.ct-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 4rem; flex-wrap: wrap; }
+.ct-content { flex: 1; min-width: 300px; }
+.ct-title { font-family: var(--display); font-size: clamp(4rem, 8vw, 6rem); color: var(--fg); line-height: 1; margin: 0 0 1rem 0; }
+.ct-sub { font-size: 1.15rem; color: rgba(237,233,224,0.7); margin-bottom: 2.5rem; max-width: 400px; }
+.ct-links { display: flex; flex-direction: column; gap: 1rem; }
+.ct-link { font-family: var(--sans); font-size: 1.5rem; color: var(--fg); text-decoration: none; transition: color 0.3s; width: fit-content; }
+.ct-link:hover { color: var(--gold); }
+
+.ct-visual { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+
+/* THE PERFECT SQUARE BOX */
+.photo-square {
+    width: clamp(250px, 30vw, 350px);
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-}
-
-.pc-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
-    flex-wrap: wrap;
-}
-
-.pc-content { flex: 1; min-width: 300px; }
-
-.pc-title {
-    font-family: var(--display);
-    font-size: clamp(4rem, 10vw, 8rem);
-    color: var(--fg);
-    line-height: 0.9;
-    margin: 0 0 1.5rem 0;
-}
-
-/* Playful Bounce on Hover */
-.pc-highlight {
-    color: var(--gold);
-    display: inline-block;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.pc-title:hover .pc-highlight { transform: rotate(-5deg) scale(1.05); }
-
-.pc-subtitle {
-    font-size: 1.2rem;
-    color: rgba(237,233,224,0.7);
-    margin-bottom: 3rem;
-    max-width: 400px;
-}
-
-.pc-links { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
-
-/* Liquid Fill Buttons */
-.magnetic-btn {
-    position: relative; display: inline-flex; padding: 1rem 2.5rem;
-    border: 1px solid var(--line); border-radius: 50px;
-    color: var(--fg); text-decoration: none; font-size: 1.1rem;
-    overflow: hidden; transition: border-color 0.3s, transform 0.2s ease-out;
+    border-radius: 8px;
+    border: 1px solid var(--line);
     background: rgba(255,255,255,0.02);
 }
-.magnetic-btn::before {
-    content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%;
-    background: var(--gold); border-radius: 50%; z-index: 0;
-    transition: top 0.4s cubic-bezier(0.25, 1, 0.2, 1), border-radius 0.4s ease;
+.ct-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image doesn't stretch */
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
 }
-.magnetic-btn:hover::before { top: 0; border-radius: 0; }
-.magnetic-btn span { position: relative; z-index: 1; transition: color 0.3s; }
-.magnetic-btn:hover span { color: var(--bg); font-weight: 500; }
+.photo-square:hover .ct-photo { filter: grayscale(0%); }
 
-/* ─── THE 4K VIGNETTE SQUARE ─── */
-.pc-visual { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
-
-.vignette-square {
-    width: clamp(280px, 35vw, 450px);
-    aspect-ratio: 1 / 1; /* Forces a perfect square */
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    transform: rotate(3deg);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
-.vignette-square:hover { transform: rotate(-2deg) scale(1.05); }
-
-/* The Deep Edge Vignette */
-.vignette-square::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(10,11,13,0.85) 100%);
-    pointer-events: none; transition: opacity 0.4s ease;
-}
-.vignette-square:hover::after { opacity: 0.5; }
-
-/* 4K Image Fit */
-.pc-photo {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(100%); transition: filter 0.5s ease, transform 0.8s ease;
-}
-.vignette-square:hover .pc-photo { filter: grayscale(0%); transform: scale(1.1); }
-
-/* Pulsing Status Indicator */
-.pc-status {
-    background: rgba(255,255,255,0.05); padding: 0.75rem 1.5rem;
-    border-radius: 50px; font-size: 0.85rem; color: var(--fg);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--line);
-}
-.status-dot {
-    width: 10px; height: 10px; background: #4ade80; border-radius: 50%;
-    box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); animation: pulse-dot 2s infinite;
-}
-@keyframes pulse-dot {
-    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-}
+.ct-status { display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; color: rgba(237,233,224,0.8); text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--line); padding: 0.75rem 1.5rem; border-radius: 50px; }
+.ct-avail-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px rgba(74, 222, 128, 0.6); }
 
 @media (max-width: 900px) {
-    .pc-container { flex-direction: column; text-align: center; }
-    .pc-links { align-items: center; margin: 0 auto; }
-    .pc-subtitle { margin: 0 auto 3rem auto; }
-    .vignette-square { transform: rotate(0); }
+    .ct-container { flex-direction: column; text-align: center; }
+    .ct-links { align-items: center; margin: 0 auto; }
 }
