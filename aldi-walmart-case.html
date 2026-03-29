@@ -20,192 +20,41 @@
         body {
             background: var(--bg); color: var(--fg); font-family: var(--sans); 
             margin: 0; padding: 0; line-height: 1.65; overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* ─── ANIMATIONS ─── */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUpAnim 1s var(--ease) forwards;
+        /* ─── 1. PARALLAX PARTICLES BACKGROUND ─── */
+        #particle-net {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; background: var(--bg); overflow: hidden;
         }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        .orb1 { width: 40vw; height: 40vw; background: var(--gold); top: -10%; left: -10%; }
+        .orb2 { width: 30vw; height: 30vw; background: #ffffff; bottom: 10%; right: -5%; animation-delay: -5s; }
 
-        @keyframes fadeUpAnim {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10vw, 15vh) scale(1.2); }
         }
 
-        /* ─── LAYOUT & SECTIONS ─── */
+        /* ─── 2. TYPING ANIMATION (HERO) ─── */
         .hero {
-            height: 60vh; display: flex; flex-direction: column; justify-content: center;
+            height: 75vh; display: flex; flex-direction: column; justify-content: center;
             align-items: center; text-align: center; border-bottom: 1px solid var(--line);
-            background: radial-gradient(circle at center, rgba(201, 168, 76, 0.05) 0%, var(--bg) 70%);
-            padding: 0 2rem;
+            padding: 0 2rem; position: relative; z-index: 10;
         }
-
-        .hero h1 {
-            font-family: var(--display); font-size: clamp(3.5rem, 8vw, 6rem);
+        .typewriter h1 {
+            font-family: var(--display); font-size: clamp(3.5rem, 8vw, 7rem);
             color: var(--gold); margin: 0; letter-spacing: 0.05em; line-height: 1;
+            overflow: hidden; border-right: .15em solid var(--gold); 
+            white-space: nowrap; margin: 0 auto;
+            animation: typing 2.5s steps(40, end), blink-caret .75s step-end infinite;
         }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
 
-        .hero p { font-size: 1.2rem; color: rgba(237,233,224,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
-
-        .content-grid {
-            max-width: 1200px; margin: 0 auto; padding: 5rem 2rem;
-            display: grid; grid-template-columns: 1fr; gap: 4rem;
-        }
-
-        /* ─── STRATEGY CARDS ─── */
-        .strategy-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
-        }
-
-        .strat-card {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--line);
-            padding: 2.5rem; border-radius: 16px; transition: all 0.4s var(--ease);
-        }
-
-        .strat-card:hover {
-            border-color: var(--gold); transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .strat-card h3 {
-            font-family: var(--display); font-size: 2.5rem; color: var(--gold);
-            margin-top: 0; margin-bottom: 1rem; letter-spacing: 0.05em; border-bottom: 1px solid var(--line); padding-bottom: 1rem;
-        }
-
-        /* ─── CHART SECTION ─── */
-        .chart-section {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--line);
-            border-radius: 16px; padding: 2rem; margin-top: 2rem;
-        }
-
-        /* ─── BACK BUTTON ─── */
-        .nav-btn {
-            display: inline-block; margin-top: 2rem; padding: 0.8rem 2rem;
-            border: 1px solid var(--gold); border-radius: 50px; color: var(--gold);
-            text-decoration: none; font-size: 0.9rem; letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .nav-btn:hover { background: var(--gold); color: var(--bg); }
-
-    </style>
-</head>
-<body>
-
-    <header class="hero">
-        <p class="fade-up">Supply Chain & Corporate Strategy</p>
-        <h1 class="fade-up delay-1">ALDI VS. WALMART</h1>
-        <p class="fade-up delay-2" style="font-size: 1rem; text-transform: none; max-width: 600px; margin-top: 1.5rem;">
-            An analysis of how a German hard-discounter disrupted the world's largest retailer, and how omnichannel fulfillment is reshaping the grocery landscape.
-        </p>
-    </header>
-
-    <main class="content-grid">
-
-        <section class="fade-up delay-3">
-            <h2 style="font-family: var(--display); font-size: 2.5rem; color: var(--fg);">THE COLLISION COURSE</h2>
-            <p style="font-size: 1.1rem; color: rgba(237,233,224,0.8);">
-                In 2019, Aldi asserted itself as a genuine challenger to US grocers, doubling its store count and encroaching on Walmart's territory by opening locations near Walmart Supercenters. While Walmart historically relied on its massive Vendor-Managed Inventory (VMI) logistics network and "Everyday Low Prices," Aldi utilized a hyper-efficient private-label model with only 1,400 curated items per store.
-            </p>
-        </section>
-
-        <section class="strategy-container fade-up delay-3">
-            
-            <div class="strat-card">
-                <h3>THE ALDI MODEL</h3>
-                <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8);">
-                    <li style="margin-bottom: 0.8rem;"><strong>Hard Discounter:</strong> Prices perceived to be 25% lower than conventional retailers.</li>
-                    <li style="margin-bottom: 0.8rem;"><strong>Operational Efficiency:</strong> Cross-trained staff, display on pallets, custom barcodes for lightning-fast checkout.</li>
-                    <li style="margin-bottom: 0.8rem;"><strong>Upscale Expansion:</strong> Moved from "food deserts" to upscale suburbs, introducing <em>Specially Selected</em> gourmet brands.</li>
-                    <li><strong>Aggressive Growth:</strong> Target of 2,500 stores by 2022, opening 130 stores per year.</li>
-                </ul>
-            </div>
-
-            <div class="strat-card">
-                <h3>THE WALMART PIVOT</h3>
-                <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8);">
-                    <li style="margin-bottom: 0.8rem;"><strong>VMI Mastery:</strong> Integrated ordering with vendors like P&G, reducing inventory costs by keeping products moving.</li>
-                    <li style="margin-bottom: 0.8rem;"><strong>Format Struggle:</strong> Launched <em>Neighborhood Markets</em> to fight Aldi, but closed 130 underperforming locations.</li>
-                    <li style="margin-bottom: 0.8rem;"><strong>Omnichannel Shift:</strong> Halted physical store expansion to focus on Click-and-Collect and same-day delivery.</li>
-                    <li><strong>New Frontiers:</strong> Diversifying profit sources through advertising and health care.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="chart-section fade-up delay-3">
-            <h2 style="font-family: var(--display); font-size: 2rem; margin-top: 0; color: var(--gold);">DATA // WALMART STORE EXPANSIONS (2011 - 2020)</h2>
-            <p style="font-size: 0.95rem; color: rgba(237,233,224,0.6); margin-bottom: 2rem;">
-                As Aldi rapidly expanded its footprint, Walmart aggressively launched its small-format "Neighborhood Markets" to compete, before abruptly halting expansion to focus on e-commerce fulfillment. <em>(Data based on case Exhibit 2)</em>.
-            </p>
-            
-            <div style="position: relative; height: 400px; width: 100%;">
-                <canvas id="walmartChart"></canvas>
-            </div>
-        </section>
-
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="index.html" class="nav-btn">← BACK TO PORTFOLIO</a>
-        </div>
-
-    </main>
-
-    <script>
-        const ctx = document.getElementById('walmartChart').getContext('2d');
-        
-        // Data derived from the Case Study Exhibit 2 Trends
-        const years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'];
-        const supercenters = [3000, 3100, 3200, 3300, 3400, 3450, 3500, 3550, 3560, 3570]; 
-        const neighborhoodMarkets = [150, 200, 300, 500, 650, 700, 680, 650, 600, 580]; // Spiked then closed underperforming locations
-
-        const walmartChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: years,
-                datasets: [
-                    {
-                        label: 'Walmart Supercenters',
-                        data: supercenters,
-                        borderColor: '#ede9e0',
-                        backgroundColor: 'rgba(237, 233, 224, 0.1)',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: 'Neighborhood Markets (Small Format)',
-                        data: neighborhoodMarkets,
-                        borderColor: '#c9a84c', // Gold
-                        backgroundColor: 'rgba(201, 168, 76, 0.2)',
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#ede9e0', font: { family: "'DM Sans', sans-serif" } }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(237,233,224,0.1)' },
-                        ticks: { color: 'rgba(237,233,224,0.6)' }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: 'rgba(237,233,224,0.6)' }
-                    }
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+        /* ─── 3. SCROLL REVEAL ANIMATIONS (Intersection Observer) ─── */
+        .reveal { opacity: 0; transition: all
