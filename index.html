@@ -757,11 +757,20 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
     .news-carousel:active { cursor: grabbing; }
 </style>
 
-<div class="news-carousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 0 5vw 4rem; width: 100vw; margin-left: calc(-50vw + 50%);">
+<style>
+    /* Hides the scrollbar for a clean, app-like feel */
+    .news-carousel::-webkit-scrollbar { display: none; }
+    .news-carousel { -ms-overflow-style: none; scrollbar-width: none; cursor: grab; user-select: none; }
+    .news-carousel.active { cursor: grabbing; }
+    /* Prevent links from interfering with the drag */
+    .news-carousel a { user-drag: none; -webkit-user-drag: none; }
+</style>
+
+<div class="news-carousel" id="newsCarousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 0 5vw 4rem; width: 100vw; margin-left: calc(-50vw + 50%);">
 
     <a href="https://www.wsj.com/logistics" target="_blank" style="flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block;">
-        <div data-a="up" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line);">
-            <img src="Hero.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
+        <div data-a="up" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line); pointer-events: none;">
+            <img src="Hero.jpg" draggable="false" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
         </div>
         <div data-a="up" data-delay="100" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line);">
             <h3 style="font-family: var(--display); color: var(--gold); font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 0; letter-spacing: 0.1em;">01 // SUPPLY CHAIN INSIGHTS</h3>
@@ -770,8 +779,8 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
     </a>
 
     <a href="https://hbr.org/topic/strategy" target="_blank" style="flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block;">
-        <div data-a="up" data-delay="100" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line);">
-            <img src="sparty.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
+        <div data-a="up" data-delay="100" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line); pointer-events: none;">
+            <img src="sparty.jpg" draggable="false" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
         </div>
         <div data-a="up" data-delay="200" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line);">
             <h3 style="font-family: var(--display); color: var(--gold); font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 0; letter-spacing: 0.1em;">02 // GLOBAL STRATEGY REVIEW</h3>
@@ -780,8 +789,8 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
     </a>
 
     <a href="https://www.ft.com" target="_blank" style="flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block;">
-        <div data-a="up" data-delay="200" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line);">
-            <img src="msu stadium.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
+        <div data-a="up" data-delay="200" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line); pointer-events: none;">
+            <img src="msu stadium.jpg" draggable="false" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
         </div>
         <div data-a="up" data-delay="300" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line);">
             <h3 style="font-family: var(--display); color: var(--gold); font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 0; letter-spacing: 0.1em;">03 // MARKET ANALYSIS</h3>
@@ -792,6 +801,43 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
     <div style="flex: 0 0 5vw;"></div>
 
 </div>
+
+<script>
+    const slider = document.getElementById('newsCarousel');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        // Temporarily disable snap while dragging for a smoother feel
+        slider.style.scrollSnapType = 'none'; 
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        slider.style.scrollSnapType = 'x mandatory';
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        // Re-enable snap so it perfectly centers the card when you let go
+        slider.style.scrollSnapType = 'x mandatory';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5; // Scroll speed multiplier
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
 <!-- ── II. EXPERIENCE ────────────────────────────────────── -->
 <section id="section-experience">
   <div class="exp-layout" style="position:relative;overflow:hidden;">
