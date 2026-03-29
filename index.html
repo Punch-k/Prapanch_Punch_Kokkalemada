@@ -921,120 +921,117 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
     <p data-a="up" data-delay="60" style="max-width:540px;font-size:.9rem;color:rgba(237,233,224,.42);line-height:1.72;margin-bottom:2.5rem;">
       Three engagements. Three industries. Each card flips to reveal the full Problem–Action–Result breakdown.
     </p>
-    <div class="case-slider" id="caseSlider">
+    <style>
+    .fan-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 0 8rem 0;
+        width: 100%;
+    }
+    .fan-card {
+        position: relative;
+        width: 240px;
+        height: 380px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transform-origin: bottom center;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    /* Negative margins make them overlap like a hand of cards */
+    .fan-card:not(:first-child) {
+        margin-left: -60px;
+    }
+    
+    .fan-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) brightness(0.5);
+        transition: all 0.6s var(--ease);
+    }
+    
+    /* The staggered fan rotations */
+    .fan-1 { transform: rotate(-12deg) translateY(10px); z-index: 1; }
+    .fan-2 { transform: rotate(-6deg) translateY(0px); z-index: 2; }
+    .fan-3 { transform: rotate(0deg) translateY(-5px); z-index: 3; }
+    .fan-4 { transform: rotate(6deg) translateY(0px); z-index: 4; }
+    .fan-5 { transform: rotate(12deg) translateY(10px); z-index: 5; }
 
-      <!-- CARD 1: B.Eng Material Testing -->
-      <div class="case-flip">
-        <div class="case-inner">
-          <div class="case-front">
-            <span class="case-cat">Structural Engineering · B.Eng Thesis</span>
-            <h3 class="case-title">Material Testing &amp;<br>Structural Design</h3>
-            <p class="case-desc">Led a load-bearing structural analysis project for a mid-rise concrete frame -- combining material fatigue testing, finite element modeling, and failure-mode prediction to inform a design revision that reduced material cost without compromising safety margins.</p>
-            <span class="flip-hint">Flip for breakdown ↻</span>
-          </div>
-          <div class="case-back">
-              <img class="case-back-img" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&q=70" alt="" loading="lazy">
-              <div class="case-back-scroll">
-                <span class="case-cat">PAR Breakdown</span>
-                <p class="case-back-desc">Structural analysis and material optimisation for a mid-rise concrete frame. Applied FEA and fatigue testing to right-size load-bearing specifications without compromising safety margins.</p>
-            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">The initial structural design for a reinforced concrete frame specified conservative material grades across all load-bearing members -- adding 12–18% to material cost with no engineering justification beyond precedent. The client needed a specification review backed by test data.</p></div>
-            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Designed and executed a compressive strength and flexural fatigue test program across M25 and M30 concrete mixes under cyclic loading. Applied finite element analysis to model stress distribution, identify critical failure zones, and validate revised cross-section specifications against IS 456 code requirements.</p></div>
-            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Test data supported a targeted downgrade of non-critical members to M25 -- reducing estimated material cost by 9% while maintaining full safety factor compliance. The methodology was adopted as the project's standard specification review protocol.</p></div>
-          </div>
-              </div>
+    /* The Hover Effect: Stand up, move up, zoom in, full color */
+    .fan-card:hover {
+        transform: rotate(0deg) translateY(-50px) scale(1.15) !important;
+        z-index: 10;
+        border-color: var(--gold);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+    .fan-card:hover img {
+        filter: grayscale(0%) brightness(0.9);
+        transform: scale(1.05);
+    }
+    
+    .fan-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 2rem 1.5rem 1.5rem;
+        background: linear-gradient(to top, rgba(10,11,13,0.95) 20%, transparent);
+    }
+    .fan-cat { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem;}
+    .fan-title { font-family: var(--display); font-size: 1.6rem; line-height: 1.1; margin: 0; color: var(--fg); letter-spacing: 0.03em;}
+
+    /* Makes them stack normally on small phone screens */
+    @media (max-width: 900px) {
+        .fan-container { flex-wrap: wrap; gap: 2rem; padding: 2rem 0; }
+        .fan-card:not(:first-child) { margin-left: 0; }
+        .fan-card { transform: none !important; margin-bottom: 1rem; }
+        .fan-card img { filter: grayscale(0%) brightness(0.7); }
+    }
+</style>
+
+<div class="fan-container">
+    <a href="#_" class="fan-card fan-1">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=700&auto=format&fit=crop" alt="Material Testing">
+        <div class="fan-content">
+            <span class="fan-cat">B.Eng Thesis</span>
+            <h3 class="fan-title">MATERIAL TESTING & DESIGN</h3>
         </div>
-      </div>
-
-      <!-- CARD 4: TechSmith GTM -->
-      <div class="case-flip">
-        <div class="case-inner">
-          <div class="case-front">
-            <span class="case-cat">GTM Consulting · TechSmith</span>
-            <h3 class="case-title">New Revenue<br>Growth Channels</h3>
-            <p class="case-desc">Identified and built the commercial case for untapped revenue channels, delivering a GTM roadmap that opened new customer segments for a B2B software company.</p>
-            <span class="flip-hint">Flip for breakdown ↻</span>
-          </div>
-          <div class="case-back">
-              <img class="case-back-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=70" alt="" loading="lazy">
-              <div class="case-back-scroll">
-                <span class="case-cat">PAR Breakdown</span>
-                <p class="case-back-desc">Revenue channel expansion strategy for a B2B software company. Identified underexplored customer segments and built a prioritised GTM roadmap with channel economics and pilot KPIs.</p>
-            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">TechSmith's existing GTM motion was concentrated in known channels, leaving adjacent customer segments and partnership-led revenue paths underexplored and unmonetized.</p></div>
-            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Conducted competitive landscape analysis and buyer persona mapping to identify high-potential new channels. Developed a structured GTM roadmap with prioritized entry sequencing, channel economics, and pilot KPIs.</p></div>
-            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Delivered a revenue channel expansion strategy with actionable go/no-go criteria and a phased rollout plan -- ready for leadership review and immediate execution.</p></div>
-          </div>
-              </div>
+    </a>
+    <a href="#_" class="fan-card fan-2">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" alt="TechSmith GTM">
+        <div class="fan-content">
+            <span class="fan-cat">TechSmith</span>
+            <h3 class="fan-title">NEW REVENUE CHANNELS</h3>
         </div>
-      </div>
-
-      <!-- CARD 5: ACG M&A Competition -->
-      <div class="case-flip">
-        <div class="case-inner">
-          <div class="case-front">
-            <span class="case-cat">M&amp;A Strategy · ACG Competition</span>
-            <h3 class="case-title">2nd Place:<br>M&amp;A Deal Thesis</h3>
-            <p class="case-desc">Competed in the ACG Cup -- building a full acquisition thesis, financial model, and strategic rationale that placed 2nd among MBA teams from across the region.</p>
-            <span class="flip-hint">Flip for breakdown ↻</span>
-          </div>
-          <div class="case-back">
-              <img class="case-back-img" src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=700&q=70" alt="" loading="lazy">
-              <div class="case-back-scroll">
-                <span class="case-cat">PAR Breakdown</span>
-                <p class="case-back-desc">Full M&A deal thesis competed at the ACG Cup — target screening, three-statement financial model, synergy analysis, and a board-ready investment thesis. Placed 2nd regionally.</p>
-            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">Identify a compelling acquisition target, construct a defensible deal valuation, and present a board-ready strategic rationale under competitive pressure and tight timelines.</p></div>
-            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Led target screening, built a three-statement financial model with synergy analysis, and developed the full investment thesis -- including deal structure, integration risks, and value creation levers.</p></div>
-            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Placed 2nd in the ACG M&amp;A Cup competition. Demonstrated end-to-end command of the deal process: from thesis origination to financial modeling to executive presentation.</p></div>
-          </div>
-              </div>
+    </a>
+    <a href="#_" class="fan-card fan-3">
+        <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=700&auto=format&fit=crop" alt="M&A Deal Thesis">
+        <div class="fan-content">
+            <span class="fan-cat">ACG Competition</span>
+            <h3 class="fan-title">M&amp;A DEAL THESIS</h3>
         </div>
-      </div>
-
-      <!-- CARD 6: Cross-Border Distribution -->
-      <div class="case-flip">
-        <div class="case-inner">
-          <div class="case-front">
-            <span class="case-cat">Supply Chain · Cross-Border</span>
-            <h3 class="case-title">US Market Entry:<br>Lead Time &amp; Risk Reduction</h3>
-            <p class="case-desc">Mapped and optimized the distribution architecture for a Canadian-made product entering US retail -- cutting lead times and building tariff-resilient routing into the supply chain design.</p>
-            <span class="flip-hint">Flip for breakdown ↻</span>
-          </div>
-          <div class="case-back">
-              <img class="case-back-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=70" alt="" loading="lazy">
-              <div class="case-back-scroll">
-                <span class="case-cat">PAR Breakdown</span>
-                <p class="case-back-desc">Cross-border distribution architecture for a Canadian manufacturer entering US retail. Modelled tariff scenarios and designed a risk-weighted routing strategy for the Michigan–Ontario corridor.</p>
-            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">A Canadian manufacturer launching into US retail had no defined cross-border distribution architecture -- exposing the launch to customs delays, tariff volatility, and last-mile gaps in a new regulatory environment.</p></div>
-            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Mapped end-to-end distribution flows across the Michigan–Ontario corridor, identified border cost drivers, modeled tariff scenarios, and designed a risk-weighted routing strategy with fallback carrier options.</p></div>
-            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Optimized lead times and embedded risk management protocols into the supply chain design -- giving the product a stable, compliant path to US retail shelf from day one.</p></div>
-          </div>
-              </div>
+    </a>
+    <a href="#_" class="fan-card fan-4">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop" alt="Cross-Border Supply Chain">
+        <div class="fan-content">
+            <span class="fan-cat">Cross-Border</span>
+            <h3 class="fan-title">US MARKET ENTRY</h3>
         </div>
-      </div>
-
-      <!-- CARD 7: Agile Retail Network -->
-      <div class="case-flip">
-        <div class="case-inner">
-          <div class="case-front">
-            <span class="case-cat">Operations · Agile / Scrum</span>
-            <h3 class="case-title">Scrum Replenishment:<br>–22% Out-of-Stocks</h3>
-            <p class="case-desc">Applied Agile sprint methodology to retail replenishment -- replacing a legacy, batch-driven system with iterative operational cycles that slashed out-of-stocks in 90 days.</p>
-            <span class="flip-hint">Flip for breakdown ↻</span>
-          </div>
-          <div class="case-back">
-              <img class="case-back-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=70" alt="" loading="lazy">
-              <div class="case-back-scroll">
-                <span class="case-cat">PAR Breakdown</span>
-                <p class="case-back-desc">Applied Scrum sprint methodology to a legacy retail replenishment system. Two-week operational cycles with daily stock-position reviews reduced out-of-stock incidents 22% in 90 days.</p>
-            <div class="par-row"><span class="par-lbl">Problem</span><p class="par-text">A legacy replenishment system built on rigid batch ordering cycles was creating chronic out-of-stock events -- eroding revenue, damaging retailer relationships, and masking demand signal accuracy.</p></div>
-            <div class="par-row"><span class="par-lbl">Action</span><p class="par-text">Rebuilt the replenishment workflow using Scrum principles: two-week operational sprints, daily standup reviews of stock position data, and iterative reorder-point calibration. Trained the operations team on sprint rituals and backlog prioritization.</p></div>
-            <div class="par-row"><span class="par-lbl">Result</span><p class="par-text">Out-of-stock incidents dropped 22% within 90 days. The sprint-based model also improved demand signal visibility and reduced emergency reorder costs across the retail network.</p></div>
-          </div>
-              </div>
+    </a>
+    <a href="#_" class="fan-card fan-5">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=700&auto=format&fit=crop" alt="Scrum Replenishment">
+        <div class="fan-content">
+            <span class="fan-cat">Agile Operations</span>
+            <h3 class="fan-title">SCRUM REPLENISH</h3>
         </div>
-      </div>
-
-    </div><!-- end case-slider -->
-    <div class="slider-dots" id="sliderDots"></div>
+    </a>
+</div>
   </div>
 </section>
 
