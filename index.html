@@ -1066,7 +1066,7 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
 <section id="section-cases">
   <div style="max-width:1200px;margin:0 auto;position:relative;">
     <p class="sec-num" data-a="up">III. Case Studies</p>
-    <p data-a="up" data-delay="60" style="max-width:540px;font-size:.9rem;color:rgba(237,233,224,.42);line-height:1.72;margin-bottom:2.5rem;">
+    <p data-a="up" data-delay="60" style="max-width:540px;font-size: 2rem;color:rgba(237,233,224,.42);line-height:1.72;margin-bottom:2.5rem;">
       Three engagements. Three industries. Each card flips to reveal the full Problem–Action–Result breakdown.
     </p>
       <style>
@@ -1075,17 +1075,17 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 2vw; /* Gap scales with screen width */
+        gap: 1.5vw; /* Slightly tighter gap to ensure 5 cards fit */
         padding: 5rem 2rem 8rem 2rem;
         width: 100%;
-        flex-wrap: wrap; /* Allows cards to wrap to the next line if the screen gets too small */
+        flex-wrap: nowrap; /* FORCES them to stay on exactly one line */
     }
 
     .tw-card {
         position: relative;
-        /* ADAPTIVE SIZING MAGIC */
-        width: clamp(160px, 16vw, 240px); /* Min size, Preferred size based on screen, Max size */
-        aspect-ratio: 9 / 15; /* Forces the perfect "tall card" shape no matter the width */
+        /* Adjusted size: they will shrink dynamically to fit 5 on a screen */
+        width: clamp(130px, 17vw, 240px); 
+        aspect-ratio: 9 / 15;
         border-radius: 0.75rem;
         overflow: hidden;
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1093,6 +1093,7 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
         cursor: pointer;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         text-decoration: none;
+        flex-shrink: 1; /* Allows the cards to squeeze slightly if needed */
     }
 
     .tw-card img {
@@ -1121,7 +1122,7 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
         filter: grayscale(0%) brightness(1);
     }
 
-    /* Text Overlay - Fonts also scale using clamp! */
+    /* Text Overlay */
     .tw-content {
         position: absolute;
         bottom: 0;
@@ -1130,62 +1131,16 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
         padding: 1.5rem 1rem 1rem;
         background: linear-gradient(to top, rgba(10,11,13,0.95) 20%, transparent);
     }
-    .tw-cat { font-size: clamp(0.55rem, 1vw, 0.65rem); letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem;}
-    .tw-title { font-family: var(--display); font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.1; margin: 0; color: var(--fg); letter-spacing: 0.03em;}
+    .tw-cat { font-size: clamp(0.5rem, 0.9vw, 0.65rem); letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem;}
+    .tw-title { font-family: var(--display); font-size: clamp(1.1rem, 1.8vw, 1.5rem); line-height: 1.1; margin: 0; color: var(--fg); letter-spacing: 0.03em;}
 
-    /* Mobile & Tablet Fallback */
-    @media (max-width: 1000px) {
-        .tw-card-container { gap: 1.5rem; }
-        .tw-card { 
-            width: clamp(200px, 40vw, 300px); /* Makes them wider on phones so they are readable */
-            transform: none !important; 
-            margin-bottom: 1rem; 
-        }
+    /* Mobile Fallback: If the screen is super small (phones), let them stack so they don't get unreadable */
+    @media (max-width: 900px) {
+        .tw-card-container { flex-wrap: wrap; gap: 1.5rem; }
+        .tw-card { width: clamp(200px, 40vw, 300px); transform: none !important; margin-bottom: 1rem; }
         .tw-card:hover { transform: translateY(-0.5rem) scale(1.02) !important; }
     }
 </style>
-
-<div class="tw-card-container">
-    <a href="YOUR_LINK_HERE_1" target="_blank" class="tw-card tw-rot-1">
-        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=700&auto=format&fit=crop" alt="Material Testing">
-        <div class="tw-content">
-            <span class="tw-cat">B.Eng Thesis</span>
-            <h3 class="tw-title">MATERIAL TESTING</h3>
-        </div>
-    </a>
-    
-    <a href="YOUR_LINK_HERE_2" target="_blank" class="tw-card tw-rot-2">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" alt="TechSmith GTM">
-        <div class="tw-content">
-            <span class="tw-cat">TechSmith</span>
-            <h3 class="tw-title">NEW REVENUE CHANNELS</h3>
-        </div>
-    </a>
-    
-    <a href="YOUR_LINK_HERE_3" target="_blank" class="tw-card tw-rot-3">
-        <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=700&auto=format&fit=crop" alt="M&A Deal Thesis">
-        <div class="tw-content">
-            <span class="tw-cat">ACG Competition</span>
-            <h3 class="tw-title">M&amp;A DEAL THESIS</h3>
-        </div>
-    </a>
-    
-    <a href="YOUR_LINK_HERE_4" target="_blank" class="tw-card tw-rot-4">
-        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop" alt="Cross-Border Supply Chain">
-        <div class="tw-content">
-            <span class="tw-cat">Cross-Border</span>
-            <h3 class="tw-title">US MARKET ENTRY</h3>
-        </div>
-    </a>
-    
-    <a href="YOUR_LINK_HERE_5" target="_blank" class="tw-card tw-rot-5">
-        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=700&auto=format&fit=crop" alt="Scrum Replenishment">
-        <div class="tw-content">
-            <span class="tw-cat">Agile Operations</span>
-            <h3 class="tw-title">SCRUM REPLENISH</h3>
-        </div>
-    </a>
-</div>
   </div>
 </section>
 
