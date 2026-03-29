@@ -7,45 +7,56 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* ─── CORE BRANDING ─── */
-        :root {
-            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c; --line: rgba(237,233,224,.1);
-            --sans: 'DM Sans', sans-serif; --display: 'Bebas Neue', sans-serif;
-            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        /* ─── CASE STUDY SPECIFIC STYLES ─── */
+        body { background: var(--bg); color: var(--fg); font-family: var(--sans); margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* 1. SEAMLESS NAVIGATION BAR */
+        .case-nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 11, 13, 0.85); backdrop-filter: blur(12px);
+            z-index: 100; border-bottom: 1px solid rgba(237,233,224,0.05);
+            box-sizing: border-box;
         }
-        
-        body {
-            background: var(--bg); color: var(--fg); font-family: var(--sans); 
-            margin: 0; padding: 0; line-height: 1.65; overflow-x: hidden;
-            scroll-behavior: smooth;
+        .nav-logo { font-family: var(--display); font-size: 1.5rem; color: var(--fg); text-decoration: none; line-height: 1; letter-spacing: 0.05em; }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.15em; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-connect {
+            border: 1px solid var(--gold); color: var(--gold); padding: 0.6rem 1.5rem;
+            border-radius: 50px; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        .nav-connect:hover { background: var(--gold); color: var(--bg); }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; } /* Hides middle links on mobile to keep it clean */
+            .case-nav { padding: 1rem 1.5rem; }
         }
 
-        /* ─── 1. PARALLAX PARTICLES BACKGROUND ─── */
-        #particle-net {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -2; background: var(--bg); overflow: hidden;
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-        .orb1 { width: 40vw; height: 40vw; background: var(--gold); top: -10%; left: -10%; }
-        .orb2 { width: 30vw; height: 30vw; background: #ffffff; bottom: 10%; right: -5%; animation-delay: -5s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10vw, 15vh) scale(1.2); }
-        }
-
-        /* ─── 2. TYPING ANIMATION (HERO) ─── */
+        /* 2. CINEMATIC HERO REVEAL */
         .hero {
-            height: 75vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; border-bottom: 1px solid var(--line);
-            padding: 0 2rem; position: relative; z-index: 10;
+            height: 85vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; position: relative; padding: 0 2rem;
+            border-bottom: 1px solid var(--line);
         }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            opacity: 0; filter: grayscale(90%) brightness(0.25);
+            z-index: 0;
+            animation: imageReveal 4s ease forwards 1s; /* Waits 1s for text, then slowly fades in */
+        }
+        @keyframes imageReveal { to { opacity: 1; } }
+
+        .hero-content { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+        
         .typewriter h1 {
             font-family: var(--display); font-size: clamp(3.5rem, 8vw, 7rem);
             color: var(--gold); margin: 0; letter-spacing: 0.05em; line-height: 1;
@@ -56,241 +67,104 @@
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
 
-        /* ─── 3. SCROLL REVEAL ANIMATIONS (Intersection Observer) ─── */
-        .reveal { opacity: 0; transition: all 1s var(--ease); }
-        .reveal.fade-up { transform: translateY(50px); }
-        .reveal.slide-left { transform: translateX(-100px); }
-        .reveal.slide-right { transform: translateX(100px); }
-        .reveal.active { opacity: 1; transform: translate(0, 0); }
+        /* 3. EDITORIAL "MEDIUM" FORMATTING */
+        .article-body { max-width: 800px; margin: 0 auto; padding: 6rem 2rem; } /* Narrow reading column */
+        
+        .article-body h2 { font-family: var(--display); font-size: 3rem; color: var(--fg); margin-top: 4rem; margin-bottom: 1.5rem; line-height: 1.1; }
+        .article-body p { font-size: 1.15rem; color: rgba(237,233,224,0.8); line-height: 1.8; margin-bottom: 2rem; font-weight: 300; }
+        
+        /* Interactive Blocks bleed outside the narrow text column */
+        .bleed-out { width: 100vw; margin-left: calc(-50vw + 50%); padding: 4rem 10vw; background: rgba(255,255,255,0.01); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 4rem; margin-bottom: 4rem;}
 
-        /* ─── LAYOUT & SECTIONS ─── */
-        .content-grid { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; display: grid; gap: 6rem; }
+        /* Scroll Reveals */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ─── 4. 3D TILT HOVER CARDS ─── */
-        .strategy-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; perspective: 1000px; }
-        .tilt-card {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--line);
-            padding: 3rem; border-radius: 16px; transform-style: preserve-3d;
-            transition: transform 0.1s ease, box-shadow 0.3s ease;
-        }
-        .tilt-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.6); border-color: var(--gold); }
-        .tilt-card h3 {
-            font-family: var(--display); font-size: 2.5rem; color: var(--gold); margin-top: 0;
-            border-bottom: 1px solid var(--line); padding-bottom: 1rem; transform: translateZ(30px); /* 3D pop out */
-        }
-        .tilt-card ul { transform: translateZ(20px); }
-
-        /* ─── 5. GLOWING NUMBER COUNTER ─── */
-        .stat-banner {
-            display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;
-            background: linear-gradient(90deg, rgba(201,168,76,0.05), transparent);
-            border-left: 4px solid var(--gold); padding: 3rem; border-radius: 8px;
-            animation: pulse-bg 4s infinite alternate;
-        }
-        @keyframes pulse-bg { to { box-shadow: inset 0 0 30px rgba(201,168,76,0.1); } }
+        /* Existing Strategy Cards & Stats */
+        .strategy-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .tilt-card { background: rgba(255,255,255,0.02); border: 1px solid var(--line); padding: 3rem; border-radius: 12px; transition: border-color 0.4s; }
+        .tilt-card:hover { border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .tilt-card h3 { font-family: var(--display); font-size: 2.2rem; color: var(--gold); margin-top: 0; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+        
+        .stat-banner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; background: linear-gradient(90deg, rgba(201,168,76,0.05), transparent); border-left: 4px solid var(--gold); padding: 3rem; border-radius: 8px; }
         .stat-box { text-align: center; }
         .stat-num { font-family: var(--display); font-size: 4rem; color: var(--gold); line-height: 1; }
         .stat-label { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,233,224,0.6); }
-
-        /* ─── LINKS & BUTTONS ─── */
-        a.in-text { color: var(--gold); text-decoration: none; border-bottom: 1px dashed var(--gold); transition: all 0.3s; }
-        a.in-text:hover { color: var(--fg); border-bottom-style: solid; }
-        .nav-btn {
-            display: inline-block; padding: 1rem 3rem; border: 1px solid var(--gold); 
-            border-radius: 50px; color: var(--gold); text-decoration: none; font-size: 0.9rem; 
-            letter-spacing: 2px; transition: all 0.4s var(--ease); overflow: hidden; position: relative;
-            z-index: 1;
-        }
-        .nav-btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--gold); transition: all 0.4s var(--ease); z-index: -1;
-        }
-        .nav-btn:hover::before { left: 0; }
-        .nav-btn:hover { color: var(--bg); box-shadow: 0 0 20px rgba(201,168,76,0.5); }
-    /* ─── 6. ARTICLE CAROUSEL (AWWWARDS STYLE) ─── */
-        .carousel-container {
-            position: relative;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%); /* Forces it to bleed edge-to-edge */
-            height: 500px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            margin-top: 4rem;
-        }
-
-        .carousel-track {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            /* This is the physics for the "settling" effect */
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); 
-        }
-
-        .carousel-card {
-            flex: 0 0 clamp(280px, 30vw, 400px);
-            height: 400px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.2, 1);
-            transform: scale(0.85); /* Shrunk by default */
-            opacity: 0.3; /* Dimmed by default */
-            cursor: pointer;
-        }
-
-        /* THE POP-UP EFFECT FOR THE CENTER CARD */
-        .carousel-card.active {
-            transform: scale(1);
-            opacity: 1;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            border-color: var(--gold);
-            z-index: 10;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 55%;
-            background-size: cover;
-            background-position: center;
-            filter: grayscale(100%);
-            transition: all 0.8s ease;
-        }
-
-        .carousel-card.active .card-image { filter: grayscale(0%); }
-
-        .card-content { padding: 1.5rem; height: 45%; display: flex; flex-direction: column; justify-content: center; }
-        .card-content h4 { font-family: var(--display); font-size: 1.8rem; color: var(--gold); margin: 0 0 0.5rem 0; }
-        .card-content p { font-size: 0.95rem; color: rgba(237,233,224,0.8); margin: 0; line-height: 1.5; }
-
-        /* THE ARROWS */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(10, 11, 13, 0.85);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 20;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-        .carousel-btn:hover { background: var(--gold); color: var(--bg); transform: translateY(-50%) scale(1.1); }
-        .left-btn { left: 5vw; }
-        .right-btn { right: 5vw; }
     </style>
 </head>
 <body>
 
-    <div id="particle-net">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-    </div>
+    <nav class="case-nav">
+        <a href="index.html" class="nav-logo">PUNCH <span>KOKKALEMADA</span></a>
+        <div class="nav-links">
+            <a href="index.html#experience">EXPERIENCE</a>
+            <a href="index.html#cases">CASES</a>
+            <a href="index.html#education">EDUCATION</a>
+            <a href="index.html#skills">SKILLS</a>
+            <a href="index.html#simulator">SIMULATOR</a>
+        </div>
+        <a href="mailto:kokkalem@msu.edu" class="nav-connect">LET'S CONNECT ↗</a>
+    </nav>
 
     <header class="hero">
-        <p class="reveal fade-up" style="color: rgba(237,233,224,0.6); letter-spacing: 0.2em; text-transform: uppercase;">Supply Chain & Strategy Deep Dive</p>
-        <div class="typewriter">
-            <h1>ALDI VS. WALMART</h1>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="reveal active" style="color: rgba(237,233,224,0.6); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">Strategy Deep Dive</p>
+            <div class="typewriter">
+                <h1>ALDI VS. WALMART</h1>
+            </div>
+            <p class="reveal active" style="font-size: 1.2rem; max-width: 650px; margin-top: 2rem; line-height: 1.8; color: var(--fg); font-weight: 300;">
+                How a German hard-discounter leveraged private labels and massive inflation to disrupt the world's largest retailer.
+            </p>
         </div>
-        <p class="reveal fade-up" style="font-size: 1.1rem; max-width: 650px; margin-top: 1.5rem; line-height: 1.8;">
-            How a German hard-discounter leveraged private labels and massive inflation to disrupt the world's largest retailer, completely rewriting the rules of the U.S. grocery landscape.
-        </p>
     </header>
 
-    <main class="content-grid">
+    <main class="article-body">
 
-        <section class="reveal slide-left">
-            <h2 style="font-family: var(--display); font-size: 3rem; color: var(--fg); margin-bottom: 1rem;">I. THE BASELINE COLLISION</h2>
-            <p style="font-size: 1.15rem; color: rgba(237,233,224,0.8);">
+        <section class="reveal">
+            <h2>I. THE BASELINE COLLISION</h2>
+            <p>
                 Historically, Walmart dominated through its massive Vendor-Managed Inventory (VMI) logistics network and "Everyday Low Prices." By 2019, Aldi asserted itself as a genuine threat, opening locations aggressively near Walmart Supercenters. While a standard Walmart carried 150,000 SKUs, Aldi utilized a hyper-efficient model with only 1,400 curated items per store—eliminating choice to maximize operational velocity and purchasing power.
             </p>
         </section>
 
-        <section class="strategy-container">
-            <div class="tilt-card reveal fade-up" id="card-aldi">
-                <h3>THE ALDI MODEL</h3>
-                <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8); line-height: 1.8;">
-                    <li><strong>Private Label Dominance:</strong> Roughly 80% of units sold are private-label, significantly reducing reliance on national brand pricing structures.</li>
-                    <li><strong>Operational Velocity:</strong> Display on pallets, custom multi-sided barcodes, and quarter-deposit carts minimize non-value-added labor.</li>
-                    <li><strong>Upscale Pivot:</strong> Transitioned from "food deserts" to affluent suburbs with organic and <em>Specially Selected</em> gourmet brands.</li>
-                </ul>
+        <div class="bleed-out reveal">
+            <div style="max-width: 1000px; margin: 0 auto;" class="strategy-container">
+                <div class="tilt-card">
+                    <h3>THE ALDI MODEL</h3>
+                    <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8); line-height: 1.8;">
+                        <li><strong>Private Label Dominance:</strong> Roughly 80% of units sold are private-label, reducing reliance on national brand pricing structures.</li>
+                        <li><strong>Operational Velocity:</strong> Display on pallets and custom multi-sided barcodes minimize non-value-added labor.</li>
+                    </ul>
+                </div>
+                <div class="tilt-card" style="transition-delay: 0.2s;">
+                    <h3>THE WALMART PIVOT</h3>
+                    <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8); line-height: 1.8;">
+                        <li><strong>VMI Mastery:</strong> Integrated ordering keeps inventory moving in trucks rather than sitting in stockrooms.</li>
+                        <li><strong>Omnichannel Retreat:</strong> Halted physical expansion to focus heavily on Click-and-Collect and retail media networks.</li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
-            <div class="tilt-card reveal fade-up" style="transition-delay: 0.2s;" id="card-walmart">
-                <h3>THE WALMART PIVOT</h3>
-                <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8); line-height: 1.8;">
-                    <li><strong>VMI Mastery:</strong> Integrated ordering with vendors (like P&G) keeps inventory moving in trucks rather than sitting in stockrooms.</li>
-                    <li><strong>Format Surrender:</strong> Closed 130 underperforming small-format <em>Neighborhood Markets</em> that were meant to fight Aldi directly.</li>
-                    <li><strong>Omnichannel Retreat:</strong> Halted physical expansion to focus heavily on Click-and-Collect, home delivery, and high-margin retail media networks.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="reveal slide-right">
-            <h2 style="font-family: var(--display); font-size: 3rem; color: var(--gold); margin-bottom: 1rem;">II. THE 2026 ESCALATION</h2>
-            <p style="font-size: 1.15rem; color: rgba(237,233,224,0.8); margin-bottom: 2rem;">
+        <section class="reveal">
+            <h2 style="color: var(--gold);">II. THE 2026 ESCALATION</h2>
+            <p>
                 The post-pandemic inflation crisis acted as an accelerant for Aldi's model. As consumers sought relief from soaring CPG costs, Aldi's perception of value drove massive customer acquisition. In 2025 alone, Aldi saw <strong>17 million new customers</strong> visit its stores, pushing its grocery market visit share from 4.3% to 5.7%.
             </p>
-            
-            <h3 style="color: var(--fg); font-size: 1.5rem;">Strategic Implications: Buy vs. Build</h3>
-            <p style="font-size: 1.15rem; color: rgba(237,233,224,0.8);">
-                Aldi is no longer growing purely organically. To capture the Southeast, Aldi acquired Southeastern Grocers in 2024, converting nearly 200 Winn-Dixie and Harvey locations into Aldi formats. With a newly announced investment, they are aggressively pushing westward, committing to open 180 new stores in 2026. This puts Aldi neck-and-neck with Kroger as they march toward a target of 3,200 U.S. locations by 2028.
+            <p>
+                Aldi is no longer growing purely organically. To capture the Southeast, Aldi acquired Southeastern Grocers in 2024, converting nearly 200 Winn-Dixie and Harvey locations into Aldi formats. With a newly announced investment, they are aggressively pushing westward, committing to open 180 new stores in 2026.
             </p>
         </section>
-<section class="reveal fade-up">
-            <h2 style="font-family: var(--display); font-size: 2.5rem; color: var(--fg); text-align: center;">III. THE TIMELINE OF DISRUPTION</h2>
-            
-            <div class="carousel-container">
-                <button class="carousel-btn left-btn">←</button>
-                
-                <div class="carousel-track" id="c-track">
-                    <div class="carousel-card">
-                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=600&auto=format&fit=crop');"></div>
-                        <div class="card-content">
-                            <h4>2017: The Warning Shot</h4>
-                            <p>Aldi announces a $3.4B capital investment to expand its US footprint to 2,500 stores.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-card active">
-                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=600&auto=format&fit=crop');"></div>
-                        <div class="card-content">
-                            <h4>2019: Format Wars</h4>
-                            <p>Walmart aggressively rolls out "Neighborhood Markets" to counter Aldi directly.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-card">
-                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop');"></div>
-                        <div class="card-content">
-                            <h4>2024: Buy vs. Build</h4>
-                            <p>Aldi acquires Southeastern Grocers, taking over 400 regional competitor locations.</p>
-                        </div>
-                    </div>
-                     <div class="carousel-card">
-                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=600&auto=format&fit=crop');"></div>
-                        <div class="card-content">
-                            <h4>2026: The Westward March</h4>
-                            <p>Aldi commits to 180 new stores, marching toward a target of 3,200 locations.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <button class="carousel-btn right-btn">→</button>
-            </div>
-        </section>
-        <section class="stat-banner reveal fade-up">
+        <section class="stat-banner reveal" style="margin: 4rem 0;">
             <div class="stat-box">
                 <div class="stat-num counter" data-target="180">0</div>
                 <div class="stat-label">New Stores in 2026</div>
             </div>
             <div class="stat-box">
                 <div class="stat-num counter" data-target="17">0</div>
-                <div class="stat-label">Million New Users (2025)</div>
+                <div class="stat-label">Million New Users</div>
             </div>
             <div class="stat-box">
                 <div class="stat-num counter" data-target="3200">0</div>
@@ -298,48 +172,44 @@
             </div>
         </section>
 
-        <section class="reveal fade-up" style="background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 16px; padding: 2rem;">
-            <h2 style="font-family: var(--display); font-size: 2rem; margin-top: 0; color: var(--gold);">DATA // WALMART'S PHYSICAL STAGNATION</h2>
-            <p style="font-size: 0.95rem; color: rgba(237,233,224,0.6); margin-bottom: 2rem;">
-                As Aldi ramps up to 3,200 stores, Walmart abandoned its small-format "Neighborhood Markets" to focus on digital fulfillment and advertising revenue.
+        <section class="reveal">
+            <h2>III. THE DATA</h2>
+            <p>
+                As Aldi ramps up to 3,200 stores, Walmart completely abandoned its small-format "Neighborhood Markets" to focus on digital fulfillment and high-margin advertising revenue.
             </p>
-            <div style="position: relative; height: 400px; width: 100%;">
+            <div style="position: relative; height: 400px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; margin-top: 2rem;">
                 <canvas id="walmartChart"></canvas>
             </div>
         </section>
 
-        <div style="text-align: center; margin-top: 2rem; margin-bottom: 4rem;">
-            <a href="index.html" class="nav-btn">← BACK TO PORTFOLIO</a>
+        <div style="text-align: center; margin-top: 6rem; border-top: 1px solid var(--line); padding-top: 4rem;">
+            <a href="index.html" style="color: var(--gold); text-decoration: none; font-family: var(--display); font-size: 2rem; letter-spacing: 0.1em; transition: color 0.3s;">← RETURN TO PORTFOLIO</a>
         </div>
 
     </main>
 
+    <script src="script.js"></script>
+
     <script>
-        // 1. SCROLL REVEAL OBSERVER
+        // 1. DELICATE SCROLL REVEALS
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    
-                    // Trigger number counter only when stat banner is visible
                     if (entry.target.classList.contains('stat-banner')) {
                         runCounters();
-                        observer.unobserve(entry.target); // Only run once
+                        observer.unobserve(entry.target);
                     }
                 }
             });
-        }, { threshold: 0.1 });
-
+        }, { threshold: 0.15 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-        // 2. NUMBER COUNTER ANIMATION
+        // 2. NUMBER COUNTERS
         function runCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
+            document.querySelectorAll('.counter').forEach(counter => {
                 const target = +counter.getAttribute('data-target');
-                const duration = 2000; // 2 seconds
-                const increment = target / (duration / 16); // 60fps
-                
+                const increment = target / 100;
                 let current = 0;
                 const updateCounter = () => {
                     current += increment;
@@ -347,149 +217,26 @@
                         counter.innerText = Math.ceil(current);
                         requestAnimationFrame(updateCounter);
                     } else {
-                        counter.innerText = target;
-                        // Add 'M' or '+' based on the specific stat for polish
-                        if(target === 17) counter.innerText = "17M";
-                        if(target === 3200) counter.innerText = "3,200";
+                        counter.innerText = target === 17 ? "17M" : (target === 3200 ? "3,200" : target);
                     }
                 };
                 updateCounter();
             });
         }
 
-        // 3. 3D CARD TILT EFFECT
-        const cards = document.querySelectorAll('.tilt-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; 
-                const y = e.clientY - rect.top;
-                // Calculate rotation based on mouse position
-                const xRotation = 10 * ((y - rect.height / 2) / rect.height);
-                const yRotation = -10 * ((x - rect.width / 2) / rect.width);
-                card.style.transform = `perspective(1000px) scale(1.02) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
-            });
-        });
-
-        // 4. CHART.JS INITIALIZATION
+        // 3. CHART DATA
         const ctx = document.getElementById('walmartChart').getContext('2d');
-        const years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'];
-        const supercenters = [3000, 3100, 3200, 3300, 3400, 3450, 3500, 3550, 3560, 3570]; 
-        const neighborhoodMarkets = [150, 200, 300, 500, 650, 700, 680, 650, 600, 580]; 
-
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: years,
+                labels: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
                 datasets: [
-                    {
-                        label: 'Walmart Supercenters',
-                        data: supercenters,
-                        borderColor: '#ede9e0',
-                        backgroundColor: 'rgba(237, 233, 224, 0.1)',
-                        borderWidth: 2, tension: 0.4, fill: true
-                    },
-                    {
-                        label: 'Neighborhood Markets',
-                        data: neighborhoodMarkets,
-                        borderColor: '#c9a84c',
-                        backgroundColor: 'rgba(201, 168, 76, 0.2)',
-                        borderWidth: 3, tension: 0.4, fill: true
-                    }
+                    { label: 'Walmart Supercenters', data: [3000, 3100, 3200, 3300, 3400, 3450, 3500, 3550, 3560, 3570], borderColor: '#ede9e0', backgroundColor: 'rgba(237, 233, 224, 0.1)', borderWidth: 2, tension: 0.4, fill: true },
+                    { label: 'Neighborhood Markets', data: [150, 200, 300, 500, 650, 700, 680, 650, 600, 580], borderColor: '#c9a84c', backgroundColor: 'rgba(201, 168, 76, 0.2)', borderWidth: 3, tension: 0.4, fill: true }
                 ]
             },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: '#ede9e0', font: { family: "'DM Sans', sans-serif" } } } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: 'rgba(237,233,224,0.1)' }, ticks: { color: 'rgba(237,233,224,0.6)' } },
-                    x: { grid: { display: false }, ticks: { color: 'rgba(237,233,224,0.6)' } }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#ede9e0' } } }, scales: { y: { grid: { color: 'rgba(237,233,224,0.1)' }, ticks: { color: 'rgba(237,233,224,0.6)' } }, x: { grid: { display: false }, ticks: { color: 'rgba(237,233,224,0.6)' } } } }
         });
-    // 5. AWWWARDS CAROUSEL LOGIC (PRO UPGRADE: SWIPE & TOUCH)
-        const track = document.getElementById('c-track');
-        const carouselCards = Array.from(document.querySelectorAll('.carousel-card'));
-        const leftBtn = document.querySelector('.left-btn');
-        const rightBtn = document.querySelector('.right-btn');
-        
-        let currentIndex = 1; // Start with the second card popped up
-        let startX = 0;
-        let isDragging = false;
-
-        function updateCarousel() {
-            if (!track || carouselCards.length === 0) return;
-            
-            // Swap the active class
-            carouselCards.forEach((card, index) => {
-                if (index === currentIndex) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-
-            // The Math: Calculate exact center of screen
-            const cardWidth = carouselCards[0].getBoundingClientRect().width;
-            const gap = 32; // 2rem gap from CSS
-            const centerOffset = (window.innerWidth / 2) - (cardWidth / 2);
-            
-            // Move the track smoothly
-            const moveX = centerOffset - (currentIndex * (cardWidth + gap));
-            track.style.transform = `translateX(${moveX}px)`;
-        }
-
-        if (leftBtn && rightBtn && track) {
-            // Button Clicks
-            leftBtn.addEventListener('click', () => {
-                if (currentIndex > 0) { currentIndex--; updateCarousel(); }
-            });
-
-            rightBtn.addEventListener('click', () => {
-                if (currentIndex < carouselCards.length - 1) { currentIndex++; updateCarousel(); }
-            });
-
-            // Click a dimmed card to snap to it
-            carouselCards.forEach((card, index) => {
-                card.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
-
-            // --- THE UPGRADE: MOBILE SWIPE PHYSICS ---
-            track.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                isDragging = true;
-            }, {passive: true});
-
-            track.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const currentX = e.touches[0].clientX;
-                const diff = startX - currentX;
-
-                // If swipe is long enough (50px threshold)
-                if (diff > 50) { 
-                    if (currentIndex < carouselCards.length - 1) { currentIndex++; updateCarousel(); }
-                    isDragging = false; // Reset so it doesn't fire 10 times
-                } else if (diff < -50) { 
-                    if (currentIndex > 0) { currentIndex--; updateCarousel(); }
-                    isDragging = false;
-                }
-            }, {passive: true});
-
-            track.addEventListener('touchend', () => { isDragging = false; });
-
-            // Recalculate if user resizes browser, and run once images fully load
-            window.addEventListener('resize', updateCarousel);
-            window.addEventListener('load', updateCarousel);
-            
-            // Initial run
-            setTimeout(updateCarousel, 100); 
-        }
     </script>
 </body>
 </html>
