@@ -1772,22 +1772,3 @@ function closeMobileMenu(){
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow='';
 }
-// --- PLAYFUL MAGNETIC BUTTONS ---
-const magnets = document.querySelectorAll('.magnetic-btn');
-
-magnets.forEach(magnet => {
-    magnet.addEventListener('mousemove', function(e) {
-        const position = magnet.getBoundingClientRect();
-        // Calculate the distance between the center of the button and the mouse
-        const x = e.clientX - position.left - position.width / 2;
-        const y = e.clientY - position.top - position.height / 2;
-        
-        // Move the button slightly towards the cursor (0.3 is the pull strength)
-        magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-    });
-
-    magnet.addEventListener('mouseleave', function() {
-        // Snap back to original position like a rubber band
-        magnet.style.transform = 'translate(0px, 0px)';
-    });
-});
