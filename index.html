@@ -745,13 +745,161 @@ footer{padding:2.2rem 3rem;border-top:1px solid var(--line);display:flex;justify
             </p>
         </div>
 
-        <div data-a="up" data-delay="200" style="flex: 1 1 400px; min-height: 350px; border: 1px dashed rgba(201,168,76,0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; background: rgba(201,168,76,0.02);">
-            
-            <p style="color: rgba(237,233,224,0.3); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
-                [ Future Animation Space ]
-            </p>
+        <style>
+    .loop-wrapper {
+        flex: 1 1 400px;
+        min-height: 350px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        background: rgba(201,168,76,0.02);
+        border: 1px solid rgba(237,233,224,0.05);
+    }
+    
+    /* The Ground Line */
+    .scenery-line {
+        position: absolute;
+        bottom: 35%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--line);
+    }
 
-        </div>
+    /* Background Elements (Mountains & Trees) */
+    .mountain {
+        position: absolute;
+        bottom: 35%;
+        right: -150px;
+        width: 0;
+        height: 0;
+        border-left: 80px solid transparent;
+        border-right: 80px solid transparent;
+        border-bottom: 120px solid rgba(201,168,76,0.03);
+        animation: passBy 12s linear infinite;
+        z-index: 1;
+    }
+    .tree {
+        position: absolute;
+        bottom: 35%;
+        right: -50px;
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 40px solid rgba(237,233,224,0.08);
+        animation: passBy 4s linear infinite;
+        z-index: 2;
+    }
+    .tree.t2 { border-bottom-width: 55px; border-bottom-color: rgba(237,233,224,0.05); animation-duration: 5.5s; animation-delay: 1.5s; z-index: 1; }
+    .tree.t3 { border-bottom-width: 30px; animation-duration: 3.2s; animation-delay: 2.5s; }
+
+    /* Wind / Speed Lines */
+    .wind {
+        position: absolute;
+        height: 1px;
+        background: var(--gold);
+        opacity: 0.6;
+        right: -100px;
+        animation: windPass 1.2s linear infinite;
+        z-index: 20;
+    }
+    .wind.w1 { top: 45%; width: 80px; animation-duration: 1.5s; }
+    .wind.w2 { top: 60%; width: 50px; animation-duration: 1.1s; animation-delay: 0.4s; opacity: 0.3; }
+
+    /* The Truck */
+    .truck {
+        position: absolute;
+        bottom: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+        height: 60px;
+        animation: truckBounce 0.4s ease-in-out infinite alternate;
+        z-index: 10;
+    }
+    
+    .truck-cab {
+        position: absolute;
+        right: 0;
+        bottom: 6px;
+        width: 40px;
+        height: 40px;
+        background: var(--gold);
+        border-radius: 6px 16px 4px 4px;
+    }
+    
+    .truck-window {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 14px;
+        height: 16px;
+        background: var(--bg);
+        border-radius: 2px 8px 2px 2px;
+    }
+    
+    .truck-trailer {
+        position: absolute;
+        left: 0;
+        bottom: 6px;
+        width: 95px;
+        height: 54px;
+        background: rgba(237, 233, 224, 0.9);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .truck-trailer span {
+        font-family: var(--display);
+        color: var(--bg);
+        font-size: 1.3rem;
+        letter-spacing: 0.15em;
+        opacity: 0.9;
+    }
+
+    /* Wheels */
+    .wheel {
+        position: absolute;
+        bottom: -2px;
+        width: 20px;
+        height: 20px;
+        background: var(--bg);
+        border: 4px solid rgba(237, 233, 224, 0.95);
+        border-radius: 50%;
+        animation: wheelSpin 0.5s linear infinite;
+    }
+    .wheel.w-front { right: 8px; border-color: var(--gold); }
+    .wheel.w-mid { left: 35px; }
+    .wheel.w-back { left: 8px; }
+
+    /* Keyframes */
+    @keyframes truckBounce { 100% { transform: translate(-50%, 2px); } }
+    @keyframes wheelSpin { 100% { transform: rotate(360deg); } }
+    @keyframes passBy { 100% { right: 120%; } }
+    @keyframes windPass { 100% { right: 120%; } }
+</style>
+
+<div class="loop-wrapper" data-a="up" data-delay="200">
+    <div class="mountain"></div>
+    <div class="tree"></div>
+    <div class="tree t2"></div>
+    <div class="tree t3"></div>
+    <div class="scenery-line"></div>
+    
+    <div class="wind w1"></div>
+    <div class="wind w2"></div>
+
+    <div class="truck">
+        <div class="truck-trailer"><span>SUPPLY</span></div>
+        <div class="truck-cab"><div class="truck-window"></div></div>
+        <div class="wheel w-front"></div>
+        <div class="wheel w-mid"></div>
+        <div class="wheel w-back"></div>
+    </div>
+</div>
 
     </div>
 </div>
