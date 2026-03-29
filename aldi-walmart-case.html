@@ -57,4 +57,243 @@
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
 
         /* ─── 3. SCROLL REVEAL ANIMATIONS (Intersection Observer) ─── */
-        .reveal { opacity: 0; transition: all
+        .reveal { opacity: 0; transition: all 1s var(--ease); }
+        .reveal.fade-up { transform: translateY(50px); }
+        .reveal.slide-left { transform: translateX(-100px); }
+        .reveal.slide-right { transform: translateX(100px); }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+
+        /* ─── LAYOUT & SECTIONS ─── */
+        .content-grid { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; display: grid; gap: 6rem; }
+
+        /* ─── 4. 3D TILT HOVER CARDS ─── */
+        .strategy-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; perspective: 1000px; }
+        .tilt-card {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--line);
+            padding: 3rem; border-radius: 16px; transform-style: preserve-3d;
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+        }
+        .tilt-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.6); border-color: var(--gold); }
+        .tilt-card h3 {
+            font-family: var(--display); font-size: 2.5rem; color: var(--gold); margin-top: 0;
+            border-bottom: 1px solid var(--line); padding-bottom: 1rem; transform: translateZ(30px); /* 3D pop out */
+        }
+        .tilt-card ul { transform: translateZ(20px); }
+
+        /* ─── 5. GLOWING NUMBER COUNTER ─── */
+        .stat-banner {
+            display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;
+            background: linear-gradient(90deg, rgba(201,168,76,0.05), transparent);
+            border-left: 4px solid var(--gold); padding: 3rem; border-radius: 8px;
+            animation: pulse-bg 4s infinite alternate;
+        }
+        @keyframes pulse-bg { to { box-shadow: inset 0 0 30px rgba(201,168,76,0.1); } }
+        .stat-box { text-align: center; }
+        .stat-num { font-family: var(--display); font-size: 4rem; color: var(--gold); line-height: 1; }
+        .stat-label { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,233,224,0.6); }
+
+        /* ─── LINKS & BUTTONS ─── */
+        a.in-text { color: var(--gold); text-decoration: none; border-bottom: 1px dashed var(--gold); transition: all 0.3s; }
+        a.in-text:hover { color: var(--fg); border-bottom-style: solid; }
+        .nav-btn {
+            display: inline-block; padding: 1rem 3rem; border: 1px solid var(--gold); 
+            border-radius: 50px; color: var(--gold); text-decoration: none; font-size: 0.9rem; 
+            letter-spacing: 2px; transition: all 0.4s var(--ease); overflow: hidden; position: relative;
+            z-index: 1;
+        }
+        .nav-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--gold); transition: all 0.4s var(--ease); z-index: -1;
+        }
+        .nav-btn:hover::before { left: 0; }
+        .nav-btn:hover { color: var(--bg); box-shadow: 0 0 20px rgba(201,168,76,0.5); }
+    </style>
+</head>
+<body>
+
+    <div id="particle-net">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+    </div>
+
+    <header class="hero">
+        <p class="reveal fade-up" style="color: rgba(237,233,224,0.6); letter-spacing: 0.2em; text-transform: uppercase;">Supply Chain & Strategy Deep Dive</p>
+        <div class="typewriter">
+            <h1>ALDI VS. WALMART</h1>
+        </div>
+        <p class="reveal fade-up" style="font-size: 1.1rem; max-width: 650px; margin-top: 1.5rem; line-height: 1.8;">
+            How a German hard-discounter leveraged private labels and massive inflation to disrupt the world's largest retailer, completely rewriting the rules of the U.S. grocery landscape.
+        </p>
+    </header>
+
+    <main class="content-grid">
+
+        <section class="reveal slide-left">
+            <h2 style="font-family: var(--display); font-size: 3rem; color: var(--fg); margin-bottom: 1rem;">I. THE BASELINE COLLISION</h2>
+            <p style="font-size: 1.15rem; color: rgba(237,233,224,0.8);">
+                Historically, Walmart dominated through its massive Vendor-Managed Inventory (VMI) logistics network and "Everyday Low Prices." By 2019, Aldi asserted itself as a genuine threat, opening locations aggressively near Walmart Supercenters. While a standard Walmart carried 150,000 SKUs, Aldi utilized a hyper-efficient model with only 1,400 curated items per store—eliminating choice to maximize operational velocity and purchasing power.
+            </p>
+        </section>
+
+        <section class="strategy-container">
+            <div class="tilt-card reveal fade-up" id="card-aldi">
+                <h3>THE ALDI MODEL</h3>
+                <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8); line-height: 1.8;">
+                    <li><strong>Private Label Dominance:</strong> Roughly 80% of units sold are private-label, significantly reducing reliance on national brand pricing structures.</li>
+                    <li><strong>Operational Velocity:</strong> Display on pallets, custom multi-sided barcodes, and quarter-deposit carts minimize non-value-added labor.</li>
+                    <li><strong>Upscale Pivot:</strong> Transitioned from "food deserts" to affluent suburbs with organic and <em>Specially Selected</em> gourmet brands.</li>
+                </ul>
+            </div>
+
+            <div class="tilt-card reveal fade-up" style="transition-delay: 0.2s;" id="card-walmart">
+                <h3>THE WALMART PIVOT</h3>
+                <ul style="padding-left: 1.2rem; color: rgba(237,233,224,0.8); line-height: 1.8;">
+                    <li><strong>VMI Mastery:</strong> Integrated ordering with vendors (like P&G) keeps inventory moving in trucks rather than sitting in stockrooms.</li>
+                    <li><strong>Format Surrender:</strong> Closed 130 underperforming small-format <em>Neighborhood Markets</em> that were meant to fight Aldi directly.</li>
+                    <li><strong>Omnichannel Retreat:</strong> Halted physical expansion to focus heavily on Click-and-Collect, home delivery, and high-margin retail media networks.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="reveal slide-right">
+            <h2 style="font-family: var(--display); font-size: 3rem; color: var(--gold); margin-bottom: 1rem;">II. THE 2026 ESCALATION</h2>
+            <p style="font-size: 1.15rem; color: rgba(237,233,224,0.8); margin-bottom: 2rem;">
+                The post-pandemic inflation crisis acted as an accelerant for Aldi's model. As consumers sought relief from soaring CPG costs, Aldi's perception of value drove massive customer acquisition. In 2025 alone, Aldi saw <strong>17 million new customers</strong> visit its stores, pushing its grocery market visit share from 4.3% to 5.7%.
+            </p>
+            
+            <h3 style="color: var(--fg); font-size: 1.5rem;">Strategic Implications: Buy vs. Build</h3>
+            <p style="font-size: 1.15rem; color: rgba(237,233,224,0.8);">
+                Aldi is no longer growing purely organically. To capture the Southeast, Aldi acquired Southeastern Grocers in 2024, converting nearly 200 Winn-Dixie and Harvey locations into Aldi formats. With a newly announced investment, they are aggressively pushing westward, committing to open 180 new stores in 2026. This puts Aldi neck-and-neck with Kroger as they march toward a target of 3,200 U.S. locations by 2028.
+            </p>
+        </section>
+
+        <section class="stat-banner reveal fade-up">
+            <div class="stat-box">
+                <div class="stat-num counter" data-target="180">0</div>
+                <div class="stat-label">New Stores in 2026</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num counter" data-target="17">0</div>
+                <div class="stat-label">Million New Users (2025)</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num counter" data-target="3200">0</div>
+                <div class="stat-label">Store Goal by 2028</div>
+            </div>
+        </section>
+
+        <section class="reveal fade-up" style="background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 16px; padding: 2rem;">
+            <h2 style="font-family: var(--display); font-size: 2rem; margin-top: 0; color: var(--gold);">DATA // WALMART'S PHYSICAL STAGNATION</h2>
+            <p style="font-size: 0.95rem; color: rgba(237,233,224,0.6); margin-bottom: 2rem;">
+                As Aldi ramps up to 3,200 stores, Walmart abandoned its small-format "Neighborhood Markets" to focus on digital fulfillment and advertising revenue.
+            </p>
+            <div style="position: relative; height: 400px; width: 100%;">
+                <canvas id="walmartChart"></canvas>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 2rem; margin-bottom: 4rem;">
+            <a href="index.html" class="nav-btn">← BACK TO PORTFOLIO</a>
+        </div>
+
+    </main>
+
+    <script>
+        // 1. SCROLL REVEAL OBSERVER
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger number counter only when stat banner is visible
+                    if (entry.target.classList.contains('stat-banner')) {
+                        runCounters();
+                        observer.unobserve(entry.target); // Only run once
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // 2. NUMBER COUNTER ANIMATION
+        function runCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                
+                let current = 0;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                        // Add 'M' or '+' based on the specific stat for polish
+                        if(target === 17) counter.innerText = "17M";
+                        if(target === 3200) counter.innerText = "3,200";
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // 3. 3D CARD TILT EFFECT
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;
+                // Calculate rotation based on mouse position
+                const xRotation = 10 * ((y - rect.height / 2) / rect.height);
+                const yRotation = -10 * ((x - rect.width / 2) / rect.width);
+                card.style.transform = `perspective(1000px) scale(1.02) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+            });
+        });
+
+        // 4. CHART.JS INITIALIZATION
+        const ctx = document.getElementById('walmartChart').getContext('2d');
+        const years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'];
+        const supercenters = [3000, 3100, 3200, 3300, 3400, 3450, 3500, 3550, 3560, 3570]; 
+        const neighborhoodMarkets = [150, 200, 300, 500, 650, 700, 680, 650, 600, 580]; 
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: 'Walmart Supercenters',
+                        data: supercenters,
+                        borderColor: '#ede9e0',
+                        backgroundColor: 'rgba(237, 233, 224, 0.1)',
+                        borderWidth: 2, tension: 0.4, fill: true
+                    },
+                    {
+                        label: 'Neighborhood Markets',
+                        data: neighborhoodMarkets,
+                        borderColor: '#c9a84c',
+                        backgroundColor: 'rgba(201, 168, 76, 0.2)',
+                        borderWidth: 3, tension: 0.4, fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#ede9e0', font: { family: "'DM Sans', sans-serif" } } } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(237,233,224,0.1)' }, ticks: { color: 'rgba(237,233,224,0.6)' } },
+                    x: { grid: { display: false }, ticks: { color: 'rgba(237,233,224,0.6)' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
