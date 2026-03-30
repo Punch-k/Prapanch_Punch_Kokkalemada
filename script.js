@@ -1772,65 +1772,209 @@ function closeMobileMenu(){
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow='';
 }
-<script>
-    // --- INTERACTIVE LANDSCAPE GAME ENGINE ---
-    const truck = document.querySelector('.truck'); 
-    const bump = document.querySelector('.road-bump');
-    const penaltyText = document.getElementById('penalty-msg');
-    const bonusText = document.getElementById('bonus-msg'); // NEW!
-    const loopWrapper = document.querySelector('.loop-wrapper');
-
-    if (truck && bump) {
-        // 1. Click to Jump & Score Bonus
-        truck.addEventListener('click', () => {
-            if (!truck.classList.contains('truck-jump')) {
-                // Make it jump
-                truck.classList.add('truck-jump');
-                
-                // Show +5s bonus text
-                if (bonusText) {
-                    bonusText.classList.remove('show-bonus');
-                    void bonusText.offsetWidth; // Force reflow to restart animation
-                    bonusText.classList.add('show-bonus');
-                }
-
-                // Reset jump ability after 0.6s
-                setTimeout(() => truck.classList.remove('truck-jump'), 600);
+// --- ADVANCED CANVAS GAME ENGINE ---
+(function initSupplyGame() {
+    const canvas = document.getElementById('canvas');
+    if (!canvas) return; 
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const GROUND = H - 52;
+    
+    let state = 'idle';
+    let score = 0, bonus = 0, frame = 0, speed = 4;
+    const truck = { x: 110, y: GROUND, w: 110, h: 52, vy: 0, jumping: false, wheelPhase: 0 };
+    const GRAVITY = 0.72, JUMP_V = -14.5;
+    
+    let bumps = [], bumpTimer = 0, bumpInterval = 110, floaters = [];
+    let trees = [];
+    for (let i = 0; i < 6; i++) trees.push({x: Math.random() * W, h: 30 + Math.random() * 40, speed: 0.6 + Math.random() * 0.4});
+    let clouds = [{x: 200, y: 35, w: 70}, {x: 500, y: 55, w: 50}, {x: 720, y: 30, w: 80}];
+    
+    const scoreEl = document.getElementById('scoreEl');
+    const bonusEl = document.getElementById('bonusEl');
+    const GOLD = '#c9a84c', RED = '#ef4444', GREEN = '#10b981';
+    
+    function spawnBump() {
+        const h = 10 + Math.random() * 8;
+        bumps.push({x: W + 20, w: 36, h: h, passed: false, _penalised: false});
+    }
+    
+    function jump(e) {
+        if(e && e.type === 'keydown' && e.code !== 'Space') return;
+        if(e && e.type === 'keydown') e.preventDefault();
+        if (state === 'idle' || state === 'dead') { startGame(); return; }
+        if (!truck.jumping) { truck.vy = JUMP_V; truck.jumping = true; }
+    }
+    
+    canvas.addEventListener('click', jump);
+    document.addEventListener('keydown', jump);
+    
+    function startGame() {
+        state = 'running';
+        score = 0; bonus = 0; frame = 0; speed = 4;
+        bumps = []; floaters = []; bumpTimer = 0;
+        truck.y = GROUND; truck.vy = 0; truck.jumping = false;
+        document.getElementById('hint').style.opacity = '0';
+        lastTime = performance.now();
+        requestAnimationFrame(loop);
+    }
+    
+    function addFloater(x, y, text, color) { floaters.push({x, y, text, color, life: 1.0}); }
+    
+    function drawTruck(x, y, wheelPhase) {
+        ctx.fillStyle = '#e8e8e4'; ctx.beginPath(); ctx.roundRect(x, y - 40, 70, 38, 3); ctx.fill();
+        ctx.fillStyle = '#d0ccc5'; ctx.fillRect(x + 2, y - 22, 66, 4);
+        ctx.fillStyle = '#2a2a2a'; ctx.font = 'bold 8px "Bebas Neue", sans-serif';
+        ctx.fillText('SUPPLY &', x + 8, y - 26); ctx.fillText('CO.', x + 8, y - 16);
+        ctx.fillStyle = GOLD; ctx.beginPath(); ctx.roundRect(x + 70, y - 34, 38, 32, [3, 6, 3, 3]); ctx.fill();
+        ctx.fillStyle = '#1a2535'; ctx.beginPath(); ctx.roundRect(x + 76, y - 30, 22, 14, 2); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.1)'; ctx.fillRect(x + 77, y - 29, 8, 12);
+        ctx.fillStyle = '#ffe066'; ctx.beginPath(); ctx.roundRect(x + 104, y - 20, 4, 6, 1); ctx.fill();
+        ctx.strokeStyle = '#555'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(x + 72, y - 34); ctx.lineTo(x + 72, y - 44); ctx.stroke();
+        
+        if (state === 'running') {
+            for (let s = 0; s < 2; s++) {
+                const age = ((wheelPhase * 3 + s * 0.5) % 1);
+                ctx.globalAlpha = (1 - age) * 0.3; ctx.fillStyle = '#aaa';
+                ctx.beginPath(); ctx.arc(x + 72, y - 44 - age * 14, 3 + age * 4, 0, Math.PI * 2); ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+        
+        [[x+14, wheelPhase], [x+48, wheelPhase], [x+80, wheelPhase+0.1], [x+98, wheelPhase+0.1]].forEach(([wx, ph]) => {
+            ctx.fillStyle = '#1a1a1a'; ctx.beginPath(); ctx.arc(wx, y - 1, 10, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = '#888'; ctx.beginPath(); ctx.arc(wx, y - 1, 5.5, 0, Math.PI * 2); ctx.fill();
+            const boltAngle = ph * Math.PI * 2; ctx.fillStyle = '#555';
+            for (let b = 0; b < 5; b++) {
+                const ba = boltAngle + (b / 5) * Math.PI * 2;
+                ctx.beginPath(); ctx.arc(wx + Math.cos(ba)*3.2, y - 1 - Math.sin(ba)*3.2, 1, 0, Math.PI*2); ctx.fill();
             }
         });
-
-        // 2. Collision Detection Loop (Runs 20 times a second)
-        setInterval(() => {
-            const truckRect = truck.getBoundingClientRect();
-            const bumpRect = bump.getBoundingClientRect();
-
-            // Check if the bump and truck overlap horizontally
-            const isOverlappingX = bumpRect.left < truckRect.right && bumpRect.right > truckRect.left;
-            
-            // If they overlap AND the truck isn't jumping or already shaking
-            if (isOverlappingX && !truck.classList.contains('truck-jump') && !truck.classList.contains('truck-shake')) {
-                
-                // 1. Trigger the Shake
-                truck.classList.add('truck-shake');
-                
-                // 2. Trigger the red -5s Penalty Text
-                if (penaltyText) {
-                    penaltyText.classList.remove('show-penalty'); 
-                    void penaltyText.offsetWidth; 
-                    penaltyText.classList.add('show-penalty');
-                }
-
-                // 3. Trigger the Slow Down
-                loopWrapper.classList.add('impact-pause');
-
-                // 4. Reset everything after 0.5 seconds
-                setTimeout(() => {
-                    loopWrapper.classList.remove('impact-pause');
-                    truck.classList.remove('truck-shake');
-                }, 500);
-            }
-        }, 50); 
-    } else {
-        console.log("GAME ENGINE ERROR: Could not find '.truck' or '.road-bump' in HTML!");
     }
-</script>
+    
+    function drawBump(b) {
+        const bx = b.x, by = GROUND, bw = b.w, bh = b.h;
+        ctx.fillStyle = GOLD; ctx.fillRect(bx - 14, by - 3, 8, 3);
+        ctx.fillStyle = '#e05a00'; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + 4, by - bh); ctx.lineTo(bx + bw - 4, by - bh); ctx.lineTo(bx + bw, by); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = GOLD; ctx.fillRect(bx + bw/2 - 3, by - bh, 6, bh);
+        ctx.fillStyle = '#ffcc00'; ctx.fillRect(bx, by - 3, 5, 3); ctx.fillRect(bx + bw - 5, by - 3, 5, 3);
+    }
+    
+    function drawRoad(frame) {
+        ctx.fillStyle = '#1a1a1a'; ctx.fillRect(0, GROUND, W, H - GROUND);
+        ctx.fillStyle = '#333';
+        const dashw = 30, gap = 50; const offset = (frame * speed) % (dashw + gap);
+        for (let dx = -offset; dx < W; dx += dashw + gap) ctx.fillRect(dx, GROUND + 10, dashw, 3);
+        ctx.fillStyle = '#2a2a2a'; ctx.fillRect(0, GROUND, W, 2);
+        ctx.fillStyle = '#252525'; ctx.fillRect(0, H - 18, W, 2);
+    }
+    
+    function drawTree(tx, th) {
+        ctx.fillStyle = '#1e1e1e'; ctx.beginPath(); ctx.moveTo(tx, GROUND); ctx.lineTo(tx - 14, GROUND - th); ctx.lineTo(tx + 14, GROUND - th); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#1a1a1a'; ctx.beginPath(); ctx.moveTo(tx, GROUND - th * 0.5); ctx.lineTo(tx - 18, GROUND); ctx.lineTo(tx + 18, GROUND); ctx.closePath(); ctx.fill();
+    }
+    
+    function drawCloud(cx, cy, cw) {
+        ctx.fillStyle = '#1c1c1c';
+        ctx.beginPath(); ctx.ellipse(cx, cy, cw/2, 10, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(cx - cw*0.2, cy + 5, cw*0.3, 8, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(cx + cw*0.2, cy + 4, cw*0.28, 7, 0, 0, Math.PI*2); ctx.fill();
+    }
+    
+    function drawOverlay() {
+        if (state === 'idle') {
+            ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = GOLD; ctx.font = 'bold 36px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText('CLICK TO START ROUTE', W/2, H/2 - 10);
+            ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
+            ctx.fillText('JUMP OVER SPEED BUMPS • EARN BONUS MINUTES', W/2, H/2 + 18);
+        }
+        if (state === 'dead') {
+            ctx.fillStyle = 'rgba(0,0,0,0.65)'; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = RED; ctx.font = 'bold 40px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText('DELIVERY DELAYED!', W/2, H/2 - 14);
+            ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
+            ctx.fillText('ROUTE TIME: ' + formatTime(score) + ' | NET BONUS: ' + (bonus >= 0 ? '+' : '') + bonus + ' MIN', W/2, H/2 + 12);
+            ctx.fillStyle = '#555'; ctx.fillText('CLICK TO RETRY', W/2, H/2 + 34);
+        }
+        ctx.textAlign = 'left';
+    }
+    
+    function formatTime(s) {
+        const m = Math.floor(s / 60).toString().padStart(2, '0');
+        const sec = Math.floor(s % 60).toString().padStart(2, '0');
+        return m + ':' + sec;
+    }
+    
+    function rectsOverlap(ax, ay, aw, ah, bx, by, bw, bh) {
+        return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+    }
+    
+    let lastTime = 0, scoreAccum = 0;
+    
+    function loop(ts) {
+        const dt = Math.min((ts - lastTime) / 1000, 0.05); lastTime = ts;
+        ctx.clearRect(0, 0, W, H);
+        
+        const grad = ctx.createLinearGradient(0, 0, 0, GROUND);
+        grad.addColorStop(0, '#0a0a0a'); grad.addColorStop(1, '#141414');
+        ctx.fillStyle = grad; ctx.fillRect(0, 0, W, GROUND);
+        
+        clouds.forEach(c => { drawCloud(c.x, c.y, c.w); if (state === 'running') { c.x -= 0.4; if (c.x + c.w < 0) c.x = W + c.w; }});
+        trees.forEach(t => { drawTree(t.x, t.h); if (state === 'running') { t.x -= t.speed * speed * 0.18; if (t.x < -20) t.x = W + 20; }});
+        drawRoad(frame);
+        
+        if (state === 'running') {
+            frame++; scoreAccum += dt;
+            if (scoreAccum >= 1) { score += 1; scoreAccum = 0; }
+            speed = 4 + Math.min(score / 60, 5);
+            
+            truck.vy += GRAVITY; truck.y += truck.vy;
+            if (truck.y >= GROUND) { truck.y = GROUND; truck.vy = 0; truck.jumping = false; }
+            truck.wheelPhase += speed * 0.003;
+            
+            bumpTimer++; bumpInterval = Math.max(70, 120 - score * 0.3);
+            if (bumpTimer >= bumpInterval) { spawnBump(); bumpTimer = 0; }
+            
+            bumps.forEach(b => {
+                b.x -= speed;
+                const tx = truck.x + 8, ty = truck.y - truck.h + 8, tw = truck.w - 16, th = truck.h - 12;
+                const bTop = GROUND - b.h;
+                if (!b.passed) {
+                    if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
+                        if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
+                            b._penalised = true; bonus -= 5;
+                            addFloater(truck.x + 60, truck.y - 60, '-5 min', RED);
+                            speed = Math.max(2, speed - 0.5);
+                        }
+                    }
+                    if (b.x + b.w < truck.x) {
+                        b.passed = true;
+                        if (!b._penalised) { bonus += 5; addFloater(truck.x + 30, truck.y - 70, '+5 min', GREEN); }
+                    }
+                }
+            });
+            
+            bumps = bumps.filter(b => b.x + b.w + 10 > 0);
+            scoreEl.textContent = formatTime(score);
+            bonusEl.textContent = (bonus >= 0 ? '+' : '') + bonus + ' min';
+            bonusEl.style.color = bonus >= 0 ? GREEN : RED;
+        }
+        
+        bumps.forEach(drawBump);
+        drawTruck(truck.x, truck.y, truck.wheelPhase);
+        
+        floaters.forEach(f => {
+            ctx.globalAlpha = Math.max(0, f.life); ctx.fillStyle = f.color;
+            ctx.font = 'bold 15px "Bebas Neue", sans-serif'; ctx.fillText(f.text, f.x, f.y);
+            ctx.globalAlpha = 1; f.y -= 0.8; f.life -= 0.018;
+        });
+        floaters = floaters.filter(f => f.life > 0);
+        
+        drawOverlay();
+        if(state !== 'dead' || floaters.length > 0) requestAnimationFrame(loop);
+    }
+    
+    drawOverlay();
+    requestAnimationFrame(loop);
+})();
