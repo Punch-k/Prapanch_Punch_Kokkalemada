@@ -335,53 +335,22 @@
 .impact-pause .wind {
     animation-play-state: paused !important; 
 }
-          /* 5. The Bonus Text */
-.bonus-text {
-    position: absolute;
-    bottom: 45%;
-    left: 15%; 
-    font-family: var(--display);
-    font-size: 2rem;
-    color: #10b981; /* Success Green */
-    opacity: 0;
-    pointer-events: none;
-    z-index: 20;
-    font-weight: bold;
-}
 
-.show-bonus {
-    animation: floatUpFadeBonus 1s ease-out forwards;
-}
-
-@keyframes floatUpFadeBonus {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-60px) scale(1.3); }
-}
 </style>
 
-<div class="loop-wrapper" data-a="up" data-delay="200">
-    <div class="road-bump"></div>
-    <div class="penalty-text" id="penalty-msg">-5s</div>
-    <div class="bonus-text" id="bonus-msg">+5s</div>
-    <div class="mountain"></div>
-    <div class="tree"></div>
-    <div class="tree t2"></div>
-    <div class="tree t3"></div>
-    <div class="scenery-line"></div>
-    
-    <div class="wind w1"></div>
-    <div class="wind w2"></div>
-
-    <div class="truck">
-        <div class="truck-trailer"><span>SUPPLY &</span></div>
-        <div class="truck-cab"><div class="truck-window"></div></div>
-        <div class="wheel w-front"></div>
-        <div class="wheel w-mid"></div>
-        <div class="wheel w-back"></div>
+<div id="gameWrap" data-a="up" data-delay="200" style="flex: 1 1 400px; max-width: 100%; position: relative;">
+    <div id="header" style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px 10px; border-bottom: 1px solid var(--line); margin-bottom: 8px; font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #888;">
+        <div id="brand" style="font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--gold);">SUPPLY & CO.</div>
+        <div id="scoreboard" style="display: flex; gap: 24px;">
+            ROUTE TIME: <span id="scoreEl" style="color: var(--gold); font-size: 15px;">00:00</span>
+            &nbsp; BONUS: <span id="bonusEl" style="color: #10b981; font-size: 15px;">+0 min</span>
+        </div>
+    </div>
+    <canvas id="canvas" width="860" height="260" style="width: 100%; height: auto; background: #111; border: 1px solid rgba(237,233,224,0.05); border-radius: 8px; cursor: pointer; display: block;"></canvas>
+    <div id="hint" style="text-align: center; font-size: 11px; color: #888; margin-top: 8px; letter-spacing: 1px; font-family: 'Share Tech Mono', monospace; transition: opacity 0.5s;">
+        CLICK THE TRUCK or press <b style="color: var(--gold);">SPACE</b> to jump over speed bumps &bull; <b style="color: var(--gold);">CLICK</b> to start
     </div>
 </div>
-
-    </div>
 </div>
 <!-- ── Articles ──────────────────────────────────────── -->
 <div class="brand-hd" style="padding: 2rem 0rem 1.5rem 2rem;">
