@@ -265,17 +265,20 @@
     @keyframes passBy { 100% { right: 120%; } }
     @keyframes windPass { 100% { right: 120%; } }
     /* ─── GAMIFIED LANDSCAPE PHYSICS ─── */
+/* 1. The Road Bump (Upgraded Visibility!) */
 .road-bump {
     position: absolute;
     bottom: 35%; 
     right: -50px;
-    width: 35px;
-    height: 12px;
-    background: var(--line);
+    width: 45px; /* Made it slightly wider */
+    height: 16px; /* Made it slightly taller */
+    background: #e05a00; /* Bright Orange Alert Color! */
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    animation: passBy 5s linear infinite; 
-    z-index: 5;
+    box-shadow: 0 0 15px rgba(224, 90, 0, 0.6); /* Adds a glowing aura so they can't miss it */
+    animation: passBy 4s linear infinite; /* Adjusted speed for better gameplay */
+    z-index: 15; /* Forces it to the very front */
+}
 }
 
 .penalty-text {
