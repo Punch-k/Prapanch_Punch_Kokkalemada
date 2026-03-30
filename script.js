@@ -1772,3 +1772,49 @@ function closeMobileMenu(){
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow='';
 }
+// --- INTERACTIVE LANDSCAPE GAME ENGINE ---
+const truck = document.querySelector('.truck'); 
+const bump = document.querySelector('.road-bump');
+const penaltyText = document.getElementById('penalty-msg');
+const loopWrapper = document.querySelector('.loop-wrapper');
+
+if (truck && bump) {
+    // 1. Click to Jump
+    truck.addEventListener('click', () => {
+        if (!truck.classList.contains('truck-jump')) {
+            truck.classList.add('truck-jump');
+            // Remove the jump class after 0.6s so they can jump again
+            setTimeout(() => truck.classList.remove('truck-jump'), 600);
+        }
+    });
+
+    // 2. Collision Detection Loop (Runs 20 times a second)
+    setInterval(() => {
+        const truckRect = truck.getBoundingClientRect();
+        const bumpRect = bump.getBoundingClientRect();
+
+        // Check if the bump and truck overlap horizontally
+        const isOverlappingX = bumpRect.left < truckRect.right && bumpRect.right > truckRect.left;
+        
+        // If they overlap AND the truck isn't jumping or already shaking
+        if (isOverlappingX && !truck.classList.contains('truck-jump') && !truck.classList.contains('truck-shake')) {
+            
+            // 1. Trigger the Shake
+            truck.classList.add('truck-shake');
+            
+            // 2. Trigger the floating Penalty Text
+            penaltyText.classList.remove('show-penalty'); 
+            void penaltyText.offsetWidth; // Force a reset so the animation can play again
+            penaltyText.classList.add('show-penalty');
+
+            // 3. Trigger the Slow Down (pauses the background momentarily)
+            loopWrapper.classList.add('impact-pause');
+
+            // 4. Reset everything after 0.5 seconds
+            setTimeout(() => {
+                loopWrapper.classList.remove('impact-pause');
+                truck.classList.remove('truck-shake');
+            }, 500);
+        }
+    }, 50); 
+}
