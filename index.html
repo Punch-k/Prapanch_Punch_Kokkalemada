@@ -1543,41 +1543,35 @@
         Initiate<br><em style="color: rgba(237,233,224,0.35);">Dialogue.</em>
       </h2>
 
-      <div style="display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2rem;">
-        <a href="mailto:kokkalem@msu.edu" style="font-family: var(--display); font-size: 2rem; color: var(--fg); text-decoration: none; letter-spacing: 0.02em; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--fg)'">kokkalem@msu.edu ↗</a>
-        <a href="https://linkedin.com/in/prapanchkokkalemada/" target="_blank" style="font-family: var(--display); font-size: 2rem; color: var(--fg); text-decoration: none; letter-spacing: 0.02em; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--fg)'">LinkedIn Network ↗</a>
-      </a>
-      </div>
-
       <div class="faq-wrapper" style="border-top: 1px solid var(--line);">
         
         <div class="faq-item" style="border-bottom: 1px solid var(--line);">
           <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
-            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q. [Placeholder Question 1]</span>
+            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q1. How do you bridge the gap between technical engineering and business strategy?</span>
             <span class="faq-icon" style="font-size: 1.4rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
           </button>
           <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
-            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. [Placeholder Answer 1]</p>
+            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. My foundation in Civil Engineering allows me to understand the complex infrastructure and capital-intensive nature of the Utilities sector, while my Broad MBA provides the framework to translate those technical realities into C-suite value. I specialize in taking "bottom-up" operational data and turning it into "top-down" GTM strategies that drive measurable margin growth.</p>
           </div>
         </div>
 
         <div class="faq-item" style="border-bottom: 1px solid var(--line);">
           <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
-            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q. [Placeholder Question 2]</span>
+            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q2. What is your approach to "Sales Reinvention" in a regulated industry?</span>
             <span class="faq-icon" style="font-size: 1.4rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
           </button>
           <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
-            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. [Placeholder Answer 2]</p>
+            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. Sales Reinvention isn't just about a new CRM; it’s about shifting from a commodity-based model to a service-based model. I focus on identifying "value leaks" in the current sales cycle and leveraging digital platforms like Salesforce to create a unified customer view. By automating reporting—as I did at Six Flags (60% time reduction)—I empower sales teams to focus on high-value consulting rather than manual data entry.</p>
           </div>
         </div>
 
         <div class="faq-item" style="border-bottom: 1px solid var(--line);">
           <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
-            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q. [Placeholder Question 3]</span>
+            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q3. What is your status regarding US Work Authorization?</span>
             <span class="faq-icon" style="font-size: 1.4rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
           </button>
           <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
-            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. [Placeholder Answer 3]</p>
+            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. I am a Canadian Citizen eligible for TN (Trade NAFTA) status under the USMCA. This allows for immediate work authorization upon a job offer in categories like Management Consultant or Engineer. This process is completed directly at the port of entry, bypassing the H-1B lottery and traditional sponsorship costs, making me available to join US-based teams with minimal lead time.</p>
           </div>
         </div>
 
@@ -1609,22 +1603,19 @@
     </div>
   </div>
 
-  <script>
+ <script>
     function toggleFaq(btn) {
+      // Find the specific content and icon for the button that was clicked
       const content = btn.nextElementSibling;
       const icon = btn.querySelector('.faq-icon');
-      const allContents = document.querySelectorAll('.faq-content');
-      const allIcons = document.querySelectorAll('.faq-icon');
       
-      // Close all other accordions
-      allContents.forEach(c => { if(c !== content) c.style.maxHeight = null; });
-      allIcons.forEach(i => { if(i !== icon) i.style.transform = 'rotate(0deg)'; });
-
-      // Toggle current accordion
+      // If it has a height, it means it's open. So we close it.
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
         icon.style.transform = 'rotate(0deg)';
-      } else {
+      } 
+      // Otherwise, it's closed. So we open it.
+      else {
         content.style.maxHeight = content.scrollHeight + "px";
         icon.style.transform = 'rotate(45deg)';
       }
@@ -1634,8 +1625,7 @@
 <footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0rem 2rem; border-top: 1px solid var(--line); background: var(--bg);">
   
   <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-    <span class="ft-logo" style="font-family: var(--display); font-size: 1.0rem; letter-spacing: 0.05em; color: var(--fg);">PRAPANCH <span style="color: var(--gold);">KOKKALEMADA</span></span>
-    <span style="font-size: 1.0rem; letter-spacing: 0.1em; color: rgba(237,233,224,0.4); text-transform: uppercase;">MBA Candidate · Michigan State University © 2026</span>
+    <span class="ft-logo" style="font-size: 1.0rem; letter-spacing: 0.1em; color: rgba(237,233,224,0.4); text-transform: uppercase;">MBA Candidate © 2026 · Broad College of Business </span>
   </div>
 
   <div style="font-size: 1.0rem;display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;">
