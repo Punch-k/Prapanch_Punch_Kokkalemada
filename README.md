@@ -27,7 +27,7 @@ While static dashboards are great for historical data, supply chain operations a
 1. Economic Order Quantity (EOQ)
 ![how much safety stock do you need to maintain a 95% fill rate through demand spikes?](https://github.com/user-attachments/assets/4474c32e-61ea-4701-93e2-f19c915730bd)
 The Concept: EOQ is a mathematical formula used to find the absolute "sweet spot" for inventory levels. It calculates the perfect balance between two conflicting expenses: the cost of ordering goods (shipping fees, administrative setup) and the cost of holding goods (warehouse space, insurance, depreciation).
-<img src="https://github.com/user-attachments/assets/1e8c3cbb-8f28-433e-aa4a-42d76946b3ef" width="100%" height="90%" alt="EOQ Model">
+<img width="1623" height="959" alt="EOQ Model" src="https://github.com/user-attachments/assets/fc37aa4c-4443-488c-9887-652e154f6b0d" />
 
 2. Stochastic Lead Times (Unpredictability) 
 The Concept: "Stochastic" is simply a statistical term for randomness. Managers use stochastic models to calculate exactly how much buffer inventory to guarantee a specific Service Level Agreement (e.g., "We need X amount of safety stock to ensure a 99% fulfillment rate during hurricane season").
