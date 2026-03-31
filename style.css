@@ -401,7 +401,7 @@ body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer
 
 /* ─── CONTACT ─────────────────────────────────────────── */
 #section-get-in-touch{padding:4.5rem 2rem;border-top:1px solid var(--line);position:relative;z-index:2;}
-.ct-layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7rem;}
+.ct-layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 0.8fr;gap:5rem;}
 .ct-left p{font-size:.97rem;color:rgba(237,233,224,.48);line-height:1.82;max-width:380px;}
 .ct-photo{width:100%;aspect-ratio:3/2;object-fit:cover;margin-top:2.8rem;display:block;transition:transform .7s var(--ease),filter .35s;}
 .ct-photo:hover{transform:scale(1.02);filter:brightness(.8);}
