@@ -157,7 +157,11 @@ body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer
 .exp-bullets li::before{content:'';position:absolute;left:0;top:.65em;width:4px;height:1px;background:var(--gold);}
 .exp-bullets li strong{color:var(--fg);font-weight:400;}
 
-/* ─── CASE STUDIES ────────────────────────────────────── */
+/* ─── CASE STUDIES ──────────────────────────────────────.case-front:hover{border-color:rgba(201,168,76,.2);}
+.case-back{transform:rotateY(180deg);background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.18);justify-content:flex-start;gap:1rem;}
+.case-cat{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.case-title{font-family:var(--display);font-size:1.8rem;letter-spacing:.02em;line-height:1.1;margin-bottom:1rem;}
+.case-desc{font-size:.85rem;color:rgba(237,233,224,.48);line-height:1.7;margin-bottom:2rem;} */
 #section-cases{padding:0.5rem 0.5rem 0.5rem;border-top:1px solid var(--line);position:relative;z-index:2;}
 .case-slider{display:flex;gap:0.5rem;overflow-x:auto;overflow-y:hidden;padding-bottom:0.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .case-slider::-webkit-scrollbar{display:none;}
@@ -171,11 +175,16 @@ body::after{content:'';position:fixed;inset:-100%;width:300%;height:300%;pointer
 .case-back-scroll::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);}
 .case-back-desc{font-size:.78rem;color:rgba(237,233,224,.55);line-height:1.72;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid rgba(237,233,224,.07);}
 .case-back{position:absolute;inset:0;background:rgba(8,9,12,.97);backdrop-filter:blur(10px);border:1px solid rgba(237,233,224,.05);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;transition:border-color .3s;}
-.case-front:hover{border-color:rgba(201,168,76,.2);}
-.case-back{transform:rotateY(180deg);background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.18);justify-content:flex-start;gap:1rem;}
-.case-cat{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
-.case-title{font-family:var(--display);font-size:1.8rem;letter-spacing:.02em;line-height:1.1;margin-bottom:1rem;}
-.case-desc{font-size:.85rem;color:rgba(237,233,224,.48);line-height:1.7;margin-bottom:2rem;}
+/* ─── CASE STUDY FRONT OVERLAY ─── */
+.case-front {  position: relative;  display: flex;  flex-direction: column;  justify-content: flex-end; /* Pushes text to the bottom of the card */ height: 100%;  overflow: hidden;}
+/* Faded shadow behind text to ensure it's readable over images */
+.case-front::after {  content: '';  position: absolute;  inset: 0;  background: linear-gradient(to top, rgba(8, 9, 12, 1) 0%, rgba(8, 9, 12, 0) 60%);
+  z-index: 1;}
+.case-info {  position: relative;  z-index: 2;  padding: 1.5rem;  pointer-events: none;}
+.case-cat {  font-size: .55rem;  letter-spacing: .18em;  text-transform: uppercase;  color: var(--gold);  margin-bottom: 0.4rem;  display: block;
+}
+.case-title {  font-family: var(--display);  font-size: 1.4rem;  letter-spacing: .02em;  line-height: 1.1;  color: #ffffff !important;  margin: 0;
+}
 .flip-hint{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,168,76,.45);margin-top:auto;padding-top:1.5rem;display:flex;align-items:center;gap:.4rem;}
 .par-row{display:flex;flex-direction:column;gap:.25rem;padding:.65rem 0;border-bottom:1px solid rgba(237,233,224,.06);}
 .par-row:last-child{border-bottom:none;}
