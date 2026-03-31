@@ -5,6 +5,7 @@ Welcome to the source code for my professional portfolio. This repository houses
 **The Objective:** To build a dynamic, data-driven "Executive Dashboard" that doesn't just list skills, but actively models them. This repository solves the communication gap between technical teams and business stakeholders by providing programmatic visual models of Supply Chain trade-offs (EOQ, stochastic lead times) and Go-To-Market (GTM) strategies—all without the sluggish load times of traditional CMS platforms like WordPress or Squarespace.
 
 🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
+
 https://github.com/user-attachments/assets/5a4f7e82-715a-424a-8a66-6cfa922ea0f2
 
 ## 🏗️ Architecture & Tech Stack
