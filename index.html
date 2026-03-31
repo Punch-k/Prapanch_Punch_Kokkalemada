@@ -347,28 +347,26 @@
     animation-play-state: paused !important; 
 }
 @media (max-width: 600px) {
-  /* This prevents the "Route Time" and "Bonus" from overlapping */
+  /* 1. Stack the Logo and Stats vertically */
+  #header {
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 10px 0 !important;
+    gap: 15px !important;
+  }
+
+  /* 2. Put Route and Bonus in a neat 2-column grid */
   #scoreboard {
     display: grid !important;
-    grid-template-columns: 1fr 1fr; 
-    gap: 10px;
-    width: 100%;
-    margin-top: 10px;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+    justify-items: center !important;
   }
 
-  #header {
-    flex-direction: column;
-    height: auto !important;
-    padding-bottom: 15px !important;
-  }
-
-  #brand {
-    font-size: 18px !important;
-    margin-bottom: 5px;
-  }
-
-  #scoreEl, #bonusEl {
-    font-size: 13px !important;
+  /* 3. Make the game area actually taller on small screens */
+  .loop-wrapper {
+    min-height: 400px !important;
   }
 }
 </style>
