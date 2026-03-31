@@ -22,7 +22,7 @@ This project was built to ensure lightning-fast load times and complete control 
 * **Fully Responsive:** Fluid typography and layout scaling using CSS `clamp()` and modern Flexbox/Grid architectures.
 
 ### 🚚 The Operations Simulator (*Try The Models*)
-While static dashboards are great for historical data, supply chain operations are inherently dynamic. To demonstrate this, I built a custom, interactive models directly into the portfolio. Here is a straightforward breakdown of what these operational models represent and how managers use them in the real world to drive profitability and efficiency.
+While static dashboards are great for historical data, supply chain operations are inherently dynamic. I built a custom, interactive models directly into the portfolio to demonstrate the dynamic nature of operations. Here is a breakdown of the operational models and how managers use them in the real world to drive efficiency.
 
 1. Economic Order Quantity (EOQ)
 
@@ -36,9 +36,10 @@ The Concept: EOQ is a mathematical formula used to find the absolute "sweet spot
 The Concept: This models the reality that an asset actively loses value the longer it sits idle or is delayed in transit. This is obvious in perishable goods (like produce), but it applies to almost everything—for example, seasonal apparel or consumer electronics rapidly lose market value as time passes.
 
 3. Discounted Cash Flow (DCF) Valuation
-The Concept: DCF is a financial valuation method that estimates the true, intrinsic value of a company or project based on its expected future cash flows, discounted back to today's dollars. Corporate strategy and M&A teams use DCF to mathematically determine if an acquisition, new market entry, or capital investment is actually worth the asking price, factoring in baseline risk and the time value of money.
 
 https://github.com/user-attachments/assets/9bbc6b00-fb66-4e90-8d5e-3089c62c73b0
+
+The Concept: DCF is a financial valuation method that estimates the true, intrinsic value of a company or project based on its expected future cash flows, discounted back to today's dollars. Corporate strategy and M&A teams use DCF to mathematically determine if an acquisition, new market entry, or capital investment is actually worth the asking price, factoring in baseline risk and the time value of money.
 
 4. Route Optimization (The Last-Mile Problem) [WIP]
 The Concept: Often related to the classic "Traveling Salesperson Problem," this models the most efficient way to navigate a network of stops while balancing physical constraints like fuel limits, traffic patterns, and strict delivery windows.
