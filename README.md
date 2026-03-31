@@ -6,7 +6,8 @@ Welcome to the source code for my professional portfolio. This repository houses
 
 🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
 
-https://github.com/user-attachments/assets/5a4f7e82-715a-424a-8a66-6cfa922ea0f2
+![Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**)](https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2)
+
 
 ## 🏗️ Architecture & Tech Stack
 This project was built to ensure lightning-fast load times and complete control over the UI/UX.
@@ -21,23 +22,29 @@ This project was built to ensure lightning-fast load times and complete control 
 * **Performance Optimized:** Utilizes `IntersectionObserver` APIs to only trigger animations when elements scroll into the viewport, saving CPU/GPU load.
 * **Fully Responsive:** Fluid typography and layout scaling using CSS `clamp()` and modern Flexbox/Grid architectures.
 
-### 🚚 The Operations & Logistics Simulator (GTM Sim)
-While static dashboards are great for historical data, supply chain operations are inherently dynamic. To demonstrate this, I built a custom, interactive logistics engine directly into the portfolio.
+### 🚚 The Operations Simulator (*Try The Models*)
+While static dashboards are great for historical data, supply chain operations are inherently dynamic. To demonstrate this, I built a custom, interactive models directly into the portfolio. Here is a straightforward breakdown of what these operational models represent and how managers use them in the real world to drive profitability and efficiency.
 
-**The Business Application:**
-The simulator gamifies last-mile delivery and route optimization. It forces the user to navigate trade-offs in real-time:
-* **Route & Time Optimization:** Models the pressure of SLA (Service Level Agreement) fulfillment.
-* **Yield Degradation:** The "Bonus" metric dynamically decays over time, representing the financial cost of delayed deliveries and holding costs.
-* **Stochastic Variables:** Unpredictable obstacles model supply chain disruptions, requiring the user to adjust their execution strategy on the fly to avoid total route failure.
+1. Economic Order Quantity (EOQ)
+![how much safety stock do you need to maintain a 95% fill rate through demand spikes?]https://github.com/user-attachments/assets/4474c32e-61ea-4701-93e2-f19c915730bd
 
-**Technical Implementation:**
-* Built entirely in **Vanilla JavaScript** and **HTML5 `<canvas>`** (Zero external game engines used).
-* Implements a custom 2D physics engine handling gravity, velocity, and precise hitbox collision detection.
-* Uses `requestAnimationFrame` for a smooth, hardware-accelerated 60fps render loop without bottlenecking the main browser thread.
+![licensed-image](https://github.com/user-attachments/assets/1e8c3cbb-8f28-433e-aa4a-42d76946b3ef)
+The Concept: EOQ is a mathematical formula used to find the absolute "sweet spot" for inventory levels. It calculates the perfect balance between two conflicting expenses: the cost of ordering goods (shipping fees, administrative setup) and the cost of holding goods (warehouse space, insurance, depreciation).
 
-## 📬 Connect
-I am always open to discussing supply chain strategy, operational execution, and data-driven market entry. Connect with me through the contact links on the live portfolio!
+3. Stochastic Lead Times (Unpredictability) [WIP]
+The Concept: "Stochastic" is simply a statistical term for randomness. Managers use stochastic models to calculate exactly how much buffer inventory to guarantee a specific Service Level Agreement (e.g., "We need X amount of safety stock to ensure a 99% fulfillment rate during hurricane season").
 
+4. Yield Degradation & Holding Costs
+The Concept: This models the reality that an asset actively loses value the longer it sits idle or is delayed in transit. This is obvious in perishable goods (like produce), but it applies to almost everything—for example, seasonal apparel or consumer electronics rapidly lose market value as time passes.
+
+5. Route Optimization (The Last-Mile Problem)
+The Concept: Often related to the classic "Traveling Salesperson Problem," this models the most efficient way to navigate a network of stops while balancing physical constraints like fuel limits, traffic patterns, and strict delivery windows.
+
+
+
+
+## 📬 ENGINEER | 2026 MBA Marketing & Operations | Implementation
+Connect with me through the contact links on the live portfolio!
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/Punch-k/Portfolio/pages/pages-build-deployment?style=flat-square&label=Deploy%20Status&color=4ade80)
 ![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=flat-square)
