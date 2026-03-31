@@ -274,7 +274,8 @@
     @keyframes wheelSpin { 100% { transform: rotate(360deg); } }
     @keyframes passBy { 100% { right: 120%; } }
     @keyframes windPass { 100% { right: 120%; } }
-    /* ─── GAMIFIED LANDSCAPE PHYSICS ─── */
+    
+/* ─── GAMIFIED LANDSCAPE PHYSICS ─── */
 /* 1. The Road Bump (Upgraded Visibility!) */
 .road-bump {
     position: absolute;
@@ -353,10 +354,10 @@
         <div id="brand" style="font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--gold);">SUPPLY & CO.</div>
         <div id="scoreboard" style="display: flex; gap: 24px;">
             ROUTE TIME: <span id="scoreEl" style="color: var(--gold); font-size: 15px;">00:00</span>
-            &nbsp; BONUS: <span id="bonusEl" style="color: #10b981; font-size: 15px;">+0 min</span>
+            &nbsp; BONUS: <span id="bonusEl" style="color: #10b981; font-size: 15px;">+0 sec</span>
         </div>
     </div>
-    <canvas id="canvas" width="860" height="260" style="width: 100%; height: auto; background: #111; border: 1px solid rgba(237,233,224,0.05); border-radius: 8px; cursor: pointer; display: block;"></canvas>
+    <canvas id="canvas" width="860" height="360" style="width: 100%; height: auto; background: #111; border: 1px solid rgba(237,233,224,0.05); border-radius: 8px; cursor: pointer; display: block;"></canvas>
     <div id="hint" style="text-align: center; font-size: 11px; color: #888; margin-top: 8px; letter-spacing: 1px; font-family: 'Share Tech Mono', monospace; transition: opacity 0.5s;">
         CLICK THE TRUCK or press <b style="color: var(--gold);">SPACE</b> to jump over speed bumps &bull; <b style="color: var(--gold);">CLICK</b> to start
     </div>
