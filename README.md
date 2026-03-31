@@ -38,7 +38,7 @@ The Concept: This models the reality that an asset actively loses value the long
 3. Discounted Cash Flow (DCF) Valuation
 The Concept: DCF is a financial valuation method that estimates the true, intrinsic value of a company or project based on its expected future cash flows, discounted back to today's dollars. Corporate strategy and M&A teams use DCF to mathematically determine if an acquisition, new market entry, or capital investment is actually worth the asking price, factoring in baseline risk and the time value of money.
 
-(https://github.com/user-attachments/assets/9bbc6b00-fb66-4e90-8d5e-3089c62c73b0)
+https://github.com/user-attachments/assets/9bbc6b00-fb66-4e90-8d5e-3089c62c73b0
 
 4. Route Optimization (The Last-Mile Problem) [WIP]
 The Concept: Often related to the classic "Traveling Salesperson Problem," this models the most efficient way to navigate a network of stops while balancing physical constraints like fuel limits, traffic patterns, and strict delivery windows.
