@@ -26,26 +26,29 @@ This project was built to ensure lightning-fast load times and complete control 
 While static dashboards are great for historical data, supply chain operations are inherently dynamic. To demonstrate this, I built a custom, interactive models directly into the portfolio. Here is a straightforward breakdown of what these operational models represent and how managers use them in the real world to drive profitability and efficiency.
 
 1. Economic Order Quantity (EOQ)
-![how much safety stock do you need to maintain a 95% fill rate through demand spikes?]https://github.com/user-attachments/assets/4474c32e-61ea-4701-93e2-f19c915730bd
-
-![licensed-image](https://github.com/user-attachments/assets/1e8c3cbb-8f28-433e-aa4a-42d76946b3ef)
+![how much safety stock do you need to maintain a 95% fill rate through demand spikes?](https://github.com/user-attachments/assets/4474c32e-61ea-4701-93e2-f19c915730bd)
 The Concept: EOQ is a mathematical formula used to find the absolute "sweet spot" for inventory levels. It calculates the perfect balance between two conflicting expenses: the cost of ordering goods (shipping fees, administrative setup) and the cost of holding goods (warehouse space, insurance, depreciation).
+![EOQ](https://github.com/user-attachments/assets/1e8c3cbb-8f28-433e-aa4a-42d76946b3ef)
 
-3. Stochastic Lead Times (Unpredictability) [WIP]
+2. Stochastic Lead Times (Unpredictability) 
 The Concept: "Stochastic" is simply a statistical term for randomness. Managers use stochastic models to calculate exactly how much buffer inventory to guarantee a specific Service Level Agreement (e.g., "We need X amount of safety stock to ensure a 99% fulfillment rate during hurricane season").
 
-4. Yield Degradation & Holding Costs
+3. Yield Degradation & Holding Costs
 The Concept: This models the reality that an asset actively loses value the longer it sits idle or is delayed in transit. This is obvious in perishable goods (like produce), but it applies to almost everything—for example, seasonal apparel or consumer electronics rapidly lose market value as time passes.
 
-5. Route Optimization (The Last-Mile Problem)
+4. Route Optimization (The Last-Mile Problem) [WIP]
 The Concept: Often related to the classic "Traveling Salesperson Problem," this models the most efficient way to navigate a network of stops while balancing physical constraints like fuel limits, traffic patterns, and strict delivery windows.
-
-
 
 
 ## 📬 ENGINEER | 2026 MBA Marketing & Operations | Implementation
 Connect with me through the contact links on the live portfolio!
-
+.
+.
+.
+.
+.
+.
+.
 ![Build Status](https://img.shields.io/github/actions/workflow/status/Punch-k/Portfolio/pages/pages-build-deployment?style=flat-square&label=Deploy%20Status&color=4ade80)
 ![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=flat-square)
 ![Dependencies](https://img.shields.io/badge/Dependencies-Zero-blue?style=flat-square)
