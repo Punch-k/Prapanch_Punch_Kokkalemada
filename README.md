@@ -1,4 +1,4 @@
-# Prapanch "Punch" Kokkalemada | Portfolio
+# Prapanch Kokkalemada | Strategy & Operations Portfolio
 
 Welcome to the source code for my professional portfolio. This repository houses my digital resume and interactive strategy case studies (including deep-dives into Supply Chain, M&A, and Corporate Strategy). 
 
