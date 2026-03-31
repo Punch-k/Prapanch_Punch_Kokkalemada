@@ -532,7 +532,7 @@
     <div class="exp-header" data-a="up">
       <div>
         <p class="sec-num">III. Case Studies</p>
-        <h2>Real Problems.<br><em><h3>Real Solutions</h3></em></h2>
+        <h2>Real Problems.<br><em>Real Solutions</em></h2>
       </div>
       <p>Focused on Business Process Re-engineering, Supply Chain Analytics, and Strategic Sourcing. Each card flips to reveal the full Problem–Action–Result breakdown.</p>
     </div>
@@ -542,7 +542,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 5rem 2rem 8rem 2rem;
+        padding: 2rem 2rem 8rem 2rem;
         width: 100vw; /* Forces the container to bleed edge-to-edge */
         margin-left: calc(-50vw + 50%); /* Centers the bleed */
         flex-wrap: nowrap;
@@ -557,7 +557,8 @@
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         transform-origin: bottom center;
         cursor: pointer;
-        box-shadow: -15px 15px 30px rgba(0,0,0,0.6); /* Deep shadow for 3D depth */
+        border: 1px solid rgba(201, 168, 76, 0.3); 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(201, 168, 76, 0.1);
         text-decoration: none;
         flex-shrink: 0; /* Prevents the browser from squishing them */
     }
@@ -573,11 +574,13 @@
         filter: brightness(0.5); 
     }
     .tw-card:hover {
-        transform: translateY(-40px) rotate(0deg) scale(1.05) !important;
-        z-index: 20;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.9);
-        filter: brightness(1) grayscale(0%) !important;
-    }
+    transform: translateY(-40px) rotate(0deg) scale(1.05) !important;
+    z-index: 20;
+    filter: brightness(1) grayscale(0%) !important;
+    /* Intense faded gold glow on hover */
+    border: 1px solid rgba(201, 168, 76, 0.8);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 168, 76, 0.4);
+}
 
     /* The alternating rotations (Keep these as you had them!) */
     .tw-rot-1 { transform: rotate(6deg); }
