@@ -1511,63 +1511,82 @@
 </section>
 
 <!-- ── VIII. CONTACT ──────────────────────────────────────── -->
-<section id="section-get-in-touch" class="contact-section" style="padding: 2rem 1rem; border-top: 1px solid var(--line); position: relative; overflow: hidden;">
-  
-  <div style="position: absolute; top: 0; right: 0; width: 40vw; height: 100%; background: radial-gradient(circle at right, rgba(201,168,76,0.03) 0%, transparent 70%); pointer-events: none;"></div>
-
-  <div class="ct-container" style="position: relative; z-index: 2;">
+<section id="section-faq" style="padding: 7rem 2rem; border-top: 1px solid var(--line); background: var(--bg); position: relative; z-index: 2;">
+  <div style="max-width: 800px; margin: 0 auto;">
     
-    <div class="ct-content" data-a="up">
-      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-        <span style="font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">Phase 04 // Connect</span>
+    <div style="margin-bottom: 3.5rem; text-align: left;" data-a="up">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">Phase 03 // Clarify</span>
         <div style="height: 1px; background: var(--line); width: 60px;"></div>
       </div>
-      
-      <h2 class="ct-title" style="margin-bottom: 1.5rem;">
-        Initiate<br><em style="color: rgba(237,233,224,0.35);">Dialogue.</em>
+      <h2 style="font-family: var(--display); font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.02em; line-height: 1; margin-bottom: 1rem;">
+        Common<br><em style="color: rgba(237,233,224,0.35);">Inquiries.</em>
       </h2>
-      <p class="ct-sub" style="font-size: 1rem; line-height: 1.8; color: rgba(237,233,224,0.5); max-width: 440px; margin-bottom: 3.5rem;">
-        Ready to scale operations, optimize your GTM strategy, or just have a coffee chat? Reach out directly via the channels below.
-      </p>
-
-      <div class="ct-links" style="display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3.5rem;">
-        <a href="mailto:kokkalem@msu.edu" class="ct-link">kokkalem@msu.edu</a>
-        <a href="https://linkedin.com/in/prapanchkokkalemada/" target="_blank" class="ct-link">LinkedIn ↗</a>
-        <a href="tel:5178932109" class="ct-link">517.893.2109</a>
-      </div>
-
-      <a href="mailto:kokkalem@msu.edu?subject=Let's%20Connect" class="btn-pri" style="width: fit-content;">
-        <span>Reach Out Directly ↗</span>
-      </a>
-      
     </div>
 
-    <div class="ct-visual" data-a="up" data-delay="200" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2rem;">
+    <div class="faq-wrapper" data-a="up" data-delay="200">
       
-      <div class="photo-portrait-frame" style="position: relative;">
-        <img src="Professional.jpg" alt="Punch Kokkalemada Professional Portrait">
-        
-        <div style="position: absolute; bottom: 1.2rem; left: -1.5rem; background: rgba(8,9,12,0.9); backdrop-filter: blur(8px); padding: 0.7rem 1.2rem; border: 1px solid var(--line); border-left: 2px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-          <span style="display: block; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.2rem;">Current Base</span>
-          <span style="font-family: var(--sans); font-size: 0.75rem; color: var(--fg); letter-spacing: 0.05em; font-weight: 500;">East Lansing, MI</span>
+      <div class="faq-item" style="border-bottom: 1px solid var(--line);">
+        <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
+          <span style="font-family: var(--sans); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.02em;">What industries are you targeting post-MBA?</span>
+          <span class="faq-icon" style="font-size: 1.5rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
+        </button>
+        <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+          <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.8; padding-bottom: 1.8rem; margin: 0; max-width: 90%;">
+            With a background spanning tech, retail, and manufacturing, my focus is on roles that sit at the intersection of supply chain optimization and commercial strategy. I am industry-agnostic but highly drawn to complex, fast-paced environments where operational bottlenecks directly impact the bottom line.
+          </p>
         </div>
       </div>
 
-      <div class="ct-status" style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: rgba(74, 222, 128, 0.05); border: 1px solid rgba(74, 222, 128, 0.2); border-radius: 4px;">
-        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-          <span style="width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 10px #4ade80;"></span>
-          <span style="position: absolute; width: 20px; height: 20px; border: 1px solid #4ade80; border-radius: 50%; animation: pulse-dot 2s infinite;"></span>
+      <div class="faq-item" style="border-bottom: 1px solid var(--line);">
+        <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
+          <span style="font-family: var(--sans); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.02em;">Are you open to relocation for full-time opportunities?</span>
+          <span class="faq-icon" style="font-size: 1.5rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
+        </button>
+        <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+          <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.8; padding-bottom: 1.8rem; margin: 0; max-width: 90%;">
+            Absolutely. While I am currently based in East Lansing, MI completing my MBA at Michigan State University, I am fully open to relocating for the right opportunity starting May 2026. My previous roles have already required me to execute strategies across Canada and the US.
+          </p>
         </div>
-        <div style="display: flex; flex-direction: column; text-align: left;">
-          <span style="font-size: 0.5rem; letter-spacing: 0.15em; color: #4ade80; text-transform: uppercase; margin-bottom: 0.1rem;">System Status: Active</span>
-          <span style="font-size: 0.75rem; color: var(--fg); letter-spacing: 0.05em; text-transform: none;">Open to Full-Time · May 2026</span>
+      </div>
+
+      <div class="faq-item" style="border-bottom: 1px solid var(--line);">
+        <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
+          <span style="font-family: var(--sans); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.02em;">How do your Operations Simulators actually work?</span>
+          <span class="faq-icon" style="font-size: 1.5rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
+        </button>
+        <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+          <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.8; padding-bottom: 1.8rem; margin: 0; max-width: 90%;">
+            They are live, JavaScript-based models built to replicate real-world scenarios I've faced. The Inventory Lab, for example, uses actual Economic Order Quantity (EOQ) logic and stochastic lead times to dynamically calculate the cost trade-offs of holding inventory versus risking a stockout.
+          </p>
         </div>
       </div>
 
     </div>
   </div>
-</section>
+  
+  <script>
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const allContents = document.querySelectorAll('.faq-content');
+      const allIcons = document.querySelectorAll('.faq-icon');
+      
+      // Close all other accordions when one is opened
+      allContents.forEach(c => { if(c !== content) c.style.maxHeight = null; });
+      allIcons.forEach(i => { if(i !== icon) i.style.transform = 'rotate(0deg)'; });
 
+      // Toggle the clicked accordion smoothly
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.style.transform = 'rotate(45deg)'; // Spins the '+' into an 'x'
+      }
+    }
+  </script>
+</section>
 <footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; padding: 3rem 2rem; border-top: 1px solid var(--line); background: var(--bg);">
   
   <div style="display: flex; flex-direction: column; gap: 0.5rem;">
