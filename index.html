@@ -346,7 +346,31 @@
 .impact-pause .wind {
     animation-play-state: paused !important; 
 }
+@media (max-width: 600px) {
+  /* This prevents the "Route Time" and "Bonus" from overlapping */
+  #scoreboard {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
 
+  #header {
+    flex-direction: column;
+    height: auto !important;
+    padding-bottom: 15px !important;
+  }
+
+  #brand {
+    font-size: 18px !important;
+    margin-bottom: 5px;
+  }
+
+  #scoreEl, #bonusEl {
+    font-size: 13px !important;
+  }
+}
 </style>
 
 <div id="gameWrap" data-a="up" data-delay="200" style="flex: 1 1 400px; max-width: 100%; position: relative;">
