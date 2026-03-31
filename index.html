@@ -1604,23 +1604,20 @@
   </div>
 
  <script>
-    function toggleFaq(btn) {
-      // Find the specific content and icon for the button that was clicked
-      const content = btn.nextElementSibling;
-      const icon = btn.querySelector('.faq-icon');
-      
-      // If it has a height, it means it's open. So we close it.
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-        icon.style.transform = 'rotate(0deg)';
-      } 
-      // Otherwise, it's closed. So we open it.
-      else {
-        content.style.maxHeight = content.scrollHeight + "px";
-        icon.style.transform = 'rotate(45deg)';
-      }
+  function toggleFaq(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-icon');
+    
+    // Check if it is currently open (has a pixel height greater than 0)
+    if (content.style.maxHeight && content.style.maxHeight !== '0px' && content.style.maxHeight !== '0') {
+      content.style.maxHeight = '0px'; // Forces it to close
+      icon.style.transform = 'rotate(0deg)';
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px"; // Opens it to its exact height
+      icon.style.transform = 'rotate(45deg)';
     }
-  </script>
+  }
+</script>
 </section>
 <footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0rem 2rem; border-top: 1px solid var(--line); background: var(--bg);">
   
