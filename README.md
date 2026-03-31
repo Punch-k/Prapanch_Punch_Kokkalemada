@@ -6,7 +6,7 @@ Welcome to the source code for my professional portfolio. This repository houses
 
 🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
 
-<img src="[https://github.com/user-attachments/assets/1e8c3cbb-8f28-433e-aa4a-42d76946b3ef](https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2)" width="100%" alt="Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**">
+<img src="https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2" width="100%" alt="Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**">
 
 ## 🏗️ Architecture & Tech Stack
 This project was built to ensure lightning-fast load times and complete control over the UI/UX.
