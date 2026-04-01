@@ -1887,14 +1887,15 @@ function closeMobileMenu(){
             ctx.fillStyle = GOLD; ctx.font = 'bold 36px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
             ctx.fillText('CLICK TO START ROUTE', W/2, H/2 - 10);
             ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
-            ctx.fillText('JUMP OVER SPEED BUMPS • EARN BONUS MINUTES', W/2, H/2 + 18);
+            ctx.fillText('JUMP OVER SPEED BUMPS • AVOID SLA PENALTIES', W/2, H/2 + 18);
         }
         if (state === 'dead') {
             ctx.fillStyle = 'rgba(0,0,0,0.65)'; ctx.fillRect(0, 0, W, H);
             ctx.fillStyle = RED; ctx.font = 'bold 40px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
             ctx.fillText('DELIVERY DELAYED!', W/2, H/2 - 14);
             ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
-            ctx.fillText('ROUTE TIME: ' + formatTime(score) + ' | NET BONUS: ' + (bonus >= 0 ? '+' : '') + bonus + ' MIN', W/2, H/2 + 12);
+            ctx.fillText('ROUTE TIME: ' + formatTime(score) + ' | CONTRACT TERMINATED AT 45 PENALTY POINTS', W/2, H/2 + 12);
+          //   ctx.fillText('ROUTE TIME: ' + formatTime(score) + ' | NET BONUS: ' + (bonus >= 0 ? '+' : '') + bonus + ' MIN', W/2, H/2 + 12);
             ctx.fillStyle = '#555'; ctx.fillText('CLICK TO RETRY', W/2, H/2 + 34);
         }
         ctx.textAlign = 'left';
@@ -1941,24 +1942,47 @@ function closeMobileMenu(){
                 const tx = truck.x + 8, ty = truck.y - truck.h + 8, tw = truck.w - 16, th = truck.h - 12;
                 const bTop = GROUND - b.h;
                 if (!b.passed) {
-                    if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
-                        if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
-                            b._penalised = true; bonus -= 5;
-                            addFloater(truck.x + 60, truck.y - 60, '-5 min', RED);
-                            speed = Math.max(2, speed - 0.5);
+                  if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
+                            if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
+                                b._penalised = true; 
+                                bonus += 15; // Accumulate SLA Penalty
+                                addFloater(truck.x + 60, truck.y - 60, '+15 Penalty', RED);
+                                speed = Math.max(2, speed - 0.5);
+                            }
                         }
-                    }
-                    if (b.x + b.w < truck.x) {
-                        b.passed = true;
-                        if (!b._penalised) { bonus += 5; addFloater(truck.x + 30, truck.y - 70, '+5 min', GREEN); }
-                    }
+                        if (b.x + b.w < truck.x) {
+                            b.passed = true;
+                            if (!b._penalised) { 
+                                // Baseline execution doesn't earn points, just a success message
+                                addFloater(truck.x + 30, truck.y - 70, 'Cleared!', GREEN); 
+                            }
+                        }
+                  // if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
+                    //    if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
+                      //      b._penalised = true; bonus -= 5;
+                        //    addFloater(truck.x + 60, truck.y - 60, '-5 min', RED);
+                          //  speed = Math.max(2, speed - 0.5);
+                       // }
+                   // }
+                   // if (b.x + b.w < truck.x) {
+                     //   b.passed = true;
+                      //  if (!b._penalised) { bonus += 5; addFloater(truck.x + 30, truck.y - 70, '+5 min', GREEN); }
+                   // }
                 }
             });
             
             bumps = bumps.filter(b => b.x + b.w + 10 > 0);
             scoreEl.textContent = formatTime(score);
-            bonusEl.textContent = (bonus >= 0 ? '+' : '') + bonus + ' min';
-            bonusEl.style.color = bonus >= 0 ? GREEN : RED;
+         // Update the dashboard text to show cumulative damage
+            bonusEl.textContent = 'SLA Penalty: ' + bonus;
+            bonusEl.style.color = bonus > 0 ? RED : GREEN;
+
+            // The 45-Point Termination Clause (Contract Lost)
+            if (bonus >= 45) {
+                state = 'dead';
+            }          
+          //  bonusEl.textContent = (bonus >= 0 ? '+' : '') + bonus + ' min';
+          //  bonusEl.style.color = bonus >= 0 ? GREEN : RED;
         }
         
         bumps.forEach(drawBump);
