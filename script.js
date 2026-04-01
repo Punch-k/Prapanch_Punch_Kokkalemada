@@ -1889,14 +1889,30 @@ function closeMobileMenu(){
             ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
             ctx.fillText('JUMP OVER SPEED BUMPS • AVOID SLA PENALTIES', W/2, H/2 + 18);
         }
-        if (state === 'dead') {
-            ctx.fillStyle = 'rgba(0,0,0,0.65)'; ctx.fillRect(0, 0, W, H);
-            ctx.fillStyle = RED; ctx.font = 'bold 40px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
-            ctx.fillText('DELIVERY DELAYED!', W/2, H/2 - 14);
-            ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
-            ctx.fillText('ROUTE TIME: ' + formatTime(score) + ' | CONTRACT TERMINATED AT 45 PENALTY POINTS', W/2, H/2 + 12);
-          //   ctx.fillText('ROUTE TIME: ' + formatTime(score) + ' | NET BONUS: ' + (bonus >= 0 ? '+' : '') + bonus + ' MIN', W/2, H/2 + 12);
-            ctx.fillStyle = '#555'; ctx.fillText('CLICK TO RETRY', W/2, H/2 + 34);
+       if (state === 'dead') {
+            ctx.fillStyle = 'rgba(0,0,0,0.85)';
+            ctx.fillRect(0, 0, W, H);
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 40px "Bebas Neue", sans-serif';
+
+            // Check if they failed (Fired) or survived (Win)
+            if (bonus >= 45) {
+                ctx.fillStyle = RED;
+                ctx.fillText('CONTRACT TERMINATED', W / 2, H / 2 - 14);
+                ctx.fillStyle = '#888';
+                ctx.font = '13px "Share Tech Mono", monospace';
+                ctx.fillText('FAILED AT ' + formatTime(score) + ' | 45 PENALTY POINTS REACHED', W / 2, H / 2 + 12);
+            } else {
+                ctx.fillStyle = GREEN;
+                ctx.fillText('ROUTE COMPLETE!', W / 2, H / 2 - 14);
+                ctx.fillStyle = '#888';
+                ctx.font = '13px "Share Tech Mono", monospace';
+                ctx.fillText('YOU SURVIVED THE SHIFT | FINAL SLA PENALTY: ' + bonus, W / 2, H / 2 + 12);
+            }
+
+            ctx.fillStyle = '#555';
+            ctx.font = '13px "Share Tech Mono", monospace';
+            ctx.fillText('CLICK TO PLAY AGAIN', W / 2, H / 2 + 40);
         }
         ctx.textAlign = 'left';
     }
@@ -1945,8 +1961,8 @@ function closeMobileMenu(){
                   if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
                             if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
                                 b._penalised = true; 
-                                bonus += 15; // Accumulate SLA Penalty
-                                addFloater(truck.x + 60, truck.y - 60, '+15 Penalty', RED);
+                                bonus += 5; // Accumulate SLA Penalty
+                                addFloater(truck.x + 60, truck.y - 60, '5 DEMERIT POINTS', RED);
                                 speed = Math.max(2, speed - 0.5);
                             }
                         }
@@ -1972,7 +1988,15 @@ function closeMobileMenu(){
             });
             
             bumps = bumps.filter(b => b.x + b.w + 10 > 0);
-            scoreEl.textContent = formatTime(score);
+            // Calculate remaining time (120 seconds = 2 minutes)
+                let timeLeft = Math.max(0, 120 - score);
+                scoreEl.textContent = formatTime(timeLeft);
+                
+                // The Shift Complete (Win) Clause
+                if (timeLeft <= 0) {
+                    state = 'dead';
+                    speed = 0;
+            }
          // Update the dashboard text to show cumulative damage
             bonusEl.textContent = 'SLA Penalty: ' + bonus;
             bonusEl.style.color = bonus > 0 ? RED : GREEN;
