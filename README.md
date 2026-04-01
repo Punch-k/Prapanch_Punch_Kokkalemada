@@ -2,7 +2,16 @@
 
 Welcome to the source code for my professional portfolio. This repository houses my digital resume and interactive strategy case studies (including deep-dives into Supply Chain, M&A, and Corporate Strategy). 
 
-**The Objective:** To build a dynamic, data-driven "Executive Dashboard" that doesn't just list skills, but actively models them. This repository solves the communication gap between technical teams and business stakeholders by providing programmatic visual models of Supply Chain trade-offs (EOQ, stochastic lead times) and Go-To-Market (GTM) strategies—all without the sluggish load times of traditional CMS platforms like WordPress or Squarespace.
+**The Objective:** To build a dynamic, website portfolio that provides me with the right models to stress test business valuation. This repository showcases visual models I've developed, both through personal interest and professional experience - all without the sluggish load times of traditional CMS platforms.
+
+### 🦖 The Last-Mile Survival Game
+**The Concept:** Operations is a lot like the classic Chrome Dino game—doing things perfectly is just the baseline expectation, but mistakes compound quickly. 
+
+I coded this mini-game to simulate cumulative operational risk. Dodging obstacles represents successfully navigating daily supply chain bottlenecks. However, when you hit an obstacle, the game doesn't just instantly end. Instead, you accumulate **SLA Penalties** (negative points). 
+
+Every mistake sticks to your brand's reputation. Once you accumulate 45 penalty points, your contract is terminated, and it's Game Over.
+
+**👇 Test your operational reflexes below!**
 
 🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
 
