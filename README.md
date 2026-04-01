@@ -4,18 +4,18 @@ Welcome to the source code for my professional portfolio. This repository houses
 
 **The Objective:** To build a dynamic, website portfolio that provides me with the right models to stress test business valuation. This repository showcases visual models I've developed, both through personal interest and professional experience - all without the sluggish load times of traditional CMS platforms.
 
+**👇 Test your operational reflexes below!**
+
+🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
+
+<img src="https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2" width="100%" alt="Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**">
+
 ### 🦖 The Last-Mile Survival Game
 **The Concept:** Operations is a lot like the classic Chrome Dino game—doing things perfectly is just the baseline expectation, but mistakes compound quickly. 
 
 I coded this mini-game to simulate cumulative operational risk. Dodging obstacles represents successfully navigating daily supply chain bottlenecks. However, when you hit an obstacle, the game doesn't just instantly end. Instead, you accumulate **SLA Penalties** (negative points). 
 
 Every mistake sticks to your brand's reputation. Once you accumulate 45 penalty points, your contract is terminated, and it's Game Over.
-
-**👇 Test your operational reflexes below!**
-
-🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
-
-<img src="https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2" width="100%" alt="Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**">
 
 ## 🏗️ Architecture & Tech Stack
 This project was built to ensure lightning-fast load times and complete control over the UI/UX.
