@@ -2,7 +2,7 @@
 
 Welcome to the source code for my professional portfolio. This repository houses my digital resume and interactive strategy case studies (including deep-dives into Supply Chain, M&A, and Corporate Strategy). 
 
-**The Objective:** To build a dynamic, website portfolio that provides me with the right models to stress test business valuation. This repository showcases visual models I've developed, both through personal interest and professional experience - all without the sluggish load times of traditional CMS platforms.
+**The Objective:** To build a dynamic, website portfolio that provides me with the right models to stress test business valuation. This repository showcases visual models I've developed, both through personal interest and professional experience - all with traditional GithubPage.
 
 **👇 Test your operational reflexes below!**
 
