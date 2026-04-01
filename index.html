@@ -376,7 +376,7 @@
     <div id="brand" style="font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--gold);">SUPPLY & CO.</div>
     <div id="scoreboard" style="display: flex; gap: 24px;">
       ROUTE TIME: <span id="scoreEl" style="color: var(--gold); font-size: 15px;">02:00</span> &nbsp;
-      <span id="bonusEl" style="color: #10b981; font-size: 15px;">SLA Penalty: 0</span>
+      <span id="bonusEl" style="color: #10b981; font-size: 15px;"> Penalty: 0</span>
     </div>
   </div>
 
@@ -388,27 +388,60 @@
     </div>
     <p style="color: var(--gold); font-family: var(--sans); font-size: 1rem; margin: 0; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px;">
       <em>[Chrome Dino inspired Logistics Mini-Game] Test your operational reflexes</em> 
-      <img src="red%20curved%20arrow.png" style="height: 1.6em; transform: rotate(180deg);" alt="Arrow pointing up">
+      <img src="red%20curved%20arrow.png" style="height: 2.6em; transform: rotate(180deg);" alt="Arrow pointing up">
     </p>
   </div>
-
 </div>
-</div> <div style="perspective: 1200px; padding: 8rem 2rem; display: flex; justify-content: center; align-items: center; overflow: hidden; width: 100%;">
-  
-  <div data-a="up" style="transform: rotateX(15deg) rotateY(-10deg) rotateZ(-2deg) scale(1.05); background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.5)); border: 1px solid rgba(255,255,255,0.05); padding: 4rem; border-radius: 20px; box-shadow: 25px 40px 60px rgba(0,0,0,0.8), inset 0 0 40px rgba(255,255,255,0.02); max-width: 900px; text-align: center; position: relative;">
-    
-    <h2 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-family: var(--display); line-height: 1.1; margin-bottom: 2rem; color: #fff; text-shadow: 0 15px 30px rgba(0,0,0,0.9);">
-      “Design creates culture. Culture shapes values. Values determine the future.”
+ /*cinematic crawl */
+ <style>
+  .crawl-container {
+    position: relative;
+    width: 100%;
+    height: 55vh; 
+    display: flex;
+    justify-content: center;
+    perspective: 600px; 
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+  }
+
+  .crawl-text {
+    position: absolute;
+    bottom: -10%; 
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    transform-origin: 50% 100%;
+    animation: starWarsCrawl 18s linear infinite; 
+  }
+
+  @keyframes starWarsCrawl {
+    0% {
+      transform: rotateX(40deg) translateY(100px) translateZ(0);
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotateX(40deg) translateY(-1000px) translateZ(-600px);
+      opacity: 0.1;
+    }
+  }
+</style>
+
+<div class="crawl-container">
+  <div class="crawl-text">
+    <h2 style="font-size: clamp(3rem, 7vw, 6rem); font-family: var(--display); line-height: 1.1; margin-bottom: 2rem; color: var(--gold); text-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+      “Design creates culture.<br>Culture shapes values.<br>Values determine the future.”
     </h2>
-    
-    <h3 style="color: var(--gold); font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; letter-spacing: 3px; text-transform: uppercase;">
+    <h3 style="color: #888; font-family: 'Share Tech Mono', monospace; font-size: 1.5rem; letter-spacing: 4px; text-transform: uppercase;">
       — Robert L. Peters
     </h3>
-    
   </div>
-</div>
-          
-</div>
+</div>         
+
 <style>
     /* Hides the scrollbar for a clean, app-like feel */
     .news-carousel::-webkit-scrollbar { display: none; }
