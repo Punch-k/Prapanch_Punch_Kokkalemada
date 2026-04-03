@@ -1,254 +1,438 @@
-// 1. PRELOADER & HERO REVEAL
-let loadProgress=0;
-const lbar=document.getElementById('lbar');
-const ltext=document.getElementById('ltext');
-const loadInterval=setInterval(()=>{
-  loadProgress+=Math.floor(Math.random()*15)+5;
-  if(loadProgress>=100){
-    loadProgress=100;clearInterval(loadInterval);
-    setTimeout(()=>{document.body.classList.add('loaded');revealHero();},400);
+// ─── 1. PRELOADER & HERO REVEAL ─────────────────────────────
+let loadProgress = 0;
+const lbar = document.getElementById('lbar');
+const ltext = document.getElementById('ltext');
+const loadInterval = setInterval(() => {
+  loadProgress += Math.floor(Math.random() * 15) + 5;
+  if (loadProgress >= 100) {
+    loadProgress = 100;
+    clearInterval(loadInterval);
+    setTimeout(() => { document.body.classList.add('loaded'); revealHero(); }, 400);
   }
-  lbar.style.width=loadProgress+'%';
-  ltext.textContent=(loadProgress<10?'0':'')+loadProgress+'%';
-},120);
+  lbar.style.width = loadProgress + '%';
+  ltext.textContent = (loadProgress < 10 ? '0' : '') + loadProgress + '%';
+}, 120);
 
-function revealHero(){
-  setTimeout(()=>{
+function revealHero() {
+  setTimeout(() => {
     document.getElementById('h-eyebrow').classList.add('show');
-    document.querySelectorAll('.word').forEach(w=>w.classList.add('show'));
-    setTimeout(()=>{
+    document.querySelectorAll('.word').forEach(w => w.classList.add('show'));
+    setTimeout(() => {
       document.getElementById('h-sub').classList.add('show');
       document.getElementById('h-act').classList.add('show');
-    },250);
-  },120);
+    }, 250);
+  }, 120);
 }
 
-// 2. CURSOR & AMBIENT AURA
-const cdot=document.getElementById('cdot');
-const cring=document.getElementById('cring');
-const ctip=document.getElementById('ctip');
-const aura=document.getElementById('aura');
-let mx=window.innerWidth/2,my=window.innerHeight/2;
-let rx=mx,ry=my,ax=mx,ay=my;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;ctip.style.left=mx+'px';ctip.style.top=my+'px';});
-(function loop(){
-  cdot.style.left=mx+'px';cdot.style.top=my+'px';
-  rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
-  cring.style.left=rx+'px';cring.style.top=ry+'px';
-  ax+=(mx-ax)*.04;ay+=(my-ay)*.04;
-  aura.style.transform=`translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
+// ─── 2. CURSOR & AMBIENT AURA ────────────────────────────────
+const cdot = document.getElementById('cdot');
+const cring = document.getElementById('cring');
+const ctip = document.getElementById('ctip');
+const aura = document.getElementById('aura');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my, ax = mx, ay = my;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  ctip.style.left = mx + 'px';
+  ctip.style.top = my + 'px';
+});
+
+(function loop() {
+  cdot.style.left = mx + 'px'; cdot.style.top = my + 'px';
+  rx += (mx - rx) * .11; ry += (my - ry) * .11;
+  cring.style.left = rx + 'px'; cring.style.top = ry + 'px';
+  ax += (mx - ax) * .04; ay += (my - ay) * .04;
+  aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
   requestAnimationFrame(loop);
 })();
-document.addEventListener('mousedown',()=>cring.classList.add('clk'));
-document.addEventListener('mouseup',()=>cring.classList.remove('clk'));
-document.querySelectorAll('a,button,.phase,.svc-hd,.case-flip,.tile-flip,.mag').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cring.classList.add('hov'));
-  el.addEventListener('mouseleave',()=>cring.classList.remove('hov'));
+
+document.addEventListener('mousedown', () => cring.classList.add('clk'));
+document.addEventListener('mouseup', () => cring.classList.remove('clk'));
+
+// ── Event delegation for hover cursor state (replaces 50+ individual listeners) ──
+const HOVER_SELECTOR = 'a, button, .phase, .svc-hd, .case-flip, .tile-flip, .mag';
+document.body.addEventListener('mouseenter', e => {
+  if (e.target.closest(HOVER_SELECTOR)) cring.classList.add('hov');
+}, true);
+document.body.addEventListener('mouseleave', e => {
+  if (e.target.closest(HOVER_SELECTOR)) cring.classList.remove('hov');
+}, true);
+
+document.querySelectorAll('[data-tip]').forEach(el => {
+  el.addEventListener('mouseenter', () => { ctip.textContent = el.dataset.tip; ctip.style.opacity = '1'; });
+  el.addEventListener('mouseleave', () => { ctip.style.opacity = '0'; });
 });
-document.querySelectorAll('[data-tip]').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ctip.textContent=el.dataset.tip;ctip.style.opacity='1';});
-  el.addEventListener('mouseleave',()=>{ctip.style.opacity='0';});
-});
 
-// 3. SCROLL PROGRESS
-const sprog=document.getElementById('sprog');
-window.addEventListener('scroll',()=>{
-  sprog.style.width=Math.min(window.scrollY/(document.body.scrollHeight-innerHeight)*100,100)+'%';
-},{passive:true});
+// ─── 3. SCROLL PROGRESS BAR ─────────────────────────────────
+const sprog = document.getElementById('sprog');
 
-// 4. PARALLAX HERO BG
-const heroBg=document.getElementById('hero-bg');
-window.addEventListener('scroll',()=>{
-  if(window.scrollY<window.innerHeight*1.4)
-    heroBg.style.transform=`scale(1.1) translateY(${window.scrollY*.22}px)`;
-},{passive:true});
+// ─── 4. PARALLAX HERO BG ────────────────────────────────────
+const heroBg = document.getElementById('hero-bg');
 
-// 5. WORD SCRUB
-const scrubText=document.getElementById('scrub-text');
-const scrubSection=document.getElementById('scrub-section');
-if(scrubText){
-  const words=scrubText.innerText.split(' ');
-  scrubText.innerHTML='';
-  words.forEach(w=>{
-    if(!w.trim())return;
-    const s=document.createElement('span');
-    s.innerText=w+' ';s.className='scrub-word';
+// ─── 5. WORD SCRUB ──────────────────────────────────────────
+const scrubText = document.getElementById('scrub-text');
+const scrubSection = document.getElementById('scrub-section');
+if (scrubText) {
+  const words = scrubText.innerText.split(' ');
+  scrubText.innerHTML = '';
+  words.forEach(w => {
+    if (!w.trim()) return;
+    const s = document.createElement('span');
+    s.innerText = w + ' '; s.className = 'scrub-word';
     scrubText.appendChild(s);
   });
 }
-const scrubWords=document.querySelectorAll('.scrub-word');
-window.addEventListener('scroll',()=>{
-  if(!scrubSection||!scrubWords.length)return;
-  const rect=scrubSection.getBoundingClientRect();
-  const start=innerHeight*.8,end=innerHeight*.2;
-  if(rect.top<start){
-    const p=Math.max(0,Math.min(1,(start-rect.top)/(start-end)));
-    const lit=Math.floor(p*scrubWords.length);
-    scrubWords.forEach((w,i)=>w.classList.toggle('lit',i<lit));
-  }else{scrubWords.forEach(w=>w.classList.remove('lit'));}
-},{passive:true});
-let scrubTimer=null;
-const scrubObs=new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(en.isIntersecting){scrubTimer=setTimeout(()=>scrubWords.forEach(w=>w.classList.add('lit')),2500);}
-    else{clearTimeout(scrubTimer);}
-  });
-},{threshold:.3});
-if(scrubSection)scrubObs.observe(scrubSection);
+const scrubWords = document.querySelectorAll('.scrub-word');
 
-// 6. SCROLL REVEAL
-const revObs=new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting)return;
-    setTimeout(()=>en.target.classList.add('in'),parseInt(en.target.dataset.delay||0,10));
+// ─── 8. NAV STICKY & ACTIVE ─────────────────────────────────
+const mainnav = document.getElementById('mainnav');
+const navAs = document.querySelectorAll('.nav-links a');
+const secs = document.querySelectorAll('section[id], div[id="scrub-section"]');
+const dots = document.querySelectorAll('.sdot');
+
+// ─── 24. FLOATING CONNECT PILL & READ INDICATOR ─────────────
+const floatCta = document.getElementById('float-cta');
+const readTime = document.getElementById('read-time');
+
+// ─── EXPERIENCE TIMELINE ─────────────────────────────────────
+const tlLine = document.getElementById('tlLine');
+const expSection = document.getElementById('section-experience');
+
+/* ══════════════════════════════════════════════════════════════
+   MERGED SCROLL HANDLER
+   Single passive listener with rAF throttle — replaces the
+   5 separate scroll listeners that previously fired independently.
+══════════════════════════════════════════════════════════════ */
+let scrollTicking = false;
+window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  requestAnimationFrame(() => {
+    const sy = window.scrollY;
+    const scrollable = document.body.scrollHeight - innerHeight;
+
+    // 3. Scroll progress bar
+    sprog.style.width = Math.min(sy / scrollable * 100, 100) + '%';
+
+    // 4. Hero parallax
+    if (heroBg && sy < innerHeight * 1.4)
+      heroBg.style.transform = `scale(1.1) translateY(${sy * .22}px)`;
+
+    // 5. Word scrub
+    if (scrubSection && scrubWords.length) {
+      const rect = scrubSection.getBoundingClientRect();
+      const start = innerHeight * .8, end = innerHeight * .2;
+      if (rect.top < start) {
+        const p = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+        const lit = Math.floor(p * scrubWords.length);
+        scrubWords.forEach((w, i) => w.classList.toggle('lit', i < lit));
+      } else {
+        scrubWords.forEach(w => w.classList.remove('lit'));
+      }
+    }
+
+    // 8. Nav sticky + active section
+    mainnav.classList.toggle('stk', sy > 55);
+    let cur = '';
+    secs.forEach(s => { if (sy >= s.offsetTop - 240) cur = s.id; });
+    navAs.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
+    dots.forEach(d => d.classList.toggle('act', d.dataset.target === cur));
+
+    // 21. Experience timeline
+    if (tlLine && expSection) {
+      const rect = expSection.getBoundingClientRect();
+      const scrolled = Math.max(0, -rect.top + innerHeight * .5);
+      const pct = Math.min(1, scrolled / expSection.offsetHeight);
+      tlLine.style.height = (pct * 100) + '%';
+      document.querySelectorAll('.exp-card-tl').forEach(card => {
+        card.classList.toggle('tl-active', card.getBoundingClientRect().top < innerHeight * .6);
+      });
+    }
+
+    // 24. Float CTA + read indicator
+    const show = sy > innerHeight * .6;
+    if (floatCta) floatCta.classList.toggle('show', show);
+    if (readTime) {
+      const pct = Math.round(sy / scrollable * 100);
+      readTime.textContent = pct + '% READ';
+      readTime.style.opacity = show ? '1' : '0';
+    }
+
+    scrollTicking = false;
+  });
+  scrollTicking = true;
+}, { passive: true });
+
+// ─── SCRUB OBSERVER (separate from scroll — no layout reads needed) ──
+let scrubTimer = null;
+const scrubObs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) { scrubTimer = setTimeout(() => scrubWords.forEach(w => w.classList.add('lit')), 2500); }
+    else { clearTimeout(scrubTimer); }
+  });
+}, { threshold: .3 });
+if (scrubSection) scrubObs.observe(scrubSection);
+
+// ─── 6. SCROLL REVEAL ────────────────────────────────────────
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    setTimeout(() => en.target.classList.add('in'), parseInt(en.target.dataset.delay || 0, 10));
     revObs.unobserve(en.target);
   });
-},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
-document.querySelectorAll('[data-a]').forEach(el=>revObs.observe(el));
+}, { threshold: .08, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('[data-a]').forEach(el => revObs.observe(el));
 
-// 7. COUNTER ANIMATION
-const cntObs=new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting)return;
-    const el=en.target;
-    const target=parseFloat(el.dataset.count);
-    const sfx=el.dataset.sfx||'',pfx=el.dataset.pfx||'';
-    const dec=target%1!==0?1:0;
-    const dur=1800,t0=performance.now();
-    const tick=now=>{
-      const p=Math.min((now-t0)/dur,1);
-      const e=1-Math.pow(2,-10*p);
-      el.textContent=pfx+(dec?(target*e).toFixed(1):Math.round(target*e))+sfx;
-      if(p<1)requestAnimationFrame(tick);
+// ─── 7. COUNTER ANIMATION ────────────────────────────────────
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    const target = parseFloat(el.dataset.count);
+    const sfx = el.dataset.sfx || '', pfx = el.dataset.pfx || '';
+    const dec = target % 1 !== 0 ? 1 : 0;
+    const dur = 1800, t0 = performance.now();
+    const tick = now => {
+      const p = Math.min((now - t0) / dur, 1);
+      const e = 1 - Math.pow(2, -10 * p);
+      el.textContent = pfx + (dec ? (target * e).toFixed(1) : Math.round(target * e)) + sfx;
+      if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
     cntObs.unobserve(el);
   });
-},{threshold:.5});
-document.querySelectorAll('[data-count]').forEach(el=>cntObs.observe(el));
+}, { threshold: .5 });
+document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
 
-// 8. NAV STICKY & ACTIVE
-const mainnav=document.getElementById('mainnav');
-const navAs=document.querySelectorAll('.nav-links a');
-const secs=document.querySelectorAll('section[id],div[id="scrub-section"]');
-const dots=document.querySelectorAll('.sdot');
-window.addEventListener('scroll',()=>{
-  mainnav.classList.toggle('stk',window.scrollY>55);
-  let cur='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-240)cur=s.id;});
-  navAs.forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+cur));
-  dots.forEach(d=>d.classList.toggle('act',d.dataset.target===cur));
-},{passive:true});
-dots.forEach(d=>d.addEventListener('click',()=>{
-  const t=document.getElementById(d.dataset.target);
-  if(t)t.scrollIntoView({behavior:'smooth'});
+// ─── 8b. SECTION DOT CLICKS ──────────────────────────────────
+dots.forEach(d => d.addEventListener('click', () => {
+  const t = document.getElementById(d.dataset.target);
+  if (t) t.scrollIntoView({ behavior: 'smooth' });
 }));
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+scrollY-80,behavior:'smooth'});}
+
+// ─── SMOOTH ANCHOR SCROLL ────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 80, behavior: 'smooth' }); }
   });
 });
 
-// 9. MAGNETIC PARALLAX (hero button)
-document.querySelectorAll('.mag').forEach(btn=>{
-  btn.addEventListener('mousemove',e=>{
-    const r=btn.getBoundingClientRect();
-    const dx=(e.clientX-(r.left+r.width/2))*.3,dy=(e.clientY-(r.top+r.height/2))*.3;
-    btn.style.transform=`translate(${dx}px,${dy}px)`;
-    btn.style.transition='transform .08s linear';
+// ─── 9. MAGNETIC PARALLAX (hero button) ──────────────────────
+document.querySelectorAll('.mag').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width / 2)) * .3, dy = (e.clientY - (r.top + r.height / 2)) * .3;
+    btn.style.transform = `translate(${dx}px,${dy}px)`;
+    btn.style.transition = 'transform .08s linear';
   });
-  btn.addEventListener('mouseleave',()=>{
-    btn.style.transform='translate(0,0)';
-    btn.style.transition='transform .55s cubic-bezier(.16,1,.3,1)';
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translate(0,0)';
+    btn.style.transition = 'transform .55s cubic-bezier(.16,1,.3,1)';
   });
 });
 
-// 10. ABOUT IMAGE TILT
-const tiltEl=document.getElementById('aboutImg');
-if(tiltEl){
-  tiltEl.addEventListener('mousemove',e=>{
-    const r=tiltEl.getBoundingClientRect();
-    const xp=(e.clientX-r.left)/r.width-.5,yp=(e.clientY-r.top)/r.height-.5;
-    tiltEl.style.transform=`perspective(700px) rotateY(${xp*8}deg) rotateX(${-yp*8}deg) scale(1.02)`;
-    tiltEl.style.transition='transform .06s linear';
+// ─── 10. ABOUT IMAGE TILT ────────────────────────────────────
+const tiltEl = document.getElementById('aboutImg');
+if (tiltEl) {
+  tiltEl.addEventListener('mousemove', e => {
+    const r = tiltEl.getBoundingClientRect();
+    const xp = (e.clientX - r.left) / r.width - .5, yp = (e.clientY - r.top) / r.height - .5;
+    tiltEl.style.transform = `perspective(700px) rotateY(${xp * 8}deg) rotateX(${-yp * 8}deg) scale(1.02)`;
+    tiltEl.style.transition = 'transform .06s linear';
   });
-  tiltEl.addEventListener('mouseleave',()=>{
-    tiltEl.style.transform='perspective(700px) rotateY(0) rotateX(0) scale(1)';
-    tiltEl.style.transition='transform .6s cubic-bezier(.16,1,.3,1)';
+  tiltEl.addEventListener('mouseleave', () => {
+    tiltEl.style.transform = 'perspective(700px) rotateY(0) rotateX(0) scale(1)';
+    tiltEl.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1)';
   });
 }
 
-// 12. VIDEO MODAL
-function openVid(src){
-  const m=document.getElementById('vmodal'),v=document.getElementById('vmodvid');
-  v.src=src;m.classList.add('open');
-  requestAnimationFrame(()=>v.play().catch(()=>{}));
+// ─── 12. VIDEO MODAL ─────────────────────────────────────────
+function openVid(src) {
+  const m = document.getElementById('vmodal'), v = document.getElementById('vmodvid');
+  v.src = src; m.classList.add('open');
+  requestAnimationFrame(() => v.play().catch(() => {}));
 }
-function closeVid(){
-  const m=document.getElementById('vmodal'),v=document.getElementById('vmodvid');
-  v.pause();v.src='';m.classList.remove('open');
+function closeVid() {
+  const m = document.getElementById('vmodal'), v = document.getElementById('vmodvid');
+  v.pause(); v.src = ''; m.classList.remove('open');
 }
-document.getElementById('vmodal').addEventListener('click',function(e){if(e.target===this)closeVid();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVid();});
+// Wire up via addEventListener instead of inline onclick
+const vmodalClose = document.getElementById('vmodal-close');
+if (vmodalClose) vmodalClose.addEventListener('click', closeVid);
+document.getElementById('vmodal').addEventListener('click', function (e) { if (e.target === this) closeVid(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVid(); });
 
-// 13. SCROLL-TIED MARQUEES
-const mqTrack=document.querySelector('.mq-track');
-const bmqTrack=document.querySelector('.bmq-track');
-window.addEventListener('scroll',()=>{
-  const offset=(window.scrollY*.08)%50;
-  if(mqTrack)mqTrack.style.transform=`translateX(-${offset}%)`;
-  if(bmqTrack)bmqTrack.style.transform=`translateX(-${50-offset}%)`;
-},{passive:true});
+// ─── 13. SCROLL-TIED MARQUEES ────────────────────────────────
+const mqTrack = document.querySelector('.mq-track');
+const bmqTrack = document.querySelector('.bmq-track');
+// Marquee offset is read inside the merged scroll handler above;
+// we add it here as a lightweight separate scroll listener since
+// it only touches transform (no layout read needed).
+window.addEventListener('scroll', () => {
+  const offset = (window.scrollY * .08) % 50;
+  if (mqTrack) mqTrack.style.transform = `translateX(-${offset}%)`;
+  if (bmqTrack) bmqTrack.style.transform = `translateX(-${50 - offset}%)`;
+}, { passive: true });
 
-// 14. HERO TEXT EVASION
-const evasiveWords=document.querySelectorAll('.hero-hl .word');
-document.addEventListener('mousemove',e=>{
-  if(window.scrollY>window.innerHeight)return;
-  evasiveWords.forEach(word=>{
-    if(!word.classList.contains('show'))return;
-    const rect=word.getBoundingClientRect();
-    const dx=e.clientX-(rect.left+rect.width/2),dy=e.clientY-(rect.top+rect.height/2);
-    const dist=Math.sqrt(dx*dx+dy*dy),radius=200;
-    if(dist<radius){
-      const force=(radius-dist)/radius;
-      word.style.transform=`translate(${-(dx/dist)*force*35}px,${-(dy/dist)*force*35}px)`;
-      word.style.transition='transform .1s ease-out';
-    }else{
-      word.style.transform='translate(0,0)';
-      word.style.transition='transform .7s cubic-bezier(.16,1,.3,1)';
+// ─── 14. HERO TEXT EVASION ───────────────────────────────────
+const evasiveWords = document.querySelectorAll('.hero-hl .word');
+document.addEventListener('mousemove', e => {
+  if (window.scrollY > window.innerHeight) return;
+  evasiveWords.forEach(word => {
+    if (!word.classList.contains('show')) return;
+    const rect = word.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2), dy = e.clientY - (rect.top + rect.height / 2);
+    const dist = Math.sqrt(dx * dx + dy * dy), radius = 200;
+    if (dist < radius) {
+      const force = (radius - dist) / radius;
+      word.style.transform = `translate(${-(dx / dist) * force * 35}px,${-(dy / dist) * force * 35}px)`;
+      word.style.transition = 'transform .1s ease-out';
+    } else {
+      word.style.transform = 'translate(0,0)';
+      word.style.transition = 'transform .7s cubic-bezier(.16,1,.3,1)';
     }
   });
 });
 
-// 15. CASE CARD FLIP + MAGNETIC TILT
-document.querySelectorAll('.case-flip').forEach(card=>{
-  card.addEventListener('click',()=>card.classList.toggle('flipped'));
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const xp=((e.clientX-r.left)/r.width-.5)*2,yp=((e.clientY-r.top)/r.height-.5)*2;
-    const inner=card.querySelector('.case-inner');
-    if(!card.classList.contains('flipped')){
-      inner.style.transform=`perspective(900px) rotateY(${xp*5}deg) rotateX(${-yp*5}deg) scale(1.02)`;
-      inner.style.transition='transform .12s linear';
+// ─── 15. CASE CARD FLIP + MAGNETIC TILT ─────────────────────
+document.querySelectorAll('.case-flip').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const xp = ((e.clientX - r.left) / r.width - .5) * 2, yp = ((e.clientY - r.top) / r.height - .5) * 2;
+    const inner = card.querySelector('.case-inner');
+    if (!card.classList.contains('flipped')) {
+      inner.style.transform = `perspective(900px) rotateY(${xp * 5}deg) rotateX(${-yp * 5}deg) scale(1.02)`;
+      inner.style.transition = 'transform .12s linear';
     }
   });
-  card.addEventListener('mouseleave',()=>{
-    const inner=card.querySelector('.case-inner');
-    if(!card.classList.contains('flipped')){
-      inner.style.transform='perspective(900px) rotateY(0) rotateX(0) scale(1)';
-      inner.style.transition='transform .55s cubic-bezier(.16,1,.3,1)';
+  card.addEventListener('mouseleave', () => {
+    const inner = card.querySelector('.case-inner');
+    if (!card.classList.contains('flipped')) {
+      inner.style.transform = 'perspective(900px) rotateY(0) rotateX(0) scale(1)';
+      inner.style.transition = 'transform .55s cubic-bezier(.16,1,.3,1)';
     }
   });
 });
 
-// 16. TILE OVERLAY (tap for mobile, hover handled via CSS)
-document.querySelectorAll('.tile-flip').forEach(tile=>{
-  tile.addEventListener('click',()=>{
-    // On touch: toggle overlay; on hover devices, CSS handles it
-    tile.classList.toggle('flipped');
-  });
+// ─── 16. TILE OVERLAY ────────────────────────────────────────
+document.querySelectorAll('.tile-flip').forEach(tile => {
+  tile.addEventListener('click', () => tile.classList.toggle('flipped'));
 });
+
+// ─── NEWS CAROUSEL DRAG (moved from inline <script>) ─────────
+(function () {
+  const slider = document.getElementById('newsCarousel');
+  if (!slider) return;
+  let isDown = false, startX, scrollLeft;
+
+  slider.addEventListener('mousedown', e => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    slider.style.scrollSnapType = 'none';
+  });
+  slider.addEventListener('mouseleave', () => {
+    isDown = false; slider.classList.remove('active');
+    slider.style.scrollSnapType = 'x mandatory';
+  });
+  slider.addEventListener('mouseup', () => {
+    isDown = false; slider.classList.remove('active');
+    slider.style.scrollSnapType = 'x mandatory';
+  });
+  slider.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    slider.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+})();
+
+// ─── IMAGE HOVER TRANSITIONS (replaces inline onmouseover/out) ──
+document.querySelectorAll('[data-hover-img]').forEach(img => {
+  const isContactPhoto = img.classList.contains('contact-portrait-img');
+  if (!isContactPhoto) {
+    // news carousel images
+    img.addEventListener('mouseenter', () => {
+      img.style.filter = 'grayscale(0%)';
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1.03)';
+    });
+    img.addEventListener('mouseleave', () => {
+      img.style.filter = 'grayscale(100%)';
+      img.style.opacity = '.6';
+      img.style.transform = 'scale(1)';
+    });
+  }
+  // Contact portrait hover is handled by CSS (.photo-portrait-frame:hover .contact-portrait-img)
+});
+
+// ─── FAQ ACCORDION (moved from inline <script>) ───────────────
+function toggleFaq(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('.faq-icon');
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+  if (isOpen) {
+    content.style.maxHeight = '0px';
+    icon.style.transform = 'rotate(0deg)';
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    content.style.maxHeight = content.scrollHeight + 'px';
+    icon.style.transform = 'rotate(45deg)';
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+// Wire FAQ buttons via addEventListener instead of inline onclick
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => toggleFaq(btn));
+});
+
+// ─── FOOTER SCROLL-TO-TOP (replaces inline onclick) ──────────
+const footerTopBtn = document.getElementById('footer-top-btn');
+if (footerTopBtn) {
+  footerTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// ─── MOBILE MENU (replaces inline onclick on all links) ──────
+function toggleMobileMenu() {
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const isOpen = menu.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', String(isOpen));
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  menu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Wire nav toggle button
+const navToggle = document.getElementById('nav-toggle');
+if (navToggle) navToggle.addEventListener('click', toggleMobileMenu);
+// Wire all mobile menu links
+document.querySelectorAll('#mobile-menu a').forEach(a => {
+  a.addEventListener('click', closeMobileMenu);
+});
+
+// ─── GAME CANVAS — PAUSE WHEN OFF-SCREEN ─────────────────────
+// (Added: prevents truck CSS animations running in background)
+const gameWrap = document.getElementById('gameWrap');
+if (gameWrap) {
+  const gameObserver = new IntersectionObserver(([entry]) => {
+    const animState = entry.isIntersecting ? 'running' : 'paused';
+    gameWrap.querySelectorAll('.truck, .tree, .mountain, .wind, .road-bump').forEach(el => {
+      el.style.animationPlayState = animState;
+    });
+  }, { threshold: 0.1 });
+  gameObserver.observe(gameWrap);
+}
 
 // ═══════════════════════════════════════════════════════════
 // INVENTORY OPTIMISATION SIMULATOR
