@@ -265,7 +265,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .exp-bullets li strong { color: var(--fg); font-weight: 400; }
 
 /* ─── CASE STUDIES ────────────────────────────────────────── */
-#section-cases { padding: .5rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+#section-cases { padding: 4.5rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .section-cases-shell { padding-top: 5rem; }
 
 /* TW Card Deck (was inline <style> in HTML) */
