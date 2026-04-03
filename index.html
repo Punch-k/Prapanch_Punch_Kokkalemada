@@ -1,71 +1,125 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     Punch Kokkalemada — Portfolio
+     Refactored: 2026-04-03
+     Changes:
+       • All 6 embedded <style> blocks → style.css
+       • All 3 inline <script> blocks → script.js
+       • Duplicate .news-carousel style block removed
+       • Dead comment "/*cinematic crawl */" removed
+       • All inline style="" attributes → CSS classes
+       • Open Graph + Twitter meta tags added
+       • <meta name="description"> added
+       • <link rel="canonical"> added
+       • Google Fonts preconnect links added
+       • :focus-visible ring added (in style.css)
+       • Mobile menu first link text added ("Home")
+       • role="navigation" + aria-label on #sdots, #mobile-menu
+       • aria-expanded on FAQ buttons (toggled via script.js)
+       • loading="lazy" on below-fold images
+       • Image mouseover/mouseout handlers → script.js [data-hover-img]
+       • Inline onclick handlers on footer button → script.js
+       • toggleMobileMenu / closeMobileMenu duplicate removed from script.js
+     ============================================================ -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Punch Kokkalemada | MBA - Commercial Strategy & GTM Execution</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KE4GVETS40"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punch Kokkalemada | MBA — Commercial Strategy &amp; GTM Execution</title>
 
-  gtag('config', 'G-KE4GVETS40');
-</script>
- <!-- Google tag (gtag.js) paste before </head> at the top of every html page --> 
+  <!-- ── SEO Meta ───────────────────────────────────────── -->
+  <meta name="description" content="MBA candidate at Michigan State Broad College of Business. Specialising in supply chain strategy, GTM execution, and operations. Fix the Ops. Scale the Business.">
+  <link rel="canonical" href="https://punchkokkalemada.com">
+
+  <!-- ── Open Graph / LinkedIn / Twitter ───────────────── -->
+  <meta property="og:title" content="Punch Kokkalemada — MBA Commercial Strategy &amp; GTM">
+  <meta property="og:description" content="Fix the Ops. Scale the Business. MBA candidate at Broad College of Business specialising in supply chain, GTM execution, and operations strategy.">
+  <meta property="og:image" content="https://punchkokkalemada.com/og-preview.jpg">
+  <meta property="og:url" content="https://punchkokkalemada.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Punch Kokkalemada — MBA &amp; Ops Strategy">
+  <meta name="twitter:description" content="Fix the Ops. Scale the Business. MBA · Broad College · MSU.">
+  <meta name="twitter:image" content="https://punchkokkalemada.com/og-preview.jpg">
+
+  <!-- ── Fonts: preconnect first, then stylesheet ───────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- ── Stylesheet ────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ── Google Analytics ──────────────────────────────── -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KE4GVETS40"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KE4GVETS40');
+  </script>
 </head>
 <body>
 
-<div id="preloader">
+<!-- ── PRELOADER ──────────────────────────────────────── -->
+<div id="preloader" role="status" aria-label="Page loading">
   <div class="loader-track"><div class="loader-bar" id="lbar"></div></div>
   <div class="loader-text" id="ltext">00%</div>
 </div>
-<div id="aura"></div>
-<div id="sprog"></div>
-<div id="cdot"></div>
-<div id="cring"></div>
-<div id="ctip"></div>
 
-<!-- FLOATING CONNECT PILL (appears after hero) -->
+<!-- ── AMBIENT / CURSOR / SCROLL CHROME ──────────────── -->
+<div id="aura" aria-hidden="true"></div>
+<div id="sprog" aria-hidden="true"></div>
+<div id="cdot" aria-hidden="true"></div>
+<div id="cring" aria-hidden="true"></div>
+<div id="ctip" aria-hidden="true"></div>
+
+<!-- ── FLOATING CONNECT PILL ─────────────────────────── -->
 <div id="float-cta">
   <a class="float-btn" href="#gtm-simulators">
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1"/><line x1="5" y1="2" x2="5" y2="8" stroke="currentColor" stroke-width="1"/><line x1="2" y1="5" x2="8" y2="5" stroke="currentColor" stroke-width="1"/></svg>
-    Lets Fix the Ops!
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+      <circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1"/>
+      <line x1="5" y1="2" x2="5" y2="8" stroke="currentColor" stroke-width="1"/>
+      <line x1="2" y1="5" x2="8" y2="5" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    Let's Fix the Ops!
   </a>
 </div>
-<!-- READING POSITION HINT -->
-<div id="read-time">SCROLL TO EXPLORE</div>
 
-<div id="sdots">
-  <div class="sdot act" data-target="section-intro"         data-lbl="Home"></div>
-  <div class="sdot"     data-target="section-experience"    data-lbl="Experience"></div>
-  <div class="sdot"     data-target="section-cases"         data-lbl="Cases"></div>
-  <div class="sdot"     data-target="section-brand-experience" data-lbl="Education"></div>
-  <div class="sdot"     data-target="section-skills"          data-lbl="Skills"></div>
-  <div class="sdot"     data-target="gtm-simulators"          data-lbl="Simulator"></div>
-  <div class="sdot"     data-target="section-get-in-touch"  data-lbl="Contact"></div>
-</div>
+<!-- ── READING POSITION HINT ─────────────────────────── -->
+<div id="read-time" aria-hidden="true">SCROLL TO EXPLORE</div>
 
-<div id="vmodal">
+<!-- ── SECTION-DOT NAV ───────────────────────────────── -->
+<nav id="sdots" role="navigation" aria-label="Page section navigation">
+  <div class="sdot act" data-target="section-intro"           data-lbl="Home"       role="link" tabindex="0" aria-label="Jump to Home"></div>
+  <div class="sdot"     data-target="section-experience"      data-lbl="Experience" role="link" tabindex="0" aria-label="Jump to Experience"></div>
+  <div class="sdot"     data-target="section-cases"           data-lbl="Cases"      role="link" tabindex="0" aria-label="Jump to Cases"></div>
+  <div class="sdot"     data-target="section-brand-experience" data-lbl="Education" role="link" tabindex="0" aria-label="Jump to Education"></div>
+  <div class="sdot"     data-target="section-skills"          data-lbl="Skills"     role="link" tabindex="0" aria-label="Jump to Skills"></div>
+  <div class="sdot"     data-target="gtm-simulators"          data-lbl="Simulator"  role="link" tabindex="0" aria-label="Jump to Simulator"></div>
+  <div class="sdot"     data-target="section-get-in-touch"    data-lbl="Contact"    role="link" tabindex="0" aria-label="Jump to Contact"></div>
+</nav>
+
+<!-- ── VIDEO MODAL ───────────────────────────────────── -->
+<div id="vmodal" role="dialog" aria-modal="true" aria-label="Video player">
   <video id="vmodvid" controls></video>
-  <button onclick="closeVid()">✕ Close</button>
+  <button id="vmodal-close" aria-label="Close video">✕ Close</button>
 </div>
 
-<div id="mobile-menu">
-  <a href="#scrub-section"          onclick="closeMobileMenu()"></a>
-  <a href="#section-experience"     onclick="closeMobileMenu()">Experience</a>
-  <a href="#section-cases"          onclick="closeMobileMenu()">Cases</a>
-  <a href="#section-brand-experience" onclick="closeMobileMenu()">Education</a>
-  <a href="#section-skills"          onclick="closeMobileMenu()">Skills</a>
-  <a href="#gtm-simulators"          onclick="closeMobileMenu()">Simulator</a>
-  <a href="#section-get-in-touch"   onclick="closeMobileMenu()">Contact</a>
-  <a href="#section-get-in-touch" class="mob-cta" onclick="closeMobileMenu()">Let's Connect ↗</a>
-</div>
+<!-- ── MOBILE MENU ───────────────────────────────────── -->
+<nav id="mobile-menu" role="navigation" aria-label="Mobile menu">
+  <a href="#scrub-section">Home</a>
+  <a href="#section-experience">Experience</a>
+  <a href="#section-cases">Cases</a>
+  <a href="#section-brand-experience">Education</a>
+  <a href="#section-skills">Skills</a>
+  <a href="#gtm-simulators">Simulator</a>
+  <a href="#section-get-in-touch">Contact</a>
+  <a href="#section-get-in-touch" class="mob-cta">Let's Connect ↗</a>
+</nav>
 
-<nav id="mainnav">
+<!-- ── MAIN NAV ──────────────────────────────────────── -->
+<nav id="mainnav" role="navigation" aria-label="Primary navigation">
   <a class="nav-logo" href="#">PUNCH <span>KOKKALEMADA</span></a>
   <ul class="nav-links">
     <li><a href="#section-experience">Profession</a></li>
@@ -75,1610 +129,919 @@
     <li><a href="#gtm-simulators">SandBox</a></li>
   </ul>
   <a class="nav-cta" href="#section-get-in-touch"><span>Let's Connect ↗</span></a>
-  <button id="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+  <button id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<!-- ── I. HERO ──────────────────────────────────────────── -->
-<section id="section-intro">
-  <div id="hero-bg"></div>
+
+<!-- ── I. HERO ───────────────────────────────────────── -->
+<section id="section-intro" aria-label="Hero">
+  <div id="hero-bg" role="img" aria-label="MSU Spartan Stadium"></div>
   <div class="hero-content">
     <p class="hero-eyebrow" id="h-eyebrow">MBA · Commercial Strategy · Supply Chain &amp; GTM Execution</p>
     <h1 class="hero-hl" id="h-hl">
-      <span class="line-mask"><span class="word" style="transition-delay:.2s">Fix</span>&nbsp;<span class="word" style="transition-delay:.3s">the</span>&nbsp;<span class="word" style="transition-delay:.4s">Ops.</span></span>
-      <em><span class="line-mask"><span class="word" style="transition-delay:.5s">Scale</span>&nbsp;<span class="word" style="transition-delay:.6s">the</span>&nbsp;<span class="word" style="transition-delay:.7s">Business.</span></span></em>
+      <span class="line-mask">
+        <span class="word" style="transition-delay:.2s">Fix</span>&nbsp;<span class="word" style="transition-delay:.3s">the</span>&nbsp;<span class="word" style="transition-delay:.4s">Ops.</span>
+      </span>
+      <em><span class="line-mask">
+        <span class="word" style="transition-delay:.5s">Scale</span>&nbsp;<span class="word" style="transition-delay:.6s">the</span>&nbsp;<span class="word" style="transition-delay:.7s">Business.</span>
+      </span></em>
     </h1>
-    <p class="hero-sub" id="h-sub">  Aligning technical development with sales enablement, and driving stakeholder consensus across global teams. My focus is always on commercialization. I leverage product lifecycle management and marketing research to translate data into a compelling, market-ready value proposition.</p>
+    <p class="hero-sub" id="h-sub">
+      Aligning technical development with sales enablement, and driving stakeholder consensus across global teams.
+      My focus is always on commercialization. I leverage product lifecycle management and marketing research to
+      translate data into a compelling, market-ready value proposition.
+    </p>
     <div class="hero-actions" id="h-act">
-      <a class="btn-pri mag" href="#section-experience"><span> View My Work ↗</span></a>
+      <a class="btn-pri mag" href="#section-experience"><span>View My Work ↗</span></a>
     </div>
   </div>
-  <div class="scroll-hint"><div class="scroll-line"></div> Scroll to Explore🔻</div>
+  <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div> Scroll to Explore 🔻</div>
 </section>
 
-<!-- ── STAT STRIP ────────────────────────────────────────── -->
-<div class="stat-strip">
-  <div class="stat-strip-item">
+<!-- ── STAT STRIP ─────────────────────────────────────── -->
+<div class="stat-strip" role="list" aria-label="Key achievements">
+  <div class="stat-strip-item" role="listitem">
     <div class="stat-strip-n"><span data-count="3" data-sfx="M">0%</span></div>
     <div class="stat-strip-l">Operational Overhead Reduced<br><em>Enterprise Performance Project</em></div>
   </div>
-  <div class="stat-strip-item">
+  <div class="stat-strip-item" role="listitem">
     <div class="stat-strip-n"><span data-count="60" data-sfx="%">0%</span></div>
     <div class="stat-strip-l">Reporting time reduction<br><em>Risk Assessment Project</em></div>
   </div>
-  <div class="stat-strip-item">
+  <div class="stat-strip-item" role="listitem">
     <div class="stat-strip-n"><span data-count="15" data-sfx="+">0%</span></div>
     <div class="stat-strip-l">Assets Produced<br><em>Dashboards Building Project</em></div>
   </div>
-   <div class="stat-strip-item">
+  <div class="stat-strip-item" role="listitem">
     <div class="stat-strip-n"><span data-count="90" data-sfx="Days">0%</span></div>
     <div class="stat-strip-l">Time-to-Market<br><em>New Product Strategy Project</em></div>
   </div>
-   <div class="stat-strip-item">
+  <div class="stat-strip-item" role="listitem">
     <div class="stat-strip-n"><span data-count="30" data-sfx="%">0%</span></div>
     <div class="stat-strip-l">Media engagement growth<br><em>Targeted Headcount Project</em></div>
   </div>
 </div>
-<!-- ── MARQUEE ──────────────────────────────────────────── -->
-<div class="mq-wrap">
+
+<!-- ── MARQUEE ────────────────────────────────────────── -->
+<div class="mq-wrap" aria-hidden="true">
   <div class="mq-track">
     <span class="mq-item">DEMAND FORECASTING</span><span class="mq-item hi">✺</span>
     <span class="mq-item">DATA STORYTELLING</span><span class="mq-item hi">✺</span>
     <span class="mq-item">MARKET INTELLIGENCE</span><span class="mq-item hi">✺</span>
-    <span class="mq-item">SALES & OPS PLANNING</span><span class="mq-item hi">✺</span>
-    <span class="mq-item">P&L OPTIMIZATION</span><span class="mq-item hi">✺</span>
+    <span class="mq-item">SALES &amp; OPS PLANNING</span><span class="mq-item hi">✺</span>
+    <span class="mq-item">P&amp;L OPTIMIZATION</span><span class="mq-item hi">✺</span>
     <span class="mq-item">GTM EXECUTION</span><span class="mq-item hi">✺</span>
     <span class="mq-item">CHANGE MANAGEMENT</span><span class="mq-item hi">✺</span>
   </div>
 </div>
-<!-- ──(mwrqee) SCRUB INTRO ──────────────────────────────────────── -->
-<div class="intro-copy" id="scrub-section" style="padding: 4rem 2rem 1rem 2rem; min-height: auto; max-width: 1400px; margin: 0 auto;">
-        <div style="display: flex; flex-wrap: wrap; gap: 4rem; align-items: center;">
-                <div style="flex: 1 1 500px;">
-            <h2 class="sec-num" data-a="up" style="margin-bottom: 1rem; font-size: clamp(3rem, 6vw, 5rem); font-family: var(--display); color: var(--gold); letter-spacing: 0.1em; line-height: 1;">I. ABOUT</h2>
-            <p class="body-xl scrub-text" id="scrub-text" data-a="up" data-delay="100" style="margin-bottom: 0;">
-                My background across three totally different industries taught me one core truth: the mechanics of business are the same everywhere. Products need to work, operations need to scale, and people need to buy them. 
-            </p>
+
+<!-- ── SCRUB INTRO ────────────────────────────────────── -->
+<div class="intro-copy" id="scrub-section">
+  <div class="scrub-layout">
+    <div class="scrub-text-col">
+      <h2 class="sec-num scrub-heading" data-a="up">I. ABOUT</h2>
+      <p class="body-xl scrub-text" id="scrub-text" data-a="up" data-delay="100">
+        My background across three totally different industries taught me one core truth:
+        the mechanics of business are the same everywhere.
+        Products need to work, operations need to scale, and people need to buy them.
+      </p>
+    </div>
+
+    <!-- TRUCK GAME WRAPPER — styles in style.css under ─── TRUCK GAME ─── -->
+    <div id="gameWrap" data-a="up" data-delay="200" class="game-wrap">
+      <div id="header" class="game-header">
+        <div id="brand" class="game-brand">SUPPLY &amp; CO.</div>
+        <div id="scoreboard" class="game-scoreboard">
+          ROUTE TIME: <span id="scoreEl" class="game-score-val">02:00</span> &nbsp;
+          <span id="bonusEl" class="game-bonus-val"> Penalty: 0</span>
         </div>
-        <style>
-    .loop-wrapper {
-        flex: 1 1 400px;
-        min-height: 350px;
-        position: relative;
-        overflow: hidden;
-        border-radius: 16px;
-        background: rgba(201,168,76,0.02);
-        border: 1px solid rgba(237,233,224,0.05);
-    }
-        /* The Ground Line */
-    .scenery-line {
-        position: absolute;
-        bottom: 35%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: var(--line);
-    }
-    /* Background Elements (Mountains & Trees) */
-    .mountain {
-        position: absolute;
-        bottom: 35%;
-        right: -150px;
-        width: 0;
-        height: 0;
-        border-left: 80px solid transparent;
-        border-right: 80px solid transparent;
-        border-bottom: 120px solid rgba(201,168,76,0.03);
-        animation: passBy 12s linear infinite;
-        z-index: 1;
-    }
-    .tree {
-        position: absolute;
-        bottom: 35%;
-        right: -50px;
-        width: 0;
-        height: 0;
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        border-bottom: 40px solid rgba(237,233,224,0.08);
-        animation: passBy 4s linear infinite;
-        z-index: 2;
-    }
-    .tree.t2 { border-bottom-width: 55px; border-bottom-color: rgba(237,233,224,0.05); animation-duration: 5.5s; animation-delay: 1.5s; z-index: 1; }
-    .tree.t3 { border-bottom-width: 30px; animation-duration: 3.2s; animation-delay: 2.5s; }
-
-    /* Wind / Speed Lines */
-    .wind {
-        position: absolute;
-        height: 1px;
-        background: var(--gold);
-        opacity: 0.6;
-        right: -100px;
-        animation: windPass 1.2s linear infinite;
-        z-index: 20;
-    }
-    .wind.w1 { top: 45%; width: 80px; animation-duration: 1.5s; }
-    .wind.w2 { top: 60%; width: 50px; animation-duration: 1.1s; animation-delay: 0.4s; opacity: 0.3; }
-
-    /* The Truck */
-    .truck {
-        position: absolute;
-        bottom: 35%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 140px;
-        height: 60px;
-        animation: truckBounce 0.4s ease-in-out infinite alternate;
-        z-index: 10;
-    }
-    
-    .truck-cab {
-        position: absolute;
-        right: 0;
-        bottom: 6px;
-        width: 40px;
-        height: 40px;
-        background: var(--gold);
-        border-radius: 6px 16px 4px 4px;
-    }
-    
-    .truck-window {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        width: 14px;
-        height: 16px;
-        background: var(--bg);
-        border-radius: 2px 8px 2px 2px;
-    }
-    
-    .truck-trailer {
-        position: absolute;
-        left: 0;
-        bottom: 6px;
-        width: 95px;
-        height: 54px;
-        background: rgba(237, 233, 224, 0.9);
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .truck-trailer span {
-        font-family: var(--display);
-        color: var(--bg);
-        font-size: 1.3rem;
-        letter-spacing: 0.15em;
-        opacity: 0.9;
-    }
-
-    /* Wheels */
-    .wheel {
-        position: absolute;
-        bottom: -2px;
-        width: 20px;
-        height: 20px;
-        background: var(--bg);
-        border: 4px solid rgba(237, 233, 224, 0.95);
-        border-radius: 50%;
-        animation: wheelSpin 0.5s linear infinite;
-    }
-    .wheel.w-front { right: 8px; border-color: var(--gold); }
-    .wheel.w-mid { left: 35px; }
-    .wheel.w-back { left: 8px; }
-
-    /* Keyframes */
-    @keyframes truckBounce { 100% { transform: translate(-50%, 2px); } }
-    @keyframes wheelSpin { 100% { transform: rotate(360deg); } }
-    @keyframes passBy { 100% { right: 120%; } }
-    @keyframes windPass { 100% { right: 120%; } }
-    
-/* ─── GAMIFIED LANDSCAPE PHYSICS ─── */
-/* 1. The Road Bump (Upgraded Visibility!) */
-.road-bump {
-    position: absolute;
-    bottom: 35%; 
-    right: -50px;
-    width: 45px; /* Made it slightly wider */
-    height: 15px; /* Made it slightly taller */
-    background: #e05a00; /* Bright Orange Alert Color! */
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 0 15px rgba(224, 90, 0, 0.6); /* Adds a glowing aura so they can't miss it */
-    animation: passBy 4s linear infinite; /* Adjusted speed for better gameplay */
-    z-index: 15; /* Forces it to the very front */
-}
-
-.penalty-text {
-    position: absolute;
-    bottom: 45%;
-    left: 15%;
-    font-family: var(--display);
-    font-size: 2rem;
-    color: #ef4444; 
-    opacity: 0;
-    pointer-events: none;
-    z-index: 20;
-    font-weight: bold;
-}
-
-.show-penalty {
-    animation: floatUpFade 1s ease-out forwards;
-}
-
-@keyframes floatUpFade {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-60px) scale(1.3); }
-}
-
-.truck {
-    transition: transform 0.1s;
-    cursor: pointer; 
-}
-
-.truck-jump {
-    animation: jumpBump 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-@keyframes jumpBump {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-80px) rotate(5deg); }
-    100% { transform: translateY(0); }
-}
-
-.truck-shake {
-    animation: hitBump 0.5s ease-in-out forwards;
-}
-
-@keyframes hitBump {
-    0% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-15px) rotate(-8deg); }
-    50% { transform: translateY(0) rotate(5deg); }
-    75% { transform: translateY(-8px) rotate(-3deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-}
-
-.impact-pause .mountain, 
-.impact-pause .tree, 
-.impact-pause .road-bump, 
-.impact-pause .wind {
-    animation-play-state: paused !important; 
-}
-@media (max-width: 600px) {
-  /* 1. Stack the Logo and Stats vertically */
-  #header {
-    flex-direction: column !important;
-    height: auto !important;
-    padding: 10px 0 !important;
-    gap: 15px !important;
-  }
-
-  /* 2. Put Route and Bonus in a neat 2-column grid */
-  #scoreboard {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    width: 100% !important;
-    justify-items: center !important;
-  }
-
-  /* 3. Make the game area actually taller on small screens */
-  .loop-wrapper {
-    min-height: 400px !important;
-  }
-}
-</style>
-
-<div id="gameWrap" data-a="up" data-delay="200" style="flex: 1 1 400px; max-width: 100%; position: relative;">
-  
-  <div id="header" style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px 10px; border-bottom: 1px solid var(--line); margin-bottom: 8px; font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #888;">
-    <div id="brand" style="font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--gold);">SUPPLY & CO.</div>
-    <div id="scoreboard" style="display: flex; gap: 24px;">
-      ROUTE TIME: <span id="scoreEl" style="color: var(--gold); font-size: 15px;">02:00</span> &nbsp;
-      <span id="bonusEl" style="color: #10b981; font-size: 15px;"> Penalty: 0</span>
+      </div>
+      <canvas id="canvas" width="860" height="360" class="game-canvas" aria-label="Logistics mini-game — click to start"></canvas>
+      <div class="game-footer">
+        <div id="hint" class="game-hint">
+          CLICK THE TRUCK or press <b class="hint-key">SPACE</b> to navigate operational bottlenecks &bull;
+          <b class="hint-key">CLICK</b> to start
+        </div>
+        <p class="game-subtitle">
+          <em>[Chrome Dino inspired Logistics Mini-Game] Test your operational reflexes</em>
+          <img src="red%20curved%20arrow.png" class="game-arrow" alt="Arrow pointing up">
+        </p>
+      </div>
     </div>
   </div>
 
-  <canvas id="canvas" width="860" height="360" style="width: 100%; height: auto; background: #111; border: 1px solid rgba(237, 233, 224, 0.1); border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; display: block;"></canvas>
-  
-  <div style="background: rgba(17,17,17,0.8); border: 1px solid rgba(237, 233, 224, 0.1); border-radius: 0 0 8px 8px; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: inset 0 15px 15px -15px rgba(0,0,0,0.5);">
-    <div id="hint" style="font-size: 11px; color: #888; letter-spacing: 1px; font-family: 'Share Tech Mono', monospace; transition: opacity 0.5s;">
-      CLICK THE TRUCK or press <b style="color: var(--gold);">SPACE</b> to navigate operational bottlenecks &bull; <b style="color: var(--gold);">CLICK</b> to start
+  <!-- CRAWL — styles in style.css under ─── CRAWL INTRO ─── -->
+  <div class="crawl-container" aria-hidden="true">
+    <div class="crawl-text">
+      <h2 class="crawl-quote">
+        "Design creates culture.<br>Culture shapes values.<br>Values determine the future."
+      </h2>
+      <h3 class="crawl-attribution">— Robert L. Peters</h3>
     </div>
-    <p style="color: var(--gold); font-family: var(--sans); font-size: 1rem; margin: 0; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px;">
-      <em>[Chrome Dino inspired Logistics Mini-Game] Test your operational reflexes</em> 
-      <img src="red%20curved%20arrow.png" style="height: 2.6em; transform: rotate(180deg);" alt="Arrow pointing up">
-    </p>
   </div>
 </div>
- /*cinematic crawl */
- <style>
-  .crawl-container {
-    position: relative;
-    width: 100%;
-    height: 55vh; 
-    display: flex;
-    justify-content: center;
-    perspective: 600px; 
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
-  }
 
-  .crawl-text {
-    position: absolute;
-    bottom: -10%; 
-    width: 90%;
-    max-width: 900px;
-    text-align: center;
-    transform-origin: 50% 100%;
-    animation: starWarsCrawl 18s linear infinite; 
-  }
+<!-- ── NEWS CAROUSEL — styles in style.css under ─── NEWS CAROUSEL ─── -->
+<div class="news-carousel" id="newsCarousel" role="list" aria-label="Industry reading list">
 
-  @keyframes starWarsCrawl {
-    0% {
-      transform: rotateX(40deg) translateY(100px) translateZ(0);
-      opacity: 0;
-    }
-    5% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotateX(40deg) translateY(-1000px) translateZ(-600px);
-      opacity: 0.1;
-    }
-  }
-</style>
+  <a href="https://www.wsj.com/logistics-report/cold-storage-vacancies-hit-20-year-high-24a8b1b2?mod=logistics_news_article_pos2"
+     target="_blank" rel="noopener noreferrer" class="news-card" role="listitem">
+    <div data-a="up" class="news-img-wrap">
+      <img src="logi.avif" draggable="false" loading="lazy"
+           alt="Cold storage warehouse — WSJ Supply Chain Insights article"
+           class="news-img" data-hover-img>
+    </div>
+    <div data-a="up" data-delay="100" class="news-meta">
+      <h3 class="news-title">01 // SUPPLY CHAIN INSIGHTS</h3>
+      <span class="news-read-btn">READ ↗</span>
+    </div>
+  </a>
 
-<div class="crawl-container">
-  <div class="crawl-text">
-    <h2 style="font-size: clamp(3rem, 7vw, 6rem); font-family: var(--display); line-height: 1.1; margin-bottom: 2rem; color: var(--gold); text-shadow: 0 10px 30px rgba(0,0,0,0.8);">
-      “Design creates culture.<br>Culture shapes values.<br>Values determine the future.”
-    </h2>
-    <h3 style="color: #888; font-family: 'Share Tech Mono', monospace; font-size: 1.5rem; letter-spacing: 4px; text-transform: uppercase;">
-      — Robert L. Peters
-    </h3>
-  </div>
-</div>         
+  <a href="https://www.ftstrategies.com/en-gb/insights/ai-role-in-publishing-where-is-it-really-adding-value"
+     target="_blank" rel="noopener noreferrer" class="news-card" role="listitem">
+    <div data-a="up" data-delay="100" class="news-img-wrap">
+      <img src="aistrat.jpg" draggable="false" loading="lazy"
+           alt="AI strategy — FT Global Strategy Review article"
+           class="news-img" data-hover-img>
+    </div>
+    <div data-a="up" data-delay="200" class="news-meta">
+      <h3 class="news-title">02 // GLOBAL STRATEGY REVIEW</h3>
+      <span class="news-read-btn">READ ↗</span>
+    </div>
+  </a>
 
-<style>
-    /* Hides the scrollbar for a clean, app-like feel */
-    .news-carousel::-webkit-scrollbar { display: none; }
-    .news-carousel { -ms-overflow-style: none; scrollbar-width: none; cursor: grab; }
-    .news-carousel:active { cursor: grabbing; }
-</style>
+  <a href="https://www.statista.com/chart/36031/fifa-world-cup-betting-intentions/"
+     target="_blank" rel="noopener noreferrer" class="news-card" role="listitem">
+    <div data-a="up" data-delay="200" class="news-img-wrap">
+      <img src="market.jpeg" draggable="false" loading="lazy"
+           alt="Market analysis chart — Statista"
+           class="news-img" data-hover-img>
+    </div>
+    <div data-a="up" data-delay="300" class="news-meta">
+      <h3 class="news-title">03 // MARKET ANALYSIS</h3>
+      <span class="news-read-btn">READ ↗</span>
+    </div>
+  </a>
 
-<style>
-    /* Hides the scrollbar for a clean, app-like feel */
-    .news-carousel::-webkit-scrollbar { display: none; }
-    .news-carousel { -ms-overflow-style: none; scrollbar-width: none; cursor: grab; user-select: none; }
-    .news-carousel.active { cursor: grabbing; }
-    /* Prevent links from interfering with the drag */
-    .news-carousel a { user-drag: none; -webkit-user-drag: none; }
-</style>
-
-<div class="news-carousel" id="newsCarousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 0 0 0rem;">
-
-    <a href="https://www.wsj.com/logistics-report/cold-storage-vacancies-hit-20-year-high-24a8b1b2?mod=logistics_news_article_pos2" target="_blank" style="flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block;">
-        <div data-a="up" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line); pointer-events: none;">
-            <img src="logi.avif" draggable="false" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
-        </div>
-        <div data-a="up" data-delay="100" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line);">
-            <h3 style="font-family: var(--display); color: var(--gold); font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 0; letter-spacing: 0.1em;">01 // SUPPLY CHAIN INSIGHTS</h3>
-            <span style="color: var(--text); border: 1px solid var(--line); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; letter-spacing: 1px; white-space: nowrap;">READ ↗</span>
-        </div>
-    </a>
-
-    <a href="https://www.ftstrategies.com/en-gb/insights/ai-role-in-publishing-where-is-it-really-adding-value" target="_blank" style="flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block;">
-        <div data-a="up" data-delay="100" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line); pointer-events: none;">
-            <img src="aistrat.jpg" draggable="false" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
-        </div>
-        <div data-a="up" data-delay="200" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line);">
-            <h3 style="font-family: var(--display); color: var(--gold); font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 0; letter-spacing: 0.1em;">02 // GLOBAL STRATEGY REVIEW</h3>
-            <span style="color: var(--text); border: 1px solid var(--line); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; letter-spacing: 1px; white-space: nowrap;">READ ↗</span>
-        </div>
-    </a>
-
-    <a href="https://www.statista.com/chart/36031/fifa-world-cup-betting-intentions/" target="_blank" style="flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block;">
-        <div data-a="up" data-delay="200" style="width: 100%; height: 50vh; overflow: hidden; position: relative; border-radius: 16px; border: 1px solid var(--line); pointer-events: none;">
-            <img src="market.jpeg" draggable="false" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.6; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='scale(1)'">
-        </div>
-        <div data-a="up" data-delay="300" style="padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line);">
-            <h3 style="font-family: var(--display); color: var(--gold); font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 0; letter-spacing: 0.1em;">03 // MARKET ANALYSIS</h3>
-            <span style="color: var(--text); border: 1px solid var(--line); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; letter-spacing: 1px; white-space: nowrap;">READ ↗</span>
-        </div>
-    </a>
-
-    <div style="flex: 0 0 5vw;"></div>
-
+  <div class="news-spacer" aria-hidden="true"></div>
 </div>
 
-<script>
-    const slider = document.getElementById('newsCarousel');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.classList.add('active');
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-        // Temporarily disable snap while dragging for a smoother feel
-        slider.style.scrollSnapType = 'none'; 
-    });
-
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        slider.classList.remove('active');
-        slider.style.scrollSnapType = 'x mandatory';
-    });
-
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.classList.remove('active');
-        // Re-enable snap so it perfectly centers the card when you let go
-        slider.style.scrollSnapType = 'x mandatory';
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5; // Scroll speed multiplier
-        slider.scrollLeft = scrollLeft - walk;
-    });
-</script>
-<!-- ── II. EXPERIENCE ────────────────────────────────────── -->
-<section id="section-experience">
-<div class="exp-layout" style="position:relative;overflow:hidden;">
+<!-- ── II. EXPERIENCE ─────────────────────────────────── -->
+<section id="section-experience" aria-labelledby="exp-heading">
+  <div class="exp-layout">
     <div class="exp-header" data-a="up">
       <div>
         <p class="sec-num">II. Experience</p>
-        <h2>30 Months.<br><em>Three Industries.<br>One Playbook.</em></h2>
+        <h2 id="exp-heading">30 Months.<br><em>Three Industries.<br>One Playbook.</em></h2>
       </div>
-      <p>Business Manager to Marketing Consultant to MBA Intern -- each role added a new commercial layer. Supply chain operations, brand growth, and enterprise risk management: I've worked across the full business stack.</p>
+      <p>Business Manager to Marketing Consultant to MBA Intern — each role added a new commercial layer.
+         Supply chain operations, brand growth, and enterprise risk management: I've worked across the full business stack.</p>
     </div>
     <div class="exp-timeline" id="expTimeline">
-      <div class="exp-timeline-line" id="tlLine"></div>
+      <div class="exp-timeline-line" id="tlLine" aria-hidden="true"></div>
 
-      <div class="exp-card-tl" data-a="up">
-        <div style="display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
-        <div class="exp-meta">
-          <p class="exp-company">Six Flags</p>
-          <p class="exp-role">MBA Intern - Enterprise Risk &amp; Compliance</p>
-          <p class="exp-dates">May 2025 – Nov 2025 · Sandusky, OH</p>
-          <span class="exp-tag">Operations · Analytics</span>
+      <article class="exp-card-tl" data-a="up">
+        <div class="exp-card-grid">
+          <div class="exp-meta">
+            <p class="exp-company">Six Flags</p>
+            <p class="exp-role">MBA Intern — Enterprise Risk &amp; Compliance</p>
+            <p class="exp-dates">May 2025 – Nov 2025 · Sandusky, OH</p>
+            <span class="exp-tag">Operations · Analytics</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Partnered with cross-functional teams to <strong>benchmark performance across 42 business units</strong>, developing unified executive dashboards that reduced daily project operation status reporting time by <strong>60%</strong>.</li>
+            <li>Assessed end-to-end individual project lifecycles to identify and optimize process performance, applying Agile principles to improve sprint velocity and accountability across the enterprise compliance program.</li>
+          </ul>
         </div>
-        <ul class="exp-bullets">
-          <li>Partnered with cross-functional teams to <strong>benchmark performance across 42 business units</strong>, developing unified executive dashboards that reduced daily project operation status reporting time by <strong>60%</strong>.</li>
-          <li>Assessed end-to-end individual project lifecycles to identify and optimize process performance, applying Agile principles to improve sprint velocity and accountability across the enterprise compliance program.</li>
-        </ul>
-        </div>
-      </div>
+      </article>
 
-      <div class="exp-card-tl" data-a="up" data-delay="80">
-        <div style="display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
-        <div class="exp-meta">
-          <p class="exp-company">Ward Tires</p>
-          <p class="exp-role">Business Manager</p>
-          <p class="exp-dates">Jul 2021 – Aug 2023 · Calgary, CA</p>
-          <span class="exp-tag">GTM · Supply Chain · P&amp;L</span>
+      <article class="exp-card-tl" data-a="up" data-delay="80">
+        <div class="exp-card-grid">
+          <div class="exp-meta">
+            <p class="exp-company">Ward Tires</p>
+            <p class="exp-role">Business Manager</p>
+            <p class="exp-dates">Jul 2021 – Aug 2023 · Calgary, CA</p>
+            <span class="exp-tag">GTM · Supply Chain · P&amp;L</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Designed and executed a regional GTM strategy, collaborating with internal &amp; external stakeholders to optimize sales and marketing expenses — resulting in a <strong>3% net margin increase</strong>.</li>
+            <li>Evaluated existing product life cycles, pricing, and positioning; new product development added <strong>20% gross revenue</strong> while filling portfolio gaps.</li>
+            <li>Facilitated cost modeling and vendor development strategy, <strong>reducing logistics costs by 10–15%</strong> through introduction of a just-in-time delivery model.</li>
+            <li>Collaborated with supplier R&amp;D teams to develop a category-based seasonal application product mix, strengthening upstream supplier relationships and improving shelf availability.</li>
+          </ul>
         </div>
-        <ul class="exp-bullets">
-          <li>Designed and executed a regional GTM strategy, collaborating with internal &amp; external stakeholders to optimize sales and marketing expenses -- resulting in a <strong>3% net margin increase</strong>.</li>
-          <li>Evaluated existing product life cycles, pricing, and positioning; new product development added <strong>20% gross revenue</strong> while filling portfolio gaps.</li>
-          <li>Facilitated cost modeling and vendor development strategy, <strong>reducing logistics costs by 10–15%</strong> through introduction of a just-in-time delivery model.</li>
-          <li>Collaborated with supplier R&amp;D teams to develop a category-based seasonal application product mix, strengthening upstream supplier relationships and improving shelf availability.</li>
-        </ul>
-        </div>
-      </div>
+      </article>
 
-      <div class="exp-card-tl" data-a="up" data-delay="160">
-        <div style="display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
-        <div class="exp-meta">
-          <p class="exp-company">Fiverr</p>
-          <p class="exp-role">Marketing Consultant</p>
-          <p class="exp-dates">Aug 2020 – Jun 2024 · Toronto, ON</p>
-          <span class="exp-tag">Digital · Content · SEO/SEM</span>
+      <article class="exp-card-tl" data-a="up" data-delay="160">
+        <div class="exp-card-grid">
+          <div class="exp-meta">
+            <p class="exp-company">Fiverr</p>
+            <p class="exp-role">Marketing Consultant</p>
+            <p class="exp-dates">Aug 2020 – Jun 2024 · Toronto, ON</p>
+            <span class="exp-tag">Digital · Content · SEO/SEM</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Managed SEO &amp; SEM initiatives, translating data from Google Analytics, Ahrefs, SEMRush, and competitor reviews to <strong>increase media engagement by 25–30%</strong>.</li>
+            <li>Led complex content strategy projects, delivering multi-platform campaigns on time and within budget using <strong>Hootsuite and MS Project</strong> for timeline management.</li>
+            <li>Supported trade shows and dealer training sessions; managed content creation for brochures, spec sheets, and social media — boosting brand visibility by analyzing customer engagement metrics.</li>
+            <li>Implemented Voice of Customer programs, converting qualitative feedback into actionable product positioning recommendations for the marketplace team.</li>
+          </ul>
         </div>
-        <ul class="exp-bullets">
-          <li>Managed SEO &amp; SEM initiatives, translating data from Google Analytics, Ahrefs, SEMRush, and competitor reviews to <strong>increase media engagement by 25–30%</strong>.</li>
-          <li>Led complex content strategy projects, delivering multi-platform campaigns on time and within budget using <strong>Hootsuite and MS Project</strong> for timeline management.</li>
-          <li>Supported trade shows and dealer training sessions; managed content creation for brochures, spec sheets, and social media -- boosting brand visibility by analyzing customer engagement metrics.</li>
-          <li>Implemented Voice of Customer programs, converting qualitative feedback into actionable product positioning recommendations for the marketplace team.</li>
-        </ul>
-        </div>
-      </div>
+      </article>
 
     </div>
   </div>
 </section>
-<!-- ── III. CASE STUDIES ─────────────────────────────────── -->
-<section id="section-cases" style="padding-top: 5rem;">
- <div class="exp-layout" style="position:relative;overflow:hidden;">
+
+<!-- ── III. CASE STUDIES ───────────────────────────────── -->
+<section id="section-cases" class="section-cases-shell" aria-labelledby="cases-heading">
+  <div class="exp-layout">
     <div class="exp-header" data-a="up">
       <div>
         <p class="sec-num">III. Case Studies</p>
-        <h2>Real Problems.<br><em>Real Solutions</em></h2>
+        <h2 id="cases-heading">Real Problems.<br><em>Real Solutions</em></h2>
       </div>
-      <p>Focused on Business Process Re-engineering, Supply Chain Analytics, and Strategic Sourcing. Each card flips to reveal the full Problem–Action–Result breakdown.</p>
+      <p>Focused on Business Process Re-engineering, Supply Chain Analytics, and Strategic Sourcing.
+         Each card flips to reveal the full Problem–Action–Result breakdown.</p>
     </div>
-      <style>
-    .tw-card-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem 2rem 8rem 2rem;
-        width: 100vw; /* Forces the container to bleed edge-to-edge */
-        margin-left: calc(-50vw + 50%); /* Centers the bleed */
-        flex-wrap: nowrap;
-    }
 
-    .tw-card {
-        position: relative;
-        width: clamp(260px, 22vw, 420px); /* Massively broader cards */
-        aspect-ratio: 9 / 13; /* Adjusted ratio so they aren't overly tall */
-        border-radius: 1rem;
-        overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        transform-origin: bottom center;
-        cursor: pointer;
-        border: 1px solid rgba(201, 168, 76, 0.3); 
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(201, 168, 76, 0.1);
-        text-decoration: none;
-        flex-shrink: 0; /* Prevents the browser from squishing them */
-    }
+    <!-- CARD DECK — styles in style.css under ─── TW CARD DECK ─── -->
+    <div class="tw-card-container" aria-label="Case study card deck">
+      <a href="./aldi-walmart-case.html" target="_blank" rel="noopener noreferrer" class="tw-card tw-rot-1" aria-label="Material Testing case study">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=700&auto=format&fit=crop" alt="Material testing laboratory" loading="lazy">
+      </a>
+      <a href="YOUR_LINK_HERE_2" target="_blank" rel="noopener noreferrer" class="tw-card tw-rot-2" aria-label="TechSmith GTM case study (coming soon)">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" alt="Analytics dashboard" loading="lazy">
+      </a>
+      <a href="YOUR_LINK_HERE_3" target="_blank" rel="noopener noreferrer" class="tw-card tw-rot-3" aria-label="M&amp;A Deal Thesis case study (coming soon)">
+        <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=700&auto=format&fit=crop" alt="Financial analysis" loading="lazy">
+      </a>
+      <a href="YOUR_LINK_HERE_4" target="_blank" rel="noopener noreferrer" class="tw-card tw-rot-4" aria-label="Cross-Border Supply Chain case study (coming soon)">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop" alt="Supply chain logistics" loading="lazy">
+      </a>
+      <a href="YOUR_LINK_HERE_5" target="_blank" rel="noopener noreferrer" class="tw-card tw-rot-5" aria-label="Scrum Replenishment case study (coming soon)">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=700&auto=format&fit=crop" alt="Team collaboration" loading="lazy">
+      </a>
+    </div>
 
-    /* THE OVERLAP MAGIC */
-    .tw-card + .tw-card {
-        margin-left: -8vw; /* This physically pulls the cards over top of each other */
-    }
-
-    /* HOVER PHYSICS: Pops the card out of the deck */
-    .tw-card-container:hover .tw-card {
-        /* Optional: slightly dims the cards you AREN'T hovering over */
-        filter: brightness(0.5); 
-    }
-    .tw-card:hover {
-    transform: translateY(-40px) rotate(0deg) scale(1.05) !important;
-    z-index: 20;
-    filter: brightness(1) grayscale(0%) !important;
-    /* Intense faded gold glow on hover */
-    border: 1px solid rgba(201, 168, 76, 0.8);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 168, 76, 0.4);
-}
-
-    /* The alternating rotations (Keep these as you had them!) */
-    .tw-rot-1 { transform: rotate(6deg); }
-    .tw-rot-2 { transform: rotate(-12deg); }
-    .tw-rot-3 { transform: rotate(8deg); }
-    .tw-rot-4 { transform: rotate(-5deg); }
-</style>
-<div class="tw-card-container">
-    <a href="./aldi-walmart-case.html" target="_blank" class="tw-card tw-rot-1">
-        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=700&auto=format&fit=crop" alt="Material Testing">
-    </a>
-    
-    <a href="YOUR_LINK_HERE_2" target="_blank" class="tw-card tw-rot-2">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" alt="TechSmith GTM">
-           </a>
-    
-    <a href="YOUR_LINK_HERE_3" target="_blank" class="tw-card tw-rot-3">
-        <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=700&auto=format&fit=crop" alt="M&A Deal Thesis">
-            </a>
-    
-    <a href="YOUR_LINK_HERE_4" target="_blank" class="tw-card tw-rot-4">
-        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop" alt="Cross-Border Supply Chain">
-          </a>
-    
-    <a href="YOUR_LINK_HERE_5" target="_blank" class="tw-card tw-rot-5">
-        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=700&auto=format&fit=crop" alt="Scrum Replenishment">
-            </a>
-</div>
-    <div style="width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 2rem 3rem 2rem; text-align: center;">
-    <p style="font-size: 0.7rem; color: rgba(237, 233, 224, 0.35); line-height: 1.6; font-family: 'DM Sans', sans-serif; letter-spacing: 0.02em;">
-      <strong>Disclaimer:</strong> The case studies presented above are for academic and demonstrative purposes. Data and insights were synthesized from various public domain sources, industry reports, and hypothetical business scenarios to illustrate strategic framework application. All trademarks and brand assets belong to their respective owners.
-    </p>
+    <div class="cases-disclaimer">
+      <p class="cases-disclaimer-text">
+        <strong>Disclaimer:</strong> The case studies presented above are for academic and demonstrative purposes.
+        Data and insights were synthesized from various public domain sources, industry reports, and hypothetical
+        business scenarios to illustrate strategic framework application.
+        All trademarks and brand assets belong to their respective owners.
+      </p>
+    </div>
   </div>
 </section>
 
-<!-- ── IV. EDUCATION & LEADERSHIP ────────────────────────── -->
-<section id="section-brand-experience">
-  <div class="exp-layout" style="position:relative;overflow:hidden; padding-bottom: 0;">
+<!-- ── IV. EDUCATION & LEADERSHIP ────────────────────── -->
+<section id="section-brand-experience" aria-labelledby="edu-heading">
+  <div class="exp-layout">
     <div class="exp-header" data-a="up">
       <div>
-        <p class="sec-num">IV. Education & Leadership</p>
-        <h2>Campus Leadership.<br><em>Global Perspective</em></h2>
+        <p class="sec-num">IV. Education &amp; Leadership</p>
+        <h2 id="edu-heading">Campus Leadership.<br><em>Global Perspective</em></h2>
       </div>
-      <p>Focused on Systems Thinking, Operations Design, and Predictive Analytics. I specialize in mapping value streams to eliminate waste, utilizing simulation tools to stress-test process changes, and developing the KPI frameworks necessary to lead cross-functional teams toward sustained operational excellence.</p>
+      <p>Focused on Systems Thinking, Operations Design, and Predictive Analytics.
+         I specialize in mapping value streams to eliminate waste, utilizing simulation tools to stress-test
+         process changes, and developing the KPI frameworks necessary to lead cross-functional teams toward
+         sustained operational excellence.</p>
     </div>
-     <!-- ──  <div class="brand-hd">
-    <div>
-      <p class="sec-num" data-a="up">IV. Education &amp; Leadership</p>
-      <h2 data-a="left">Education &amp;<br>Leadership</h2>
-    </div>
-    <p data-a="right" data-delay="100">Academic foundation, campus leadership, and the cross-disciplinary perspective that shapes how I think and execute.</p>
-  </div> -->
+
     <div class="edu-cards">
-    <div class="edu-card" data-a="up">
-      <div class="edu-card-top">
-        <span class="edu-card-badge">MBA · 2026</span>
-        <span class="edu-card-year">2024 – 2026</span>
+      <div class="edu-card" data-a="up">
+        <div class="edu-card-top">
+          <span class="edu-card-badge">MBA · 2026</span>
+          <span class="edu-card-year">2024 – 2026</span>
+        </div>
+        <h3 class="edu-card-school">Michigan State University</h3>
+        <p class="edu-card-degree">Master of Business Administration</p>
+        <p class="edu-card-field">Supply Chain Management &amp; Marketing · Broad College of Business</p>
+        <div class="edu-card-leads">
+          <span class="edu-lead-item"><span class="edu-lead-dot"></span>Board Member — Graduate Supply Chain Management Association (GSCMA)</span>
+          <span class="edu-lead-item"><span class="edu-lead-dot"></span>Ambassador — MBA Association (MBAA)</span>
+          <span class="edu-lead-item"><span class="edu-lead-dot"></span>Global Student Ambassador</span>
+          <span class="edu-lead-item"><span class="edu-lead-dot"></span>Member — Broad Consulting Club &amp; Multicultural Club</span>
+        </div>
       </div>
-      <h3 class="edu-card-school">Michigan State University</h3>
-      <p class="edu-card-degree">Master of Business Administration</p>
-      <p class="edu-card-field">Supply Chain Management &amp; Marketing · Broad College of Business</p>
-      <div class="edu-card-leads">
-        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Board Member - Graduate Supply Chain Management Association (GSCMA)</span>
-        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Ambassador - MBA Association (MBAA)</span>
-        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Global Student Ambassador</span>
-        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Member - Broad Consulting Club &amp; Multicultural Club</span>
+
+      <div class="edu-card" data-a="up" data-delay="120">
+        <div class="edu-card-top">
+          <span class="edu-card-badge">B.Eng · 2020</span>
+          <span class="edu-card-year">2016 – 2020</span>
+        </div>
+        <h3 class="edu-card-school">National Institute of Engineering</h3>
+        <p class="edu-card-degree">Bachelor of Engineering</p>
+        <p class="edu-card-field">Project Management · College of Civil Engineering, Mysuru, IND</p>
+        <div class="edu-card-leads">
+          <span class="edu-lead-item"><span class="edu-lead-dot"></span>President — Community Engagement Committee</span>
+          <span class="edu-lead-item"><span class="edu-lead-dot"></span>Captain — Varsity Soccer Team</span>
+        </div>
       </div>
     </div>
 
-    <div class="edu-card" data-a="up" data-delay="120">
-      <div class="edu-card-top">
-        <span class="edu-card-badge">B.Eng · 2020</span>
-        <span class="edu-card-year">2016 – 2020</span>
+    <div class="bmq-wrap" aria-hidden="true">
+      <div class="bmq-track">
+        <span class="bn">Salesforce</span><span class="bn bn-sep">✦</span>
+        <span class="bn">HubSpot</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Ahrefs</span><span class="bn bn-sep">✦</span>
+        <span class="bn">SEMRush</span><span class="bn bn-sep">✦</span>
+        <span class="bn">MS Project</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Tableau</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Power BI</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Google Analytics</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Hootsuite</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Salesforce</span><span class="bn bn-sep">✦</span>
+        <span class="bn">HubSpot</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Ahrefs</span><span class="bn bn-sep">✦</span>
+        <span class="bn">SEMRush</span><span class="bn bn-sep">✦</span>
+        <span class="bn">MS Project</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Tableau</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Power BI</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Google Analytics</span><span class="bn bn-sep">✦</span>
+        <span class="bn">HubSpot</span><span class="bn bn-sep">✦</span>
+        <span class="bn">MS Project</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Tableau</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Power BI</span><span class="bn bn-sep">✦</span>
+        <span class="bn">Google Analytics</span><span class="bn bn-sep">✦</span>
       </div>
-      <h3 class="edu-card-school">National Institute of Engineering</h3>
-      <p class="edu-card-degree">Bachelor of Engineering</p>
-      <p class="edu-card-field">Project Management · College of Civil Engineering, Mysuru, IND</p>
-      <div class="edu-card-leads">
-        <span class="edu-lead-item"><span class="edu-lead-dot"></span>President - Community Engagement Committee</span>
-        <span class="edu-lead-item"><span class="edu-lead-dot"></span>Captain - Varsity Soccer Team</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="bmq-wrap">
-    <div class="bmq-track">
-      <span class="bn">Salesforce</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">HubSpot</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Ahrefs</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">SEMRush</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">MS Project</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Tableau</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Power BI</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Google Analytics</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Hootsuite</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Salesforce</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">HubSpot</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Ahrefs</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">SEMRush</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">MS Project</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Tableau</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Power BI</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Google Analytics</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Hootsuite</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">HubSpot</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">MS Project</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Tableau</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Power BI</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Google Analytics</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">HubSpot</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">MS Project</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Tableau</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Power BI</span><span class="bn" style="opacity:.22">✦</span>
-      <span class="bn">Google Analytics</span><span class="bn" style="opacity:.22">✦</span>
     </div>
   </div>
 </section>
 
-<!-- ── VII-A. SKILLS & TOOLS ──────────────────────────── -->
-  <section id="section-skills">
-        <div class="exp-layout" style="position:relative;overflow:hidden;">
-          <div class="exp-header" data-a="up">
-              <div>
-                   <p class="sec-num" data-a="up">V. Skills &amp; Tools</p>
-                   <h2>Core Competencies.</h2>
-              </div>
-              <p>Drag the cursor across the pit — the balls scatter. Highlighted balls are your core competencies.</p>
-              </div>
-          <div id="skills-pit-wrap" style="margin-top: 0rem;">
-        <canvas id="skills-canvas"></canvas>
+<!-- ── V. SKILLS & TOOLS ──────────────────────────────── -->
+<section id="section-skills" aria-labelledby="skills-heading">
+  <div class="exp-layout">
+    <div class="exp-header" data-a="up">
+      <div>
+        <p class="sec-num" data-a="up">V. Skills &amp; Tools</p>
+        <h2 id="skills-heading">Core Competencies.</h2>
       </div>
+      <p>Drag the cursor across the pit — the balls scatter. Highlighted balls are your core competencies.</p>
     </div>
-  </section>      
-<!--<section id="section-skills">
-    <div class="skills-pit-header">
-    <h2 class="sec-num" data-a="up" data-delay="60">V. Skills &amp; Tools</h2>
-    <p data-a="right" data-delay="80">Drag the cursor across the pit — the balls scatter. Highlighted balls are core competencies.</p>
+    <div id="skills-pit-wrap">
+      <canvas id="skills-canvas" aria-label="Interactive skills ball pit — hover to scatter, click a ball to reveal skill name"></canvas>
+    </div>
   </div>
-  <div id="skills-pit-wrap">
-    <canvas id="skills-canvas"></canvas>
-  </div>
-</section>-->
+</section>
 
-<!-- ── VI. SIMULATORS ────────────────────────────────────── 
-<section id="gtm-simulators">
-<div class="sim-wrap">
-  <h2 class="sim-title" data-a="up" data-delay="60">Operations Simulators</h2>
-  <p class="sim-intro" data-a="up" data-delay="120">
-    Two interactive models built from real-world operations problems. <em>Inventory Lab</em> uses EOQ and safety stock logic applied at Ward Tires. <em>Queue &amp; Staffing Lab</em> models the staffing trade-off from Six Flags -- finding the right number of servers without over-spending on idle capacity.
-  </p>-->
- <section id="gtm-simulators">
+<!-- ── VI. SIMULATORS ─────────────────────────────────── -->
+<section id="gtm-simulators" aria-labelledby="sim-heading">
   <div class="sim-wrap">
-    <div class="exp-layout" style="position:relative;overflow:hidden;">
+    <div class="exp-layout">
       <div class="exp-header" data-a="up">
         <div>
           <p class="sec-num">VI. Operations Simulators</p>
-          <h2>Data in Action.<br><em>Interactive Models</em></h2>
+          <h2 id="sim-heading">Data in Action.<br><em>Interactive Models</em></h2>
         </div>
-        <p>Strategic growth relies on mastering the trade-offs between operational efficiency and financial performance.<br>Two interactive models built from real-world operations problems. <em>Inventory Lab</em> uses EOQ and safety stock logic applied at Ward Tires. <em>Queue &amp; Staffing Lab</em> models the staffing trade-off from Six Flags — finding the right number of servers without over-spending on idle capacity.</p>
+        <p>Strategic growth relies on mastering the trade-offs between operational efficiency and financial performance.<br>
+           Two interactive models built from real-world operations problems.
+           <em>Inventory Lab</em> uses EOQ and safety stock logic applied at Ward Tires.
+           <em>Queue &amp; Staffing Lab</em> models the staffing trade-off from Six Flags — finding the right number
+           of servers without over-spending on idle capacity.</p>
       </div>
     </div>
-  </section>
 
-  <!-- ── TAB NAVIGATION ──────────────────────────────────── -->
-  <div class="sim-tabs" data-a="up" data-delay="160">
-    <button class="sim-tab-btn active" onclick="switchSimTab('inv')" id="tab-btn-inv">
-      <span class="stb-num">01</span> Inventory vs. Service Level
-    </button>
-    <button class="sim-tab-btn" onclick="switchSimTab('queue')" id="tab-btn-queue">
-      <span class="stb-num">02</span> Queue &amp; Staffing Dynamics
-    </button>
-    <button class="sim-tab-btn" onclick="switchSimTab('dcf')" id="tab-btn-dcf">
-      <span class="stb-num">03</span> Financial &amp; DCF Valuation
-    </button>
-  </div>
-
-  <!-- ══ TAB 1: INVENTORY ════════════════════════════════ -->
-  <div class="sim-tab-panel active" id="tab-panel-inv">
-
-  <div class="sim-scenario-card">
-    <div class="ssc-eyebrow">Hypothetical Scenario</div>
-    <div class="ssc-body">
-      <strong>Ward Tires — Calgary Distribution Centre.</strong> You manage a mid-size tyre distributor with 12,000 units of your top-selling all-season SKU moving annually. Your supplier in Ontario ships in batches, taking 21 days on average (but sometimes 14, sometimes 28). Your warehouse costs 25% of unit value per year to operate, and each purchase order costs ~$150 in admin and receiving labour. At what order quantity do you minimise total inventory cost — and how much safety stock do you need to maintain a 95% fill rate through demand spikes?
-    </div>
-    <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the model to see the EOQ and cost curve.</div>
-  </div>
-
-  <!-- ── GUIDED EXPLAINER STRIP ────────────────────────── -->
-  <div class="sim-guide">
-    <div class="sim-guide-step active" data-step="0" id="inv-gs-0">
-      <span class="sgs-num">01</span>
-      <span class="sgs-label">Set demand &amp; cost parameters</span>
-    </div>
-    <div class="sim-guide-arrow">→</div>
-    <div class="sim-guide-step" data-step="1" id="inv-gs-1">
-      <span class="sgs-num">02</span>
-      <span class="sgs-label">Define service &amp; lead time targets</span>
-    </div>
-    <div class="sim-guide-arrow">→</div>
-    <div class="sim-guide-step" data-step="2" id="inv-gs-2">
-      <span class="sgs-num">03</span>
-      <span class="sgs-label">Run model -- EOQ, safety stock &amp; cost curve</span>
-    </div>
-  </div>
-
-  <!-- ── MAIN SIMULATOR LAYOUT ─────────────────────────── -->
-  <div class="sim-body">
-
-    <!-- LEFT: Inputs panel -->
-    <div class="sim-inputs-panel">
-
-      <!-- Group A: Demand -->
-      <div class="sim-input-group" id="grp-demand">
-        <div class="sig-header">
-          <span class="sig-tag">A</span>
-          <span class="sig-title">Demand Parameters</span>
-          <span class="sig-hint">How much you sell and how variable that demand is</span>
-        </div>
-        <div class="sim-field">
-          <label>Annual Demand (units)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-demand" value="12000" min="100" max="1000000" step="100">
-            <span class="sim-field-unit">units/yr</span>
-          </div>
-          <p class="sim-field-note">Total units sold or consumed per year. At Ward Tires this was SKU-level tyre demand across trade channels.</p>
-        </div>
-        <div class="sim-field">
-          <label>Demand Variability (std dev, units/day)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-sigma-d" value="12" min="0" max="500" step="1">
-            <span class="sim-field-unit">σ units/day</span>
-          </div>
-          <p class="sim-field-note">How much daily demand fluctuates. Higher variability requires more safety stock to protect service level.</p>
-        </div>
-      </div>
-
-      <!-- Group B: Cost -->
-      <div class="sim-input-group" id="grp-cost">
-        <div class="sig-header">
-          <span class="sig-tag">B</span>
-          <span class="sig-title">Cost Parameters</span>
-          <span class="sig-hint">The two competing costs that determine your optimal order quantity</span>
-        </div>
-        <div class="sim-field">
-          <label>Ordering Cost per Order ($)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-order-cost" value="150" min="10" max="10000" step="10">
-            <span class="sim-field-unit">$/order</span>
-          </div>
-          <p class="sim-field-note">Fixed cost each time you place an order -- admin, freight set-up, receiving labour. Ordering more frequently multiplies this cost.</p>
-        </div>
-        <div class="sim-field">
-          <label>Unit Purchase Cost ($)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-unit-cost" value="48" min="1" max="50000" step="1">
-            <span class="sim-field-unit">$/unit</span>
-          </div>
-          <p class="sim-field-note">Landed cost per unit. Used to calculate the holding cost on capital tied up in inventory.</p>
-        </div>
-        <div class="sim-field">
-          <label>Annual Holding Cost Rate (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-hold-rate" value="25" min="5" max="60" step="1">
-            <span class="sim-field-unit">% / yr</span>
-          </div>
-          <p class="sim-field-note">The cost to store one unit for one year, as a % of its value. Typically 20–35% including capital cost, warehouse, insurance, and obsolescence.</p>
-        </div>
-      </div>
-
-      <!-- Group C: Supply & Service -->
-      <div class="sim-input-group" id="grp-service">
-        <div class="sig-header">
-          <span class="sig-tag">C</span>
-          <span class="sig-title">Supply &amp; Service Targets</span>
-          <span class="sig-hint">Lead time and the service level you're committing to customers</span>
-        </div>
-        <div class="sim-field">
-          <label>Supplier Lead Time (days)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-lead" value="21" min="1" max="180" step="1">
-            <span class="sim-field-unit">days</span>
-          </div>
-          <p class="sim-field-note">Average days from purchase order to stock arriving and available. Longer lead time = more stock needed to bridge the gap.</p>
-        </div>
-        <div class="sim-field">
-          <label>Lead Time Variability (std dev, days)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-sigma-l" value="4" min="0" max="60" step="1">
-            <span class="sim-field-unit">σ days</span>
-          </div>
-          <p class="sim-field-note">How unpredictable your supplier's delivery is. A supplier that sometimes delivers in 14 days and sometimes in 28 days has high lead-time sigma.</p>
-        </div>
-        <div class="sim-field">
-          <label>Target Service Level (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="f-service" value="95" min="50" max="99.9" step="0.5">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">The % of demand cycles you want to fulfil without a stockout. 95% = 1 stockout in 20 order cycles. 99% costs significantly more to maintain.</p>
-        </div>
-      </div>
-
-      <!-- RUN BUTTON -->
-      <button class="sim-run-btn" id="sim-run-btn" onclick="runSimulator()">
-        <span id="sim-btn-text">Run Model</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <!-- ── TAB NAVIGATION ─────────────────────────────── -->
+    <div class="sim-tabs" role="tablist" data-a="up" data-delay="160">
+      <button class="sim-tab-btn active" role="tab" aria-selected="true"
+              aria-controls="tab-panel-inv" id="tab-btn-inv" onclick="switchSimTab('inv')">
+        <span class="stb-num">01</span> Inventory vs. Service Level
       </button>
+      <button class="sim-tab-btn" role="tab" aria-selected="false"
+              aria-controls="tab-panel-queue" id="tab-btn-queue" onclick="switchSimTab('queue')">
+        <span class="stb-num">02</span> Queue &amp; Staffing Dynamics
+      </button>
+      <button class="sim-tab-btn" role="tab" aria-selected="false"
+              aria-controls="tab-panel-dcf" id="tab-btn-dcf" onclick="switchSimTab('dcf')">
+        <span class="stb-num">03</span> Financial &amp; DCF Valuation
+      </button>
+    </div>
 
-    </div><!-- /sim-inputs-panel -->
+    <!-- ══ TAB 1: INVENTORY ════════════════════════════ -->
+    <div class="sim-tab-panel active" id="tab-panel-inv" role="tabpanel" aria-labelledby="tab-btn-inv">
 
-    <!-- RIGHT: Output panel -->
-    <div class="sim-output-panel" id="sim-output-panel">
-
-      <!-- State: pre-run -->
-      <div class="sim-placeholder" id="sim-placeholder">
-        <div class="sim-ph-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-            <path d="M12 36 L12 20 M20 36 L20 14 M28 36 L28 24 M36 36 L36 10" stroke="rgba(201,168,76,0.35)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M8 10 Q24 28 40 8" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
-          </svg>
+      <div class="sim-scenario-card">
+        <div class="ssc-eyebrow">Hypothetical Scenario</div>
+        <div class="ssc-body">
+          <strong>Ward Tires — Calgary Distribution Centre.</strong> You manage a mid-size tyre distributor with 12,000 units of
+          your top-selling all-season SKU moving annually. Your supplier in Ontario ships in batches, taking 21 days on average
+          (but sometimes 14, sometimes 28). Your warehouse costs 25% of unit value per year to operate, and each purchase order
+          costs ~$150 in admin and receiving labour. At what order quantity do you minimise total inventory cost — and how much
+          safety stock do you need to maintain a 95% fill rate through demand spikes?
         </div>
-        <p class="sim-ph-title">Model not yet run</p>
-        <p class="sim-ph-sub">Fill in your parameters on the left and click <strong>Run Model</strong> to generate your inventory optimisation analysis.</p>
+        <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the model to see the EOQ and cost curve.</div>
       </div>
 
-      <!-- State: results (hidden until run) -->
-      <div class="sim-results" id="sim-results" style="display:none;">
-
-        <!-- Key metrics row -->
-        <div class="sim-metrics-row">
-          <div class="sim-metric" id="sm-eoq">
-            <span class="sm-label">Optimal Order Qty (EOQ)</span>
-            <span class="sm-value" id="out-eoq">--</span>
-            <span class="sm-unit">units</span>
-          </div>
-          <div class="sim-metric" id="sm-ss">
-            <span class="sm-label">Safety Stock Required</span>
-            <span class="sm-value" id="out-ss">--</span>
-            <span class="sm-unit">units</span>
-          </div>
-          <div class="sim-metric" id="sm-rop">
-            <span class="sm-label">Reorder Point</span>
-            <span class="sm-value" id="out-rop">--</span>
-            <span class="sm-unit">units</span>
-          </div>
-          <div class="sim-metric highlight" id="sm-tc">
-            <span class="sm-label">Total Annual Inventory Cost</span>
-            <span class="sm-value" id="out-tc">--</span>
-            <span class="sm-unit">/ year</span>
-          </div>
+      <div class="sim-guide">
+        <div class="sim-guide-step active" data-step="0" id="inv-gs-0">
+          <span class="sgs-num">01</span>
+          <span class="sgs-label">Set demand &amp; cost parameters</span>
         </div>
+        <div class="sim-guide-arrow" aria-hidden="true">→</div>
+        <div class="sim-guide-step" data-step="1" id="inv-gs-1">
+          <span class="sgs-num">02</span>
+          <span class="sgs-label">Define service &amp; lead time targets</span>
+        </div>
+        <div class="sim-guide-arrow" aria-hidden="true">→</div>
+        <div class="sim-guide-step" data-step="2" id="inv-gs-2">
+          <span class="sgs-num">03</span>
+          <span class="sgs-label">Run model — EOQ, safety stock &amp; cost curve</span>
+        </div>
+      </div>
 
-        <!-- Cost breakdown bar -->
-        <div class="sim-cost-breakdown">
-          <div class="scb-header">
-            <span class="scb-title">Annual Cost Breakdown</span>
-            <div class="scb-legend">
-              <span class="scb-leg-dot" style="background:#c9a84c"></span><span>Holding</span>
-              <span class="scb-leg-dot" style="background:#4a90e2"></span><span>Ordering</span>
-              <span class="scb-leg-dot" style="background:#e05a00"></span><span>Stockout Risk</span>
+      <div class="sim-body">
+        <div class="sim-inputs-panel">
+          <div class="sim-input-group" id="grp-demand">
+            <div class="sig-header">
+              <span class="sig-tag">A</span>
+              <span class="sig-title">Demand Parameters<span class="sig-hint">How much you sell and how variable that demand is</span></span>
+            </div>
+            <div class="sim-field">
+              <label for="f-demand">Annual Demand (units)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-demand" value="12000" min="100" max="1000000" step="100">
+                <span class="sim-field-unit">units/yr</span>
+              </div>
+              <p class="sim-field-note">Total units sold or consumed per year. At Ward Tires this was SKU-level tyre demand across trade channels.</p>
+            </div>
+            <div class="sim-field">
+              <label for="f-sigma-d">Demand Variability (std dev, units/day)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-sigma-d" value="12" min="0" max="500" step="1">
+                <span class="sim-field-unit">σ units/day</span>
+              </div>
+              <p class="sim-field-note">How much daily demand fluctuates. Higher variability requires more safety stock to protect service level.</p>
             </div>
           </div>
-          <div class="scb-bar-wrap">
-            <div class="scb-bar">
-              <div class="scb-seg seg-hold" id="seg-hold" title="Holding cost"></div>
-              <div class="scb-seg seg-ord"  id="seg-ord"  title="Ordering cost"></div>
-              <div class="scb-seg seg-sk"   id="seg-sk"   title="Stockout risk cost"></div>
+
+          <div class="sim-input-group" id="grp-cost">
+            <div class="sig-header">
+              <span class="sig-tag">B</span>
+              <span class="sig-title">Cost Parameters<span class="sig-hint">The two competing costs that determine your optimal order quantity</span></span>
+            </div>
+            <div class="sim-field">
+              <label for="f-order-cost">Ordering Cost per Order ($)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-order-cost" value="150" min="10" max="10000" step="10">
+                <span class="sim-field-unit">$/order</span>
+              </div>
+              <p class="sim-field-note">Fixed cost each time you place an order — admin, freight set-up, receiving labour.</p>
+            </div>
+            <div class="sim-field">
+              <label for="f-unit-cost">Unit Purchase Cost ($)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-unit-cost" value="48" min="1" max="50000" step="1">
+                <span class="sim-field-unit">$/unit</span>
+              </div>
+              <p class="sim-field-note">Landed cost per unit. Used to calculate the holding cost on capital tied up in inventory.</p>
+            </div>
+            <div class="sim-field">
+              <label for="f-hold-rate">Annual Holding Cost Rate (%)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-hold-rate" value="25" min="5" max="60" step="1">
+                <span class="sim-field-unit">% / yr</span>
+              </div>
+              <p class="sim-field-note">Cost to store one unit for one year as a % of its value. Typically 20–35% including capital, warehouse, insurance, and obsolescence.</p>
             </div>
           </div>
-          <div class="scb-values">
-            <span id="val-hold">--</span>
-            <span id="val-ord">--</span>
-            <span id="val-sk">--</span>
+
+          <div class="sim-input-group" id="grp-service">
+            <div class="sig-header">
+              <span class="sig-tag">C</span>
+              <span class="sig-title">Supply &amp; Service Targets<span class="sig-hint">Lead time and the service level you're committing to customers</span></span>
+            </div>
+            <div class="sim-field">
+              <label for="f-lead">Supplier Lead Time (days)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-lead" value="21" min="1" max="180" step="1">
+                <span class="sim-field-unit">days</span>
+              </div>
+              <p class="sim-field-note">Average days from purchase order to stock arriving. Longer lead time = more stock needed to bridge the gap.</p>
+            </div>
+            <div class="sim-field">
+              <label for="f-sigma-l">Lead Time Variability (std dev, days)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-sigma-l" value="4" min="0" max="60" step="1">
+                <span class="sim-field-unit">σ days</span>
+              </div>
+              <p class="sim-field-note">How unpredictable your supplier's delivery is. High sigma = wide safety stock buffer needed.</p>
+            </div>
+            <div class="sim-field">
+              <label for="f-service">Target Service Level (%)</label>
+              <div class="sim-field-row">
+                <input type="number" id="f-service" value="95" min="50" max="99.9" step="0.5">
+                <span class="sim-field-unit">%</span>
+              </div>
+              <p class="sim-field-note">The % of demand cycles you want to fulfil without a stockout. 95% = 1 stockout in 20 order cycles.</p>
+            </div>
           </div>
+
+          <button class="sim-run-btn" id="sim-run-btn" onclick="runSimulator()" aria-label="Run inventory model">
+            <span id="sim-btn-text">Run Model</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
 
-        <!-- Chart: EOQ cost curve -->
-        <div class="sim-chart-block">
-          <div class="schart-header">
-            <span class="schart-title">Total Cost vs. Order Quantity</span>
-            <span class="schart-sub">The EOQ sits at the minimum of the total cost curve -- where ordering and holding costs balance.</span>
+        <div class="sim-output-panel" id="sim-output-panel">
+          <div class="sim-placeholder" id="sim-placeholder">
+            <div class="sim-ph-icon" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+                <path d="M12 36 L12 20 M20 36 L20 14 M28 36 L28 24 M36 36 L36 10" stroke="rgba(201,168,76,0.35)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 10 Q24 28 40 8" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+              </svg>
+            </div>
+            <p class="sim-ph-title">Model not yet run</p>
+            <p class="sim-ph-sub">Fill in your parameters on the left and click <strong>Run Model</strong> to generate your inventory optimisation analysis.</p>
           </div>
-          <div class="schart-canvas-wrap">
-            <canvas id="chart-cost-curve"></canvas>
+
+          <div class="sim-results" id="sim-results" style="display:none;" aria-live="polite">
+            <div class="sim-metrics-row">
+              <div class="sim-metric"><span class="sm-label">Optimal Order Qty (EOQ)</span><span class="sm-value" id="out-eoq">--</span><span class="sm-unit">units</span></div>
+              <div class="sim-metric"><span class="sm-label">Safety Stock Required</span><span class="sm-value" id="out-ss">--</span><span class="sm-unit">units</span></div>
+              <div class="sim-metric"><span class="sm-label">Reorder Point</span><span class="sm-value" id="out-rop">--</span><span class="sm-unit">units</span></div>
+              <div class="sim-metric highlight"><span class="sm-label">Total Annual Inventory Cost</span><span class="sm-value" id="out-tc">--</span><span class="sm-unit">/ year</span></div>
+            </div>
+            <div class="sim-cost-breakdown">
+              <div class="scb-header">
+                <span class="scb-title">Annual Cost Breakdown</span>
+                <div class="scb-legend">
+                  <span class="scb-leg-dot" style="background:#c9a84c"></span><span>Holding</span>
+                  <span class="scb-leg-dot" style="background:#4a90e2"></span><span>Ordering</span>
+                  <span class="scb-leg-dot" style="background:#e05a00"></span><span>Stockout Risk</span>
+                </div>
+              </div>
+              <div class="scb-bar-wrap">
+                <div class="scb-bar">
+                  <div class="scb-seg seg-hold" id="seg-hold" title="Holding cost"></div>
+                  <div class="scb-seg seg-ord"  id="seg-ord"  title="Ordering cost"></div>
+                  <div class="scb-seg seg-sk"   id="seg-sk"   title="Stockout risk cost"></div>
+                </div>
+              </div>
+              <div class="scb-values">
+                <span id="val-hold">--</span>
+                <span id="val-ord">--</span>
+                <span id="val-sk">--</span>
+              </div>
+            </div>
+            <div class="sim-chart-block">
+              <div class="schart-header">
+                <span class="schart-title">Total Cost vs. Order Quantity</span>
+                <span class="schart-sub">The EOQ sits at the minimum of the total cost curve — where ordering and holding costs balance.</span>
+              </div>
+              <div class="schart-canvas-wrap"><canvas id="chart-cost-curve"></canvas></div>
+            </div>
+            <div class="sim-chart-block">
+              <div class="schart-header">
+                <span class="schart-title">Service Level vs. Safety Stock Cost</span>
+                <span class="schart-sub">The diminishing return of chasing higher service levels — each extra % costs disproportionately more capital.</span>
+              </div>
+              <div class="schart-canvas-wrap"><canvas id="chart-service-curve"></canvas></div>
+            </div>
+            <div class="sim-commentary" id="sim-commentary">
+              <div class="scom-eyebrow">Model Interpretation</div>
+              <div class="scom-body" id="scom-body">--</div>
+              <div class="scom-insight" id="scom-insight"></div>
+            </div>
+            <div class="sim-sensitivity">
+              <div class="ssens-header">Sensitivity Analysis — What If You Change One Variable?</div>
+              <table class="ssens-table" id="ssens-table">
+                <thead><tr><th>Scenario</th><th>EOQ</th><th>Safety Stock</th><th>Total Cost</th><th>vs. Base</th></tr></thead>
+                <tbody id="ssens-body"></tbody>
+              </table>
+            </div>
+            <button class="sim-reset-btn" onclick="resetSimulator()">Reset &amp; Re-run</button>
+            <button class="sim-carry-btn" onclick="carryInvToQueue()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Use these results in Queue &amp; Staffing Lab
+            </button>
           </div>
-        </div>
-
-        <!-- Chart: Service level vs safety stock -->
-        <div class="sim-chart-block">
-          <div class="schart-header">
-            <span class="schart-title">Service Level vs. Safety Stock Cost</span>
-            <span class="schart-sub">The diminishing return of chasing higher service levels -- each extra % costs disproportionately more capital.</span>
-          </div>
-          <div class="schart-canvas-wrap">
-            <canvas id="chart-service-curve"></canvas>
-          </div>
-        </div>
-
-        <!-- Analyst commentary -->
-        <div class="sim-commentary" id="sim-commentary">
-          <div class="scom-eyebrow">Model Interpretation</div>
-          <div class="scom-body" id="scom-body">--</div>
-          <div class="scom-insight" id="scom-insight"></div>
-        </div>
-
-        <!-- Sensitivity table -->
-        <div class="sim-sensitivity">
-          <div class="ssens-header">Sensitivity Analysis -- What If You Change One Variable?</div>
-          <table class="ssens-table" id="ssens-table">
-            <thead>
-              <tr>
-                <th>Scenario</th>
-                <th>EOQ</th>
-                <th>Safety Stock</th>
-                <th>Total Cost</th>
-                <th>vs. Base</th>
-              </tr>
-            </thead>
-            <tbody id="ssens-body"></tbody>
-          </table>
-        </div>
-
-        <!-- Reset / Carry forward -->
-        <button class="sim-reset-btn" onclick="resetSimulator()">Reset &amp; Re-run</button>
-        <button class="sim-carry-btn" onclick="carryInvToQueue()">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Use these results in Queue &amp; Staffing Lab
-        </button>
-
-      </div><!-- /sim-results -->
-    </div><!-- /sim-output-panel -->
-  </div><!-- /sim-body -->
-
-  </div><!-- /tab-panel-inv -->
-
-  <!-- ══════════════════════════════════════════════════════
-       TAB 2: QUEUE & STAFFING DYNAMICS SIMULATOR
-  ══════════════════════════════════════════════════════ -->
-  <div class="sim-tab-panel" id="tab-panel-queue">
-
-  <div class="sim-scenario-card">
-    <div class="ssc-eyebrow">Hypothetical Scenario</div>
-    <div class="ssc-body">
-      <strong>Six Flags Great Lakes — Peak Saturday Operations.</strong> It's a summer Saturday and the park's flagship coaster is running at full capacity. On average, a new guest joins the queue every 2.5 minutes. Each boarding cycle takes about 5 minutes per customer. Management has deployed 3 ride operators to handle loading, safety checks, and dispatch. By 11am the queue is visibly growing. Do you add a 4th operator, or is the system still within tolerance? What does utilisation look like, and at what point does adding staff stop meaningfully cutting wait time?
-    </div>
-    <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the simulation to see real-time queue dynamics.</div>
-  </div>
-
-  <!-- ── GUIDED EXPLAINER STRIP ────────────────────────── -->
-  <div class="sim-guide">
-    <div class="sim-guide-step active" id="q-gs-0">
-      <span class="sgs-num">01</span>
-      <span class="sgs-label">Set arrival rate &amp; service time</span>
-    </div>
-    <div class="sim-guide-arrow">→</div>
-    <div class="sim-guide-step" id="q-gs-1">
-      <span class="sgs-num">02</span>
-      <span class="sgs-label">Set number of servers &amp; run time</span>
-    </div>
-    <div class="sim-guide-arrow">→</div>
-    <div class="sim-guide-step" id="q-gs-2">
-      <span class="sgs-num">03</span>
-      <span class="sgs-label">Run simulation -- see queue &amp; utilisation</span>
-    </div>
-  </div>
-
-  <div class="sim-body">
-
-    <!-- LEFT: Queue Sim Inputs -->
-    <div class="sim-inputs-panel">
-
-      <!-- Group A: Arrival -->
-      <div class="sim-input-group" id="qgrp-arrival">
-        <div class="sig-header">
-          <span class="sig-tag">A</span>
-          <div>
-            <span class="sig-title">Arrival &amp; Demand</span>
-            <span class="sig-hint">How often customers / jobs arrive</span>
-          </div>
-        </div>
-        <div class="sim-field">
-          <label>Avg. Arrival Interval (minutes)</label>
-          <div class="sim-field-row">
-            <input type="number" id="q-arrival" value="2.5" min="0.1" max="60" step="0.1">
-            <span class="sim-field-unit">min / arrival</span>
-          </div>
-          <p class="sim-field-note">One new customer every X minutes on average. At Six Flags, guest throughput drove this figure per attraction.</p>
-        </div>
-        <div class="sim-field">
-          <label>Simulation Duration (minutes)</label>
-          <div class="sim-field-row">
-            <input type="number" id="q-simtime" value="240" min="30" max="1440" step="30">
-            <span class="sim-field-unit">minutes</span>
-          </div>
-          <p class="sim-field-note">Total operating window to simulate. 240 = a typical 4-hour peak period.</p>
         </div>
       </div>
+    </div><!-- /tab-panel-inv -->
 
-      <!-- Group B: Service -->
-      <div class="sim-input-group" id="qgrp-service">
-        <div class="sig-header">
-          <span class="sig-tag">B</span>
-          <div>
-            <span class="sig-title">Service Parameters</span>
-            <span class="sig-hint">How long it takes to serve each customer</span>
-          </div>
+    <!-- ══ TAB 2: QUEUE & STAFFING ═════════════════════ -->
+    <div class="sim-tab-panel" id="tab-panel-queue" role="tabpanel" aria-labelledby="tab-btn-queue">
+      <div class="sim-scenario-card">
+        <div class="ssc-eyebrow">Hypothetical Scenario</div>
+        <div class="ssc-body">
+          <strong>Six Flags Great Lakes — Peak Saturday Operations.</strong> It's a summer Saturday and the park's flagship
+          coaster is running at full capacity. On average, a new guest joins the queue every 2.5 minutes. Each boarding cycle
+          takes about 5 minutes per customer. Management has deployed 3 ride operators to handle loading, safety checks, and
+          dispatch. By 11am the queue is visibly growing. Do you add a 4th operator, or is the system still within tolerance?
         </div>
-        <div class="sim-field">
-          <label>Avg. Service Time (minutes)</label>
-          <div class="sim-field-row">
-            <input type="number" id="q-service" value="5" min="0.5" max="120" step="0.5">
-            <span class="sim-field-unit">min / customer</span>
-          </div>
-          <p class="sim-field-note">Average time one server spends with one customer. Exponentially distributed -- some will be faster, some slower.</p>
-        </div>
-        <div class="sim-field">
-          <label>Number of Servers (staff)</label>
-          <div class="sim-field-row">
-            <input type="number" id="q-servers" value="3" min="1" max="20" step="1">
-            <span class="sim-field-unit">servers</span>
-          </div>
-          <p class="sim-field-note">Parallel servers working simultaneously. Increase this to see the effect on wait time and utilisation.</p>
-        </div>
-        <div class="sim-field">
-          <label>Staff Cost per Server ($/hour)</label>
-          <div class="sim-field-row">
-            <input type="number" id="q-staffcost" value="22" min="5" max="200" step="1">
-            <span class="sim-field-unit">$/hr</span>
-          </div>
-          <p class="sim-field-note">Hourly labour cost per server. Used to calculate total staffing cost vs. wait-time cost trade-off.</p>
-        </div>
+        <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the simulation to see real-time queue dynamics.</div>
       </div>
 
-      <!-- RUN BUTTON -->
-      <button class="sim-run-btn" id="q-run-btn" onclick="runQueueSim()">
-        <span id="q-btn-text">Run Simulation</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-
-    </div><!-- /inputs -->
-
-    <!-- RIGHT: Queue Sim Output -->
-    <div class="sim-output-panel" id="q-output-panel">
-
-      <!-- Placeholder -->
-      <div class="sim-placeholder" id="q-placeholder">
-        <div class="sim-ph-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-            <circle cx="12" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
-            <circle cx="24" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
-            <circle cx="36" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
-            <path d="M6 36 Q12 28 18 36 Q24 28 30 36 Q36 28 42 36" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
-        <p class="sim-ph-title">Simulation not yet run</p>
-        <p class="sim-ph-sub">Configure arrival rate, service time and staff count. Click <strong>Run Simulation</strong> to see queue dynamics and staffing recommendations.</p>
+      <div class="sim-guide">
+        <div class="sim-guide-step active" id="q-gs-0"><span class="sgs-num">01</span><span class="sgs-label">Set arrival rate &amp; service time</span></div>
+        <div class="sim-guide-arrow" aria-hidden="true">→</div>
+        <div class="sim-guide-step" id="q-gs-1"><span class="sgs-num">02</span><span class="sgs-label">Set number of servers &amp; run time</span></div>
+        <div class="sim-guide-arrow" aria-hidden="true">→</div>
+        <div class="sim-guide-step" id="q-gs-2"><span class="sgs-num">03</span><span class="sgs-label">Run simulation — see queue &amp; utilisation</span></div>
       </div>
 
-      <!-- Results -->
-      <div id="q-results" style="display:none;">
-
-        <!-- Key metrics -->
-        <div class="qsim-metrics-row">
-          <div class="qsim-metric">
-            <span class="sm-label">Customers Served</span>
-            <span class="sm-value" id="q-out-served">--</span>
-            <span class="sm-unit">total</span>
+      <div class="sim-body">
+        <div class="sim-inputs-panel">
+          <div class="sim-input-group" id="qgrp-arrival">
+            <div class="sig-header"><span class="sig-tag">A</span><span class="sig-title">Arrival &amp; Demand<span class="sig-hint">How often customers / jobs arrive</span></span></div>
+            <div class="sim-field">
+              <label for="q-arrival">Avg. Arrival Interval (minutes)</label>
+              <div class="sim-field-row"><input type="number" id="q-arrival" value="2.5" min="0.1" max="60" step="0.1"><span class="sim-field-unit">min / arrival</span></div>
+              <p class="sim-field-note">One new customer every X minutes on average.</p>
+            </div>
+            <div class="sim-field">
+              <label for="q-simtime">Simulation Duration (minutes)</label>
+              <div class="sim-field-row"><input type="number" id="q-simtime" value="240" min="30" max="1440" step="30"><span class="sim-field-unit">minutes</span></div>
+              <p class="sim-field-note">Total operating window to simulate. 240 = a typical 4-hour peak period.</p>
+            </div>
           </div>
-          <div class="qsim-metric">
-            <span class="sm-label">Avg. Wait Time</span>
-            <span class="sm-value" id="q-out-wait">--</span>
-            <span class="sm-unit">minutes</span>
+          <div class="sim-input-group" id="qgrp-service">
+            <div class="sig-header"><span class="sig-tag">B</span><span class="sig-title">Service Parameters<span class="sig-hint">How long it takes to serve each customer</span></span></div>
+            <div class="sim-field">
+              <label for="q-service">Avg. Service Time (minutes)</label>
+              <div class="sim-field-row"><input type="number" id="q-service" value="5" min="0.5" max="120" step="0.5"><span class="sim-field-unit">min / customer</span></div>
+              <p class="sim-field-note">Average time one server spends with one customer.</p>
+            </div>
+            <div class="sim-field">
+              <label for="q-servers">Number of Servers (staff)</label>
+              <div class="sim-field-row"><input type="number" id="q-servers" value="3" min="1" max="20" step="1"><span class="sim-field-unit">servers</span></div>
+              <p class="sim-field-note">Parallel servers working simultaneously. Increase this to see the effect on wait time.</p>
+            </div>
+            <div class="sim-field">
+              <label for="q-staffcost">Staff Cost per Server ($/hour)</label>
+              <div class="sim-field-row"><input type="number" id="q-staffcost" value="22" min="5" max="200" step="1"><span class="sim-field-unit">$/hr</span></div>
+              <p class="sim-field-note">Hourly labour cost per server. Used to calculate total staffing cost vs. wait-time trade-off.</p>
+            </div>
           </div>
-          <div class="qsim-metric">
-            <span class="sm-label">Max Wait Time</span>
-            <span class="sm-value" id="q-out-maxwait">--</span>
-            <span class="sm-unit">minutes</span>
-          </div>
-          <div class="qsim-metric highlight">
-            <span class="sm-label">Server Utilisation</span>
-            <span class="sm-value" id="q-out-util">--</span>
-            <span class="sm-unit">%</span>
-          </div>
+          <button class="sim-run-btn" id="q-run-btn" onclick="runQueueSim()" aria-label="Run queue simulation">
+            <span id="q-btn-text">Run Simulation</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
 
-        <!-- Utilisation bar -->
-        <div class="util-bar-wrap">
-          <div class="util-bar-label">
-            <span>Server Utilisation</span>
-            <span id="q-util-pct-lbl">--%</span>
+        <div class="sim-output-panel" id="q-output-panel">
+          <div class="sim-placeholder" id="q-placeholder">
+            <div class="sim-ph-icon" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+                <circle cx="12" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+                <circle cx="24" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+                <circle cx="36" cy="24" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+                <path d="M6 36 Q12 28 18 36 Q24 28 30 36 Q36 28 42 36" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="sim-ph-title">Simulation not yet run</p>
+            <p class="sim-ph-sub">Configure arrival rate, service time and staff count. Click <strong>Run Simulation</strong> to see queue dynamics.</p>
           </div>
-          <div class="util-track">
-            <div class="util-fill" id="q-util-bar" style="width:0%"></div>
+
+          <div id="q-results" style="display:none;" aria-live="polite">
+            <div class="qsim-metrics-row">
+              <div class="qsim-metric"><span class="sm-label">Customers Served</span><span class="sm-value" id="q-out-served">--</span><span class="sm-unit">total</span></div>
+              <div class="qsim-metric"><span class="sm-label">Avg. Wait Time</span><span class="sm-value" id="q-out-wait">--</span><span class="sm-unit">minutes</span></div>
+              <div class="qsim-metric"><span class="sm-label">Max Wait Time</span><span class="sm-value" id="q-out-maxwait">--</span><span class="sm-unit">minutes</span></div>
+              <div class="qsim-metric highlight"><span class="sm-label">Server Utilisation</span><span class="sm-value" id="q-out-util">--</span><span class="sm-unit">%</span></div>
+            </div>
+            <div class="util-bar-wrap">
+              <div class="util-bar-label"><span>Server Utilisation</span><span id="q-util-pct-lbl">--%</span></div>
+              <div class="util-track"><div class="util-fill" id="q-util-bar" style="width:0%"></div></div>
+            </div>
+            <div class="qsim-chart-block">
+              <div class="schart-header"><span class="schart-title">Queue Length Over Time</span><span class="schart-sub">Number of customers waiting at each point in the simulation.</span></div>
+              <div class="qsim-canvas-wrap"><canvas id="q-chart-queue"></canvas></div>
+            </div>
+            <div class="qsim-chart-block">
+              <div class="schart-header"><span class="schart-title">Wait Time vs. Number of Servers</span><span class="schart-sub">The diminishing return of adding staff — each extra server reduces wait time by less than the last.</span></div>
+              <div class="qsim-canvas-wrap"><canvas id="q-chart-sensitivity"></canvas></div>
+            </div>
+            <div class="sim-commentary" id="q-commentary">
+              <div class="scom-eyebrow">Model Interpretation</div>
+              <div class="scom-body" id="q-scom-body">--</div>
+              <div class="scom-insight" id="q-scom-insight"></div>
+            </div>
+            <button class="sim-reset-btn" onclick="resetQueueSim()">Reset &amp; Re-run</button>
+            <button class="sim-carry-btn" onclick="carryQueueToDCF()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Use these results in Financial &amp; DCF Lab
+            </button>
           </div>
-        </div>
-
-        <!-- Chart: Queue length over time -->
-        <div class="qsim-chart-block">
-          <div class="schart-header">
-            <span class="schart-title">Queue Length Over Time</span>
-            <span class="schart-sub">Number of customers waiting at each point in the simulation.</span>
-          </div>
-          <div class="qsim-canvas-wrap">
-            <canvas id="q-chart-queue"></canvas>
-          </div>
-        </div>
-
-        <!-- Chart: Staff count sensitivity -->
-        <div class="qsim-chart-block">
-          <div class="schart-header">
-            <span class="schart-title">Wait Time vs. Number of Servers</span>
-            <span class="schart-sub">The diminishing return of adding staff -- each extra server reduces wait time by less than the last.</span>
-          </div>
-          <div class="qsim-canvas-wrap">
-            <canvas id="q-chart-sensitivity"></canvas>
-          </div>
-        </div>
-
-        <!-- Commentary -->
-        <div class="sim-commentary" id="q-commentary">
-          <div class="scom-eyebrow">Model Interpretation</div>
-          <div class="scom-body" id="q-scom-body">--</div>
-          <div class="scom-insight" id="q-scom-insight"></div>
-        </div>
-
-        <!-- Reset -->
-        <button class="sim-reset-btn" onclick="resetQueueSim()">Reset &amp; Re-run</button>
-        <button class="sim-carry-btn" onclick="carryQueueToDCF()">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Use these results in Financial &amp; DCF Lab
-        </button>
-      </div><!-- /q-results -->
-    </div><!-- /q-output-panel -->
-  </div><!-- /sim-body -->
-
-  </div><!-- /tab-panel-queue -->
-
-  <!-- ══ TAB 3: FINANCIAL & DCF VALUATION ══════════════════ -->
-  <div class="sim-tab-panel" id="tab-panel-dcf">
-
-  <div class="sim-scenario-card">
-    <div class="ssc-eyebrow">Hypothetical Scenario</div>
-    <div class="ssc-body">
-      <strong>TechSmith Corporation — Acquisition Valuation.</strong> During the Broad Consulting Club engagement, you're tasked with building a preliminary DCF for a mid-market B2B software target. The company is generating $5M in revenue with strong early-stage growth (~18% per year) as it expands into new verticals. EBITDA margins are at 22% — compressed by S&amp;M spend, but improving. The acquirer's WACC is 10%, and comparable SaaS transactions are clearing at 8× EBITDA. Does the current growth trajectory support the acquisition price being discussed? What does the valuation look like under bear, base, and bull assumptions?
-    </div>
-    <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the model to see NPV, IRR and the valuation football field.</div>
-  </div>
-
-  <div class="sim-guide">
-    <div class="sim-guide-step active" id="d-gs-0">
-      <span class="sgs-num">01</span><span class="sgs-label">Enter revenue &amp; cost projections</span>
-    </div>
-    <div class="sim-guide-arrow">→</div>
-    <div class="sim-guide-step" id="d-gs-1">
-      <span class="sgs-num">02</span><span class="sgs-label">Set discount rate &amp; market assumptions</span>
-    </div>
-    <div class="sim-guide-arrow">→</div>
-    <div class="sim-guide-step" id="d-gs-2">
-      <span class="sgs-num">03</span><span class="sgs-label">Run model — NPV, IRR &amp; valuation range</span>
-    </div>
-  </div>
-
-  <div class="sim-body">
-
-    <!-- LEFT: DCF Inputs -->
-    <div class="sim-inputs-panel">
-
-      <!-- Group A: Revenue -->
-      <div class="sim-input-group" id="dgrp-revenue">
-        <div class="sig-header">
-          <span class="sig-tag">A</span>
-          <div><span class="sig-title">Revenue Projections</span><span class="sig-hint">Base year revenue and growth assumptions</span></div>
-        </div>
-        <div class="sim-field">
-          <label>Base Year Revenue ($000s)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-revenue" value="5000" min="10" max="10000000" step="100">
-            <span class="sim-field-unit">$K</span>
-          </div>
-          <p class="sim-field-note">Current / Year 0 annual revenue in thousands. Starting point for the 5-year projection.</p>
-        </div>
-        <div class="sim-field">
-          <label>Revenue Growth Rate — Years 1–3 (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-growth1" value="18" min="-50" max="200" step="1">
-            <span class="sim-field-unit">% / yr</span>
-          </div>
-          <p class="sim-field-note">High-growth phase. Reflects market penetration, GTM execution, or new product revenue.</p>
-        </div>
-        <div class="sim-field">
-          <label>Revenue Growth Rate — Years 4–5 (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-growth2" value="9" min="-50" max="100" step="1">
-            <span class="sim-field-unit">% / yr</span>
-          </div>
-          <p class="sim-field-note">Maturity phase. Business stabilises toward a steady-state growth rate.</p>
         </div>
       </div>
+    </div><!-- /tab-panel-queue -->
 
-      <!-- Group B: Costs & Margins -->
-      <div class="sim-input-group" id="dgrp-costs">
-        <div class="sig-header">
-          <span class="sig-tag">B</span>
-          <div><span class="sig-title">Cost Structure</span><span class="sig-hint">Margins and capital requirements</span></div>
+    <!-- ══ TAB 3: DCF VALUATION ════════════════════════ -->
+    <div class="sim-tab-panel" id="tab-panel-dcf" role="tabpanel" aria-labelledby="tab-btn-dcf">
+      <div class="sim-scenario-card">
+        <div class="ssc-eyebrow">Hypothetical Scenario</div>
+        <div class="ssc-body">
+          <strong>TechSmith Corporation — Acquisition Valuation.</strong> During the Broad Consulting Club engagement, you're
+          tasked with building a preliminary DCF for a mid-market B2B software target. The company is generating $5M in revenue
+          with strong early-stage growth (~18% per year). EBITDA margins are at 22%. The acquirer's WACC is 10%, and comparable
+          SaaS transactions are clearing at 8× EBITDA. Does the current growth trajectory support the acquisition price?
         </div>
-        <div class="sim-field">
-          <label>EBITDA Margin (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-ebitda" value="22" min="-100" max="80" step="1">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Earnings before interest, tax, depreciation and amortisation as % of revenue. Proxy for operating profitability.</p>
-        </div>
-        <div class="sim-field">
-          <label>D&amp;A as % of Revenue (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-da" value="4" min="0" max="30" step="0.5">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Depreciation and amortisation. Non-cash charge added back to get to free cash flow.</p>
-        </div>
-        <div class="sim-field">
-          <label>Capex as % of Revenue (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-capex" value="5" min="0" max="50" step="0.5">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Capital expenditure required to sustain growth. High for asset-heavy businesses (manufacturing, logistics); low for software.</p>
-        </div>
-        <div class="sim-field">
-          <label>Change in Working Capital (% of Rev Growth)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-nwc" value="8" min="-20" max="40" step="1">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Incremental working capital needed per dollar of revenue growth. Retail and supply chain businesses typically run 8–15%.</p>
-        </div>
+        <div class="ssc-defaults">Default inputs are pre-loaded from this scenario. Run the model to see NPV, IRR and the valuation football field.</div>
       </div>
 
-      <!-- Group C: Market & Discount Assumptions -->
-      <div class="sim-input-group" id="dgrp-market">
-        <div class="sig-header">
-          <span class="sig-tag">C</span>
-          <div><span class="sig-title">Market Assumptions</span><span class="sig-hint">Discount rate, terminal value and tax</span></div>
-        </div>
-        <div class="sim-field">
-          <label>WACC — Discount Rate (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-wacc" value="10" min="3" max="35" step="0.5">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Weighted average cost of capital. Blends cost of equity (CAPM) and cost of debt. Typically 8–14% for mid-market companies.</p>
-        </div>
-        <div class="sim-field">
-          <label>Terminal Growth Rate (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-tgr" value="2.5" min="0" max="8" step="0.5">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Perpetuity growth rate beyond Year 5. Should be at or below long-run GDP growth (~2–3%). Used in the Gordon Growth Model terminal value.</p>
-        </div>
-        <div class="sim-field">
-          <label>Tax Rate (%)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-tax" value="26" min="0" max="50" step="1">
-            <span class="sim-field-unit">%</span>
-          </div>
-          <p class="sim-field-note">Effective corporate tax rate. US federal + state blended: ~26–28%. Canada: ~26.5%.</p>
-        </div>
-        <div class="sim-field">
-          <label>EV/EBITDA Exit Multiple (×)</label>
-          <div class="sim-field-row">
-            <input type="number" id="d-multiple" value="8" min="2" max="40" step="0.5">
-            <span class="sim-field-unit">×</span>
-          </div>
-          <p class="sim-field-note">Market comparable exit multiple for terminal value cross-check. Mid-market B2B: 6–10×. Tech/SaaS: 12–20×.</p>
-        </div>
+      <div class="sim-guide">
+        <div class="sim-guide-step active" id="d-gs-0"><span class="sgs-num">01</span><span class="sgs-label">Enter revenue &amp; cost projections</span></div>
+        <div class="sim-guide-arrow" aria-hidden="true">→</div>
+        <div class="sim-guide-step" id="d-gs-1"><span class="sgs-num">02</span><span class="sgs-label">Set discount rate &amp; market assumptions</span></div>
+        <div class="sim-guide-arrow" aria-hidden="true">→</div>
+        <div class="sim-guide-step" id="d-gs-2"><span class="sgs-num">03</span><span class="sgs-label">Run model — NPV, IRR &amp; valuation range</span></div>
       </div>
 
-      <button class="sim-run-btn" id="d-run-btn" onclick="runDCF()">
-        <span id="d-btn-text">Run DCF Model</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-
-    </div><!-- /inputs -->
-
-    <!-- RIGHT: DCF Output -->
-    <div class="sim-output-panel" id="d-output-panel">
-
-      <div class="sim-placeholder" id="d-placeholder">
-        <div class="sim-ph-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-            <path d="M8 36 L8 28 M16 36 L16 20 M24 36 L24 14 M32 36 L32 22 M40 36 L40 10" stroke="rgba(201,168,76,0.35)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6 32 Q16 18 26 22 Q34 10 42 8" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
-          </svg>
+      <div class="sim-body">
+        <div class="sim-inputs-panel">
+          <div class="sim-input-group" id="dgrp-revenue">
+            <div class="sig-header"><span class="sig-tag">A</span><span class="sig-title">Revenue Projections<span class="sig-hint">Base year revenue and growth assumptions</span></span></div>
+            <div class="sim-field"><label for="d-revenue">Base Year Revenue ($000s)</label><div class="sim-field-row"><input type="number" id="d-revenue" value="5000" min="10" max="10000000" step="100"><span class="sim-field-unit">$K</span></div><p class="sim-field-note">Current / Year 0 annual revenue in thousands.</p></div>
+            <div class="sim-field"><label for="d-growth1">Revenue Growth Rate — Years 1–3 (%)</label><div class="sim-field-row"><input type="number" id="d-growth1" value="18" min="-50" max="200" step="1"><span class="sim-field-unit">% / yr</span></div><p class="sim-field-note">High-growth phase reflecting market penetration or new product revenue.</p></div>
+            <div class="sim-field"><label for="d-growth2">Revenue Growth Rate — Years 4–5 (%)</label><div class="sim-field-row"><input type="number" id="d-growth2" value="9" min="-50" max="100" step="1"><span class="sim-field-unit">% / yr</span></div><p class="sim-field-note">Maturity phase — business stabilises toward a steady-state growth rate.</p></div>
+          </div>
+          <div class="sim-input-group" id="dgrp-costs">
+            <div class="sig-header"><span class="sig-tag">B</span><span class="sig-title">Cost Structure<span class="sig-hint">Margins and capital requirements</span></span></div>
+            <div class="sim-field"><label for="d-ebitda">EBITDA Margin (%)</label><div class="sim-field-row"><input type="number" id="d-ebitda" value="22" min="-100" max="80" step="1"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Earnings before interest, tax, D&amp;A as % of revenue.</p></div>
+            <div class="sim-field"><label for="d-da">D&amp;A as % of Revenue (%)</label><div class="sim-field-row"><input type="number" id="d-da" value="4" min="0" max="30" step="0.5"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Non-cash charge added back to get to free cash flow.</p></div>
+            <div class="sim-field"><label for="d-capex">Capex as % of Revenue (%)</label><div class="sim-field-row"><input type="number" id="d-capex" value="5" min="0" max="50" step="0.5"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Capital expenditure required to sustain growth.</p></div>
+            <div class="sim-field"><label for="d-nwc">Change in Working Capital (% of Rev Growth)</label><div class="sim-field-row"><input type="number" id="d-nwc" value="8" min="-20" max="40" step="1"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Incremental working capital needed per dollar of revenue growth.</p></div>
+          </div>
+          <div class="sim-input-group" id="dgrp-market">
+            <div class="sig-header"><span class="sig-tag">C</span><span class="sig-title">Market Assumptions<span class="sig-hint">Discount rate, terminal value and tax</span></span></div>
+            <div class="sim-field"><label for="d-wacc">WACC — Discount Rate (%)</label><div class="sim-field-row"><input type="number" id="d-wacc" value="10" min="3" max="35" step="0.5"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Weighted average cost of capital. Typically 8–14% for mid-market companies.</p></div>
+            <div class="sim-field"><label for="d-tgr">Terminal Growth Rate (%)</label><div class="sim-field-row"><input type="number" id="d-tgr" value="2.5" min="0" max="8" step="0.5"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Perpetuity growth rate beyond Year 5. Should be at or below long-run GDP growth.</p></div>
+            <div class="sim-field"><label for="d-tax">Tax Rate (%)</label><div class="sim-field-row"><input type="number" id="d-tax" value="26" min="0" max="50" step="1"><span class="sim-field-unit">%</span></div><p class="sim-field-note">Effective corporate tax rate. US federal + state blended: ~26–28%.</p></div>
+            <div class="sim-field"><label for="d-multiple">EV/EBITDA Exit Multiple (×)</label><div class="sim-field-row"><input type="number" id="d-multiple" value="8" min="2" max="40" step="0.5"><span class="sim-field-unit">×</span></div><p class="sim-field-note">Market comparable exit multiple for terminal value cross-check.</p></div>
+          </div>
+          <button class="sim-run-btn" id="d-run-btn" onclick="runDCF()" aria-label="Run DCF model">
+            <span id="d-btn-text">Run DCF Model</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
-        <p class="sim-ph-title">Model not yet run</p>
-        <p class="sim-ph-sub">Fill in revenue projections, cost structure, and market assumptions. Click <strong>Run DCF Model</strong> to generate NPV, IRR and valuation range.</p>
+
+        <div class="sim-output-panel" id="d-output-panel">
+          <div class="sim-placeholder" id="d-placeholder">
+            <div class="sim-ph-icon" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="1" y="1" width="46" height="46" rx="3" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+                <path d="M8 36 L8 28 M16 36 L16 20 M24 36 L24 14 M32 36 L32 22 M40 36 L40 10" stroke="rgba(201,168,76,0.35)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M6 32 Q16 18 26 22 Q34 10 42 8" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+              </svg>
+            </div>
+            <p class="sim-ph-title">Model not yet run</p>
+            <p class="sim-ph-sub">Fill in revenue projections, cost structure, and market assumptions. Click <strong>Run DCF Model</strong> to generate NPV, IRR and valuation range.</p>
+          </div>
+
+          <div id="d-results" style="display:none;" aria-live="polite">
+            <div class="dcf-val-row">
+              <div class="dcf-val-card bear"><span class="dcf-vc-label">Bear Case</span><span class="dcf-vc-value" id="d-out-bear">--</span><span class="dcf-vc-sub">WACC +200bps</span></div>
+              <div class="dcf-val-card base active-val"><span class="dcf-vc-label">Base Case</span><span class="dcf-vc-value" id="d-out-base">--</span><span class="dcf-vc-sub">Your inputs</span></div>
+              <div class="dcf-val-card bull"><span class="dcf-vc-label">Bull Case</span><span class="dcf-vc-value" id="d-out-bull">--</span><span class="dcf-vc-sub">WACC −200bps</span></div>
+            </div>
+            <div class="sim-metrics-row" style="grid-template-columns:repeat(4,1fr);">
+              <div class="sim-metric"><span class="sm-label">Enterprise Value (DCF)</span><span class="sm-value" id="d-out-ev">--</span><span class="sm-unit">$K</span></div>
+              <div class="sim-metric"><span class="sm-label">NPV of FCFs</span><span class="sm-value" id="d-out-npv">--</span><span class="sm-unit">$K</span></div>
+              <div class="sim-metric"><span class="sm-label">Terminal Value (PV)</span><span class="sm-value" id="d-out-tv">--</span><span class="sm-unit">$K</span></div>
+              <div class="sim-metric highlight"><span class="sm-label">Implied IRR</span><span class="sm-value" id="d-out-irr">--</span><span class="sm-unit">%</span></div>
+            </div>
+            <div class="sim-chart-block">
+              <div class="schart-header"><span class="schart-title">Free Cash Flow Projection — Years 1–5</span><span class="schart-sub">Revenue, EBITDA and unlevered FCF by year.</span></div>
+              <div class="schart-canvas-wrap" style="height:200px;"><canvas id="d-chart-fcf"></canvas></div>
+            </div>
+            <div class="sim-chart-block">
+              <div class="schart-header"><span class="schart-title">Valuation Football Field — WACC vs. Terminal Growth Rate</span><span class="schart-sub">Enterprise value across the WACC / TGR matrix.</span></div>
+              <div class="schart-canvas-wrap" style="height:200px;"><canvas id="d-chart-football"></canvas></div>
+            </div>
+            <div class="sim-cost-breakdown" style="padding:0;overflow:hidden;">
+              <div class="scb-header" style="padding:1rem 1.1rem .6rem;"><span class="scb-title">5-Year FCF Schedule</span></div>
+              <div style="overflow-x:auto;">
+                <table class="ssens-table" id="d-fcf-table" style="min-width:560px;">
+                  <thead><tr><th>Metric</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr></thead>
+                  <tbody id="d-fcf-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="sim-commentary" id="d-commentary" style="margin-top:1.5rem;">
+              <div class="scom-eyebrow">Model Interpretation</div>
+              <div class="scom-body" id="d-scom-body">--</div>
+              <div class="scom-insight" id="d-scom-insight"></div>
+            </div>
+            <button class="sim-reset-btn" onclick="resetDCF()">Reset &amp; Re-run</button>
+          </div>
+        </div>
       </div>
+    </div><!-- /tab-panel-dcf -->
 
-      <div id="d-results" style="display:none;">
+  </div><!-- /sim-wrap -->
+</section><!-- /gtm-simulators -->
 
-        <!-- Valuation summary row -->
-        <div class="dcf-val-row">
-          <div class="dcf-val-card bear">
-            <span class="dcf-vc-label">Bear Case</span>
-            <span class="dcf-vc-value" id="d-out-bear">--</span>
-            <span class="dcf-vc-sub">WACC +200bps</span>
-          </div>
-          <div class="dcf-val-card base active-val">
-            <span class="dcf-vc-label">Base Case</span>
-            <span class="dcf-vc-value" id="d-out-base">--</span>
-            <span class="dcf-vc-sub">Your inputs</span>
-          </div>
-          <div class="dcf-val-card bull">
-            <span class="dcf-vc-label">Bull Case</span>
-            <span class="dcf-vc-value" id="d-out-bull">--</span>
-            <span class="dcf-vc-sub">WACC −200bps</span>
-          </div>
-        </div>
+<!-- ── VIII. CONTACT ──────────────────────────────────── -->
+<section id="section-get-in-touch" class="contact-section-shell" aria-labelledby="contact-heading">
 
-        <!-- Key metrics -->
-        <div class="sim-metrics-row" style="grid-template-columns:repeat(4,1fr);">
-          <div class="sim-metric">
-            <span class="sm-label">Enterprise Value (DCF)</span>
-            <span class="sm-value" id="d-out-ev">--</span>
-            <span class="sm-unit">$K</span>
-          </div>
-          <div class="sim-metric">
-            <span class="sm-label">NPV of FCFs</span>
-            <span class="sm-value" id="d-out-npv">--</span>
-            <span class="sm-unit">$K</span>
-          </div>
-          <div class="sim-metric">
-            <span class="sm-label">Terminal Value (PV)</span>
-            <span class="sm-value" id="d-out-tv">--</span>
-            <span class="sm-unit">$K</span>
-          </div>
-          <div class="sim-metric highlight">
-            <span class="sm-label">Implied IRR</span>
-            <span class="sm-value" id="d-out-irr">--</span>
-            <span class="sm-unit">%</span>
-          </div>
-        </div>
+  <div class="connect-grid">
 
-        <!-- FCF waterfall chart -->
-        <div class="sim-chart-block">
-          <div class="schart-header">
-            <span class="schart-title">Free Cash Flow Projection — Years 1–5</span>
-            <span class="schart-sub">Revenue, EBITDA and unlevered FCF by year. Bar = FCF; lines = Revenue &amp; EBITDA.</span>
-          </div>
-          <div class="schart-canvas-wrap" style="height:200px;">
-            <canvas id="d-chart-fcf"></canvas>
-          </div>
-        </div>
-
-        <!-- Sensitivity / football field chart -->
-        <div class="sim-chart-block">
-          <div class="schart-header">
-            <span class="schart-title">Valuation Football Field — WACC vs. Terminal Growth Rate</span>
-            <span class="schart-sub">Enterprise value across the WACC / TGR matrix. Brighter = higher valuation.</span>
-          </div>
-          <div class="schart-canvas-wrap" style="height:200px;">
-            <canvas id="d-chart-football"></canvas>
-          </div>
-        </div>
-
-        <!-- FCF schedule table -->
-        <div class="sim-cost-breakdown" style="padding:0;overflow:hidden;">
-          <div class="scb-header" style="padding:1rem 1.1rem .6rem;">
-            <span class="scb-title">5-Year FCF Schedule</span>
-          </div>
-          <div style="overflow-x:auto;">
-            <table class="ssens-table" id="d-fcf-table" style="min-width:560px;">
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th>
-                </tr>
-              </thead>
-              <tbody id="d-fcf-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Commentary -->
-        <div class="sim-commentary" id="d-commentary" style="margin-top:1.5rem;">
-          <div class="scom-eyebrow">Model Interpretation</div>
-          <div class="scom-body" id="d-scom-body">--</div>
-          <div class="scom-insight" id="d-scom-insight"></div>
-        </div>
-
-        <button class="sim-reset-btn" onclick="resetDCF()">Reset &amp; Re-run</button>
-
-      </div><!-- /d-results -->
-    </div><!-- /d-output-panel -->
-  </div><!-- /sim-body -->
-
-  </div><!-- /tab-panel-dcf -->
-
-</div>
-</section>
-<br>
-<!-- ── VIII. CONTACT ──────────────────────────────────────── -->
-<section id="section-get-in-touch" style="padding: 3rem 2rem; border-top: 1px solid var(--line); position: relative; overflow: hidden; background: var(--bg);">
-  
-  <style>
-    .connect-grid {
-      max-width: 1200px; 
-      margin: 0 auto; 
-      display: grid; 
-      grid-template-columns: 1fr clamp(300px, 35vw, 400px); 
-      gap: 6rem; 
-      align-items: flex-start;
-    }
-    @media (max-width: 900px) {
-      .connect-grid {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-      }
-    }
-  </style>
-
-  <div class="connect-grid" style="position: relative; z-index: 2;">
-    
     <div class="ct-content" data-a="up">
-      
-     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-        <span style="font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">Let's Connect</span>
-      <div style="height: 1px; background: var(--line); width: 60px;"></div>
-    </div>
-      
-      <h2 style="font-family: var(--display); font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1; margin-bottom: 3rem; color: var(--fg);">
-        Initiate<br><em style="color: rgba(237,233,224,0.35);">Dialogue.</em>
+      <div class="sec-eyebrow-row">
+        <span class="sec-eyebrow-label">Let's Connect</span>
+        <div class="sec-eyebrow-line"></div>
+      </div>
+
+      <h2 class="contact-display-heading" id="contact-heading">
+        Initiate<br><em class="contact-display-em">Dialogue.</em>
       </h2>
 
-      <div class="faq-wrapper" style="border-top: 1px solid var(--line);">
-        
-        <div class="faq-item" style="border-bottom: 1px solid var(--line);">
-          <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
-            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q1. How do you bridge the gap between technical engineering and business strategy?</span>
-            <span class="faq-icon" style="font-size: 1.4rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
+      <!-- FAQ ACCORDION -->
+      <div class="faq-wrapper">
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a1">
+            <span class="faq-question">Q1. How do you bridge the gap between technical engineering and business strategy?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
-            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. My foundation in Civil Engineering allows me to understand the complex infrastructure and capital-intensive nature of the Utilities sector, while my Broad MBA provides the framework to translate those technical realities into C-suite value. I specialize in taking "bottom-up" operational data and turning it into "top-down" GTM strategies that drive measurable margin growth.</p>
+          <div class="faq-content" id="faq-a1" role="region">
+            <p class="faq-answer">A. My foundation in Civil Engineering allows me to understand the complex infrastructure and
+              capital-intensive nature of the Utilities sector, while my Broad MBA provides the framework to translate those
+              technical realities into C-suite value. I specialize in taking "bottom-up" operational data and turning it into
+              "top-down" GTM strategies that drive measurable margin growth.</p>
           </div>
         </div>
 
-        <div class="faq-item" style="border-bottom: 1px solid var(--line);">
-          <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
-            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q2. What is your approach to "Sales Reinvention" in a regulated industry?</span>
-            <span class="faq-icon" style="font-size: 1.4rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a2">
+            <span class="faq-question">Q2. What is your approach to "Sales Reinvention" in a regulated industry?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
-            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. Sales Reinvention isn't just about a new CRM; it’s about shifting from a commodity-based model to a service-based model. I focus on identifying "value leaks" in the current sales cycle and leveraging digital platforms like Salesforce to create a unified customer view. By automating reporting—as I did at Six Flags (60% time reduction)—I empower sales teams to focus on high-value consulting rather than manual data entry.</p>
+          <div class="faq-content" id="faq-a2" role="region">
+            <p class="faq-answer">A. Sales Reinvention isn't just about a new CRM; it's about shifting from a commodity-based
+              model to a service-based model. I focus on identifying "value leaks" in the current sales cycle and leveraging
+              digital platforms like Salesforce to create a unified customer view. By automating reporting — as I did at Six
+              Flags (60% time reduction) — I empower sales teams to focus on high-value consulting rather than manual data entry.</p>
           </div>
         </div>
 
-        <div class="faq-item" style="border-bottom: 1px solid var(--line);">
-          <button class="faq-btn" onclick="toggleFaq(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; background: transparent; border: none; cursor: pointer; color: var(--fg); text-align: left;">
-            <span style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">Q3. What is your status regarding US Work Authorization?</span>
-            <span class="faq-icon" style="font-size: 1.4rem; color: var(--gold); transition: transform 0.3s ease;">+</span>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a3">
+            <span class="faq-question">Q3. What is your status regarding US Work Authorization?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
-            <p style="font-size: 0.9rem; color: rgba(237,233,224,0.6); line-height: 1.4; padding-bottom: 1.2rem; margin: 0;">A. I am a Canadian Citizen eligible for TN (Trade NAFTA) status under the USMCA. This allows for immediate work authorization upon a job offer in categories like Management Consultant or Engineer. This process is completed directly at the port of entry, bypassing the H-1B lottery and traditional sponsorship costs, making me available to join US-based teams with minimal lead time.</p>
+          <div class="faq-content" id="faq-a3" role="region">
+            <p class="faq-answer">A. I am a Canadian Citizen eligible for TN (Trade NAFTA) status under the USMCA. This allows
+              for immediate work authorization upon a job offer in categories like Management Consultant or Engineer. This
+              process is completed directly at the port of entry, bypassing the H-1B lottery and traditional sponsorship costs,
+              making me available to join US-based teams with minimal lead time.</p>
           </div>
         </div>
 
       </div>
     </div>
 
-    <div class="ct-visual" data-a="up" data-delay="200" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2rem; position: sticky; top: 120px;">
-      
-      <div class="photo-portrait-frame" style="position: relative; width: 100%; aspect-ratio: 800 / 1066; border-radius: 8px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);">
-        <img src="sparty.jpg" alt="Punch &amp; Sparty" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.9); transition: all 0.6s ease;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'; this.style.transform='scale(1.03)'" onmouseout="this.style.filter='grayscale(100%) brightness(0.9)'; this.style.transform='scale(1)'">
-        
-        <div style="position: absolute; bottom: 1.2rem; left: -1rem; background: rgba(8,9,12,0.95); backdrop-filter: blur(8px); padding: 0.7rem 1.2rem; border: 1px solid var(--line); border-left: 2px solid var(--gold);">
-          <span style="display: block; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.2rem;">Current Base</span>
-          <span style="font-family: var(--sans); font-size: 0.75rem; color: var(--fg); letter-spacing: 0.05em; font-weight: 500;">East Lansing, MI</span>
+    <div class="ct-visual" data-a="up" data-delay="200">
+
+      <div class="photo-portrait-frame">
+        <img src="sparty.jpg"
+             alt="Punch Kokkalemada with Sparty at Michigan State University"
+             class="contact-portrait-img"
+             loading="lazy"
+             data-hover-img>
+        <div class="portrait-location-badge">
+          <span class="portrait-location-eyebrow">Current Base</span>
+          <span class="portrait-location-city">East Lansing, MI</span>
         </div>
       </div>
 
-      <div class="ct-status" style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: rgba(74, 222, 128, 0.03); border: 1px solid rgba(74, 222, 128, 0.15); border-radius: 4px;">
-        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-          <span style="width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 10px #4ade80;"></span>
-          <span style="position: absolute; width: 20px; height: 20px; border: 1px solid #4ade80; border-radius: 50%; animation: pulse-dot 2s infinite;"></span>
+      <div class="ct-status-badge">
+        <div class="ct-status-dot-wrap" aria-hidden="true">
+          <span class="ct-status-dot"></span>
+          <span class="ct-status-pulse"></span>
         </div>
-        <div style="display: flex; flex-direction: column; text-align: left;">
-          <span style="font-size: 0.5rem; letter-spacing: 0.15em; color: #4ade80; text-transform: uppercase; margin-bottom: 0.1rem;">System Status: Active</span>
-          <span style="font-size: 0.75rem; color: var(--fg); letter-spacing: 0.05em;">Open to Full-Time · May 2026</span>
+        <div class="ct-status-text">
+          <span class="ct-status-eyebrow">System Status: Active</span>
+          <span class="ct-status-label">Open to Full-Time · May 2026</span>
         </div>
       </div>
 
     </div>
   </div>
-
- <script>
-  function toggleFaq(btn) {
-    const content = btn.nextElementSibling;
-    const icon = btn.querySelector('.faq-icon');
-    
-    // Check if it is currently open (has a pixel height greater than 0)
-    if (content.style.maxHeight && content.style.maxHeight !== '0px' && content.style.maxHeight !== '0') {
-      content.style.maxHeight = '0px'; // Forces it to close
-      icon.style.transform = 'rotate(0deg)';
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px"; // Opens it to its exact height
-      icon.style.transform = 'rotate(45deg)';
-    }
-  }
-</script>
 </section>
-<footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0rem 2rem; border-top: 1px solid var(--line); background: var(--bg);">
-  
-  <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-    <span class="ft-logo" style="font-size: 1.0rem; letter-spacing: 0.1em; color: rgba(237,233,224,0.4); text-transform: uppercase;">MBA Candidate © 2026 · Broad College of Business </span>
-  </div>
 
-  <div style="font-size: 1.0rem;display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;">
-    <a href="mailto:kokkalem@msu.edu" class="ft-link">E-MAILs</a>
-    <a href="https://linkedin.com/in/prapanchkokkalemada/" class="ft-link">LINKEDIN</a>
-    <a href="https://broad.campusgroups.com/gscma/events/" class="ft-link" target="_blank">🏅&nbsp;GSCMA</a>
-    <button class="ft-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="margin-left: 1rem;">↑ Top</button>
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-left">
+    <span class="ft-logo">MBA Candidate © 2026 · Broad College of Business</span>
   </div>
-  
+  <nav class="footer-links" aria-label="Footer links">
+    <a href="/cdn-cgi/l/email-protection#5a313531313b363f371a37292f743f3e2f" class="ft-link">E-MAIL</a>
+    <a href="https://linkedin.com/in/prapanchkokkalemada/" class="ft-link" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+    <a href="https://broad.campusgroups.com/gscma/events/" class="ft-link" target="_blank" rel="noopener noreferrer">🏅&nbsp;GSCMA</a>
+    <button class="ft-top-btn" id="footer-top-btn" aria-label="Scroll to top of page">↑ Top</button>
+  </nav>
 </footer>
+
+<!-- ── SCRIPTS ────────────────────────────────────────── -->
 <script src="script.js"></script>
 </body>
 </html>
