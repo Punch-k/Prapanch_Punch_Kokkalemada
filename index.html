@@ -232,14 +232,35 @@
   </div>
 
 <!-- ── Quote ─── -->     
-<div class="agency-quote-section" id="agency-quote" aria-hidden="true">
+<!-- ── AGENCY QUOTE — GSAP ScrollTrigger word scrub ── -->
+<section class="agency-quote-section" id="agency-quote" aria-label="Design philosophy quote">
   <div class="agency-quote-wrap">
-    <span class="reveal-mask"><span class="reveal-text">“Design creates culture.</span></span>
-    <span class="reveal-mask"><span class="reveal-text">Culture shapes values.</span></span>
-    <span class="reveal-mask"><span class="reveal-text">Values determine the future.”</span></span>
-    <span class="reveal-mask"><span class="reveal-author">— Robert L. Peters</span></span>
+    <p class="aq-line" aria-hidden="true">
+      <span class="aq-word">"Design</span>
+      <span class="aq-word">creates</span>
+      <span class="aq-word">culture.</span>
+    </p>
+    <p class="aq-line" aria-hidden="true">
+      <span class="aq-word">Culture</span>
+      <span class="aq-word">shapes</span>
+      <span class="aq-word">values.</span>
+    </p>
+    <p class="aq-line" aria-hidden="true">
+      <span class="aq-word">Values</span>
+      <span class="aq-word">determine</span>
+      <span class="aq-word">the</span>
+      <span class="aq-word">future."</span>
+    </p>
+    <p class="aq-attribution" aria-hidden="true">
+      <span class="aq-word aq-author">— Robert L. Peters</span>
+    </p>
   </div>
-</div>
+  <!-- Visually hidden accessible version -->
+  <blockquote class="aq-accessible">
+    <p>"Design creates culture. Culture shapes values. Values determine the future."</p>
+    <footer>— Robert L. Peters</footer>
+  </blockquote>
+</section>
 
 <!-- ── NEWS CAROUSEL — styles in style.css under ─── NEWS CAROUSEL ─── -->
 <div class="news-carousel" id="newsCarousel" role="list" aria-label="Industry reading list">
