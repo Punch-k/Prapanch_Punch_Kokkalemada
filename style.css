@@ -213,16 +213,57 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   .loop-wrapper { min-height: 400px; }
 }
 
-/* ─── CRAWL INTRO (was inline <style> in HTML) ────────────── */
-.crawl-container { position: relative; width: 100%; height: 55vh; display: flex; justify-content: center; perspective: 600px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%); }
-.crawl-text { position: absolute; bottom: -10%; width: 90%; max-width: 900px; text-align: center; transform-origin: 50% 100%; animation: starWarsCrawl 18s linear infinite; }
-.crawl-quote { font-size: clamp(3rem,7vw,6rem); font-family: var(--display); line-height: 1.1; margin-bottom: 2rem; color: var(--gold); text-shadow: 0 10px 30px rgba(0,0,0,.8); }
-.crawl-attribution { color: #888; font-family: 'Share Tech Mono', monospace; font-size: 1.5rem; letter-spacing: 4px; text-transform: uppercase; }
-@keyframes starWarsCrawl {
-  0% { transform: rotateX(40deg) translateY(100px) translateZ(0); opacity: 0; }
-  5% { opacity: 1; }
-  100% { transform: rotateX(40deg) translateY(-1000px) translateZ(-600px); opacity: .1; }
+/* ─── AGENCY QUOTE (Scroll Reveal) ────────────── */
+.agency-quote-section {
+  padding: 10rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
+.agency-quote-wrap { text-align: center; }
+
+/* The Mask creates the invisible floor the text slides up from */
+.reveal-mask {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 0.1em; /* Prevents letters like 'g' or 'y' from clipping */
+  margin-bottom: -0.1em;
+}
+.reveal-text {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  color: var(--gold);
+  transform: translateY(115%);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.reveal-author {
+  display: block;
+  color: #888;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  transform: translateY(115%);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* The active state triggered by the JS Observer */
+.agency-quote-section.is-visible .reveal-text,
+.agency-quote-section.is-visible .reveal-author {
+  transform: translateY(0);
+}
+
+/* Staggering delays for the waterfall effect */
+.agency-quote-section.is-visible .reveal-mask:nth-child(1) .reveal-text { transition-delay: 0.0s; }
+.agency-quote-section.is-visible .reveal-mask:nth-child(2) .reveal-text { transition-delay: 0.15s; }
+.agency-quote-section.is-visible .reveal-mask:nth-child(3) .reveal-text { transition-delay: 0.3s; }
+.agency-quote-section.is-visible .reveal-mask:nth-child(4) .reveal-author { transition-delay: 0.5s; }
 
 /* ─── NEWS CAROUSEL (was 2× duplicate inline <style>) ─────── */
 /* Only one canonical block now — second duplicate deleted */
