@@ -2026,3 +2026,17 @@ function closeMobileMenu(){
     drawOverlay();
     requestAnimationFrame(loop);
 })();
+// ─── AGENCY QUOTE SCROLL REVEAL ─────────────────────────────
+const quoteObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            quoteObserver.unobserve(entry.target); // Stops watching once triggered
+        }
+    });
+}, { threshold: 0.4 }); // Triggers exactly when 40% of the quote is visible
+
+const quoteEl = document.getElementById('agency-quote');
+if (quoteEl) {
+    quoteObserver.observe(quoteEl);
+}
