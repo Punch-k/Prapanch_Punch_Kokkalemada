@@ -2101,3 +2101,13 @@ function closeMobileMenu(){
   });
   */
 })();
+// ── FIX: RECALCULATE GSAP TRIGGER MATH AFTER RENDER ─────────
+window.addEventListener('load', () => {
+    document.fonts.ready.then(() => {
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
+    });
+});
+
+
