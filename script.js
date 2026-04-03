@@ -2026,17 +2026,78 @@ function closeMobileMenu(){
     drawOverlay();
     requestAnimationFrame(loop);
 })();
-// ─── AGENCY QUOTE SCROLL REVEAL ─────────────────────────────
-const quoteObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            quoteObserver.unobserve(entry.target); // Stops watching once triggered
-        }
-    });
-}, { threshold: 0.4 }); // Triggers exactly when 40% of the quote is visible
+// ═══════════════════════════════════════════════════════════
+// AGENCY QUOTE — GSAP ScrollTrigger word-by-word scrub
+// Each word animates from: dim + blurred + offset → clear
+// as the user scrolls through the pinned section.
+// ═══════════════════════════════════════════════════════════
+(function () {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-const quoteEl = document.getElementById('agency-quote');
-if (quoteEl) {
-    quoteObserver.observe(quoteEl);
-}
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.getElementById('agency-quote');
+  if (!section) return;
+
+  // Respect prefers-reduced-motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.aq-word').forEach(w => {
+      gsap.set(w, { opacity: 1, filter: 'blur(0px)', y: 0 });
+    });
+    return;
+  }
+
+  const words = gsap.utils.toArray('.aq-word');
+
+  // ── Master timeline, scrubbed by scroll ─────────────────
+  // Each word staggers in sequentially. The total scroll distance
+  // is proportional to word count, giving a smooth "typewriter
+  // reveal" feel as the user scrolls through the pinned section.
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',          // pin starts when section hits viewport top
+      end: () => `+=${words.length * 120}`,  // scroll distance scales with word count
+      pin: true,                 // freeze the section in place while scrubbing
+      scrub: 1.4,                // lag behind scroll for cinematic smoothness
+      anticipatePin: 1,
+    }
+  });
+
+  // ── Per-word animation ───────────────────────────────────
+  // Words animate one at a time with a slight overlap (each starts
+  // at 85% of the previous word's progress) for flow.
+  const STEP = 1 / words.length;         // fraction of timeline per word
+  const OVERLAP = 0.18;                  // how much words overlap in time
+
+  words.forEach((word, i) => {
+    const start = i * STEP * (1 - OVERLAP);
+    tl.to(
+      word,
+      {
+        opacity: 1,
+        filter: 'blur(0px)',
+        y: 0,
+        ease: 'power2.out',
+        duration: STEP * 1.6,
+      },
+      start
+    );
+  });
+
+  // ── Optional: dim already-revealed words as new ones appear ─
+  // Uncomment the block below for a "spotlight" effect where only
+  // the current word is fully bright and others fade behind it.
+  /*
+  words.forEach((word, i) => {
+    if (i === 0) return;
+    const dimStart = i * STEP * (1 - OVERLAP) + STEP * 0.5;
+    tl.to(
+      words[i - 1],
+      { opacity: 0.22, ease: 'power1.in', duration: STEP * 0.8 },
+      dimStart
+    );
+  });
+  */
+})();
