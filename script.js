@@ -2027,50 +2027,42 @@ function closeMobileMenu(){
     requestAnimationFrame(loop);
 })();
 // ═══════════════════════════════════════════════════════════
-// AGENCY QUOTE — GSAP ScrollTrigger (DELAYED INIT FIX)
+// AGENCY QUOTE — GSAP ScrollTrigger (BULLETPROOF INIT)
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('load', () => {
-  // The crucial fix: Wait 150ms AFTER window load so the Canvas game fully draws its height
   setTimeout(() => {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = document.getElementById('agency-quote');
-    if (!section) return;
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.aq-word').forEach(w => {
-        gsap.set(w, { opacity: 1, filter: 'blur(0px)', y: 0 });
+    const words = document.querySelectorAll('.aq-word');
+    
+    // THE FAILSAFE: If GSAP fails to load, force the text to be visible so it doesn't stay hidden.
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      words.forEach(w => {
+        w.style.opacity = 1;
+        w.style.filter = 'blur(0px)';
+        w.style.transform = 'translateY(0)';
       });
       return;
     }
 
-    const words = gsap.utils.toArray('.aq-word');
+    gsap.registerPlugin(ScrollTrigger);
+    const section = document.getElementById('agency-quote');
+    if (!section) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top top',
+        start: 'top 15%', // Gives a slight buffer before pinning so it doesn't trigger prematurely
         end: () => `+=${words.length * 120}`,
         pin: true,
-        scrub: 1.4,
+        scrub: 1.2,
         anticipatePin: 1,
       }
     });
 
     const STEP = 1 / words.length;
-    const OVERLAP = 0.18;
-
     words.forEach((word, i) => {
-      const start = i * STEP * (1 - OVERLAP);
-      tl.to(
-        word,
-        { opacity: 1, filter: 'blur(0px)', y: 0, ease: 'power2.out', duration: STEP * 1.6 },
-        start
-      );
+      tl.to(word, { opacity: 1, filter: 'blur(0px)', y: 0, ease: 'power2.out', duration: STEP * 1.6 }, i * STEP * 0.82);
     });
 
-    // Force one final math check just to be safe
     ScrollTrigger.refresh();
-  }, 150);
+  }, 250); 
 });
