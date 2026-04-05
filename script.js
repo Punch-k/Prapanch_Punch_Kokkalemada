@@ -1772,7 +1772,7 @@ function closeMobileMenu(){
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow='';
 }
-// --- ADVANCED CANVAS GAME ENGINE ---
+// --- ADVANCED CANVAS GAME ENGINE (CHROME DINO EDITION) ---
 (function initSupplyGame() {
     const canvas = document.getElementById('canvas');
     if (!canvas) return; 
@@ -1781,11 +1781,11 @@ function closeMobileMenu(){
     const GROUND = H - 52;
     
     let state = 'idle';
-    let score = 0, bonus = 0, frame = 0, speed = 4;
+    let distance = 0, highScore = 0, frame = 0, speed = 4;
     const truck = { x: 110, y: GROUND, w: 110, h: 52, vy: 0, jumping: false, wheelPhase: 0 };
     const GRAVITY = 0.72, JUMP_V = -14.5;
     
-    let bumps = [], bumpTimer = 0, bumpInterval = 110, floaters = [];
+    let bumps = [], bumpTimer = 0, floaters = [];
     let trees = [];
     for (let i = 0; i < 6; i++) trees.push({x: Math.random() * W, h: 30 + Math.random() * 40, speed: 0.6 + Math.random() * 0.4});
     let clouds = [{x: 200, y: 35, w: 70}, {x: 500, y: 55, w: 50}, {x: 720, y: 30, w: 80}];
@@ -1796,7 +1796,7 @@ function closeMobileMenu(){
     
     function spawnBump() {
         const h = 10 + Math.random() * 8;
-        bumps.push({x: W + 20, w: 36, h: h, passed: false, _penalised: false});
+        bumps.push({x: W + 20, w: 36, h: h, passed: false});
     }
     
     function jump(e) {
@@ -1811,7 +1811,7 @@ function closeMobileMenu(){
     
     function startGame() {
         state = 'running';
-        score = 0; bonus = 0; frame = 0; speed = 4;
+        distance = 0; frame = 0; speed = 4;
         bumps = []; floaters = []; bumpTimer = 0;
         truck.y = GROUND; truck.vy = 0; truck.jumping = false;
         document.getElementById('hint').style.opacity = '0';
@@ -1887,7 +1887,7 @@ function closeMobileMenu(){
             ctx.fillStyle = GOLD; ctx.font = 'bold 36px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
             ctx.fillText('CLICK TO START ROUTE', W/2, H/2 - 10);
             ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
-            ctx.fillText('JUMP OVER SPEED BUMPS • AVOID SLA PENALTIES', W/2, H/2 + 18);
+            ctx.fillText('JUMP OVER SPEED BUMPS • HOW FAR CAN YOU GO?', W/2, H/2 + 18);
         }
        if (state === 'dead') {
             ctx.fillStyle = 'rgba(0,0,0,0.85)';
@@ -1895,39 +1895,24 @@ function closeMobileMenu(){
             ctx.textAlign = 'center';
             ctx.font = 'bold 40px "Bebas Neue", sans-serif';
 
-            // Check if they failed (Fired) or survived (Win)
-            if (bonus >= 45) {
-                ctx.fillStyle = RED;
-                ctx.fillText('CONTRACT TERMINATED', W / 2, H / 2 - 14);
-                ctx.fillStyle = '#888';
-                ctx.font = '13px "Share Tech Mono", monospace';
-                ctx.fillText('FAILED AT ' + formatTime(score) + ' | 45 PENALTY POINTS REACHED', W / 2, H / 2 + 12);
-            } else {
-                ctx.fillStyle = GREEN;
-                ctx.fillText('ROUTE COMPLETE!', W / 2, H / 2 - 14);
-                ctx.fillStyle = '#888';
-                ctx.font = '13px "Share Tech Mono", monospace';
-                ctx.fillText('YOU SURVIVED THE SHIFT | FINAL SLA PENALTY: ' + bonus, W / 2, H / 2 + 12);
-            }
+            ctx.fillStyle = RED;
+            ctx.fillText('SUPPLY CHAIN DISRUPTED', W / 2, H / 2 - 14);
+            ctx.fillStyle = '#888';
+            ctx.font = '13px "Share Tech Mono", monospace';
+            ctx.fillText('FINAL DISTANCE: ' + Math.floor(distance) + 'm  |  HI-SCORE: ' + Math.floor(highScore) + 'm', W / 2, H / 2 + 12);
 
             ctx.fillStyle = '#555';
             ctx.font = '13px "Share Tech Mono", monospace';
-            ctx.fillText('CLICK TO PLAY AGAIN', W / 2, H / 2 + 40);
+            ctx.fillText('CLICK OR PRESS SPACE TO RESTART', W / 2, H / 2 + 40);
         }
         ctx.textAlign = 'left';
-    }
-    
-    function formatTime(s) {
-        const m = Math.floor(s / 60).toString().padStart(2, '0');
-        const sec = Math.floor(s % 60).toString().padStart(2, '0');
-        return m + ':' + sec;
     }
     
     function rectsOverlap(ax, ay, aw, ah, bx, by, bw, bh) {
         return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
     }
     
-    let lastTime = 0, scoreAccum = 0;
+    let lastTime = 0;
     
     function loop(ts) {
         const dt = Math.min((ts - lastTime) / 1000, 0.05); lastTime = ts;
@@ -1942,71 +1927,54 @@ function closeMobileMenu(){
         drawRoad(frame);
         
         if (state === 'running') {
-            frame++; scoreAccum += dt;
-            if (scoreAccum >= 1) { score += 1; scoreAccum = 0; }
-            speed = 4 + Math.min(score / 60, 5);
+            frame++; 
+            // Calculate actual distance traveled based on current speed
+            distance += speed * dt * 25; 
+            
+            // Speed up progressively as distance increases (Dino mechanic)
+            speed = 4 + Math.min(distance / 600, 8); 
             
             truck.vy += GRAVITY; truck.y += truck.vy;
             if (truck.y >= GROUND) { truck.y = GROUND; truck.vy = 0; truck.jumping = false; }
             truck.wheelPhase += speed * 0.003;
             
-            bumpTimer++; bumpInterval = Math.max(70, 120 - score * 0.3);
+            bumpTimer++; 
+            const bumpInterval = Math.max(50, 120 - speed * 4); // Bumps spawn faster as speed increases
             if (bumpTimer >= bumpInterval) { spawnBump(); bumpTimer = 0; }
             
             bumps.forEach(b => {
                 b.x -= speed;
                 const tx = truck.x + 8, ty = truck.y - truck.h + 8, tw = truck.w - 16, th = truck.h - 12;
                 const bTop = GROUND - b.h;
+                
                 if (!b.passed) {
-                  if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
-                            if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
-                                b._penalised = true; 
-                                bonus += 5; // Accumulate SLA Penalty
-                                addFloater(truck.x + 60, truck.y - 60, '5 DEMERIT POINTS', RED);
-                                speed = Math.max(2, speed - 0.5);
+                    // CHROME DINO 1-HIT KO LOGIC
+                    if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
+                        if (!truck.jumping && truck.y >= GROUND - 2) {
+                            state = 'dead';
+                            if (distance > highScore) {
+                                highScore = distance; // Update High Score
                             }
+                            speed = 0;
                         }
-                        if (b.x + b.w < truck.x) {
-                            b.passed = true;
-                            if (!b._penalised) { 
-                                // Baseline execution doesn't earn points, just a success message
-                                addFloater(truck.x + 30, truck.y - 70, 'Cleared!', GREEN); 
-                            }
-                        }
-                  // if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
-                    //    if (!truck.jumping && truck.y >= GROUND - 2 && !b._penalised) {
-                      //      b._penalised = true; bonus -= 5;
-                        //    addFloater(truck.x + 60, truck.y - 60, '-5 min', RED);
-                          //  speed = Math.max(2, speed - 0.5);
-                       // }
-                   // }
-                   // if (b.x + b.w < truck.x) {
-                     //   b.passed = true;
-                      //  if (!b._penalised) { bonus += 5; addFloater(truck.x + 30, truck.y - 70, '+5 min', GREEN); }
-                   // }
+                    }
+                    // Successfully cleared bump
+                    if (b.x + b.w < truck.x && state === 'running') {
+                        b.passed = true;
+                        addFloater(truck.x + 30, truck.y - 70, 'Cleared!', GREEN);
+                    }
                 }
             });
             
             bumps = bumps.filter(b => b.x + b.w + 10 > 0);
-            // Calculate remaining time (120 seconds = 2 minutes)
-                let timeLeft = Math.max(0, 120 - score);
-                scoreEl.textContent = formatTime(timeLeft);
-                
-                // The Shift Complete (Win) Clause
-                if (timeLeft <= 0) {
-                    state = 'dead';
-                    speed = 0;
-            }
-         // Update the dashboard text to show cumulative damage
-            bonusEl.textContent = 'SLA Penalty: ' + bonus;
-            bonusEl.style.color = bonus > 0 ? RED : GREEN;
-
-            // The 45-Point Termination Clause (Contract Lost)
-            if (bonus >= 45) {
-                state = 'dead';
-            }          
-          //  bonusEl.textContent = (bonus >= 0 ? '+' : '') + bonus + ' min';
-          //  bonusEl.style.color = bonus >= 0 ? GREEN : RED;
+            
+            // Format strings to 5 digits (e.g., 00142m)
+            const distStr = Math.floor(distance).toString().padStart(5, '0') + 'm';
+            const hiStr = Math.floor(highScore).toString().padStart(5, '0') + 'm';
+            
+            // Update the Dashboard
+            scoreEl.textContent = distStr;
+            bonusEl.textContent = hiStr;
         }
         
         bumps.forEach(drawBump);
@@ -2026,6 +1994,7 @@ function closeMobileMenu(){
     drawOverlay();
     requestAnimationFrame(loop);
 })();
+
 // ═══════════════════════════════════════════════════════════
 // AGENCY QUOTE — "THE CINEMATIC FOCUS PULL" (CLEAN INIT)
 // ═══════════════════════════════════════════════════════════
