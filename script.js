@@ -1781,7 +1781,8 @@ function closeMobileMenu(){
     const GROUND = H - 52;
     
     let state = 'idle';
-    let distance = 0, highScore = 0, frame = 0, speed = 4;
+    // savedSpeed ensures the user restarts exactly at the speed they died at
+    let distance = 0, highScore = 0, frame = 0, speed = 4, savedSpeed = 4;
     const truck = { x: 110, y: GROUND, w: 110, h: 52, vy: 0, jumping: false, wheelPhase: 0 };
     const GRAVITY = 0.72, JUMP_V = -14.5;
     
@@ -1794,9 +1795,23 @@ function closeMobileMenu(){
     const bonusEl = document.getElementById('bonusEl');
     const GOLD = '#c9a84c', RED = '#ef4444', GREEN = '#10b981';
     
-    function spawnBump() {
-        const h = 10 + Math.random() * 8;
-        bumps.push({x: W + 20, w: 36, h: h, passed: false});
+    function spawnObstacle() {
+        const types = ['bump', 'pothole', 'bridge'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        let w = 40, h = 15;
+        
+        if (type === 'bump') {
+            w = 36 + Math.random() * 8;
+            h = 10 + Math.random() * 8;
+        } else if (type === 'pothole') {
+            w = 55 + Math.random() * 15;
+            h = 10;
+        } else if (type === 'bridge') {
+            w = 80;
+            h = 25; 
+        }
+        
+        bumps.push({x: W + 20, w: w, h: h, type: type, passed: false});
     }
     
     function jump(e) {
@@ -1811,7 +1826,8 @@ function closeMobileMenu(){
     
     function startGame() {
         state = 'running';
-        distance = 0; frame = 0; speed = 4;
+        distance = 0; frame = 0; 
+        speed = savedSpeed; // Restore the speed from the previous run
         bumps = []; floaters = []; bumpTimer = 0;
         truck.y = GROUND; truck.vy = 0; truck.jumping = false;
         document.getElementById('hint').style.opacity = '0';
@@ -1852,12 +1868,32 @@ function closeMobileMenu(){
         });
     }
     
-    function drawBump(b) {
+    function drawObstacle(b) {
         const bx = b.x, by = GROUND, bw = b.w, bh = b.h;
-        ctx.fillStyle = GOLD; ctx.fillRect(bx - 14, by - 3, 8, 3);
-        ctx.fillStyle = '#e05a00'; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + 4, by - bh); ctx.lineTo(bx + bw - 4, by - bh); ctx.lineTo(bx + bw, by); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = GOLD; ctx.fillRect(bx + bw/2 - 3, by - bh, 6, bh);
-        ctx.fillStyle = '#ffcc00'; ctx.fillRect(bx, by - 3, 5, 3); ctx.fillRect(bx + bw - 5, by - 3, 5, 3);
+        
+        if (b.type === 'bump') {
+            ctx.fillStyle = GOLD; ctx.fillRect(bx - 14, by - 3, 8, 3);
+            ctx.fillStyle = '#e05a00'; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + 4, by - bh); ctx.lineTo(bx + bw - 4, by - bh); ctx.lineTo(bx + bw, by); ctx.closePath(); ctx.fill();
+            ctx.fillStyle = GOLD; ctx.fillRect(bx + bw/2 - 3, by - bh, 6, bh);
+            ctx.fillStyle = '#ffcc00'; ctx.fillRect(bx, by - 3, 5, 3); ctx.fillRect(bx + bw - 5, by - 3, 5, 3);
+        } 
+        else if (b.type === 'pothole') {
+            ctx.fillStyle = '#0a0a0a';
+            ctx.beginPath(); ctx.ellipse(bx + bw/2, by + 2, bw/2, 5, 0, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#000';
+            ctx.beginPath(); ctx.ellipse(bx + bw/2, by + 3, bw/2 - 4, 3, 0, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = GOLD;
+            ctx.fillRect(bx - 10, by - 2, 8, 2);
+            ctx.fillRect(bx + bw + 2, by - 2, 8, 2);
+        } 
+        else if (b.type === 'bridge') {
+            ctx.fillStyle = '#111'; ctx.fillRect(bx + 10, by - 100, 12, 100);
+            ctx.fillStyle = '#222'; ctx.fillRect(bx + bw - 22, by - 100, 12, 100);
+            ctx.fillStyle = GOLD; ctx.fillRect(bx, by - 100, bw, 24);
+            ctx.fillStyle = '#222'; ctx.fillRect(bx, by - 79, bw, 3);
+            ctx.fillStyle = '#111'; ctx.font = 'bold 12px "Bebas Neue", sans-serif';
+            ctx.fillText('DO NOT JUMP', bx + 12, by - 84);
+        }
     }
     
     function drawRoad(frame) {
@@ -1887,7 +1923,7 @@ function closeMobileMenu(){
             ctx.fillStyle = GOLD; ctx.font = 'bold 36px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
             ctx.fillText('CLICK TO START ROUTE', W/2, H/2 - 10);
             ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
-            ctx.fillText('JUMP OVER SPEED BUMPS • HOW FAR CAN YOU GO?', W/2, H/2 + 18);
+            ctx.fillText('JUMP OVER HOLES. DUCK UNDER BRIDGES.', W/2, H/2 + 18);
         }
        if (state === 'dead') {
             ctx.fillStyle = 'rgba(0,0,0,0.85)';
@@ -1928,37 +1964,48 @@ function closeMobileMenu(){
         
         if (state === 'running') {
             frame++; 
-            // Calculate actual distance traveled based on current speed
             distance += speed * dt * 25; 
             
-            // Speed up progressively as distance increases (Dino mechanic)
-            speed = 4 + Math.min(distance / 600, 8); 
+            // Decoupled speed: It gradually increases over time to a cap, preserving across deaths
+            speed = Math.min(12, speed + dt * 0.1); 
             
             truck.vy += GRAVITY; truck.y += truck.vy;
             if (truck.y >= GROUND) { truck.y = GROUND; truck.vy = 0; truck.jumping = false; }
             truck.wheelPhase += speed * 0.003;
             
             bumpTimer++; 
-            const bumpInterval = Math.max(50, 120 - speed * 4); // Bumps spawn faster as speed increases
-            if (bumpTimer >= bumpInterval) { spawnBump(); bumpTimer = 0; }
+            const bumpInterval = Math.max(45, 130 - speed * 6); // Obstacles spawn faster as speed increases
+            if (bumpTimer >= bumpInterval) { spawnObstacle(); bumpTimer = 0; }
             
             bumps.forEach(b => {
                 b.x -= speed;
                 const tx = truck.x + 8, ty = truck.y - truck.h + 8, tw = truck.w - 16, th = truck.h - 12;
-                const bTop = GROUND - b.h;
+                
+                // Dynamic collision boxes based on obstacle type
+                let obsX = b.x, obsY, obsW = b.w, obsH;
+                if (b.type === 'bump') {
+                    obsY = GROUND - b.h;
+                    obsH = b.h + 2;
+                } else if (b.type === 'pothole') {
+                    obsX = b.x + 10;
+                    obsW = b.w - 20; 
+                    obsY = GROUND - 10; // Extends up slightly to catch the truck wheels
+                    obsH = 20;
+                } else if (b.type === 'bridge') {
+                    obsX = b.x + 5;
+                    obsW = b.w - 10;
+                    obsY = 0;
+                    obsH = GROUND - 60; // Fills the airspace, killing the truck if it jumps
+                }
                 
                 if (!b.passed) {
-                    // CHROME DINO 1-HIT KO LOGIC
-                    if (rectsOverlap(tx, ty, tw, th, b.x, bTop - 2, b.w, b.h + 2)) {
-                        if (!truck.jumping && truck.y >= GROUND - 2) {
-                            state = 'dead';
-                            if (distance > highScore) {
-                                highScore = distance; // Update High Score
-                            }
-                            speed = 0;
-                        }
+                    if (rectsOverlap(tx, ty, tw, th, obsX, obsY, obsW, obsH)) {
+                        state = 'dead';
+                        if (distance > highScore) { highScore = distance; }
+                        savedSpeed = speed; // Save the exact momentum for the next run
+                        speed = 0;          // Freeze the animation
                     }
-                    // Successfully cleared bump
+                    
                     if (b.x + b.w < truck.x && state === 'running') {
                         b.passed = true;
                         addFloater(truck.x + 30, truck.y - 70, 'Cleared!', GREEN);
@@ -1968,17 +2015,16 @@ function closeMobileMenu(){
             
             bumps = bumps.filter(b => b.x + b.w + 10 > 0);
             
-            // Format strings to 5 digits (e.g., 00142m)
             const distStr = Math.floor(distance).toString().padStart(5, '0') + 'm';
             const hiStr = Math.floor(highScore).toString().padStart(5, '0') + 'm';
             
-            // Update the Dashboard
             scoreEl.textContent = distStr;
             bonusEl.textContent = hiStr;
         }
         
-        bumps.forEach(drawBump);
+        // Draw truck FIRST so the bridge pillars render "over" it
         drawTruck(truck.x, truck.y, truck.wheelPhase);
+        bumps.forEach(drawObstacle);
         
         floaters.forEach(f => {
             ctx.globalAlpha = Math.max(0, f.life); ctx.fillStyle = f.color;
@@ -1994,7 +2040,6 @@ function closeMobileMenu(){
     drawOverlay();
     requestAnimationFrame(loop);
 })();
-
 // ═══════════════════════════════════════════════════════════
 // AGENCY QUOTE — "THE CINEMATIC FOCUS PULL" (CLEAN INIT)
 // ═══════════════════════════════════════════════════════════
