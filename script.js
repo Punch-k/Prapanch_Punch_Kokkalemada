@@ -1988,16 +1988,13 @@ function closeMobileMenu(){
         
         clouds.forEach(c => { drawCloud(c.x, c.y, c.w); if (state === 'running') { c.x -= 0.4; if (c.x + c.w < 0) c.x = W + c.w; }});
         trees.forEach(t => { drawTree(t.x, t.h); if (state === 'running') { t.x -= t.speed * speed * 0.18; if (t.x < -20) t.x = W + 20; }});
-        drawRoad(frame);
+        drawRoad();
         
         if (state === 'running') {
             frame++;
             speed = Math.min(12, speed + 0.002); // Smooth, frame-based acceleration
             distance += speed * 0.05;            // Frame-based distance tracking 
-            
-            // Decoupled speed: It gradually increases over time to a cap, preserving across deaths
-            speed = Math.min(12, speed + dt * 0.1); 
-            
+                     
             truck.vy += GRAVITY; truck.y += truck.vy;
             if (truck.y >= GROUND) { truck.y = GROUND; truck.vy = 0; truck.jumping = false; }
             truck.wheelPhase += speed * 0.003;
@@ -2031,7 +2028,7 @@ function closeMobileMenu(){
                     if (rectsOverlap(tx, ty, tw, th, obsX, obsY, obsW, obsH)) {
                         state = 'dead';
                         if (distance > highScore) { highScore = distance; }
-                        savedSpeed = speed; // Save the exact momentum for the next run
+                         // Save the exact momentum for the next run
                         speed = 0;          // Freeze the animation
                     }
                     
