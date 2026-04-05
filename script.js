@@ -2031,38 +2031,46 @@ function closeMobileMenu(){
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('load', () => {
   setTimeout(() => {
-    const words = document.querySelectorAll('.aq-word');
-    
-    // THE FAILSAFE: If GSAP fails to load, force the text to be visible so it doesn't stay hidden.
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-      words.forEach(w => {
-        w.style.opacity = 1;
-        w.style.filter = 'blur(0px)';
-        w.style.transform = 'translateY(0)';
-      });
-      return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
     const section = document.getElementById('agency-quote');
-    if (!section) return;
+        const words = document.querySelectorAll('.aq-word');
+    
+   // Critical Check: If elements aren't found, stop to prevent errors
+        if (!section || words.length === 0) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 15%', // Gives a slight buffer before pinning so it doesn't trigger prematurely
-        end: () => `+=${words.length * 120}`,
-        pin: true,
-        scrub: 1.2,
-        anticipatePin: 1,
-      }
-    });
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            // Fallback: Show words if GSAP fails
+            words.forEach(w => { w.style.opacity = 1; w.style.filter = 'blur(0px)'; });
+            return;
+        }
 
-    const STEP = 1 / words.length;
-    words.forEach((word, i) => {
-      tl.to(word, { opacity: 1, filter: 'blur(0px)', y: 0, ease: 'power2.out', duration: STEP * 1.6 }, i * STEP * 0.82);
-    });
+        gsap.registerPlugin(ScrollTrigger);
 
-    ScrollTrigger.refresh();
-  }, 250); 
+        // Create the timeline
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: "top top", // Pins exactly when the section hits the top
+                end: () => `+=${words.length * 150}`, 
+                pin: true,
+                scrub: 1.2,
+                markers: false, // Set to true if you want to see the start/end lines for debugging
+                invalidateOnRefresh: true
+            }
+        });
+
+        const STEP = 1 / words.length;
+
+        words.forEach((word, i) => {
+            tl.to(word, {
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                ease: 'power2.out',
+                duration: STEP * 1.6
+            }, i * STEP * 0.85);
+        });
+
+        // Final force-refresh to fix the "Starting at Hero" issue
+        ScrollTrigger.refresh();
+    }, 300); 
 });
