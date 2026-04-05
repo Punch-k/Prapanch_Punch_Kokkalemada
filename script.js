@@ -2059,10 +2059,10 @@ function initAgencyQuote() {
         scrollTrigger: {
             trigger: section,
             start: "top top", 
-            end: () => `+=${words.length * 150}`, 
+            end: () => `+=${words.length * 100}`, 
             pin: true,
             pinType: "transform",
-            scrub: 1.2,
+            scrub: 2.5,
             markers: false,
             invalidateOnRefresh: true
         }
@@ -2075,9 +2075,9 @@ function initAgencyQuote() {
             opacity: 1,
             filter: 'blur(0px)',
             y: 0,
-            ease: 'power2.out',
+            ease: 'power4.out',
             duration: STEP * 1.6
-        }, i * STEP * 0.85);
+        }, i * STEP * 1.0);
     });
 
     ScrollTrigger.refresh();
