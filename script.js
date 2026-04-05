@@ -2027,51 +2027,58 @@ function closeMobileMenu(){
     requestAnimationFrame(loop);
 })();
 // ═══════════════════════════════════════════════════════════
-// AGENCY QUOTE — GSAP ScrollTrigger (BULLETPROOF INIT)
+// AGENCY QUOTE — GSAP ScrollTrigger (PRELOADER-SAFE INIT)
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    const section = document.getElementById('agency-quote');
-        const words = document.querySelectorAll('.aq-word');
-    
-   // Critical Check: If elements aren't found, stop to prevent errors
-        if (!section || words.length === 0) return;
-
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-            // Fallback: Show words if GSAP fails
-            words.forEach(w => { w.style.opacity = 1; w.style.filter = 'blur(0px)'; });
-            return;
+    // 1. Wait for your custom Preloader to finish adding the 'loaded' class
+    // This guarantees the page is at its true, final height before GSAP measures it.
+    const waitForPreloader = setInterval(() => {
+        if (document.body.classList.contains('loaded')) {
+            clearInterval(waitForPreloader);
+            
+            // 2. Give the browser 100ms to snap the layout into place, then boot GSAP
+            setTimeout(initAgencyQuote, 100); 
         }
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Create the timeline
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: section,
-                start: "top top", 
-                end: () => `+=${words.length * 150}`, 
-                pin: true,
-                pinType: "transform", // <--- ADD THIS SAFETY NET
-                scrub: 1.2,
-                markers: false, 
-                invalidateOnRefresh: true
-            }
-        });
-
-        const STEP = 1 / words.length;
-
-        words.forEach((word, i) => {
-            tl.to(word, {
-                opacity: 1,
-                filter: 'blur(0px)',
-                y: 0,
-                ease: 'power2.out',
-                duration: STEP * 1.6
-            }, i * STEP * 0.85);
-        });
-
-        // Final force-refresh to fix the "Starting at Hero" issue
-        ScrollTrigger.refresh();
-    }, 300); 
+    }, 100);
 });
+
+function initAgencyQuote() {
+    const section = document.getElementById('agency-quote');
+    const words = document.querySelectorAll('.aq-word');
+
+    if (!section || words.length === 0) return;
+
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        words.forEach(w => { w.style.opacity = 1; w.style.filter = 'blur(0px)'; });
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top top", 
+            end: () => `+=${words.length * 150}`, 
+            pin: true,
+            pinType: "transform",
+            scrub: 1.2,
+            markers: false,
+            invalidateOnRefresh: true
+        }
+    });
+
+    const STEP = 1 / words.length;
+
+    words.forEach((word, i) => {
+        tl.to(word, {
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            ease: 'power2.out',
+            duration: STEP * 1.6
+        }, i * STEP * 0.85);
+    });
+
+    ScrollTrigger.refresh();
+}
