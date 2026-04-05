@@ -156,6 +156,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .scrub-layout { display: flex; flex-wrap: wrap; gap: 4rem; align-items: center; }
 .scrub-text-col { flex: 1 1 500px; }
 .scrub-heading { margin-bottom: 1rem; font-size: clamp(3rem,6vw,5rem); font-family: var(--display); color: var(--gold); letter-spacing: .1em; line-height: 1; }
+.ai-vibecode {font-family: var(--display); color: var(--gold); font-size: 1.5rem; display: inline-block; margin-top: 10px; }
 .body-xl { font-size: clamp(1.5rem,3.2vw,2.5rem); line-height: 1.28; font-weight: 300; max-width: 960px; margin-bottom: 1.6rem; }
 .scrub-text { color: transparent; margin-bottom: 0; }
 .scrub-word { color: rgba(237,233,224,.15); transition: color .15s ease; }
