@@ -36,45 +36,95 @@ body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-w
 
 /* ─── PRELOADER ───────────────────────────────────────────── */
 #preloader { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity .8s var(--ease), visibility .8s; }
-.goo-loader {
-    position: relative;
-    width: 80px;
-    height: 40px;
-    filter: url('#goo'); /* Applies the SVG filter from HTML */
-    margin-bottom: 1rem;
+/* From Uiverse.io by kennyotsu */ 
+.card {
+  /* color used to softly clip top and bottom of the .words container */
+  --bg-color: #111;
+  background-color: var(--bg-color);
+  padding: 1rem 2rem;
+  border-radius: 1.25rem;
+}
+.loader {
+  color: rgb(124, 124, 124);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 40px;
+  padding: 10px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 8px;
 }
 
-.goo-loader .dot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 22px;
-    height: 22px;
-    background: var(--gold);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 10%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-color) 90%
+  );
+  z-index: 20;
 }
 
-/* The center dot stays still, the other two pull apart and merge */
-.goo-loader .dot:nth-child(2) {
-    animation: gooLeft 1s infinite ease-in-out alternate;
+.word {
+  display: block;
+  height: 100%;
+  padding-left: 6px;
+  color: #956afa;
+  animation: spin_4991 4s infinite;
 }
 
-.goo-loader .dot:nth-child(3) {
-    animation: gooRight 1s infinite ease-in-out alternate;
-}
+@keyframes spin_4991 {
+  10% {
+    -webkit-transform: translateY(-102%);
+    transform: translateY(-102%);
+  }
 
-@keyframes gooLeft {
-    0% { transform: translate(-50%, -50%); }
-    100% { transform: translate(-150%, -50%); } /* Pulls left */
-}
+  25% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
 
-@keyframes gooRight {
-    0% { transform: translate(-50%, -50%); }
-    100% { transform: translate(50%, -50%); }  /* Pulls right */
+  35% {
+    -webkit-transform: translateY(-202%);
+    transform: translateY(-202%);
+  }
+
+  50% {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+
+  60% {
+    -webkit-transform: translateY(-302%);
+    transform: translateY(-302%);
+  }
+
+  75% {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%);
+  }
+
+  85% {
+    -webkit-transform: translateY(-402%);
+    transform: translateY(-402%);
+  }
+
+  100% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
 }
-.loader-text { font-family: var(--display); font-size: 2rem; letter-spacing: .1em; color: var(--fg); }
-body.loaded #preloader { opacity: 0; visibility: hidden; }
 
 /* ─── AMBIENT AURA ────────────────────────────────────────── */
 #aura { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 0; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
