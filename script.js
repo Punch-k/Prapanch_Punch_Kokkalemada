@@ -2027,58 +2027,74 @@ function closeMobileMenu(){
     requestAnimationFrame(loop);
 })();
 // ═══════════════════════════════════════════════════════════
-// AGENCY QUOTE — GSAP ScrollTrigger (PRELOADER-SAFE INIT)
+// AGENCY QUOTE — "THE CINEMATIC FOCUS PULL" (No-Pin)
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('load', () => {
-    // 1. Wait for your custom Preloader to finish adding the 'loaded' class
-    // This guarantees the page is at its true, final height before GSAP measures it.
+    // Wait for the page to fully load to ensure perfect math
     const waitForPreloader = setInterval(() => {
-        if (document.body.classList.contains('loaded')) {
+        if (document.body.classList.contains('loaded') || !document.getElementById('preloader')) {
             clearInterval(waitForPreloader);
-            
-            // 2. Give the browser 100ms to snap the layout into place, then boot GSAP
-            setTimeout(initAgencyQuote, 100); 
+            setTimeout(initCreativeQuote, 100); 
         }
     }, 100);
 });
 
-function initAgencyQuote() {
+function initCreativeQuote() {
     const section = document.getElementById('agency-quote');
-    const words = document.querySelectorAll('.aq-word');
+    const lines = document.querySelectorAll('.aq-line');
 
-    if (!section || words.length === 0) return;
-
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        words.forEach(w => { w.style.opacity = 1; w.style.filter = 'blur(0px)'; });
-        return;
-    }
+    if (!section || lines.length === 0 || typeof gsap === 'undefined') return;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline({
+    // 1. The Parallax Drift: Moves the whole quote slightly as you scroll past it
+    gsap.to('.agency-quote-wrap', {
+        y: 60,
+        ease: "none",
         scrollTrigger: {
             trigger: section,
-            start: "top top", 
-            end: () => `+=${words.length * 100}`, 
-            pin: true,
-            pinType: "transform",
-            scrub: 2.5,
-            markers: false,
-            invalidateOnRefresh: true
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
         }
     });
 
-    const STEP = 1 / words.length;
+    // 2. The 3D Cascade: Each line unfurls seamlessly as it enters the viewport
+    lines.forEach((line) => {
+        const words = line.querySelectorAll('.aq-word');
 
-    words.forEach((word, i) => {
-        tl.to(word, {
-            opacity: 1,
-            filter: 'blur(0px)',
-            y: 0,
-            ease: 'power4.out',
-            duration: STEP * 1.6
-        }, i * STEP * 1.0);
+        gsap.fromTo(words, 
+            {
+                opacity: 0,
+                filter: "blur(24px)",
+                y: 50,
+                rotationX: -60, // Folds the text backward in 3D space
+                transformOrigin: "50% 100%"
+            },
+            {
+                opacity: 1,
+                filter: "blur(0px)",
+                y: 0,
+                rotationX: 0, // Flips flat to face the user
+                stagger: 0.12, // The wave effect between words
+                scrollTrigger: {
+                    trigger: line,
+                    start: "top 90%",  // Animation starts as the line enters the bottom of the screen
+                    end: "top 45%",    // Finishes when the line reaches the middle of the screen
+                    scrub: 1.5,        // "Butter" factor - smooth lag behind the scroll wheel
+                }
+            }
+        );
     });
 
-    ScrollTrigger.refresh();
-}
+    // 3. Fade in the Author tag slightly after the quote
+    const author = document.querySelector('.aq-author');
+    if (author) {
+        gsap.fromTo(author,
+            { opacity: 0, y: 20 },
+            { 
+                opacity: 1, 
+                y: 0, 
+                scrollTrigger: {
+                    trigger: section,
+                    start:
