@@ -42,8 +42,25 @@
 
 <!-- ── PRELOADER ──────────────────────────────────────── -->
 <div id="preloader" role="status" aria-label="Page loading">
-  <div class="loader-track"><div class="loader-bar" id="lbar"></div></div>
+  
+  <svg width="0" height="0" style="position: absolute;">
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+      <feBlend in="SourceGraphic" in2="goo" />
+    </filter>
+  </svg>
+
+  <div class="goo-loader">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div id="lbar" style="display: none;"></div>
+
   <div class="loader-text" id="ltext">00%</div>
+  
 </div>
 
 <!-- ── AMBIENT / CURSOR / SCROLL CHROME ──────────────── -->
