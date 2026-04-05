@@ -2027,80 +2027,79 @@ function closeMobileMenu(){
     requestAnimationFrame(loop);
 })();
 // ═══════════════════════════════════════════════════════════
-// AGENCY QUOTE — "THE CINEMATIC FOCUS PULL" (No-Pin)
+// AGENCY QUOTE — "THE CINEMATIC FOCUS PULL" (CLEAN INIT)
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('load', () => {
-    // Wait for the page to fully load to ensure perfect math
-    const waitForPreloader = setInterval(() => {
+    // Wait for the preloader to finish before calculating scroll math
+    const quoteInterval = setInterval(() => {
         if (document.body.classList.contains('loaded') || !document.getElementById('preloader')) {
-            clearInterval(waitForPreloader);
-            setTimeout(initCreativeQuote, 100); 
+            clearInterval(quoteInterval);
+            
+            const section = document.getElementById('agency-quote');
+            const lines = document.querySelectorAll('.aq-line');
+
+            if (!section || lines.length === 0 || typeof gsap === 'undefined') return;
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Parallax Drift: Moves the quote slightly as you scroll past it
+            gsap.to('.agency-quote-wrap', {
+                y: 80,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // 2. 3D Cascade: Folds the words up out of the darkness
+            lines.forEach((line) => {
+                const words = line.querySelectorAll('.aq-word');
+                gsap.fromTo(words, 
+                    { 
+                        opacity: 0, 
+                        filter: "blur(16px)", 
+                        y: 40, 
+                        rotationX: -50, 
+                        transformOrigin: "50% 100%" 
+                    },
+                    {
+                        opacity: 1, 
+                        filter: "blur(0px)", 
+                        y: 0, 
+                        rotationX: 0, 
+                        stagger: 0.1,
+                        scrollTrigger: {
+                            trigger: line,
+                            start: "top 90%",
+                            end: "top 50%",
+                            scrub: 1.2
+                        }
+                    }
+                );
+            });
+
+            // 3. Author Fade
+            const author = document.querySelector('.aq-author');
+            if (author) {
+                gsap.fromTo(author,
+                    { opacity: 0, y: 20 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        scrollTrigger: { 
+                            trigger: section, 
+                            start: "center 70%", 
+                            end: "center 50%", 
+                            scrub: 1.2 
+                        } 
+                    }
+                );
+            }
+
+            ScrollTrigger.refresh();
         }
     }, 100);
 });
-
-function initCreativeQuote() {
-    const section = document.getElementById('agency-quote');
-    const lines = document.querySelectorAll('.aq-line');
-
-    if (!section || lines.length === 0 || typeof gsap === 'undefined') return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    // 1. The Parallax Drift: Moves the whole quote slightly as you scroll past it
-    gsap.to('.agency-quote-wrap', {
-        y: 60,
-        ease: "none",
-        scrollTrigger: {
-            trigger: section,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-        }
-    });
-
-    // 2. The 3D Cascade: Each line unfurls seamlessly as it enters the viewport
-    lines.forEach((line) => {
-        const words = line.querySelectorAll('.aq-word');
-
-        gsap.fromTo(words, 
-            {
-                opacity: 0,
-                filter: "blur(24px)",
-                y: 50,
-                rotationX: -60, // Folds the text backward in 3D space
-                transformOrigin: "50% 100%"
-            },
-            {
-                opacity: 1,
-                filter: "blur(0px)",
-                y: 0,
-                rotationX: 0, // Flips flat to face the user
-                stagger: 0.12, // The wave effect between words
-                scrollTrigger: {
-                    trigger: line,
-                    start: "top 90%",  // Animation starts as the line enters the bottom of the screen
-                    end: "top 45%",    // Finishes when the line reaches the middle of the screen
-                    scrub: 1.5,        // "Butter" factor - smooth lag behind the scroll wheel
-                }
-            }
-        );
-    });
-
-    // 3. Fade in the Author tag slightly after the quote
-    const author = document.querySelector('.aq-author');
-    if (author) {
-        gsap.fromTo(author,
-            { opacity: 0, y: 20 },
-            { 
-                opacity: 1, 
-                y: 0, 
-                scrollTrigger: {
-                    trigger: section,
-                    start: "center 60%",
-                    end: "center 40%",
-                    scrub: 1.5
-                }
-            }
-        );
-    }
