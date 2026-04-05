@@ -1782,7 +1782,12 @@ function closeMobileMenu(){
     
     let state = 'idle';
     // savedSpeed ensures the user restarts exactly at the speed they died at
-    let distance = 0, highScore = 0, frame = 0, speed = 4, savedSpeed = 4;
+    //let distance = 0, highScore = 0, frame = 0, speed = 4, savedSpeed = 4;
+    //const truck = { x: 110, y: GROUND, w: 110, h: 52, vy: 0, jumping: false, wheelPhase: 0 };
+    //const GRAVITY = 0.72, JUMP_V = -14.5;
+    let state = 'idle'; 
+    let distance = 0, highScore = 0, frame = 0, speed = 4;
+    let roadOffset = 0; // NEW: Tracks the road smoothly
     const truck = { x: 110, y: GROUND, w: 110, h: 52, vy: 0, jumping: false, wheelPhase: 0 };
     const GRAVITY = 0.72, JUMP_V = -14.5;
     
@@ -1823,17 +1828,32 @@ function closeMobileMenu(){
     
     canvas.addEventListener('click', jump);
     document.addEventListener('keydown', jump);
-    
-    function startGame() {
-        state = 'running';
-        distance = 0; frame = 0; 
-        speed = savedSpeed; // Restore the speed from the previous run
-        bumps = []; floaters = []; bumpTimer = 0;
-        truck.y = GROUND; truck.vy = 0; truck.jumping = false;
-        document.getElementById('hint').style.opacity = '0';
-        lastTime = performance.now();
-        requestAnimationFrame(loop);
-    }
+
+  function startGame() {
+    state = 'running';
+    distance = 0;
+    frame = 0;
+    speed = 4;          // FIX: Always start at base speed
+    roadOffset = 0;     // FIX: Reset road visual
+    bumps = [];
+    floaters = [];
+    bumpTimer = 0;
+    truck.y = GROUND;
+    truck.vy = 0;
+    truck.jumping = false;
+    document.getElementById('hint').style.opacity = '0';
+    requestAnimationFrame(loop);
+}
+  //  function startGame() {
+ //    state = 'running';
+   //  distance = 0; frame = 0; 
+     // speed = savedSpeed; // Restore the speed from the previous run
+       // bumps = []; floaters = []; bumpTimer = 0;
+        //truck.y = GROUND; truck.vy = 0; truck.jumping = false;
+        //document.getElementById('hint').style.opacity = '0';
+        //lastTime = performance.now();
+       //  requestAnimationFrame(loop);
+    // /}
     
     function addFloater(x, y, text, color) { floaters.push({x, y, text, color, life: 1.0}); }
     
@@ -1896,14 +1916,23 @@ function closeMobileMenu(){
         }
     }
     
-    function drawRoad(frame) {
-        ctx.fillStyle = '#1a1a1a'; ctx.fillRect(0, GROUND, W, H - GROUND);
-        ctx.fillStyle = '#333';
-        const dashw = 30, gap = 50; const offset = (frame * speed) % (dashw + gap);
-        for (let dx = -offset; dx < W; dx += dashw + gap) ctx.fillRect(dx, GROUND + 10, dashw, 3);
-        ctx.fillStyle = '#2a2a2a'; ctx.fillRect(0, GROUND, W, 2);
-        ctx.fillStyle = '#252525'; ctx.fillRect(0, H - 18, W, 2);
+   function drawRoad(offset) {
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fillRect(0, GROUND, W, H - GROUND);
+    
+    ctx.fillStyle = '#333';
+    const dashw = 30, gap = 50;
+     roadOffset = (roadOffset + speed) % (dashw + gap);
+    // FIX: Uses the smooth offset instead of frame math
+    for (let dx = -offset; dx < W; dx += dashw + gap) { 
+        ctx.fillRect(dx, GROUND + 10, dashw, 3);
     }
+    
+    ctx.fillStyle = '#2a2a2a';
+    ctx.fillRect(0, GROUND, W, 2);
+    ctx.fillStyle = '#252525';
+    ctx.fillRect(0, H - 18, W, 2);
+}
     
     function drawTree(tx, th) {
         ctx.fillStyle = '#1e1e1e'; ctx.beginPath(); ctx.moveTo(tx, GROUND); ctx.lineTo(tx - 14, GROUND - th); ctx.lineTo(tx + 14, GROUND - th); ctx.closePath(); ctx.fill();
@@ -1963,8 +1992,9 @@ function closeMobileMenu(){
         drawRoad(frame);
         
         if (state === 'running') {
-            frame++; 
-            distance += speed * dt * 25; 
+            frame++;
+            speed = Math.min(12, speed + 0.002); // Smooth, frame-based acceleration
+            distance += speed * 0.05;            // Frame-based distance tracking 
             
             // Decoupled speed: It gradually increases over time to a cap, preserving across deaths
             speed = Math.min(12, speed + dt * 0.1); 
