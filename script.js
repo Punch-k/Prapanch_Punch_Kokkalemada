@@ -2097,4 +2097,10 @@ function initCreativeQuote() {
                 y: 0, 
                 scrollTrigger: {
                     trigger: section,
-                    start:
+                    start:"center 60%",
+                    end: "center 40%",
+                    scrub: 1.5
+                }
+            }
+        );
+    }
