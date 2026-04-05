@@ -1,27 +1,23 @@
 // 1. PRELOADER & HERO REVEAL
-let loadProgress=0;
-const lbar=document.getElementById('lbar');
-const ltext=document.getElementById('ltext');
-const loadInterval=setInterval(()=>{
-  loadProgress+=Math.floor(Math.random()*15)+5;
-  if(loadProgress>=100){
-    loadProgress=100;clearInterval(loadInterval);
-    setTimeout(()=>{document.body.classList.add('loaded');revealHero();},400);
-  }
-  lbar.style.width=loadProgress+'%';
-  ltext.textContent=(loadProgress<10?'0':'')+loadProgress+'%';
-},120);
+// 1. PRE LOADER & HERO REVEAL
+let loadProgress = 0;
+const ltext = document.getElementById('ltext');
 
-function revealHero(){
-  setTimeout(()=>{
-    document.getElementById('h-eyebrow').classList.add('show');
-    document.querySelectorAll('.word').forEach(w=>w.classList.add('show'));
-    setTimeout(()=>{
-      document.getElementById('h-sub').classList.add('show');
-      document.getElementById('h-act').classList.add('show');
-    },250);
-  },120);
-}
+const loadInterval = setInterval(() => {
+    loadProgress += Math.floor(Math.random() * 15) + 5;
+    
+    if (loadProgress >= 100) {
+        loadProgress = 100;
+        clearInterval(loadInterval);
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+            revealHero();
+        }, 400);
+    }
+    
+    // Updates the percentage text (the bar width logic is gone)
+    ltext.textContent = (loadProgress < 10 ? '0' : '') + loadProgress + '%';
+}, 120);
 
 // 2. CURSOR & AMBIENT AURA
 const cdot=document.getElementById('cdot');
