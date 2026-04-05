@@ -1780,7 +1780,7 @@ function closeMobileMenu(){
     const W = canvas.width, H = canvas.height;
     const GROUND = H - 52;
     
-    let state = 'idle';
+   // let state = 'idle';
     // savedSpeed ensures the user restarts exactly at the speed they died at
     //let distance = 0, highScore = 0, frame = 0, speed = 4, savedSpeed = 4;
     //const truck = { x: 110, y: GROUND, w: 110, h: 52, vy: 0, jumping: false, wheelPhase: 0 };
