@@ -1264,8 +1264,6 @@ window.resetDCF = function(){
 setDGuideStep(0);
 })();
 
-// ═══════════════════════════════════════════════════════════════
-// ═══════════════════════════════════════════════════════════
 // SKILLS BALL PIT
 // ═══════════════════════════════════════════════════════════
 (function(){
@@ -1916,15 +1914,16 @@ function closeMobileMenu(){
         }
     }
     
-   function drawRoad(offset) {
+   function drawRoad() {   // Removed "offset" from the parentheses
     ctx.fillStyle = '#1a1a1a';
     ctx.fillRect(0, GROUND, W, H - GROUND);
     
     ctx.fillStyle = '#333';
     const dashw = 30, gap = 50;
-     roadOffset = (roadOffset + speed) % (dashw + gap);
-    // FIX: Uses the smooth offset instead of frame math
-    for (let dx = -offset; dx < W; dx += dashw + gap) { 
+    roadOffset = (roadOffset + speed) % (dashw + gap); 
+    
+    // FIX: Changed "-offset" to "-roadOffset"
+    for (let dx = -roadOffset; dx < W; dx += dashw + gap) { 
         ctx.fillRect(dx, GROUND + 10, dashw, 3);
     }
     
@@ -2070,7 +2069,7 @@ function closeMobileMenu(){
     drawOverlay();
     requestAnimationFrame(loop);
 })();
-// ═══════════════════════════════════════════════════════════
+
 // AGENCY QUOTE — "THE CINEMATIC FOCUS PULL" (CLEAN INIT)
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('load', () => {
