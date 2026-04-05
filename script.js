@@ -2049,11 +2049,12 @@ window.addEventListener('load', () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
-                start: "top top", // Pins exactly when the section hits the top
+                start: "top top", 
                 end: () => `+=${words.length * 150}`, 
                 pin: true,
+                pinType: "transform", // <--- ADD THIS SAFETY NET
                 scrub: 1.2,
-                markers: false, // Set to true if you want to see the start/end lines for debugging
+                markers: false, 
                 invalidateOnRefresh: true
             }
         });
