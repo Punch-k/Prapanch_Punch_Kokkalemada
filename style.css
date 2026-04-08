@@ -103,14 +103,14 @@ body.loaded #preloader {
 
 /* The Animation Keyframes */
 @keyframes spin_loader {
-    10% { transform: translateY(-102%); }
-    25% { transform: translateY(-100%); }
-    35% { transform: translateY(-202%); }
-    50% { transform: translateY(-200%); }
-    60% { transform: translateY(-302%); }
-    75% { transform: translateY(-300%); }
-    85% { transform: translateY(-402%); }
-    100% { transform: translateY(-400%); }
+    0%, 15%  { transform: translateY(0%); }
+    15%, 25% { transform: translateY(-100%); } /* Slides to word 2 */
+    25%, 40% { transform: translateY(-100%); } /* Holds word 2 */
+    40%, 50% { transform: translateY(-200%); } /* Slides to word 3 */
+    50%, 65% { transform: translateY(-200%); } /* Holds word 3 */
+    65%, 75% { transform: translateY(-300%); } /* Slides to word 4 */
+    75%, 90% { transform: translateY(-300%); } /* Holds word 4 */
+    90%, 100%{ transform: translateY(-400%); } /* Slides to duplicate word 1 */
 }
 /* ─── AMBIENT AURA ────────────────────────────────────────── */
 #aura { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 0; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
