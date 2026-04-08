@@ -93,7 +93,7 @@ body.loaded #preloader {
     z-index: 20;
 }
 
-.word {
+.loader-word {
     display: block;
     height: 100%;
     padding-left: 8px;
