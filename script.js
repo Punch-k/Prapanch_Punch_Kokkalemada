@@ -11,8 +11,7 @@ const loadInterval = setInterval(() => {
         clearInterval(loadInterval);
         setTimeout(() => {
             document.body.classList.add('loaded');
-            revealHero();
-        }, 400);
+            }, 400);
     }
     
     // Updates the percentage text (the bar width logic is gone)
