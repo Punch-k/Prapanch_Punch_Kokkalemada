@@ -41,7 +41,6 @@ body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-w
     background: var(--bg);
     z-index: 9999;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: opacity 0.8s var(--ease), visibility 0.8s;
@@ -54,63 +53,70 @@ body.loaded #preloader {
     pointer-events: none;
 }
 
-/* Loader Card & Typography */
-.card {
-    --bg-color: var(--bg); /* Matches your site background perfectly */
-    background-color: var(--bg-color);
-    padding: 1rem 2rem;
+.loader-card {
+    background-color: var(--bg);
+    padding: 1.5rem 2rem;
     border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.loader {
+.loader-text-wrap {
     color: var(--muted);
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 25px;
-    box-sizing: content-box;
-    height: 40px;
-    padding: 10px;
+    font-size: 1.8rem;
+    height: 40px;         /* Strict height */
+    overflow: hidden;     /* Hides the inactive words */
     display: flex;
-    border-radius: 8px;
-}
-
-/* The Spinning Words Setup */
-.words {
-    overflow: hidden;
+    align-items: center;
     position: relative;
 }
 
-.words::after {
+.loader-text-wrap p {
+    margin: 0;
+    line-height: 40px;
+}
+
+.words-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    animation: spin_words 5s infinite cubic-bezier(0.16, 1, 0.3, 1); /* Buttery easing */
+}
+
+.words-wrapper .word {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+/* Flawless snap-and-hold keyframes. 
+Because height is 40px, it translates exactly by -40px per word.
+*/
+@keyframes spin_words {
+    0%, 15%  { transform: translateY(0); }
+    20%, 35% { transform: translateY(-40px); }
+    40%, 55% { transform: translateY(-80px); }
+    60%, 75% { transform: translateY(-120px); }
+    80%, 100%{ transform: translateY(-160px); }
+}
+
+/* The barrel-roll shadow mask */
+.loader-text-wrap::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        var(--bg-color) 10%,
-        transparent 30%,
-        transparent 70%,
-        var(--bg-color) 90%
+        var(--bg) 0%,
+        transparent 25%,
+        transparent 75%,
+        var(--bg) 100%
     );
-    z-index: 20;
-}
-
-.word {
-    display: block;
-    height: 100%;
-    padding-left: 8px;
-    color: var(--gold); /* Uses your theme's gold color */
-    animation: spin_loader 4s infinite;
-}
-
-/* The Animation Keyframes */
-@keyframes spin_loader {
-    10% { transform: translateY(-102%); }
-    25% { transform: translateY(-100%); }
-    35% { transform: translateY(-202%); }
-    50% { transform: translateY(-200%); }
-    60% { transform: translateY(-302%); }
-    75% { transform: translateY(-300%); }
-    85% { transform: translateY(-402%); }
-    100% { transform: translateY(-400%); }
+    pointer-events: none;
 }
 /* ─── AMBIENT AURA ────────────────────────────────────────── */
 #aura { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 0; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
