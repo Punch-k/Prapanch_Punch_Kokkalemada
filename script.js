@@ -17,6 +17,7 @@
             // Wait slightly at 100% so it doesn't instantly vanish
             setTimeout(() => {
                 document.body.classList.add('loaded');
+                revealHero(); // THE FIX: This triggers the text animation
             }, 400); 
         }
         
@@ -26,6 +27,19 @@
         }
     }, 150);
 })();
+
+// THE RESTORED HERO REVEAL FUNCTION
+function revealHero() {
+    const eyebrow = document.getElementById('h-eyebrow');
+    const words = document.querySelectorAll('.hero-hl .word');
+    const sub = document.getElementById('h-sub');
+    const act = document.getElementById('h-act');
+
+    if (eyebrow) eyebrow.classList.add('show');
+    if (words) words.forEach(w => w.classList.add('show'));
+    if (sub) sub.classList.add('show');
+    if (act) act.classList.add('show');
+}
 
 // 2. CURSOR & AMBIENT AURA
 const cdot=document.getElementById('cdot');
