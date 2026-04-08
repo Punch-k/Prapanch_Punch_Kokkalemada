@@ -98,7 +98,7 @@ body.loaded #preloader {
     height: 100%;
     padding-left: 8px;
     color: var(--gold); 
-    animation: spin_loader 4s infinite;
+    animation: spin_loader 8s infinite;
 }
 
 /* The Animation Keyframes */
