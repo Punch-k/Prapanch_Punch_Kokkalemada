@@ -1761,19 +1761,6 @@ window.addEventListener('scroll',()=>{
   }
 },{passive:true});
 
-// 18. MOBILE MENU
-function toggleMobileMenu(){
-  const toggle=document.getElementById('nav-toggle');
-  const menu=document.getElementById('mobile-menu');
-  toggle.classList.toggle('open');
-  menu.classList.toggle('open');
-  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
-}
-function closeMobileMenu(){
-  document.getElementById('nav-toggle').classList.remove('open');
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.body.style.overflow='';
-}
 // --- ADVANCED CANVAS GAME ENGINE (CHROME DINO EDITION) ---
 (function initSupplyGame() {
     const canvas = document.getElementById('canvas');
