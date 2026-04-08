@@ -1,22 +1,31 @@
 // 1. PRELOADER & HERO REVEAL
-// 1. PRE LOADER & HERO REVEAL
-let loadProgress = 0;
-const ltext = document.getElementById('ltext');
+(function initPreloader() {
+    let loadProgress = 0;
+    const ltext = document.getElementById('ltext');
+    const preloader = document.getElementById('preloader');
 
-const loadInterval = setInterval(() => {
-    loadProgress += Math.floor(Math.random() * 15) + 5;
-    
-    if (loadProgress >= 100) {
-        loadProgress = 100;
-        clearInterval(loadInterval);
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-            }, 400);
-    }
-    
-    // Updates the percentage text (the bar width logic is gone)
-    ltext.textContent = (loadProgress < 10 ? '0' : '') + loadProgress + '%';
-}, 120);
+    if (!preloader) return; 
+
+    const loadInterval = setInterval(() => {
+        // Randomizes the loading speed for a realistic feel
+        loadProgress += Math.floor(Math.random() * 18) + 4; 
+        
+        if (loadProgress >= 100) {
+            loadProgress = 100;
+            clearInterval(loadInterval);
+            
+            // Wait slightly at 100% so it doesn't instantly vanish
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 400); 
+        }
+        
+        // Silently updates the hidden counter 
+        if (ltext) {
+            ltext.textContent = (loadProgress < 10 ? '0' : '') + loadProgress + '%';
+        }
+    }, 150);
+})();
 
 // 2. CURSOR & AMBIENT AURA
 const cdot=document.getElementById('cdot');
