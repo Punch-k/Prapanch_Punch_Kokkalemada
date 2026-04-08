@@ -8,7 +8,7 @@
 
     const loadInterval = setInterval(() => {
         // Randomizes the loading speed for a realistic feel
-        loadProgress += Math.floor(Math.random() * 18) + 4; 
+        loadProgress += Math.floor(Math.random() * 8) + 2; 
         
         if (loadProgress >= 100) {
             loadProgress = 100;
@@ -18,7 +18,7 @@
             setTimeout(() => {
                 document.body.classList.add('loaded');
                 revealHero(); // THE FIX: This triggers the text animation
-            }, 400); 
+            }, 600); 
         }
         
         // Silently updates the hidden counter 
