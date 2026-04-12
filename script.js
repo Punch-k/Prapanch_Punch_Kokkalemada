@@ -2126,7 +2126,7 @@ window.addEventListener('load', () => {
                 );
             });
 
-            // 3. Author Fade
+                // 3. Author Fade
 const author = document.querySelector('.aq-author');
 if (author) {
     gsap.fromTo(author,
@@ -2136,7 +2136,6 @@ if (author) {
         }
     );
 }
-
             ScrollTrigger.refresh();
         }
     }, 100);
