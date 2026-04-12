@@ -365,8 +365,22 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 }
 /* ─── NEWS CAROUSEL (was 2× duplicate inline <style>) ─────── */
 /* Only one canonical block now — second duplicate deleted */
-.news-carousel::-webkit-scrollbar { display: none; }
-.news-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 0; -ms-overflow-style: none; scrollbar-width: none; cursor: grab; user-select: none; }
+.news-carousel::-webkit-scrollbar { 
+    display: none; 
+}
+.news-carousel { 
+    display: flex; 
+    overflow-x: auto; 
+    overflow-y: hidden; /* THE FIX: Kills vertical scroll */
+    scroll-snap-type: x mandatory; 
+    gap: 24px; 
+    padding: 0 5% 4rem 5%; /* THE FIX: Adjusts spacing for the new header */
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    cursor: grab; 
+    user-select: none; 
+}
 .news-carousel.active { cursor: grabbing; }
 .news-carousel a { user-drag: none; -webkit-user-drag: none; }
 .news-card { flex: 0 0 85%; max-width: 900px; scroll-snap-align: center; text-decoration: none; display: block; }
