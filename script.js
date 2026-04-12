@@ -1775,6 +1775,38 @@ window.addEventListener('scroll',()=>{
   }
 },{passive:true});
 
+// 25. FAQ ACCORDION
+document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-icon');
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        // 1. Close all other accordions automatically (keeps the UI clean)
+        document.querySelectorAll('.faq-btn').forEach(otherBtn => {
+            if (otherBtn !== btn) {
+                otherBtn.setAttribute('aria-expanded', 'false');
+                otherBtn.nextElementSibling.style.maxHeight = null;
+                otherBtn.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // 2. Toggle the one that was clicked
+        if (!isOpen) {
+            btn.setAttribute('aria-expanded', 'true');
+            // Calculates the exact height needed and opens it
+            content.style.maxHeight = content.scrollHeight + "px"; 
+            // Smoothly rotates the '+' icon into an 'x'
+            icon.style.transform = 'rotate(45deg)'; 
+        } else {
+            btn.setAttribute('aria-expanded', 'false');
+            // Closes it
+            content.style.maxHeight = null; 
+            icon.style.transform = 'rotate(0deg)';
+        }
+    });
+});
+
 // --- ADVANCED CANVAS GAME ENGINE (CHROME DINO EDITION) ---
 (function initSupplyGame() {
     const canvas = document.getElementById('canvas');
