@@ -92,25 +92,26 @@ body.loaded #preloader {
     );
     z-index: 20;
 }
-
 .loader-word {
     display: block;
     height: 100%;
     padding-left: 8px;
-    color: var(--gold); 
-    animation: spin_loader 8s infinite ease-in-out;
+    color: var(--gold);
+    /* Important: Set to linear so the keyframes control the pacing */
+    animation: spin_loader 4s infinite linear; 
 }
 
 /* The Animation Keyframes */
 @keyframes spin_loader {
-    0%, 15%  { transform: translateY(0%); }
-    15%, 25% { transform: translateY(-100%); } /* Slides to word 2 */
-    25%, 40% { transform: translateY(-100%); } /* Holds word 2 */
-    40%, 50% { transform: translateY(-200%); } /* Slides to word 3 */
-    50%, 65% { transform: translateY(-200%); } /* Holds word 3 */
-    65%, 75% { transform: translateY(-300%); } /* Slides to word 4 */
-    75%, 90% { transform: translateY(-300%); } /* Holds word 4 */
-    90%, 100%{ transform: translateY(-400%); } /* Slides to duplicate word 1 */
+    0%   { transform: translateY(0%); }
+    12%  { transform: translateY(0%); animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1); }
+    25%  { transform: translateY(-100%); }
+    37%  { transform: translateY(-100%); animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1); }
+    50%  { transform: translateY(-200%); }
+    62%  { transform: translateY(-200%); animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1); }
+    75%  { transform: translateY(-300%); }
+    87%  { transform: translateY(-300%); animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1); }
+    100% { transform: translateY(-400%); }
 }
 /* ─── AMBIENT AURA ────────────────────────────────────────── */
 #aura { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 0; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
