@@ -8,7 +8,7 @@
 
     const loadInterval = setInterval(() => {
         // Randomizes the loading speed for a realistic feel
-        loadProgress += Math.floor(Math.random() * 18) + 1; 
+        loadProgress += Math.floor(Math.random() * 6) + 1; 
         
         if (loadProgress >= 100) {
             loadProgress = 100;
