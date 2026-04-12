@@ -2081,7 +2081,7 @@ window.addEventListener('load', () => {
             clearInterval(quoteInterval);
             
             const section = document.getElementById('agency-quote');
-            const lines = document.querySelectorAll('.aq-line');
+            const lines = document.querySelectorAll('.aq-line, .aq-author');
 
             if (!section || lines.length === 0 || typeof gsap === 'undefined') return;
 
@@ -2127,22 +2127,15 @@ window.addEventListener('load', () => {
             });
 
             // 3. Author Fade
-            const author = document.querySelector('.aq-author');
-            if (author) {
-                gsap.fromTo(author,
-                    { opacity: 0, y: 20 },
-                    { 
-                        opacity: 1, 
-                        y: 0, 
-                        scrollTrigger: { 
-                            trigger: section, 
-                            start: "center 70%", 
-                            end: "center 50%", 
-                            scrub: 1.2 
-                        } 
-                    }
-                );
-            }
+const author = document.querySelector('.aq-author');
+if (author) {
+    gsap.fromTo(author,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0,
+          scrollTrigger: { trigger: section, start: "center 70%", end: "center 50%", scrub: 1.2 }
+        }
+    );
+}
 
             ScrollTrigger.refresh();
         }
