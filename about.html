@@ -21,17 +21,19 @@
             width: 100%; height: 100%; 
             background: var(--bg); color: var(--fg); 
             font-family: var(--sans); overflow: hidden; 
-            overscroll-behavior: none; cursor: none; 
+            /* FIX: Prevents Chrome swipe-to-back navigation */
+            overscroll-behavior: none; 
+            cursor: none; 
         }
 
         /* ─── AMBIENT AURA ────────────────────────────────────────── */
         #aura { position: fixed; top: 0; left: 0; width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
 
-        /* ─── MAIN NAV (STAY-TOP FIX) ────────────────────────────── */
+        /* ─── MAIN NAV ────────────────────────────────────────────── */
         #mainnav { 
             position: fixed; top: 0; left: 0; right: 0; z-index: 99999; 
             padding: 1.65rem 3rem; display: flex; justify-content: space-between; 
-            align-items: center; background: rgba(10,11,13,.95); 
+            align-items: center; background: rgba(10,11,13,.92); 
             backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
         }
         .nav-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
@@ -45,8 +47,10 @@
         /* ─── INFINITE ARENA (3D ENVIRONMENT) ───────────────────── */
         #viewport { 
             perspective: 2000px; width: 100vw; height: 100vh; overflow: hidden; 
-            background: transparent; position: relative; z-index: 5;
-            transform: scale(1.06); /* Your requested scale */
+            position: relative; z-index: 5;
+            /* Added background with dark overlay for readability */
+            background: linear-gradient(rgba(10,11,13,0.88), rgba(10,11,13,0.88)), 
+                        url('https://plus.unsplash.com/premium_photo-1673541168090-26775e19c437?q=80&w=872&auto=format&fit=crop') center/cover no-repeat;
         }
         #images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
 
@@ -54,7 +58,7 @@
         .item-wrapper { transform-style: preserve-3d; transition: transform 0.1s ease-out; cursor: grab; }
         .item-wrapper:active { cursor: grabbing; }
 
-        /* IMAGE OVERLAY CARDS (The "Fixed Bubble") */
+        /* IMAGE OVERLAY CARDS */
         .tw-card {
             position: relative; border-radius: 1rem; overflow: hidden;
             border: 1px solid rgba(201,168,76,.2);
@@ -114,16 +118,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
+        // TIGHTENED COORDINATES (Reduced Blank Space)
         const gridData = [
-            { x: 150, y: 150, w: 400, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
-            { x: 850, y: 550, w: 380, src: '2.png', year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimization.' },
-            { x: 1550, y: 250, w: 420, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
-            { x: 450, y: 1100, w: 380, src: '4.png', year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
-            { x: 1250, y: 1400, w: 350, src: '5.png', year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
-            { x: 1950, y: 850, w: 390, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical system and business growth.' },
-            { x: 250, y: 1950, w: 410, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in systems architecture.' },
-            { x: 1050, y: 2150, w: 380, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
-            { x: 1750, y: 1850, w: 360, src: 'market.jpeg', year: '2018', desc: 'The Origin. Focus on large-scale data modeling and process automation.' }
+            { x: 100, y: 100, w: 380, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
+            { x: 600, y: 400, w: 350, src: '2.png', year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimization.' },
+            { x: 1100, y: 150, w: 400, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
+            { x: 300, y: 800, w: 360, src: '4.png', year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
+            { x: 900, y: 1000, w: 340, src: '5.png', year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
+            { x: 1400, y: 650, w: 360, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical system and business growth.' },
+            { x: 150, y: 1400, w: 380, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in systems architecture.' },
+            { x: 700, y: 1600, w: 350, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
+            { x: 1250, y: 1400, w: 340, src: 'market.jpeg', year: '2018', desc: 'The Origin. Focus on large-scale data modeling and process automation.' }
         ];
 
         const container = document.getElementById('images');
@@ -131,7 +136,8 @@
         let winW = window.innerWidth, winH = window.innerHeight;
         let isMobile = winW < 768;
 
-        let tileSize = { w: 2800, h: 2800 };
+        // REDUCED TILE SIZE (Tighter play area)
+        let tileSize = { w: 2000, h: 2000 };
         let items = [];
         const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
         const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.05 };
@@ -168,7 +174,7 @@
                             container.appendChild(el);
                             items.push({ 
                                 el, x: (isMobile ? winW * 0.1 : d.x) + ox, 
-                                y: (isMobile ? (items.length * 500) % tileSize.h : d.y) + oy, 
+                                y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
                                 w: d.w, h: d.w * ratio, ex: 0, ey: 0 
                             });
                         });
@@ -184,7 +190,6 @@
             mouse.x += (mouse.tX - mouse.x) * 0.05;
             mouse.y += (mouse.tY - mouse.y) * 0.05;
 
-            // Tilt AWAY from cursor logic
             const rotY = (mouse.x - 0.5) * -12;
             const rotX = (mouse.y - 0.5) * 12;
 
@@ -195,10 +200,11 @@
                 let px = item.x + scroll.x + item.ex;
                 let py = item.y + scroll.y + item.ey;
 
-                if (px > winW + 600) item.ex -= tileSize.w;
-                if (px + item.w < -600) item.ex += tileSize.w;
-                if (py > winH + 600) item.ey -= tileSize.h;
-                if (py + item.h < -600) item.ey += tileSize.h;
+                // WRAPPING BOUNDS (Tighter threshold)
+                if (px > winW + 400) item.ex -= tileSize.w;
+                if (px + item.w < -400) item.ex += tileSize.w;
+                if (py > winH + 400) item.ey -= tileSize.h;
+                if (py + item.h < -400) item.ey += tileSize.h;
 
                 item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
             });
