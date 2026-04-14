@@ -364,7 +364,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   }
 }
 /* ─── NEWS CAROUSEL (was 2× duplicate inline <style>) ─────── */
-#section-carousel { padding: 4.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+#section-carousel { padding: 4.5rem 1rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .news-carousel::-webkit-scrollbar { display: none; }
 .news-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 0; -ms-overflow-style: none; scrollbar-width: none; cursor: grab; user-select: none; }
 .news-carousel.active { cursor: grabbing; }
