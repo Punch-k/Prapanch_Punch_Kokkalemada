@@ -341,16 +341,12 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 }
 
 .aq-author {
-  display: block;
-  font-family: var(--display);
-  font-size: clamp(0.85rem, 1.5vw, 1.35rem);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #666;
-  /* Author starts even more ghosted */
-  opacity: 0.08;
-  filter: blur(14px);
-  transform: translateY(28px);
+    display: block;
+    font-family: var(--display);
+    font-size: clamp(0.85rem, 1.5vw, 1.35rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #666;
 }
 
  Accessible fallback (visually hidden) 
