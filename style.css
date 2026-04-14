@@ -1,14 +1,3 @@
-/* ============================================================
-   Punch Kokkalemada — Portfolio Stylesheet
-   Refactored: 2026-04-03
-   Changes:
-     • 6 embedded HTML <style> blocks consolidated here
-     • Duplicate .news-carousel block removed
-     • :focus-visible ring added (a11y)
-     • New utility classes for previously inline styles
-     • Sections clearly labelled with comments
-   ============================================================ */
-
 /* ─── RESET ──────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
