@@ -53,72 +53,78 @@
         #images { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; cursor: grab; z-index: 10; }
         #images:active { cursor: grabbing; }
 
-        /* THE BUBBLE UNIT (Grouped Arena) */
+        /* THE BUBBLE UNIT (Grouped Milestone) */
         .item {
             position: absolute; top: 0; left: 0;
             will-change: transform;
-            display: flex; /* Side-by-side alignment */
+            display: flex; 
             align-items: center;
-            gap: 40px; /* Space between Image and Text */
-            padding: 20px;
+            gap: 50px; 
+            padding: 40px;
             pointer-events: auto;
         }
 
-        /* Image Side */
+        /* Image Component */
         .tw-card {
             flex-shrink: 0;
             position: relative; 
-            border-radius: 1rem; overflow: hidden;
-            border: 1px solid rgba(201,168,76,.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(201,168,76,.1);
-            transition: all .5s cubic-bezier(.4,0,.2,1);
+            border-radius: 1.2rem; overflow: hidden;
+            border: 1px solid rgba(201,168,76,.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 15px rgba(201,168,76,.05);
+            transition: transform .6s cubic-bezier(.16,1,.3,1), box-shadow .6s, border-color .6s;
         }
-        .tw-card img { width: 100%; height: auto; display: block; }
+        .tw-card img { width: 100%; height: auto; display: block; filter: grayscale(20%); }
 
         .item:hover .tw-card {
-            transform: scale(1.05);
-            border: 1px solid rgba(201,168,76,.8);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(201,168,76,0.4);
+            transform: scale(1.04) translateY(-10px);
+            border-color: rgba(201,168,76,.8);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.3);
         }
 
-        /* Text Side */
+        /* Metadata Component (Fixed relative to image) */
         .item-meta {
             position: relative;
-            width: 280px;
+            width: 320px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            opacity: 0.7;
+            transition: opacity 0.5s;
         }
+        .item:hover .item-meta { opacity: 1; }
 
-        /* The Tail connecting Image to Year */
+        /* Glowing Connecting Tail */
         .item-tail {
             position: absolute;
-            left: -40px; top: 40px;
-            width: 40px; height: 1px;
-            background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
-            box-shadow: 0 0 10px rgba(255,255,255,0.4);
+            left: -50px; top: 45px;
+            width: 50px; height: 1px;
+            background: linear-gradient(to right, #ffffff, transparent);
+            box-shadow: 0 0 15px rgba(255,255,255,0.6);
         }
 
         .item-year {
             font-family: var(--display);
-            font-size: 5rem; /* Larger anchor */
-            line-height: 0.9;
+            font-size: 5.5rem; 
+            line-height: 0.8;
             color: #ffffff;
-            text-shadow: 0 0 30px rgba(255,255,255,0.2);
-            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(255,255,255,0.15);
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
         }
 
         .item-desc {
-            font-size: 0.85rem;
-            color: rgba(237, 233, 224, 0.6);
-            line-height: 1.6;
-            max-width: 240px;
+            font-size: 0.9rem;
+            color: rgba(237, 233, 224, 0.5);
+            line-height: 1.8;
+            max-width: 280px;
+            font-weight: 300;
         }
 
         /* ─── FOOTER ────────────────────────────────────────────── */
         .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.88); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
-        .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; }
-        .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; }
+        .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; letter-spacing: 0.1em; }
+        .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; transition: opacity 0.3s; }
+        .ft-link:hover { opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -140,37 +146,51 @@
     <footer class="site-footer">
         <div class="ft-logo">PRAPANCH KOKKALEMADA © 2026</div>
         <div>
-            <a href="https://linkedin.com/in/yourprofile" class="ft-link">LINKEDIN</a>
+            <a href="https://linkedin.com/in/yourprofile" class="ft-link" target="_blank">LINKEDIN</a>
             <a href="mailto:your.email@example.com" class="ft-link">E-MAIL</a>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
+        // 1. DATA (Positions, Sizes, and Narrative)
         const gridData = [
-            { x: 150, y: 150, w: 320, src: '1.png', year: '2026', desc: 'MBA Candidate at Michigan State University. Global Student Ambassador focusing on Strategic Operations.' },
-            { x: 800, y: 400, w: 280, src: '2.png', year: '2025', desc: 'Strategy Associate Intern. Developed data-driven frameworks for market entry and P&L optimization.' },
-            { x: 1400, y: 200, w: 350, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and optimizing supply chain bottlenecks.' },
-            { x: 300, y: 900, w: 300, src: '4.png', year: '2023', desc: 'Operations Specialist. Implementing automated workflows using Power BI and SQL.' },
-            { x: 1000, y: 1100, w: 260, src: '5.png', year: '2022', desc: 'Consulting Projects solving high-impact commercial challenges for tech clients.' },
-            { x: 1700, y: 900, w: 320, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical infrastructure and business growth.' },
-            { x: 100, y: 1600, w: 340, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in computer science and systems architecture.' },
-            { x: 750, y: 1800, w: 300, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum and Lean methodologies in global environments.' },
-            { x: 1500, y: 1700, w: 280, src: 'market.jpeg', year: '2018', desc: 'The Origin. Early career focus on data analytics and process automation.' }
+            { x: 200, y: 150, w: 350, src: '1.png', year: '2026', desc: 'MBA Candidate at Michigan State University. Global Student Ambassador focusing on Strategic Operations.' },
+            { x: 950, y: 450, w: 300, src: '2.png', year: '2025', desc: 'Strategy Associate Intern. Developed data-driven frameworks for market entry and P&L optimization.' },
+            { x: 1600, y: 250, w: 380, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and optimizing supply chain bottlenecks.' },
+            { x: 350, y: 950, w: 320, src: '4.png', year: '2023', desc: 'Operations Specialist. Implementing automated workflows using Power BI and SQL.' },
+            { x: 1100, y: 1150, w: 280, src: '5.png', year: '2022', desc: 'Consulting Projects solving high-impact commercial challenges for tech clients.' },
+            { x: 1850, y: 950, w: 340, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical infrastructure and business growth.' },
+            { x: 150, y: 1700, w: 360, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in computer science and systems architecture.' },
+            { x: 900, y: 1850, w: 320, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum and Lean methodologies in global environments.' },
+            { x: 1650, y: 1750, w: 300, src: 'market.jpeg', year: '2018', desc: 'The Origin. Early career focus on data analytics and process automation.' }
         ];
 
         const container = document.getElementById('images');
         const aura = document.getElementById('aura');
         let winW = window.innerWidth, winH = window.innerHeight;
-        // Arena size increased to handle wider flex units
-        let tileSize = { w: 2400, h: 2400 }, items = [];
-        let mx = winW/2, my = winH/2, ax = mx, ay = my;
-
+        
+        // Arena Dimensions (2x2 tiling area)
+        let tileSize = { w: 2600, h: 2600 }, items = [];
+        
+        // Interaction State
+        const mouse = { 
+            x: { current: 0.5, target: 0.5 }, 
+            y: { current: 0.5, target: 0.5 } 
+        };
         const scroll = { current: { x: 0, y: 0 }, target: { x: 0, y: 0 }, ease: 0.05 };
         const drag = { isDragging: false, startX: 0, startY: 0, scrollX: 0, scrollY: 0 };
+        
+        let mx = winW/2, my = winH/2, ax = mx, ay = my;
 
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        // 2. MOUSE TRACKING (For Aura + Screen Parallax)
+        document.addEventListener('mousemove', e => { 
+            mx = e.clientX; my = e.clientY; 
+            mouse.x.target = e.clientX / winW;
+            mouse.y.target = e.clientY / winH;
+        });
 
+        // 3. GRID GENERATION
         function buildGrid() {
             container.innerHTML = '';
             items = [];
@@ -182,13 +202,12 @@
                 img.onload = () => {
                     const ratio = img.naturalHeight / img.naturalWidth;
                     const calculatedH = d.w * ratio;
-                    const totalW = d.w + 320; // protected unit width (image + gap + text)
+                    const totalW = d.w + 370; // (Image + Gap + Meta Width)
 
                     repsX.forEach((offsetX) => {
                         repsY.forEach((offsetY) => {
                             const el = document.createElement('div');
                             el.className = 'item';
-                            // The unit width is now the math anchor
                             el.style.width = `${totalW}px`;
                             el.innerHTML = `
                                 <div class="tw-card" style="width:${d.w}px"><img src="${d.src}" alt="${d.year}"></div>
@@ -199,29 +218,49 @@
                                 </div>
                             `;
                             container.appendChild(el);
-                            items.push({ el, x: d.x + offsetX, y: d.y + offsetY, w: totalW, h: calculatedH, extraX: 0, extraY: 0 });
+                            items.push({ 
+                                el, 
+                                x: d.x + offsetX, 
+                                y: d.y + offsetY, 
+                                w: totalW, 
+                                h: calculatedH, 
+                                extraX: 0, 
+                                extraY: 0,
+                                depth: Math.random() * 0.4 + 0.6 // Randomized depth for the cursor movement
+                            });
                         });
                     });
                 };
             });
         }
 
+        // 4. RENDER LOOP (The "Arena" movement Engine)
         function render() {
+            // Aura follow
             ax += (mx - ax) * 0.04;
             ay += (my - ay) * 0.04;
             aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
 
+            // Mouse Arena movement (Lerp current to target)
+            mouse.x.current += (mouse.x.target - mouse.x.current) * 0.05;
+            mouse.y.current += (mouse.y.target - mouse.y.current) * 0.05;
+
+            // Scroll/Drag movement
             scroll.current.x += (scroll.target.x - scroll.current.x) * scroll.ease;
             scroll.current.y += (scroll.target.y - scroll.current.y) * scroll.ease;
 
             items.forEach(item => {
-                let posX = item.x + scroll.current.x + item.extraX;
-                let posY = item.y + scroll.current.y + item.extraY;
+                // CURSOR MOVEMENT LOGIC: Apply a parallax offset based on cursor position relative to screen center
+                const cursorOffsetX = (mouse.x.current - 0.5) * (winW * 0.1) * item.depth;
+                const cursorOffsetY = (mouse.y.current - 0.5) * (winH * 0.1) * item.depth;
 
-                // Teleportation wrapping based on the FULL bubble width (item.w)
-                if (posX > winW + 400) item.extraX -= tileSize.w;
+                let posX = item.x + scroll.current.x + item.extraX + cursorOffsetX;
+                let posY = item.y + scroll.current.y + item.extraY + cursorOffsetY;
+
+                // Infinite wrapping math based on the FULL unit
+                if (posX > winW + 500) item.extraX -= tileSize.w;
                 if (posX + item.w < -600) item.extraX += tileSize.w;
-                if (posY > winH + 400) item.extraY -= tileSize.h;
+                if (posY > winH + 500) item.extraY -= tileSize.h;
                 if (posY + item.h < -600) item.extraY += tileSize.h;
 
                 item.el.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
@@ -230,11 +269,26 @@
             requestAnimationFrame(render);
         }
 
-        window.addEventListener('wheel', e => { scroll.target.x -= e.deltaX * 0.5; scroll.target.y -= e.deltaY * 0.5; }, { passive: true });
-        window.addEventListener('pointerdown', e => { drag.isDragging = true; drag.startX = e.clientX; drag.startY = e.clientY; drag.scrollX = scroll.target.x; drag.scrollY = scroll.target.y; });
-        window.addEventListener('pointerup', () => drag.isDragging = false);
-        window.addEventListener('pointermove', e => { if (drag.isDragging) { scroll.target.x = drag.scrollX + (e.clientX - drag.startX) * 1.5; scroll.target.y = drag.scrollY + (e.clientY - drag.startY) * 1.5; } });
+        // 5. INTERACTION HANDLERS
+        window.addEventListener('wheel', e => { 
+            scroll.target.x -= e.deltaX * 0.5; 
+            scroll.target.y -= e.deltaY * 0.5; 
+        }, { passive: true });
 
+        window.addEventListener('pointerdown', e => { 
+            drag.isDragging = true; 
+            drag.startX = e.clientX; drag.startY = e.clientY; 
+            drag.scrollX = scroll.target.x; drag.scrollY = scroll.target.y; 
+        });
+        window.addEventListener('pointerup', () => drag.isDragging = false);
+        window.addEventListener('pointermove', e => { 
+            if (drag.isDragging) { 
+                scroll.target.x = drag.scrollX + (e.clientX - drag.startX) * 1.5; 
+                scroll.target.y = drag.scrollY + (e.clientY - drag.startY) * 1.5; 
+            } 
+        });
+
+        // Initialize
         buildGrid();
         render();
     </script>
