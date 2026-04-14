@@ -151,14 +151,23 @@
         const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
         const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.05 };
         const drag = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
+        // Add this below the drag object
+        const pan = { x: 0, y: 0, tX: 0, tY: 0 };
         
         let ax = winW/2, ay = winH/2, mx = ax, my = ay;
         let isPressed = false;
 
-        document.addEventListener('mousemove', e => { 
-            mx = e.clientX; my = e.clientY; 
-            mouse.tX = e.clientX / winW; mouse.tY = e.clientY / winH;
-        });
+        document.addEventListener('mousemove', e => {
+    mx = e.clientX; 
+    my = e.clientY; 
+    mouse.tX = e.clientX / winW; 
+    mouse.tY = e.clientY / winH;
+
+    // ADD THIS: Calculates how far the wall should shift based on cursor
+    // 0.3 is the intensity. Increase to 1.0 for "same distance" 1:1 mapping.
+    pan.tX = (e.clientX - winW / 2) * 0.3; 
+    pan.tY = (e.clientY - winH / 2) * 0.3;
+});
 
         // ─── PRESS EFFECT ───
         window.addEventListener('mousedown', () => { 
@@ -220,6 +229,8 @@
 
             mouse.x += (mouse.tX - mouse.x) * 0.05;
             mouse.y += (mouse.tY - mouse.y) * 0.05;
+            pan.x += (pan.tX - pan.x) * 0.05; 
+            pan.y += (pan.tY - pan.y) * 0.05;
 
             const rotY = (mouse.x - 0.5) * -12;
             const rotX = (mouse.y - 0.5) * 12;
@@ -228,8 +239,8 @@
             scroll.y += (scroll.tY - scroll.y) * scroll.ease;
 
             items.forEach(item => {
-                let px = item.x + scroll.x + item.ex;
-                let py = item.y + scroll.y + item.ey;
+                let px = item.x + scroll.x + item.ex + pan.x; 
+                let py = item.y + scroll.y + item.ey + pan.y;
 
                 if (px > winW + 400) item.ex -= tileSize.w;
                 if (px + item.w < -400) item.ex += tileSize.w;
