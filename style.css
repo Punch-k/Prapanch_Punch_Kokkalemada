@@ -293,7 +293,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3.5rem 8rem;
+    padding: 8rem 2rem;
     position: relative;
     overflow: hidden;
 }
