@@ -297,246 +297,265 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <script>
-  (() => {
-    /* ── DATA ──────────────────────────────────────────────────── */
-    const gridData = [
-      { x:  150, y:  150, w: 400, src: '1.png',                year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
-      { x:  850, y:  550, w: 380, src: '2.png',                year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimisation.' },
-      { x: 1550, y:  250, w: 420, src: '3.png',                year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
-      { x:  450, y: 1100, w: 380, src: '4.png',                year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
-      { x: 1250, y: 1400, w: 350, src: '5.png',                year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
-      { x: 1950, y:  850, w: 390, src: 'GSA.jpg',              year: '2021', desc: 'Engineering Lead. Bridging the gap between technical systems and business growth.' },
-      { x:  250, y: 1950, w: 410, src: 'MBAA.jpg',             year: '2020', desc: 'Foundational Engineering. Core specialisation in systems architecture.' },
-      { x: 1050, y: 2150, w: 380, src: 'Professional.jpg',     year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
-      { x: 1750, y: 1850, w: 360, src: 'Hero.jpg',             year: '2018', desc: 'The Origin. Focus on large-scale data modelling and process automation.' },
-    ];
+(() => {
+  /* ── DATA ──────────────────────────────────────────────────── */
+  const gridData = [
+    { x:  150, y:  150, w: 400, src: '1.png',            year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
+    { x:  850, y:  550, w: 380, src: '2.png',            year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimisation.' },
+    { x: 1550, y:  250, w: 420, src: '3.png',            year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
+    { x:  450, y: 1100, w: 380, src: '4.png',            year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
+    { x: 1250, y: 1400, w: 350, src: '5.png',            year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
+    { x: 1950, y:  850, w: 390, src: 'GSA.jpg',          year: '2021', desc: 'Engineering Lead. Bridging the gap between technical systems and business growth.' },
+    { x:  250, y: 1950, w: 410, src: 'MBAA.jpg',         year: '2020', desc: 'Foundational Engineering. Core specialisation in systems architecture.' },
+    { x: 1050, y: 2150, w: 380, src: 'Professional.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
+    { x: 1750, y: 1850, w: 360, src: 'Hero.jpg',         year: '2018', desc: 'The Origin. Focus on large-scale data modelling and process automation.' },
+  ];
 
-    /* ── ELEMENTS ──────────────────────────────────────────────── */
-    const container = document.getElementById('images');
-    const auraEl    = document.getElementById('aura');
-    const cursorEl  = document.getElementById('cursor');
+  /* ── ELEMENTS ──────────────────────────────────────────────── */
+  const container = document.getElementById('images');
+  const auraEl    = document.getElementById('aura');
+  const cursorEl  = document.getElementById('cursor');
 
-    /* ── STATE ─────────────────────────────────────────────────── */
-    let winW = window.innerWidth;
-    let winH = window.innerHeight;
-    let isMobile = winW < 768;
+  /* ── STATE ─────────────────────────────────────────────────── */
+  let winW     = window.innerWidth;
+  let winH     = window.innerHeight;
+  let isMobile = winW < 768;
 
-    const ARENA_W = isMobile ? winW * 2.5 : 2800;
-    const ARENA_H = isMobile ? winH * 2.5 : 2800;
+  const ARENA_W = isMobile ? winW * 2.5 : 2800;
+  const ARENA_H = isMobile ? winH * 2.5 : 2800;
 
-    /* Pointer position (normalised 0-1) */
-    const mouse = { x: { t: 0.5, c: 0.5 }, y: { t: 0.5, c: 0.5 } };
-    /* Press state (0 = up, 1 = down) */
-    const press = { t: 0, c: 0 };
-    /* Aura smoothed position in px */
-    const aura  = { x: { t: winW * 0.5, c: winW * 0.5 },
-                    y: { t: winH * 0.5, c: winH * 0.5 } };
+  /* ── DAMPENED SCROLL STATE ─────────────────────────────────── *
+   *
+   *  Each axis has three values:
+   *    .target  – where we WANT the velocity to be (set by input)
+   *    .current – the smoothed, actual velocity driving the items
+   *    .pos     – accumulated position (unused for display; for wrapping math)
+   *
+   *  On every frame:
+   *    1. current lerps toward target  (input smoothing / ease-in)
+   *    2. target  lerps toward 0       (natural deceleration / ease-out)
+   *
+   *  This two-stage lerp means:
+   *    – a quick flick builds up then glides to a stop (no abrupt cut-off)
+   *    – horizontal-only scrolls don't bleed into Y and vice-versa
+   *    – drag release inherits current velocity and decays naturally
+   */
+  const vel = {
+    x: { target: 0, current: 0 },
+    y: { target: 0, current: 0 },
+  };
 
-    /* Scroll / momentum */
-    const scroll = {
-      x: { pos: 0, vel: 0 },
-      y: { pos: 0, vel: 0 },
-    };
-    const FRICTION = 0.88;   // how quickly momentum decays
+  // How fast input is ABSORBED into current velocity (higher = snappier start)
+  const EASE_IN   = 0.14;
+  // How fast the target velocity decays to zero (lower = longer glide)
+  const EASE_OUT  = 0.072;
+  // Dead-zone: stop jittering when velocity is tiny
+  const DEADZONE  = 0.08;
 
-    /* Drag */
-    const drag = { active: false, startX: 0, startY: 0, scrollX0: 0, scrollY0: 0 };
+  /* Pointer position (normalised 0–1) */
+  const mouse = { x: { t: 0.5, c: 0.5 }, y: { t: 0.5, c: 0.5 } };
+  /* Press state (0 = up, 1 = down) */
+  const press = { t: 0, c: 0 };
+  /* Aura smoothed position in px */
+  const aura  = {
+    x: { t: winW * 0.5, c: winW * 0.5 },
+    y: { t: winH * 0.5, c: winH * 0.5 },
+  };
 
-    /* Items array */
-    let items = [];
+  /* Drag */
+  const drag = {
+    active: false,
+    prevX: 0, prevY: 0,   // previous frame pointer, for velocity-on-release
+    currX: 0, currY: 0,
+  };
 
-    /* ── INTERSECTION OBSERVER ─────────────────────────────────── */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
-    });
+  let items = [];
 
-    /* ── BUILD GRID ────────────────────────────────────────────── */
-    function buildGrid() {
-      container.innerHTML = '';
-      items = [];
+  /* ── INTERSECTION OBSERVER ─────────────────────────────────── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
+  });
 
-      const repsX = Math.ceil(ARENA_W / ARENA_W) + 1; // 1 tile wide (tiled by wrapping)
-      const repsY = Math.ceil(ARENA_H / ARENA_H) + 1;
+  /* ── LERP HELPER ───────────────────────────────────────────── */
+  const lerp = (a, b, t) => a + (b - a) * t;
 
-      gridData.forEach(({ x, y, w, src, year, desc }) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          const ratio = img.naturalHeight / img.naturalWidth;
-          const cardW = isMobile ? w * 0.72 : w;
-          const cardH = cardW * ratio;
+  /* ── BUILD GRID ────────────────────────────────────────────── */
+  function buildGrid() {
+    container.innerHTML = '';
+    items = [];
 
-          const el = document.createElement('div');
-          el.className = 'item';
-          el.style.cssText = `width:${cardW}px`;
-          el.innerHTML = `
-            <div class="item-wrapper">
-              <div class="tw-card">
-                <img src="${src}" alt="${desc}" loading="lazy">
-                <div class="item-overlay">
-                  <div class="item-year">${year}</div>
-                  <div class="item-desc">${desc}</div>
-                </div>
+    gridData.forEach(({ x, y, w, src, year, desc }) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        const ratio = img.naturalHeight / img.naturalWidth;
+        const cardW = isMobile ? w * 0.72 : w;
+        const cardH = cardW * ratio;
+
+        const el = document.createElement('div');
+        el.className = 'item';
+        el.style.cssText = `width:${cardW}px`;
+        el.innerHTML = `
+          <div class="item-wrapper">
+            <div class="tw-card">
+              <img src="${src}" alt="${desc}" loading="lazy">
+              <div class="item-overlay">
+                <div class="item-year">${year}</div>
+                <div class="item-desc">${desc}</div>
               </div>
-            </div>`;
+            </div>
+          </div>`;
 
-          container.appendChild(el);
-          observer.observe(el);
+        container.appendChild(el);
+        observer.observe(el);
 
-          const startX = isMobile ? Math.random() * winW * 0.8 : x % ARENA_W;
-          const startY = isMobile ? items.length * 400 % ARENA_H : y % ARENA_H;
+        const depthEase = Math.random() * 0.06 + 0.04;
 
-          // Per-item depth ease (0.04 = slow/far, 0.10 = fast/near)
-          const depthEase = Math.random() * 0.06 + 0.04;
+        items.push({
+          el,
+          wrapper: el.querySelector('.item-wrapper'),
+          x: isMobile ? Math.random() * winW * 0.8 : x % ARENA_W,
+          y: isMobile ? items.length * 400 % ARENA_H  : y % ARENA_H,
+          w: cardW,
+          h: cardH,
+          ease: depthEase,
+        });
 
-          items.push({
-            el,
-            wrapper: el.querySelector('.item-wrapper'),
-            x: startX,
-            y: startY,
-            w: cardW,
-            h: cardH,
-            ease: depthEase,
-          });
-
-          // Kick intro after all images have a chance to load
-          if (items.length === gridData.length) {
-            setTimeout(introAnimation, 400);
-          }
-        };
-      });
-    }
-
-    /* ── INTRO ANIMATION ───────────────────────────────────────── */
-    function introAnimation() {
-      // Gather wrappers that are in the visible viewport region
-      const wrappers = items.map(d => d.wrapper);
-
-      // Starting offsets – fly in from the nearest screen edge
-      const fromVars = items.map(({ x, y }) => {
-        const offX = x < winW * 0.5 ? -winW * 0.4 : winW * 0.4;
-        const offY = y < winH * 0.5 ? -winH * 0.4 : winH * 0.4;
-        return { x: offX, y: offY };
-      });
-
-      wrappers.forEach((w, i) => gsap.set(w, fromVars[i]));
-
-      gsap.to(wrappers, {
-        x: 0,
-        y: 0,
-        duration: 1.8,
-        ease: 'expo.inOut',
-        stagger: 0.04,
-        clearProps: 'x,y',
-      });
-
-      gsap.fromTo(wrappers,
-        { opacity: 0, scale: 0.88 },
-        { opacity: 1, scale: 1, duration: 1.4, ease: 'expo.out', stagger: 0.04 }
-      );
-    }
-
-    /* ── LERP HELPER ───────────────────────────────────────────── */
-    const lerp = (a, b, t) => a + (b - a) * t;
-
-    /* ── RENDER LOOP ───────────────────────────────────────────── */
-    function render() {
-      requestAnimationFrame(render);
-
-      // Mouse normalised lerp
-      mouse.x.c = lerp(mouse.x.c, mouse.x.t, 0.06);
-      mouse.y.c = lerp(mouse.y.c, mouse.y.t, 0.06);
-
-      // Press lerp
-      press.c = lerp(press.c, press.t, 0.1);
-
-      // Aura smooth follow (separate X/Y easing)
-      aura.x.c = lerp(aura.x.c, aura.x.t, 0.055);
-      aura.y.c = lerp(aura.y.c, aura.y.t, 0.055);
-      auraEl.style.transform = `translate(calc(${aura.x.c}px - 50%), calc(${aura.y.c}px - 50%))`;
-
-      // Cursor
-      cursorEl.style.left = aura.x.t + 'px';
-      cursorEl.style.top  = aura.y.t  + 'px';
-
-      // Momentum decay
-      scroll.x.vel *= FRICTION;
-      scroll.y.vel *= FRICTION;
-      scroll.x.pos += scroll.x.vel;
-      scroll.y.pos += scroll.y.vel;
-
-      // Arena tilt (opposite to cursor = looking around effect)
-      const tiltY = (mouse.x.c - 0.5) * 18;
-      const tiltX = (mouse.y.c - 0.5) * -12;
-      const pressScale = 1 - press.c * 0.025;
-
-      items.forEach(item => {
-        // Wrap position
-        item.x += scroll.x.vel * item.ease * 18;
-        item.y += scroll.y.vel * item.ease * 18;
-
-        if (item.x >  ARENA_W * 0.6)  item.x -= ARENA_W;
-        if (item.x < -ARENA_W * 0.6)  item.x += ARENA_W;
-        if (item.y >  ARENA_H * 0.6)  item.y -= ARENA_H;
-        if (item.y < -ARENA_H * 0.6)  item.y += ARENA_H;
-
-        // 3-D placement: translate in 2-D + arena rotation + press scale
-        item.el.style.transform =
-          `translate3d(${item.x}px, ${item.y}px, 0)
-           rotateY(${tiltY}deg) rotateX(${tiltX}deg)
-           scale(${pressScale})`;
-      });
-    }
-
-    /* ── INPUT EVENTS ──────────────────────────────────────────── */
-    // Wheel → momentum
-    window.addEventListener('wheel', e => {
-      scroll.x.vel -= e.deltaX * 0.6;
-      scroll.y.vel -= e.deltaY * 0.6;
-    }, { passive: true });
-
-    // Drag
-    window.addEventListener('pointerdown', e => {
-      drag.active   = true;
-      drag.startX   = e.clientX;
-      drag.startY   = e.clientY;
-      drag.scrollX0 = scroll.x.pos;
-      drag.scrollY0 = scroll.y.pos;
-      press.t = 1;
-      cursorEl.classList.add('press');
+        if (items.length === gridData.length) {
+          setTimeout(introAnimation, 400);
+        }
+      };
     });
-    window.addEventListener('pointerup', () => {
-      drag.active = false;
-      press.t = 0;
-      cursorEl.classList.remove('press');
-    });
-    window.addEventListener('pointermove', e => {
-      // Update normalised mouse
-      mouse.x.t = e.clientX / winW;
-      mouse.y.t = e.clientY / winH;
-      // Update aura target
-      aura.x.t = e.clientX;
-      aura.y.t = e.clientY;
+  }
 
-      if (!drag.active) return;
-      const dx = (e.clientX - drag.startX) * 2.0;
-      const dy = (e.clientY - drag.startY) * 2.0;
-      scroll.x.vel = dx * 0.08;
-      scroll.y.vel = dy * 0.08;
-    });
+  /* ── INTRO ANIMATION ───────────────────────────────────────── */
+  function introAnimation() {
+    const wrappers = items.map(d => d.wrapper);
 
-    // Resize
-    window.addEventListener('resize', () => {
-      winW    = window.innerWidth;
-      winH    = window.innerHeight;
-      isMobile = winW < 768;
-      buildGrid();
-    });
+    const fromVars = items.map(({ x, y }) => ({
+      x: x < winW * 0.5 ? -winW * 0.4 : winW * 0.4,
+      y: y < winH * 0.5 ? -winH * 0.4 : winH * 0.4,
+    }));
 
-    /* ── BOOT ──────────────────────────────────────────────────── */
+    wrappers.forEach((w, i) => gsap.set(w, fromVars[i]));
+
+    gsap.to(wrappers,   { x: 0, y: 0, duration: 1.8, ease: 'expo.inOut', stagger: 0.04, clearProps: 'x,y' });
+    gsap.fromTo(wrappers,
+      { opacity: 0, scale: 0.88 },
+      { opacity: 1, scale: 1,   duration: 1.4, ease: 'expo.out',  stagger: 0.04 }
+    );
+  }
+
+  /* ── RENDER LOOP ───────────────────────────────────────────── */
+  function render() {
+    requestAnimationFrame(render);
+
+    /* — Mouse & aura — */
+    mouse.x.c = lerp(mouse.x.c, mouse.x.t, 0.06);
+    mouse.y.c = lerp(mouse.y.c, mouse.y.t, 0.06);
+    press.c   = lerp(press.c,   press.t,   0.10);
+
+    aura.x.c = lerp(aura.x.c, aura.x.t, 0.055);
+    aura.y.c = lerp(aura.y.c, aura.y.t, 0.055);
+    auraEl.style.transform = `translate(calc(${aura.x.c}px - 50%), calc(${aura.y.c}px - 50%))`;
+
+    cursorEl.style.left = aura.x.t + 'px';
+    cursorEl.style.top  = aura.y.t + 'px';
+
+    /* — Two-stage inertia dampener — */
+    // Stage 1: smooth the input → current velocity (ease-in)
+    vel.x.current = lerp(vel.x.current, vel.x.target, EASE_IN);
+    vel.y.current = lerp(vel.y.current, vel.y.target, EASE_IN);
+
+    // Stage 2: decay the target back to zero (ease-out / glide)
+    vel.x.target = lerp(vel.x.target, 0, EASE_OUT);
+    vel.y.target = lerp(vel.y.target, 0, EASE_OUT);
+
+    // Dead-zone snap to prevent micro-jitter at rest
+    if (Math.abs(vel.x.current) < DEADZONE) vel.x.current = 0;
+    if (Math.abs(vel.y.current) < DEADZONE) vel.y.current = 0;
+
+    /* — Arena tilt — */
+    const tiltY     = (mouse.x.c - 0.5) * 18;
+    const tiltX     = (mouse.y.c - 0.5) * -12;
+    const pressScale = 1 - press.c * 0.025;
+
+    /* — Move + wrap items — */
+    items.forEach(item => {
+      // Each item drifts at its own depth-scaled rate
+      item.x += vel.x.current * item.ease * 18;
+      item.y += vel.y.current * item.ease * 18;
+
+      // Infinite wrapping
+      const hw = ARENA_W * 0.6;
+      const hh = ARENA_H * 0.6;
+      if (item.x >  hw) item.x -= ARENA_W;
+      if (item.x < -hw) item.x += ARENA_W;
+      if (item.y >  hh) item.y -= ARENA_H;
+      if (item.y < -hh) item.y += ARENA_H;
+
+      item.el.style.transform =
+        `translate3d(${item.x}px, ${item.y}px, 0)
+         rotateY(${tiltY}deg) rotateX(${tiltX}deg)
+         scale(${pressScale})`;
+    });
+  }
+
+  /* ── INPUT EVENTS ──────────────────────────────────────────── */
+
+  /* Wheel — accumulate into target (not directly into current) */
+  window.addEventListener('wheel', e => {
+    vel.x.target -= e.deltaX * 0.55;
+    vel.y.target -= e.deltaY * 0.55;
+  }, { passive: true });
+
+  /* Drag — track per-frame delta so release carries momentum */
+  window.addEventListener('pointerdown', e => {
+    drag.active = true;
+    drag.prevX  = drag.currX = e.clientX;
+    drag.prevY  = drag.currY = e.clientY;
+    press.t = 1;
+    cursorEl.classList.add('press');
+  });
+
+  window.addEventListener('pointermove', e => {
+    mouse.x.t = e.clientX / winW;
+    mouse.y.t = e.clientY / winH;
+    aura.x.t  = e.clientX;
+    aura.y.t  = e.clientY;
+
+    if (!drag.active) return;
+
+    drag.prevX = drag.currX;
+    drag.prevY = drag.currY;
+    drag.currX = e.clientX;
+    drag.currY = e.clientY;
+
+    // Feed frame-delta into target velocity (NOT current) so the dampener still applies
+    vel.x.target += (drag.currX - drag.prevX) * 1.6;
+    vel.y.target += (drag.currY - drag.prevY) * 1.6;
+  });
+
+  window.addEventListener('pointerup', () => {
+    drag.active = false;
+    press.t = 0;
+    cursorEl.classList.remove('press');
+    // No manual velocity transfer needed — target already holds the momentum
+    // and EASE_OUT will glide it to zero naturally
+  });
+
+  /* Resize */
+  window.addEventListener('resize', () => {
+    winW     = window.innerWidth;
+    winH     = window.innerHeight;
+    isMobile = winW < 768;
     buildGrid();
-    render();
-  })();
-  </script>
+  });
+
+  /* ── BOOT ──────────────────────────────────────────────────── */
+  buildGrid();
+  render();
+})();
+</script>
 </body>
 </html>
