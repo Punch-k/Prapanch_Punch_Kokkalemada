@@ -286,7 +286,6 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   .loop-wrapper { min-height: 400px; }
 }
 
-/* ─── AGENCY QUOTE (Scroll Reveal) ────────────── */
 /* ─── AGENCY QUOTE — GSAP SCROLL SCRUB ──────────────────── */
 .agency-quote-section {
   /* Pin height: tall enough to scrub through all words */
@@ -294,7 +293,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+  padding: 3.5rem 2rem;
   position: relative;
   overflow: hidden;
 }
@@ -364,7 +363,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   }
 }
 /* ─── NEWS CAROUSEL (was 2× duplicate inline <style>) ─────── */
-#section-carousel { padding: 0rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+#section-carousel { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .news-carousel::-webkit-scrollbar { display: none; }
 .news-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 0; -ms-overflow-style: none; scrollbar-width: none; cursor: grab; user-select: none; }
 .news-carousel.active { cursor: grabbing; }
@@ -379,7 +378,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .news-spacer { flex: 0 0 5vw; }
 
 /* ─── EXPERIENCE ──────────────────────────────────────────── */
-#section-experience { padding: 4.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+#section-experience { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .exp-layout { max-width: 1200px; margin: 0 auto; }
 .exp-header { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; margin-bottom: 3.5rem; }
 .exp-header h2 { font-family: var(--display); font-size: clamp(2.8rem,5.5vw,5rem); line-height: .96; letter-spacing: .02em; }
@@ -404,7 +403,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .exp-bullets li strong { color: var(--fg); font-weight: 400; }
 
 /* ─── CASE STUDIES ────────────────────────────────────────── */
-#section-cases { padding: 4.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+#section-cases { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .section-cases-shell { padding-top: 5rem; }
 
 /* TW Card Deck (was inline <style> in HTML) */
@@ -450,7 +449,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .slider-dot.act { background: var(--gold); width: 32px; }
 
 /* ─── EDUCATION & LEADERSHIP ──────────────────────────────── */
-#section-brand-experience { padding: 4.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+#section-brand-experience { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .edu-cards { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.5rem; }
 .edu-card { padding: 2.2rem; border: 1px solid var(--line); background: rgba(255,255,255,.02); position: relative; transition: border-color .3s, background .3s; }
 .edu-card:hover { border-color: rgba(201,168,76,.35); background: rgba(201,168,76,.03); }
@@ -465,7 +464,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .edu-lead-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
 /* ─── SKILLS BALL PIT ─────────────────────────────────────── */
-#section-skills { padding: 4.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; background: var(--bg); overflow: hidden; }
+#section-skills { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; background: var(--bg); overflow: hidden; }
 #skills-pit-wrap { width: 100%; position: relative; background: transparent; overflow: hidden; margin-top: 0; }
 #skills-canvas { display: block; width: 100%; cursor: none; }
 
@@ -474,7 +473,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .sec-rule.in { width: 60px; }
 
 /* ─── SIMULATOR TABS ──────────────────────────────────────── */
-#gtm-simulators { padding: 5rem 2rem 6rem; border-top: 1px solid var(--line); background: var(--bg); position: relative; z-index: 2; }
+#gtm-simulators { padding: 3.5rem 2rem 6rem; border-top: 1px solid var(--line); background: var(--bg); position: relative; z-index: 2; }
 .sim-wrap { max-width: 1280px; margin: 0 auto; }
 .sim-title { font-family: var(--display); font-size: clamp(1.5rem,2.8vw,2.2rem); letter-spacing: .03em; margin-bottom: .5rem; }
 .sim-intro { font-size: .9rem; color: rgba(237,233,224,.44); line-height: 1.8; margin-bottom: 2.5rem; max-width: 720px; }
@@ -603,7 +602,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .dcf-vc-sub { font-size: .55rem; color: rgba(237,233,224,.28); letter-spacing: .08em; }
 
 /* ─── CONTACT (was inline <style> in HTML) ────────────────── */
-.contact-section-shell { padding: 3rem 2rem; border-top: 1px solid var(--line); position: relative; overflow: hidden; background: var(--bg); }
+.contact-section-shell { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; overflow: hidden; background: var(--bg); }
 
 /* connect-grid (was inline <style> in HTML) */
 .connect-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr clamp(300px,35vw,400px); gap: 6rem; align-items: flex-start; position: relative; z-index: 2; }
