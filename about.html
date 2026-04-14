@@ -62,13 +62,24 @@
 
         /* IMAGE OVERLAY CARDS */
         .tw-card {
-            position: relative; border-radius: 1.2rem; overflow: hidden;
-            border: 1px solid rgba(201,168,76,.15);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
-            background: #000; transition: border-color .6s, box-shadow .6s;
-        }
-        .tw-card img { width: 100%; height: auto; display: block; filter: grayscale(100%) brightness(0.7); transition: filter .8s, transform .8s; }
+    position: relative; 
+    border-radius: 1.2rem; 
+    overflow: hidden; /* This makes it a window */
+    border: 1px solid rgba(201,168,76,.15);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+    background: #000;
+}
 
+.tw-card img { 
+    width: 120%;  /* Increased size for the "fill" effect */
+    height: 120%; /* Increased size for the "fill" effect */
+    object-fit: cover;
+    position: absolute;
+    top: -10%; /* Center the oversized image */
+    left: -10%; 
+    filter: grayscale(100%) brightness(0.7); 
+    will-change: transform; /* Smoothness boost */
+}
         .item-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
@@ -127,16 +138,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
         const gridData = [
-            { x: 100, y: 100, w: 380, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
-            { x: 600, y: 400, w: 350, src: '2.png', year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimization.' },
-            { x: 1100, y: 150, w: 400, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
-            { x: 300, y: 800, w: 360, src: '4.png', year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
-            { x: 900, y: 1000, w: 340, src: '5.png', year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
-            { x: 1400, y: 650, w: 360, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical system and business growth.' },
-            { x: 150, y: 1400, w: 380, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in systems architecture.' },
-            { x: 700, y: 1600, w: 350, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
-            { x: 1250, y: 1400, w: 340, src: 'market.jpeg', year: '2018', desc: 'The Origin. Focus on large-scale data modeling and process automation.' }
-        ];
+    { x: 100, y: 100, w: 320, h: 450, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU.' },
+    { x: 600, y: 400, w: 450, h: 300, src: '2.png', year: '2025', desc: 'Strategy Associate.' },
+    { x: 1100, y: 150, w: 300, h: 300, src: '3.png', year: '2024', desc: 'Systems Engineer.' },
+    { x: 300, y: 800, w: 400, h: 250, src: '4.png', year: '2023', desc: 'Operations Specialist.' },
+    { x: 900, y: 1000, w: 280, h: 420, src: '5.png', year: '2022', desc: 'Consulting Projects.' },
+    { x: 1400, y: 650, w: 450, h: 320, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead.' },
+    { x: 150, y: 1400, w: 380, h: 380, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering.' },
+    { x: 700, y: 1600, w: 420, h: 280, src: 'class.jpg', year: '2019', desc: 'Project Management.' },
+    { x: 1250, y: 1400, w: 300, h: 450, src: 'market.jpeg', year: '2018', desc: 'The Origin.' }
+];
 
         const container = document.getElementById('images');
         const aura = document.getElementById('aura');
@@ -242,15 +253,23 @@
                 let px = item.x + scroll.x + item.ex + pan.x; 
                 let py = item.y + scroll.y + item.ey + pan.y;
 
-                if (px > winW + 400) item.ex -= tileSize.w;
-                if (px + item.w < -400) item.ex += tileSize.w;
-                if (py > winH + 400) item.ey -= tileSize.h;
-                if (py + item.h < -400) item.ey += tileSize.h;
+                // Use item.w and item.h as the threshold instead of 400
+                if (px > winW + item.w) item.ex -= tileSize.w;
+                if (px + item.w < -item.w) item.ex += tileSize.w;
+                if (py > winH + item.h) item.ey -= tileSize.h;
+                if (py + item.h < -item.h) item.ey += tileSize.h;
                 
                 // Press Scaling Effect
                 const pressScale = isPressed ? 1.08 : 1;
-
                 item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${pressScale})`;
+                const imgX = px * -0.1;
+        const imgY = py * -0.1;
+        
+        const img = item.el.querySelector('img');
+        if (img) {
+            // This moves the image inside the frame in the opposite direction
+            img.style.transform = `translate3d(${imgX}px, ${imgY}px, 0) scale(1.2)`;
+        }           
             });
             requestAnimationFrame(render);
         }
