@@ -22,15 +22,36 @@
       --display: 'Bebas Neue', sans-serif;
     }
 
-    html, body {
-      width: 100%; height: 100%;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--sans);
-      overflow: hidden;
-      overscroll-behavior: none;
-      cursor: none;
-    }
+   html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  overflow: hidden;
+  overscroll-behavior: none;
+  cursor: none;
+}
+
+/* ─── BACKGROUND IMAGE ───────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* dark overlay so cards/text stay legible */
+    linear-gradient(
+      135deg,
+      rgba(10,11,13,.82) 0%,
+      rgba(10,11,13,.65) 50%,
+      rgba(10,11,13,.82) 100%
+    ),
+    url('https://plus.unsplash.com/premium_photo-1675504585830-d124a759099c?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+    center / cover no-repeat;
+  /* subtle parallax drift on mouse (driven by the aura's GPU layer) */
+  will-change: transform;
+  transform: scale(1.06); /* slight over-scale so edges never show on tilt */
+}
 
     /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
     #cursor {
@@ -60,7 +81,7 @@
       z-index: 0;
       transform: translate(-50%,-50%);
       will-change: transform;
-      mix-blend-mode: screen;
+      mix-blend-mode: overlay;
     }
 
     /* ─── MAIN NAV ───────────────────────────────────────────── */
@@ -110,12 +131,12 @@
 
     /* ─── INFINITE ARENA ─────────────────────────────────────── */
     #viewport {
-      perspective: 1800px;
-      width: 100%; height: 100%;
-      overflow: hidden;
-      background: radial-gradient(circle at center, #14161a 0%, #0a0b0d 100%);
-      position: relative;
-    }
+  perspective: 1800px;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: transparent; /* image shows through from body::before */
+  position: relative;
+}
 
     #images {
       position: absolute;
