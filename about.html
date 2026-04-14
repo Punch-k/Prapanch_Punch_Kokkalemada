@@ -20,7 +20,7 @@
         html, body { 
             width: 100%; height: 100%; background: var(--bg); color: var(--fg); 
             font-family: var(--sans); overflow: hidden; overscroll-behavior: none; 
-            cursor: none; /* Hide default mouse */
+            cursor: none; 
         }
 
         /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
@@ -29,7 +29,7 @@
             position: fixed; top: 0; left: 0; width: 40px; height: 40px; 
             border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; 
             z-index: 100000; pointer-events: none; transform: translate(-50%,-50%); 
-            transition: width 0.3s, height 0.3s, border-color 0.3s;
+            transition: width 0.3s, height 0.3s, border-color 0.3s, border-width 0.3s;
         }
         #aura { position: fixed; top: 0; left: 0; width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%,-50%); mix-blend-mode: screen; will-change: transform; }
 
@@ -43,9 +43,9 @@
         .nav-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
         .nav-logo span { color: var(--gold); }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(237,233,224,.35); text-decoration: none; transition: color .2s; }
+        .nav-links a { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(237, 233, 224, .35); text-decoration: none; transition: color .2s; }
         .nav-links a:hover, .nav-links a.act { color: var(--fg); }
-        .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
+        .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237, 233, 224, .2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
         .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
         /* ─── INFINITE ARENA ────────────────────────────────────── */
@@ -84,8 +84,8 @@
         .item:hover .item-overlay { opacity: 1; }
 
         /* ─── FOOTER ────────────────────────────────────────────── */
-        .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
-        .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; }
+        .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10, 11, 13, .9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
+        .ft-logo { font-size: 0.75rem; color: rgba(237, 233, 224, .3); text-transform: uppercase; }
         .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; }
 
         @media (max-width: 768px) {
@@ -118,7 +118,10 @@
 
     <footer class="site-footer">
         <div class="ft-logo">PRAPANCH KOKKALEMADA © 2026</div>
-        <div><a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank">LINKEDIN</a><a href="mailto:prapanch@example.com" class="ft-link">E-MAIL</a></div>
+        <div>
+            <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank">LINKEDIN</a>
+            <a href="mailto:prapanch@example.com" class="ft-link">E-MAIL</a>
+        </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -160,11 +163,17 @@
         // ─── PRESS EFFECT ───
         window.addEventListener('mousedown', () => { 
             isPressed = true; 
-            cring.style.width = '70px'; cring.style.height = '70px'; cring.style.borderColor = 'var(--gold)';
+            cring.style.width = '70px'; 
+            cring.style.height = '70px'; 
+            cring.style.borderColor = 'var(--gold)';
+            cring.style.borderWidth = '2px';
         });
         window.addEventListener('mouseup', () => { 
             isPressed = false; 
-            cring.style.width = '40px'; cring.style.height = '40px'; cring.style.borderColor = 'rgba(255,255,255,0.3)';
+            cring.style.width = '40px'; 
+            cring.style.height = '40px'; 
+            cring.style.borderColor = 'rgba(255,255,255,0.3)';
+            cring.style.borderWidth = '1px';
         });
 
         function buildGrid() {
@@ -194,8 +203,7 @@
                                 el, wrapper: el.querySelector('.item-wrapper'),
                                 x: (isMobile ? winW * 0.1 : d.x) + ox, 
                                 y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
-                                w: d.w, h: d.w * ratio, ex: 0, ey: 0,
-                                floatSeed: Math.random() * 100 // For random floating
+                                w: d.w, h: d.w * ratio, ex: 0, ey: 0
                             });
                         });
                     });
@@ -203,9 +211,9 @@
             });
         }
 
-        function render(time) {
+        function render() {
             // Cursor Follow
-            ax += (mx - ax) * 0.08; ay += (my - ay) * 0.08;
+            ax += (mx - ax) * 0.1; ay += (my - ay) * 0.1;
             cdot.style.left = `${mx}px`; cdot.style.top = `${my}px`;
             cring.style.left = `${ax}px`; cring.style.top = `${ay}px`;
             aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
@@ -227,14 +235,11 @@
                 if (px + item.w < -400) item.ex += tileSize.w;
                 if (py > winH + 400) item.ey -= tileSize.h;
                 if (py + item.h < -400) item.ey += tileSize.h;
-
-                // Embellish: Subtle Floating Motion
-                const floatY = Math.sin(time * 0.001 + item.floatSeed) * 10;
                 
                 // Press Scaling Effect
                 const pressScale = isPressed ? 1.08 : 1;
 
-                item.el.style.transform = `translate3d(${px}px, ${py + floatY}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${pressScale})`;
+                item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${pressScale})`;
             });
             requestAnimationFrame(render);
         }
