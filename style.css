@@ -307,8 +307,8 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .aq-line {
   display: block;
   overflow: visible;
-  margin: 0 0 0.1em;
-  line-height: 1.05;
+  margin: 1 1 1.1em;
+  line-height: 2.05;
 }
 
 .aq-word {
@@ -336,9 +336,9 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   text-transform: uppercase;
   color: #666;
   /* Author starts even more ghosted */
-  opacity: 0.05;
-  filter: blur(8px);
-  transform: translateY(16px);
+  opacity: 0.08;
+  filter: blur(14px);
+  transform: translateY(28px);
 }
 
 /* Accessible fallback (visually hidden) 
