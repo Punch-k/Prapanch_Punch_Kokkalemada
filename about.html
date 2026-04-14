@@ -163,87 +163,153 @@ body::before {
     }
     .item-wrapper:active { cursor: grabbing; }
 
-    /* ─── IMAGE OVERLAY CARDS ─────────────────────────────────── */
-    .tw-card {
-      position: relative;
-      border-radius: .75rem;
-      overflow: hidden;
-      border: 1px solid rgba(201,168,76,.12);
-      box-shadow: 0 8px 40px rgba(0,0,0,.55);
-      transition: border-color .35s, box-shadow .35s;
-      background: #000;
-      /* GPU layer */
-      transform: translateZ(0);
-    }
+/* ─── IMAGE OVERLAY CARDS ─────────────────────────────────────── */
 
-    .tw-card img {
-      width: 100%; height: auto;
-      display: block;
-      filter: grayscale(100%) contrast(1.08) brightness(.95);
-      transition: filter .45s ease, transform .45s ease;
-      will-change: filter, transform;
-    }
+.item {
+  position: relative;   /* anchor for the absolutely-positioned tooltip */
+  z-index: 0;
+}
 
-    /* Gradient overlay */
-    .item-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(10,11,13,.96) 0%,
-        rgba(10,11,13,.45) 45%,
-        transparent 100%
-      );
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1rem 1.25rem 1.25rem;
-      opacity: 0;
-      transition: opacity .35s ease;
-    }
+.item:hover {
+  z-index: 5;           /* lift hovered card above siblings so tooltip is never clipped */
+}
 
-    .item-year {
-      font-family: var(--display);
-      font-size: 3.2rem;
-      color: var(--gold);
-      line-height: .85;
-      margin-bottom: .35rem;
-      text-shadow: 0 2px 12px rgba(0,0,0,.5);
-      /* intro: starts clipped */
-      clip-path: inset(0 0 100% 0);
-      transition: clip-path .5s cubic-bezier(.16,1,.3,1);
-    }
+.tw-card {
+  position: relative;
+  border-radius: .75rem;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,.12);
+  box-shadow: 0 8px 40px rgba(0,0,0,.55);
+  transition: border-color .35s, box-shadow .35s;
+  background: #000;
+  transform: translateZ(0);
+}
 
-    .item-desc {
-      font-size: .78rem;
-      color: var(--fg);
-      line-height: 1.5;
-      font-weight: 300;
-      max-width: 28ch;
-      /* intro: starts invisible */
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity .4s .08s ease, transform .4s .08s ease;
-    }
+.tw-card img {
+  width: 100%; height: auto;
+  display: block;
+  filter: grayscale(100%) contrast(1.08) brightness(.95);
+  transition: filter .45s ease, transform .45s ease;
+  will-change: filter, transform;
+}
 
-    /* ─── HOVER STATES ───────────────────────────────────────── */
-    .item:hover .tw-card {
-      border-color: var(--gold);
-      box-shadow: 0 12px 50px rgba(201,168,76,.22), 0 0 0 1px rgba(201,168,76,.08);
-    }
-    .item:hover .tw-card img {
-      filter: grayscale(0%) contrast(1.05) brightness(1.02);
-      transform: scale(1.04);
-    }
-    .item:hover .item-overlay { opacity: 1; }
-    .item:hover .item-year { clip-path: inset(0 0 0% 0); }
-    .item:hover .item-desc  { opacity: 1; transform: translateY(0); }
+/* Year badge — stays inside the card, bottom-left */
+.item-year {
+  position: absolute;
+  bottom: .75rem;
+  left: .9rem;
+  font-family: var(--display);
+  font-size: 2.6rem;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,.6);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity .45s ease;   /* matched to image transition duration */
+}
 
-    /* visible = inside viewport (IntersectionObserver adds this class) */
-    .item.visible .tw-card {
-      border-color: rgba(201,168,76,.18);
-    }
+/* ─── CARET TOOLTIP ───────────────────────────────────────────── */
 
+.item-tooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: max-content;
+  max-width: 240px;
+  background: rgba(10,11,13,.94);
+  border: 1px solid rgba(201,168,76,.25);
+  border-radius: .5rem;
+  padding: .6rem .85rem;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity .35s ease, transform .35s ease;
+  /* prevent tooltip from being clipped by any stacking context */
+  will-change: opacity, transform;
+}
+
+/* Caret — outer (border color) */
+.item-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: rgba(201,168,76,.25);
+}
+
+/* Caret — inner (fill color) */
+.item-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: rgba(10,11,13,.94);
+}
+
+.item-tooltip-text {
+  font-size: .75rem;
+  color: var(--fg);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* ─── WRAPPER ─────────────────────────────────────────────────── */
+
+.item-wrapper {
+  transition: transform .15s ease-out;
+  cursor: pointer;          /* grab implies dragging; use pointer unless cards are truly draggable */
+  will-change: transform;
+  /* 20 px invisible hover buffer on all sides */
+  padding: 20px;
+  margin: -20px;
+}
+
+/* ─── HOVER STATES ────────────────────────────────────────────── */
+
+.item:hover .tw-card {
+  border-color: var(--gold);
+  box-shadow: 0 12px 50px rgba(201,168,76,.22), 0 0 0 1px rgba(201,168,76,.08);
+}
+
+.item:hover .tw-card img {
+  filter: grayscale(0%) contrast(1.05) brightness(1.02);
+  transform: scale(1.04);
+}
+
+.item:hover .item-year {
+  opacity: 0;
+}
+
+.item:hover .item-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── REDUCED MOTION ──────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .tw-card img,
+  .item-tooltip,
+  .item-year,
+  .item-wrapper {
+    transition: none;
+  }
+
+  .tw-card img {
+    transform: none !important;
+  }
+}
+
+/* ─── VISIBLE STATE ───────────────────────────────────────────── */
+
+.item.visible .tw-card {
+  border-color: rgba(201,168,76,.18);
+}
     /* ─── MOBILE ─────────────────────────────────────────────── */
     @media (max-width: 768px) {
       .mainnav { padding: .9rem 1.2rem; }
