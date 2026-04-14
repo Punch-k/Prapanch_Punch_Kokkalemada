@@ -246,7 +246,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .game-hint { font-size: 11px; color: #888; letter-spacing: 1px; font-family: 'Share Tech Mono', monospace; transition: opacity .5s; }
 .hint-key { color: var(--gold); }
 .game-subtitle { color: var(--gold); font-family: var(--sans); font-size: 1rem; margin: 0; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.game-arrow { height: 2.6em; transform: rotate(0deg); }
+.game-arrow { height: 2.6em; transform: rotate(90deg); }
 
 /* Loop Wrapper (truck scenery) */
 .loop-wrapper { flex: 1 1 400px; min-height: 350px; position: relative; overflow: hidden; border-radius: 16px; background: rgba(201,168,76,.02); border: 1px solid rgba(237,233,224,.05); }
