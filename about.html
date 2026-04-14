@@ -13,21 +13,16 @@
         /* ─── RESET & VARS ──────────────────────────────────────── */
         * , *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0b0d; 
-            --fg: #ede9e0; 
-            --gold: #c9a84c; 
-            --line: rgba(237,233,224,.1);
-            --sans: 'DM Sans', sans-serif;
+            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c; 
+            --line: rgba(237,233,224,.1); --sans: 'DM Sans', sans-serif;
             --display: 'Bebas Neue', sans-serif;
         }
         
         html, body {
             width: 100%; height: 100%;
             background: var(--bg); color: var(--fg);
-            font-family: var(--sans);
-            overflow: hidden; 
-            overscroll-behavior: none;
-            cursor: none; /* Custom cursor theme */
+            font-family: var(--sans); overflow: hidden; 
+            overscroll-behavior: none; cursor: none;
         }
 
         /* ─── AMBIENT AURA ────────────────────────────────────────── */
@@ -54,14 +49,25 @@
         .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
         .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
-        /* ─── INFINITE GRID ─────────────────────────────────────── */
+        /* ─── INFINITE GRID ARENA ───────────────────────────────── */
         #images { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; cursor: grab; z-index: 10; }
         #images:active { cursor: grabbing; }
-        .item { position: absolute; top: 0; left: 0; will-change: transform; }
 
-        /* REUSING CASE STUDY STYLE - No fixed height/ratio */
+        /* THE BUBBLE UNIT (Grouped Arena) */
+        .item {
+            position: absolute; top: 0; left: 0;
+            will-change: transform;
+            display: flex; /* Side-by-side alignment */
+            align-items: center;
+            gap: 40px; /* Space between Image and Text */
+            padding: 20px;
+            pointer-events: auto;
+        }
+
+        /* Image Side */
         .tw-card {
-            position: relative; width: 100%;
+            flex-shrink: 0;
+            position: relative; 
             border-radius: 1rem; overflow: hidden;
             border: 1px solid rgba(201,168,76,.3);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(201,168,76,.1);
@@ -75,11 +81,39 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(201,168,76,0.4);
         }
 
-        /* METADATA */
-        .item-meta { position: absolute; top: 20px; left: calc(100% + 40px); width: 280px; pointer-events: none; }
-        .item-tail { position: absolute; top: 50px; left: -40px; width: 40px; height: 1px; background: #ffffff; box-shadow: 0 0 10px rgba(255,255,255,0.8); }
-        .item-year { font-family: var(--display); font-size: 3.5rem; line-height: 1; color: #ffffff; text-shadow: 0 0 20px rgba(255,255,255,0.4); margin-bottom: 0.5rem; }
-        .item-desc { font-size: 0.85rem; color: rgba(237, 233, 224, 0.6); line-height: 1.6; max-width: 240px; }
+        /* Text Side */
+        .item-meta {
+            position: relative;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* The Tail connecting Image to Year */
+        .item-tail {
+            position: absolute;
+            left: -40px; top: 40px;
+            width: 40px; height: 1px;
+            background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
+            box-shadow: 0 0 10px rgba(255,255,255,0.4);
+        }
+
+        .item-year {
+            font-family: var(--display);
+            font-size: 5rem; /* Larger anchor */
+            line-height: 0.9;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.2);
+            margin-bottom: 10px;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            color: rgba(237, 233, 224, 0.6);
+            line-height: 1.6;
+            max-width: 240px;
+        }
 
         /* ─── FOOTER ────────────────────────────────────────────── */
         .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.88); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
@@ -114,30 +148,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
         const gridData = [
-            { x: 100, y: 100, w: 320, src: '1.png', year: '2026', desc: 'MBA Candidate at Michigan State University. Global Student Ambassador focusing on Strategic Operations.' },
-            { x: 600, y: 350, w: 280, src: '2.png', year: '2025', desc: 'Strategy Associate Intern. Developed data-driven frameworks for market entry and P&L optimization.' },
-            { x: 1100, y: 150, w: 350, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and optimizing supply chain bottlenecks.' },
-            { x: 200, y: 700, w: 300, src: '4.png', year: '2023', desc: 'Operations Specialist. Implementing automated workflows using Power BI and SQL.' },
-            { x: 750, y: 850, w: 260, src: '5.png', year: '2022', desc: 'Consulting Projects. solving high-impact commercial challenges for tech clients.' },
-            { x: 1300, y: 750, w: 320, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical infrastructure and business growth.' },
-            { x: 50, y: 1300, w: 340, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in computer science and systems architecture.' },
-            { x: 550, y: 1450, w: 300, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum and Lean methodologies in global environments.' },
-            { x: 1050, y: 1350, w: 280, src: 'market.jpeg', year: '2018', desc: 'The Origin. Early career focus on data analytics and process automation.' }
+            { x: 150, y: 150, w: 320, src: '1.png', year: '2026', desc: 'MBA Candidate at Michigan State University. Global Student Ambassador focusing on Strategic Operations.' },
+            { x: 800, y: 400, w: 280, src: '2.png', year: '2025', desc: 'Strategy Associate Intern. Developed data-driven frameworks for market entry and P&L optimization.' },
+            { x: 1400, y: 200, w: 350, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and optimizing supply chain bottlenecks.' },
+            { x: 300, y: 900, w: 300, src: '4.png', year: '2023', desc: 'Operations Specialist. Implementing automated workflows using Power BI and SQL.' },
+            { x: 1000, y: 1100, w: 260, src: '5.png', year: '2022', desc: 'Consulting Projects solving high-impact commercial challenges for tech clients.' },
+            { x: 1700, y: 900, w: 320, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical infrastructure and business growth.' },
+            { x: 100, y: 1600, w: 340, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in computer science and systems architecture.' },
+            { x: 750, y: 1800, w: 300, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum and Lean methodologies in global environments.' },
+            { x: 1500, y: 1700, w: 280, src: 'market.jpeg', year: '2018', desc: 'The Origin. Early career focus on data analytics and process automation.' }
         ];
 
         const container = document.getElementById('images');
         const aura = document.getElementById('aura');
         let winW = window.innerWidth, winH = window.innerHeight;
-        let tileSize = { w: 2000, h: 2000 }, items = [];
+        // Arena size increased to handle wider flex units
+        let tileSize = { w: 2400, h: 2400 }, items = [];
         let mx = winW/2, my = winH/2, ax = mx, ay = my;
 
         const scroll = { current: { x: 0, y: 0 }, target: { x: 0, y: 0 }, ease: 0.05 };
         const drag = { isDragging: false, startX: 0, startY: 0, scrollX: 0, scrollY: 0 };
 
-        // 1. AURA & MOUSE TRACKING
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-        // 2. BUILD GRID WITH RATIO PRESERVATION
         function buildGrid() {
             container.innerHTML = '';
             items = [];
@@ -149,14 +182,16 @@
                 img.onload = () => {
                     const ratio = img.naturalHeight / img.naturalWidth;
                     const calculatedH = d.w * ratio;
+                    const totalW = d.w + 320; // protected unit width (image + gap + text)
 
                     repsX.forEach((offsetX) => {
                         repsY.forEach((offsetY) => {
                             const el = document.createElement('div');
                             el.className = 'item';
-                            el.style.width = `${d.w}px`;
+                            // The unit width is now the math anchor
+                            el.style.width = `${totalW}px`;
                             el.innerHTML = `
-                                <div class="tw-card"><img src="${d.src}" alt="${d.year}"></div>
+                                <div class="tw-card" style="width:${d.w}px"><img src="${d.src}" alt="${d.year}"></div>
                                 <div class="item-meta">
                                     <div class="item-tail"></div>
                                     <div class="item-year">${d.year}</div>
@@ -164,21 +199,18 @@
                                 </div>
                             `;
                             container.appendChild(el);
-                            items.push({ el, x: d.x + offsetX, y: d.y + offsetY, w: d.w, h: calculatedH, extraX: 0, extraY: 0 });
+                            items.push({ el, x: d.x + offsetX, y: d.y + offsetY, w: totalW, h: calculatedH, extraX: 0, extraY: 0 });
                         });
                     });
                 };
             });
         }
 
-        // 3. RENDER LOOP (GRID + AURA)
         function render() {
-            // Smooth Aura follow
             ax += (mx - ax) * 0.04;
             ay += (my - ay) * 0.04;
             aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
 
-            // Smooth Grid scroll
             scroll.current.x += (scroll.target.x - scroll.current.x) * scroll.ease;
             scroll.current.y += (scroll.target.y - scroll.current.y) * scroll.ease;
 
@@ -186,6 +218,7 @@
                 let posX = item.x + scroll.current.x + item.extraX;
                 let posY = item.y + scroll.current.y + item.extraY;
 
+                // Teleportation wrapping based on the FULL bubble width (item.w)
                 if (posX > winW + 400) item.extraX -= tileSize.w;
                 if (posX + item.w < -600) item.extraX += tileSize.w;
                 if (posY > winH + 400) item.extraY -= tileSize.h;
@@ -197,7 +230,6 @@
             requestAnimationFrame(render);
         }
 
-        // 4. LISTENERS
         window.addEventListener('wheel', e => { scroll.target.x -= e.deltaX * 0.5; scroll.target.y -= e.deltaY * 0.5; }, { passive: true });
         window.addEventListener('pointerdown', e => { drag.isDragging = true; drag.startX = e.clientX; drag.startY = e.clientY; drag.scrollX = scroll.target.x; drag.scrollY = scroll.target.y; });
         window.addEventListener('pointerup', () => drag.isDragging = false);
