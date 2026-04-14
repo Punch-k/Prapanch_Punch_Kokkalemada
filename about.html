@@ -18,16 +18,20 @@
             --display: 'Bebas Neue', sans-serif;
         }
         html, body { 
-            width: 100%; height: 100%; 
-            background: var(--bg); color: var(--fg); 
-            font-family: var(--sans); overflow: hidden; 
-            /* FIX: Prevents Chrome swipe-to-back navigation */
-            overscroll-behavior: none; 
-            cursor: none; 
+            width: 100%; height: 100%; background: var(--bg); color: var(--fg); 
+            font-family: var(--sans); overflow: hidden; overscroll-behavior: none; 
+            cursor: none; /* Hide default mouse */
         }
 
-        /* ─── AMBIENT AURA ────────────────────────────────────────── */
-        #aura { position: fixed; top: 0; left: 0; width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
+        /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
+        #cdot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #fff; border-radius: 50%; z-index: 100000; pointer-events: none; transform: translate(-50%,-50%); }
+        #cring { 
+            position: fixed; top: 0; left: 0; width: 40px; height: 40px; 
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; 
+            z-index: 100000; pointer-events: none; transform: translate(-50%,-50%); 
+            transition: width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        #aura { position: fixed; top: 0; left: 0; width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%,-50%); mix-blend-mode: screen; will-change: transform; }
 
         /* ─── MAIN NAV ────────────────────────────────────────────── */
         #mainnav { 
@@ -44,41 +48,40 @@
         .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
         .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
-        /* ─── INFINITE ARENA (3D ENVIRONMENT) ───────────────────── */
+        /* ─── INFINITE ARENA ────────────────────────────────────── */
         #viewport { 
             perspective: 2000px; width: 100vw; height: 100vh; overflow: hidden; 
             position: relative; z-index: 5;
-            /* Added background with dark overlay for readability */
-            background: linear-gradient(rgba(10,11,13,0.88), rgba(10,11,13,0.88)), 
+            background: linear-gradient(rgba(10,11,13,0.9), rgba(10,11,13,0.9)), 
                         url('https://plus.unsplash.com/premium_photo-1673541168090-26775e19c437?q=80&w=872&auto=format&fit=crop') center/cover no-repeat;
         }
         #images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
 
         .item { position: absolute; top: 0; left: 0; will-change: transform; pointer-events: auto; }
-        .item-wrapper { transform-style: preserve-3d; transition: transform 0.1s ease-out; cursor: grab; }
-        .item-wrapper:active { cursor: grabbing; }
+        .item-wrapper { transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(.16,1,.3,1); }
 
         /* IMAGE OVERLAY CARDS */
         .tw-card {
-            position: relative; border-radius: 1rem; overflow: hidden;
-            border: 1px solid rgba(201,168,76,.2);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            background: #000;
+            position: relative; border-radius: 1.2rem; overflow: hidden;
+            border: 1px solid rgba(201,168,76,.15);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+            background: #000; transition: border-color .6s, box-shadow .6s;
         }
-        .tw-card img { width: 100%; height: auto; display: block; filter: grayscale(100%); transition: filter .6s, transform .6s; }
+        .tw-card img { width: 100%; height: auto; display: block; filter: grayscale(100%) brightness(0.7); transition: filter .8s, transform .8s; }
 
         .item-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
             display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 2.5rem 2rem; opacity: 0.85; transition: opacity .4s;
+            padding: 2.5rem 2rem; opacity: 0.8; transition: opacity .4s;
         }
 
-        .item-year { font-family: var(--display); font-size: 4.5rem; color: var(--gold); line-height: 0.85; margin-bottom: 10px; }
+        .item-year { font-family: var(--display); font-size: 4.5rem; color: var(--gold); line-height: 0.85; margin-bottom: 10px; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
         .item-desc { font-size: 0.85rem; color: var(--fg); line-height: 1.6; font-weight: 300; }
 
-        .item:hover .tw-card { border-color: var(--gold); }
-        .item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+        .item:hover .tw-card { border-color: var(--gold); box-shadow: 0 0 40px rgba(201,168,76,0.2); }
+        .item:hover img { filter: grayscale(0%) brightness(1); }
+        .item:hover .item-overlay { opacity: 1; }
 
         /* ─── FOOTER ────────────────────────────────────────────── */
         .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
@@ -95,6 +98,8 @@
 </head>
 <body>
 
+    <div id="cdot"></div>
+    <div id="cring"></div>
     <div id="aura"></div>
 
     <nav id="mainnav">
@@ -113,12 +118,11 @@
 
     <footer class="site-footer">
         <div class="ft-logo">PRAPANCH KOKKALEMADA © 2026</div>
-        <div><a href="#" class="ft-link">LINKEDIN</a><a href="#" class="ft-link">E-MAIL</a></div>
+        <div><a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank">LINKEDIN</a><a href="mailto:prapanch@example.com" class="ft-link">E-MAIL</a></div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
-        // TIGHTENED COORDINATES (Reduced Blank Space)
         const gridData = [
             { x: 100, y: 100, w: 380, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
             { x: 600, y: 400, w: 350, src: '2.png', year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimization.' },
@@ -133,20 +137,34 @@
 
         const container = document.getElementById('images');
         const aura = document.getElementById('aura');
+        const cdot = document.getElementById('cdot');
+        const cring = document.getElementById('cring');
+
         let winW = window.innerWidth, winH = window.innerHeight;
         let isMobile = winW < 768;
-
-        // REDUCED TILE SIZE (Tighter play area)
         let tileSize = { w: 2000, h: 2000 };
         let items = [];
+        
         const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
         const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.05 };
         const drag = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
+        
         let ax = winW/2, ay = winH/2, mx = ax, my = ay;
+        let isPressed = false;
 
         document.addEventListener('mousemove', e => { 
             mx = e.clientX; my = e.clientY; 
             mouse.tX = e.clientX / winW; mouse.tY = e.clientY / winH;
+        });
+
+        // ─── PRESS EFFECT ───
+        window.addEventListener('mousedown', () => { 
+            isPressed = true; 
+            cring.style.width = '70px'; cring.style.height = '70px'; cring.style.borderColor = 'var(--gold)';
+        });
+        window.addEventListener('mouseup', () => { 
+            isPressed = false; 
+            cring.style.width = '40px'; cring.style.height = '40px'; cring.style.borderColor = 'rgba(255,255,255,0.3)';
         });
 
         function buildGrid() {
@@ -173,9 +191,11 @@
                                 </div>`;
                             container.appendChild(el);
                             items.push({ 
-                                el, x: (isMobile ? winW * 0.1 : d.x) + ox, 
+                                el, wrapper: el.querySelector('.item-wrapper'),
+                                x: (isMobile ? winW * 0.1 : d.x) + ox, 
                                 y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
-                                w: d.w, h: d.w * ratio, ex: 0, ey: 0 
+                                w: d.w, h: d.w * ratio, ex: 0, ey: 0,
+                                floatSeed: Math.random() * 100 // For random floating
                             });
                         });
                     });
@@ -183,8 +203,11 @@
             });
         }
 
-        function render() {
-            ax += (mx - ax) * 0.04; ay += (my - ay) * 0.04;
+        function render(time) {
+            // Cursor Follow
+            ax += (mx - ax) * 0.08; ay += (my - ay) * 0.08;
+            cdot.style.left = `${mx}px`; cdot.style.top = `${my}px`;
+            cring.style.left = `${ax}px`; cring.style.top = `${ay}px`;
             aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
 
             mouse.x += (mouse.tX - mouse.x) * 0.05;
@@ -200,13 +223,18 @@
                 let px = item.x + scroll.x + item.ex;
                 let py = item.y + scroll.y + item.ey;
 
-                // WRAPPING BOUNDS (Tighter threshold)
                 if (px > winW + 400) item.ex -= tileSize.w;
                 if (px + item.w < -400) item.ex += tileSize.w;
                 if (py > winH + 400) item.ey -= tileSize.h;
                 if (py + item.h < -400) item.ey += tileSize.h;
 
-                item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+                // Embellish: Subtle Floating Motion
+                const floatY = Math.sin(time * 0.001 + item.floatSeed) * 10;
+                
+                // Press Scaling Effect
+                const pressScale = isPressed ? 1.08 : 1;
+
+                item.el.style.transform = `translate3d(${px}px, ${py + floatY}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${pressScale})`;
             });
             requestAnimationFrame(render);
         }
@@ -217,7 +245,7 @@
         window.addEventListener('pointermove', e => { if (drag.active) { scroll.tX = drag.scrollX + (e.clientX - drag.sx) * 1.5; scroll.tY = drag.scrollY + (e.clientY - drag.sy) * 1.5; } });
 
         buildGrid();
-        render();
+        requestAnimationFrame(render);
     </script>
 </body>
 </html>
