@@ -3,312 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel | Infinite Grid</title>
+    <title>Prapanch Kokkalemada | About</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     
-    <style>
-        /* ─── RESET & VARS ──────────────────────────────────────── */
-        * , *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0a0b0d; 
-            --fg: #ede9e0; 
-            --gold: #c9a84c; 
-            --line: rgba(237,233,224,.1);
-            --sans: 'DM Sans', sans-serif;
-            --display: 'Bebas Neue', sans-serif;
-        }
-        
-        html, body {
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--sans);
-            overflow: hidden; /* Prevent native scrolling, JS handles it */
-            overscroll-behavior: none;
-        }
-
-        /* ─── MAIN NAV (From your portfolio) ────────────────────── */
-        #mainnav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-            padding: 1.65rem 3rem; display: flex; justify-content: space-between;
-            align-items: center; background: rgba(10,11,13,.88);
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
-        }
-        .nav-logo {
-            font-family: var(--display); font-size: 1rem; letter-spacing: .1em;
-            color: var(--fg); text-decoration: none; transition: opacity .2s;
-        }
-        .nav-logo span { color: var(--gold); }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
-            color: rgba(237,233,224,.35); text-decoration: none; transition: color .2s;
-        }
-        .nav-links a:hover, .nav-links a.act { color: var(--fg); }
-        .nav-cta {
-            font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
-            color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2);
-            padding: .5rem 1.2rem; transition: color .3s, border-color .3s;
-        }
-        .nav-cta:hover { color: var(--bg); background: var(--gold); border-color: var(--gold); }
-
-        /* ─── INFINITE GRID ─────────────────────────────────────── */
-        #images {
-            position: absolute;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            overflow: hidden;
-            cursor: grab;
-        }
-        #images:active { cursor: grabbing; }
-        
-        .item {
-            position: absolute;
-            top: 0; left: 0;
-            will-change: transform;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .item-wrapper {
-            width: 100%; height: 100%;
-            will-change: transform;
-            position: relative;
-        }
-        .item img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%) brightness(0.7);
-            transition: filter 0.5s ease, transform 0.5s ease;
-            pointer-events: none; /* Prevents ghost dragging */
-        }
-        .item:hover img {
-            filter: grayscale(0%) brightness(1.1);
-            transform: scale(1.05);
-        }
-        .item-caption {
-            position: absolute;
-            bottom: 1rem; left: 1.5rem;
-            font-family: var(--display);
-            font-size: 2rem;
-            color: var(--gold);
-            letter-spacing: 0.05em;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .item:hover .item-caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
-    <nav id="mainnav" role="navigation">
-        <a class="nav-logo" href="index.html">DANIEL <span>.</span></a>
+    <div id="preloader" role="status" aria-label="Page loading">
+        <div class="card">
+            <div class="loader">
+                <p>Loading</p>
+                <div class="words">
+                    <span class="loader-word">profile.exe</span>
+                    <span class="loader-word">history.xls</span>
+                    <span class="loader-word">about_me.sql</span>
+                </div>
+            </div>
+        </div>
+        <div id="ltext" style="display: none;">00%</div>
+    </div>
+
+    <div id="aura" aria-hidden="true"></div>
+    <div id="sprog" aria-hidden="true"></div>
+    <div id="cdot" aria-hidden="true"></div>
+    <div id="cring" aria-hidden="true"></div>
+    <div id="ctip" aria-hidden="true"></div>
+
+    <nav id="mainnav" role="navigation" aria-label="Primary navigation">
+        <a class="nav-logo" href="index.html">PRAPANCH <span>KOKKALEMADA</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#" class="act">Sandbox</a></li>
+            <li><a href="about.html" class="act">About</a></li>
+            <li><a href="index.html#section-cases">Work</a></li>
         </ul>
-        <a class="nav-cta" href="#"><span>Let's Connect ↗</span></a>
+        <a class="nav-cta" href="mailto:placeholder@example.com"><span>Let's Connect ↗</span></a>
     </nav>
 
-    <div id="images"></div>
+    <section id="section-intro" aria-label="Hero">
+        <div id="hero-bg" role="img" style="background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;"></div>
+        
+        <div class="hero-content">
+            <p class="hero-eyebrow" id="h-eyebrow">The Origin Story</p>
+            <h1 class="hero-hl" id="h-hl">
+                <span class="line-mask">
+                    <span class="word" style="transition-delay:.2s">Engineering</span>&nbsp;
+                    <span class="word" style="transition-delay:.3s">Mind.</span>
+                </span>
+                <br>
+                <em>
+                    <span class="line-mask">
+                        <span class="word" style="transition-delay:.5s">Strategic</span>&nbsp;
+                        <span class="word" style="transition-delay:.6s">Execution.</span>
+                    </span>
+                </em>
+            </h1>
+            <p class="hero-sub" id="h-sub">
+                Bridging the gap between technical operations and commercial growth. I leverage data-driven insights to solve complex bottlenecks and scale operations efficiently.
+            </p>
+        </div>
+        <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div> Scroll to Explore 🔻</div>
+    </section>
+
+    <section class="spine-timeline-section">
+        <div class="spine-line"></div>
+
+        <div class="spine-node" data-a="up">
+            <div class="spine-dot"></div>
+            <div class="spine-spacer"></div>
+            
+            <div class="spine-content">
+                <div class="spine-tail"></div>
+                <div class="tw-card" style="flex-shrink: 0; width: 220px; aspect-ratio: 9/12; cursor: default;">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop" alt="Strategy">
+                </div>
+                <div class="spine-text">
+                    <div class="spine-year">2026</div>
+                    <div class="spine-desc">
+                        <strong>Michigan State University — MBA Candidate</strong><br>
+                        Currently serving as a Global Student Ambassador. Focusing heavily on supply chain analytics, commercial strategy, and turning operational data into actionable go-to-market strategies.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spine-node" data-a="up">
+            <div class="spine-dot"></div>
+            <div class="spine-spacer"></div>
+            
+            <div class="spine-content">
+                <div class="spine-tail"></div>
+                <div class="tw-card" style="flex-shrink: 0; width: 220px; aspect-ratio: 9/12; cursor: default;">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Operations">
+                </div>
+                <div class="spine-text">
+                    <div class="spine-year">2023</div>
+                    <div class="spine-desc">
+                        <strong>Systems & Operations Engineering</strong><br>
+                        Engineered scalable technical solutions to reduce system downtime and operational overhead. Integrated automated data pipelines using SQL and Power BI to significantly improve reporting times.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="spine-node" data-a="up">
+            <div class="spine-dot"></div>
+            <div class="spine-spacer"></div>
+            
+            <div class="spine-content">
+                <div class="spine-tail"></div>
+                <div class="tw-card" style="flex-shrink: 0; width: 220px; aspect-ratio: 9/12; cursor: default;">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop" alt="Foundation">
+                </div>
+                <div class="spine-text">
+                    <div class="spine-year">2020</div>
+                    <div class="spine-desc">
+                        <strong>Foundational Engineering</strong><br>
+                        Established a core technical background in computer science and agile frameworks, creating the analytical bedrock used to solve complex commercial bottlenecks today.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-left">
+            <span class="ft-logo">Prapanch Kokkalemada © 2026 · Broad College of Business</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer links">
+            <a href="#" class="ft-link">E-MAIL</a>
+            <a href="#" class="ft-link" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+            <button class="ft-top-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Scroll to top of page">↑ Top</button>
+        </nav>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script>
-        // 1. DATA (Figma Coordinates & Dimensions)
-        const gridData = [
-            { x: 71, y: 58, w: 400, h: 270, src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800', txt: 'STRATEGY' },
-            { x: 211, y: 255, w: 540, h: 360, src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800', txt: 'OPERATIONS' },
-            { x: 631, y: 158, w: 400, h: 270, src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800', txt: 'SUPPLY CHAIN' },
-            { x: 1191, y: 245, w: 260, h: 195, src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800', txt: 'ANALYTICS' },
-            { x: 351, y: 687, w: 260, h: 290, src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', txt: 'SYSTEMS' },
-            { x: 751, y: 824, w: 205, h: 154, src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800', txt: 'FORECASTING' },
-            { x: 911, y: 540, w: 260, h: 350, src: 'https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=800', txt: 'GTM' },
-            { x: 1051, y: 803, w: 400, h: 300, src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800', txt: 'LEADERSHIP' },
-            { x: 71, y: 922, w: 350, h: 260, src: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800', txt: 'EXECUTION' }
-        ];
-
-        const originalSize = { w: 1600, h: 1200 };
-        const container = document.getElementById('images');
-        
-        let winW = window.innerWidth;
-        let winH = window.innerHeight;
-        let tileSize = { w: 0, h: 0 };
-        let items = [];
-
-        // Scroll & Drag State
-        const scroll = { 
-            current: { x: 0, y: 0 }, 
-            target: { x: 0, y: 0 }, 
-            last: { x: 0, y: 0 }, 
-            ease: 0.05 
-        };
-        const drag = { isDragging: false, startX: 0, startY: 0, scrollX: 0, scrollY: 0 };
-
-        // 2. BUILD THE GRID
-        function buildGrid() {
-            container.innerHTML = '';
-            items = [];
-            
-            // Scale Figma coordinates to fit the current browser window
-            tileSize.w = winW * 1.5; // Make the grid slightly larger than the screen
-            tileSize.h = tileSize.w * (originalSize.h / originalSize.w);
-            
-            const scaleX = tileSize.w / originalSize.w;
-            const scaleY = tileSize.h / originalSize.h;
-
-            // 2x2 Duplication for seamless infinite wrapping
-            const repsX = [0, tileSize.w];
-            const repsY = [0, tileSize.h];
-
-            gridData.forEach((d) => {
-                repsX.forEach((offsetX) => {
-                    repsY.forEach((offsetY) => {
-                        // Create physical DOM elements
-                        const el = document.createElement('div');
-                        el.className = 'item';
-                        el.style.width = `${d.w * scaleX}px`;
-                        el.style.height = `${d.h * scaleY}px`;
-
-                        const wrapper = document.createElement('div');
-                        wrapper.className = 'item-wrapper';
-                        
-                        const img = new Image();
-                        img.src = d.src;
-                        wrapper.appendChild(img);
-                        
-                        const caption = document.createElement('div');
-                        caption.className = 'item-caption';
-                        caption.innerText = d.txt;
-                        wrapper.appendChild(caption);
-
-                        el.appendChild(wrapper);
-                        container.appendChild(el);
-
-                        // Store mathematical data for the Render Loop
-                        items.push({
-                            el: el,
-                            wrapper: wrapper,
-                            x: (d.x * scaleX) + offsetX,
-                            y: (d.y * scaleY) + offsetY,
-                            w: d.w * scaleX,
-                            h: d.h * scaleY,
-                            extraX: 0,
-                            extraY: 0,
-                            ease: Math.random() * 0.4 + 0.6 // Unique parallax speed per item
-                        });
-                    });
-                });
-            });
-
-            // Double the virtual bounds so the camera wraps seamlessly
-            tileSize.w *= 2;
-            tileSize.h *= 2;
-
-            introAnimation();
-        }
-
-        // 3. EVENT LISTENERS
-        window.addEventListener('resize', () => {
-            winW = window.innerWidth;
-            winH = window.innerHeight;
-            buildGrid();
-        });
-
-        // Trackpad / Mousewheel
-        window.addEventListener('wheel', (e) => {
-            scroll.target.x -= e.deltaX * 0.6;
-            scroll.target.y -= e.deltaY * 0.6;
-        }, { passive: true });
-
-        // Pointer Dragging
-        window.addEventListener('pointerdown', (e) => {
-            drag.isDragging = true;
-            drag.startX = e.clientX;
-            drag.startY = e.clientY;
-            drag.scrollX = scroll.target.x;
-            drag.scrollY = scroll.target.y;
-        });
-        window.addEventListener('pointerup', () => drag.isDragging = false);
-        window.addEventListener('pointerleave', () => drag.isDragging = false);
-        window.addEventListener('pointermove', (e) => {
-            if (drag.isDragging) {
-                const dx = e.clientX - drag.startX;
-                const dy = e.clientY - drag.startY;
-                scroll.target.x = drag.scrollX + dx * 1.5;
-                scroll.target.y = drag.scrollY + dy * 1.5;
-            }
-        });
-
-        // 4. RENDER LOOP (The Infinite Wrapping Math)
-        function render() {
-            // Linear Interpolation (Lerp) for buttery smooth decay
-            scroll.current.x += (scroll.target.x - scroll.current.x) * scroll.ease;
-            scroll.current.y += (scroll.target.y - scroll.current.y) * scroll.ease;
-
-            // Parallax Delta
-            const dx = scroll.current.x - scroll.last.x;
-            const dy = scroll.current.y - scroll.last.y;
-
-            items.forEach(item => {
-                // Apply individual easing for organic parallax depth
-                const parX = dx * item.ease;
-                const parY = dy * item.ease;
-
-                // Calculate absolute physical position
-                let posX = item.x + scroll.current.x + item.extraX + parX;
-                let posY = item.y + scroll.current.y + item.extraY + parY;
-
-                // THE MAGIC: If it leaves the screen, teleport it to the opposite side
-                if (posX > winW + 100) item.extraX -= tileSize.w;
-                if (posX + item.w < -100) item.extraX += tileSize.w;
-                if (posY > winH + 100) item.extraY -= tileSize.h;
-                if (posY + item.h < -100) item.extraY += tileSize.h;
-
-                // Reposition the physical DOM element
-                item.el.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
-            });
-
-            scroll.last.x = scroll.current.x;
-            scroll.last.y = scroll.current.y;
-            requestAnimationFrame(render);
-        }
-
-        // 5. GSAP INTRO (The Cinematic Scatter)
-        function introAnimation() {
-            const wrappers = items.map(i => i.wrapper);
-            
-            // Instantly suck all images into the exact center of the screen
-            gsap.set(wrappers, {
-                x: (i) => -items[i].x + winW / 2 - items[i].w / 2,
-                y: (i) => -items[i].y + winH / 2 - items[i].h / 2,
-                scale: 0.5,
-                opacity: 0
-            });
-
-            // Explosively scatter them back to their calculated coordinates
-            gsap.to(wrappers, {
-                duration: 2,
-                ease: 'expo.inOut',
-                x: 0,
-                y: 0,
-                scale: 1,
-                opacity: 1,
-                stagger: 0.02
-            });
-        }
-
-        // Boot it up
-        buildGrid();
-        render();
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
