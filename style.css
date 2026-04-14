@@ -21,11 +21,22 @@
   --serif: 'DM Serif Display', Georgia, serif;
   --display: 'Bebas Neue', sans-serif;
 }
-html { 
-   scroll-behavior: smooth; 
-     }
-body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-weight: 300; line-height: 1.65; overflow-x: hidden; cursor: none; }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+}
 
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+    width: 100%;
+    cursor: none;
+}
 /* ─── ACCESSIBILITY: FOCUS RING ──────────────────────────── */
 /* Restores visible focus indicator for keyboard users (compensates for cursor:none) */
 :focus-visible {
