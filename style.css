@@ -297,47 +297,47 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
   .loop-wrapper { min-height: 400px; }
 }
 
-/* ─── AGENCY QUOTE — GSAP SCROLL SCRUB ──────────────────── */
+/* ============================================================
+   AGENCY QUOTE — "THE CINEMATIC FOCUS PULL"
+   ============================================================ */
 .agency-quote-section {
-  /* Pin height: tall enough to scrub through all words */
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3.5rem 2rem;
-  position: relative;
-  overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3.5rem 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .agency-quote-wrap {
-  text-align: center;
-  max-width: 1100px;
-  width: 100%;
+    text-align: center;
+    max-width: 1100px;
+    width: 100%;
 }
 
 .aq-line {
-  display: block;
-  overflow: visible;
-  margin: 1 1 1.1em;
-  line-height: 2.05;
+    display: block;
+    overflow: visible;
+    margin: 0 0 1.1em;
+    line-height: 2.05;
 }
 
 .aq-word {
-  display: inline-block;
-  font-family: var(--display);
-  font-size: clamp(2.8rem, 6.5vw, 6.5rem);
-  line-height: 1.05;
-  color: var(--gold);
-  /* Start state: dim, offset upward, blurred */
-  opacity: 0.08;
-  filter: blur(14px);
-  transform: translateY(28px);
-  will-change: opacity, filter, transform;
+    display: inline-block;
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 6.5vw, 6.5rem);
+    line-height: 1.05;
+    color: var(--gold);
+    /* Start state: dim, offset upward, blurred */
+    opacity: 0.08;
+    filter: blur(14px);
+    transform: translateY(28px);
+    will-change: opacity, filter, transform;
 }
 
 .aq-attribution {
-  display: block;
-  margin-top: 2.5rem;
+    display: block;
+    margin-top: 2.5rem;
 }
 
 .aq-author {
@@ -347,28 +347,36 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: #666;
+    margin-top: 2rem;
 }
 
- Accessible fallback (visually hidden) 
+/* Force the words inside the author block to shrink and inherit styles */
+.aq-author .aq-word {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+}
+
+/* Accessible fallback (visually hidden) */
 .aq-accessible {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* Reduced motion: skip scrub, just show the text */
 @media (prefers-reduced-motion: reduce) {
-  .aq-word {
-    opacity: 1 !important;
-    filter: none !important;
-    transform: none !important;
-  }
+    .aq-word {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+    }
 }
 /* ─── NEWS CAROUSEL (was 2× duplicate inline <style>) ─────── */
 #section-carousel { padding: 3.5rem 2rem; border-top: 1px solid var(--line); position: relative; z-index: 2; }
