@@ -1762,6 +1762,20 @@ if(tlLine&&expSection){
   },{passive:true});
 })();
 
+ // 3. Author Fade
+const author = document.querySelector('.aq-author');
+if (author) {
+    gsap.fromTo(author,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, scrollTrigger: { trigger: section, start: "center 70%", end: "center 50%", scrub: 1.2 } }
+    );
+}
+        }
+            ScrollTrigger.refresh();
+        }
+    }, 100);
+});
+
 // 24. FLOATING CONNECT PILL -- appears after hero
 const floatCta=document.getElementById('float-cta');
 const readTime=document.getElementById('read-time');
@@ -2158,17 +2172,4 @@ window.addEventListener('load', () => {
                 );
             });
 
-                // 3. Author Fade
-const author = document.querySelector('.aq-author');
-if (author) {
-    gsap.fromTo(author,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0,
-          scrollTrigger: { trigger: section, start: "center 70%", end: "center 50%", scrub: 1.2 }
-        }
-    );
-}
-            ScrollTrigger.refresh();
-        }
-    }, 100);
-});
+               
