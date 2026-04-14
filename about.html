@@ -1,639 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prapanch Kokkalemada | About</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prapanch Kokkalemada | About</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ─── FOUNDATION ────────────────────────────────────────── */
+        * , *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c; 
+            --line: rgba(237,233,224,.1); --sans: 'DM Sans', sans-serif;
+            --display: 'Bebas Neue', sans-serif;
+        }
+        html, body { 
+            width: 100%; height: 100%; 
+            background: var(--bg); color: var(--fg); 
+            font-family: var(--sans); overflow: hidden; 
+            overscroll-behavior: none; cursor: none; 
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+        /* ─── AMBIENT AURA ────────────────────────────────────────── */
+        #aura { position: fixed; top: 0; left: 0; width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%,-50%); transition: opacity .5s; mix-blend-mode: screen; will-change: transform; }
 
-  <style>
-    /* ─── FOUNDATION ─────────────────────────────────────────── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ─── MAIN NAV (STAY-TOP FIX) ────────────────────────────── */
+        #mainnav { 
+            position: fixed; top: 0; left: 0; right: 0; z-index: 99999; 
+            padding: 1.65rem 3rem; display: flex; justify-content: space-between; 
+            align-items: center; background: rgba(10,11,13,.95); 
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
+        }
+        .nav-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(237,233,224,.35); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover, .nav-links a.act { color: var(--fg); }
+        .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
+        .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
-    :root {
-      --bg:      #0a0b0d;
-      --fg:      #ede9e0;
-      --gold:    #c9a84c;
-      --line:    rgba(237,233,224,.1);
-      --sans:    'DM Sans', sans-serif;
-      --display: 'Bebas Neue', sans-serif;
-    }
+        /* ─── INFINITE ARENA (3D ENVIRONMENT) ───────────────────── */
+        #viewport { 
+            perspective: 2000px; width: 100vw; height: 100vh; overflow: hidden; 
+            background: transparent; position: relative; z-index: 5;
+            transform: scale(1.06); /* Your requested scale */
+        }
+        #images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
 
-   html, body {
-  width: 100%; height: 100%;
-  color: var(--fg);
-  font-family: var(--sans);
-  overflow: hidden;
-  overscroll-behavior: none;
-  cursor: none;
-  background:
-    /* dark overlay so cards/text stay legible */
-    linear-gradient(
-      135deg,
-      rgba(10,11,13,.82) 0%,
-      rgba(10,11,13,.65) 50%,
-      rgba(10,11,13,.82) 100%
-    ),
-    url('https://plus.unsplash.com/premium_photo-1675504585830-d124a759099c?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
-    center / cover no-repeat;
-  /* subtle parallax drift on mouse (driven by the aura's GPU layer) */
-  will-change: transform;
-  transform: scale(1.06); /* slight over-scale so edges never show on tilt */
-}
-    }
-    /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
-    #cursor {
-      position: fixed;
-      width: 10px; height: 10px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%,-50%);
-      transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-      mix-blend-mode: screen;
-    }
-    #cursor.press {
-      width: 20px; height: 20px;
-      opacity: 0.6;
-    }
+        .item { position: absolute; top: 0; left: 0; will-change: transform; pointer-events: auto; }
+        .item-wrapper { transform-style: preserve-3d; transition: transform 0.1s ease-out; cursor: grab; }
+        .item-wrapper:active { cursor: grabbing; }
 
-    /* ─── AMBIENT AURA ───────────────────────────────────────── */
-    #aura {
-      position: fixed;
-      top: 0; left: 0;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(201,168,76,.13) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      transform: translate(-50%,-50%);
-      will-change: transform;
-      mix-blend-mode: overlay;
-    }
+        /* IMAGE OVERLAY CARDS (The "Fixed Bubble") */
+        .tw-card {
+            position: relative; border-radius: 1rem; overflow: hidden;
+            border: 1px solid rgba(201,168,76,.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            background: #000;
+        }
+        .tw-card img { width: 100%; height: auto; display: block; filter: grayscale(100%); transition: filter .6s, transform .6s; }
 
-    /* ─── MAIN NAV ───────────────────────────────────────────── */
-    .mainnav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 9999;
-      padding: 1.65rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(10,11,13,.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      letter-spacing: .12em;
-      color: var(--fg);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--gold); }
+        .item-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 2.5rem 2rem; opacity: 0.85; transition: opacity .4s;
+        }
 
-    .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
-    }
-    .nav-links a {
-      font-size: .65rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(237,233,224,.35);
-      text-decoration: none;
-      transition: color .3s;
-    }
-    .nav-links a:hover,
-    .nav-links a.act { color: var(--fg); }
+        .item-year { font-family: var(--display); font-size: 4.5rem; color: var(--gold); line-height: 0.85; margin-bottom: 10px; }
+        .item-desc { font-size: 0.85rem; color: var(--fg); line-height: 1.6; font-weight: 300; }
 
-    .nav-cta {
-      font-size: .65rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--fg);
-      text-decoration: none;
-      border: 1px solid rgba(237,233,224,.25);
-      padding: .4rem 1.2rem;
-      transition: background .3s, color .3s;
-    }
-    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+        .item:hover .tw-card { border-color: var(--gold); }
+        .item:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
-    /* ─── INFINITE ARENA ─────────────────────────────────────── */
-    #viewport {
-  perspective: 1800px;
-  width: 100%; height: 100%;
-  overflow: hidden;
-  background: transparent; /* image shows through from body::before */
-  position: relative;
-}
+        /* ─── FOOTER ────────────────────────────────────────────── */
+        .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
+        .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; }
+        .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; }
 
-    #images {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    /* Individual item outer shell */
-    .item {
-      position: absolute;
-      top: 0; left: 0;
-      will-change: transform;
-      pointer-events: auto;
-    }
-
-    /* Inner wrapper – holds the 3-D tilt on hover */
-    .item-wrapper {
-      transform-style: preserve-3d;
-      transition: transform .15s ease-out;
-      cursor: grab;
-      will-change: transform;
-    }
-    .item-wrapper:active { cursor: grabbing; }
-
-/* ─── IMAGE OVERLAY CARDS ─────────────────────────────────────── */
-
-.item {
-  position: relative;   /* anchor for the absolutely-positioned tooltip */
-  z-index: 0;
-}
-
-.item:hover {
-  z-index: 5;           /* lift hovered card above siblings so tooltip is never clipped */
-}
-
-.tw-card {
-  position: relative;
-  border-radius: .75rem;
-  overflow: hidden;
-  border: 1px solid rgba(201,168,76,.12);
-  box-shadow: 0 8px 40px rgba(0,0,0,.55);
-  transition: border-color .35s, box-shadow .35s;
-  background: #000;
-  transform: translateZ(0);
-}
-
-.tw-card img {
-  width: 100%; height: auto;
-  display: block;
-  filter: grayscale(100%) contrast(1.08) brightness(.95);
-  transition: filter .45s ease, transform .45s ease;
-  will-change: filter, transform;
-}
-
-/* Year badge — stays inside the card, bottom-left */
-.item-year {
-  position: absolute;
-  bottom: .75rem;
-  left: .9rem;
-  font-family: var(--display);
-  font-size: 2.6rem;
-  color: var(--gold);
-  line-height: 1;
-  text-shadow: 0 2px 10px rgba(0,0,0,.6);
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity .45s ease;   /* matched to image transition duration */
-}
-
-/* ─── CARET TOOLTIP ───────────────────────────────────────────── */
-
-.item-tooltip {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  width: max-content;
-  max-width: 240px;
-  background: rgba(10,11,13,.94);
-  border: 1px solid rgba(201,168,76,.25);
-  border-radius: .5rem;
-  padding: .6rem .85rem;
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity .35s ease, transform .35s ease;
-  /* prevent tooltip from being clipped by any stacking context */
-  will-change: opacity, transform;
-}
-
-/* Caret — outer (border color) */
-.item-tooltip::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-bottom-color: rgba(201,168,76,.25);
-}
-
-/* Caret — inner (fill color) */
-.item-tooltip::after {
-  content: '';
-  position: absolute;
-  bottom: calc(100% - 1px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-bottom-color: rgba(10,11,13,.94);
-}
-
-.item-tooltip-text {
-  font-size: .75rem;
-  color: var(--fg);
-  line-height: 1.55;
-  font-weight: 300;
-}
-
-/* ─── WRAPPER ─────────────────────────────────────────────────── */
-
-.item-wrapper {
-  transition: transform .15s ease-out;
-  cursor: pointer;          /* grab implies dragging; use pointer unless cards are truly draggable */
-  will-change: transform;
-  /* 20 px invisible hover buffer on all sides */
-  padding: 20px;
-  margin: -20px;
-}
-
-/* ─── HOVER STATES ────────────────────────────────────────────── */
-
-.item:hover .tw-card {
-  border-color: var(--gold);
-  box-shadow: 0 12px 50px rgba(201,168,76,.22), 0 0 0 1px rgba(201,168,76,.08);
-}
-
-.item:hover .tw-card img {
-  filter: grayscale(0%) contrast(1.05) brightness(1.02);
-  transform: scale(1.04);
-}
-
-.item:hover .item-year {
-  opacity: 0;
-}
-
-.item:hover .item-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* ─── REDUCED MOTION ──────────────────────────────────────────── */
-
-@media (prefers-reduced-motion: reduce) {
-  .tw-card img,
-  .item-tooltip,
-  .item-year,
-  .item-wrapper {
-    transition: none;
-  }
-
-  .tw-card img {
-    transform: none !important;
-  }
-}
-
-/* ─── VISIBLE STATE ───────────────────────────────────────────── */
-
-.item.visible .tw-card {
-  border-color: rgba(201,168,76,.18);
-}
-    /* ─── MOBILE ─────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .mainnav { padding: .9rem 1.2rem; }
-      .nav-links, .nav-cta { display: none; }
-      .item-year { font-size: 2.6rem; }
-      .item-desc { font-size: .7rem; line-height: 1.4; }
-    }
-
-    /* ─── FOOTER ─────────────────────────────────────────────── */
-    .site-footer {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      z-index: 9999;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(10,11,13,.88);
-      backdrop-filter: blur(14px);
-      border-top: 1px solid var(--line);
-    }
-    .ft-logo {
-      font-size: .72rem;
-      color: rgba(237,233,224,.45);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-    .ft-link {
-      font-size: .65rem;
-      color: var(--gold);
-      text-decoration: none;
-      margin-left: 1.5rem;
-      opacity: .75;
-      transition: opacity .3s;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .ft-link:hover { opacity: 1; }
-  </style>
+        @media (max-width: 768px) {
+            #mainnav { padding: 1rem 1.5rem; }
+            .nav-links, .nav-cta { display: none; }
+            .item-year { font-size: 3rem; }
+            .item-desc { font-size: 0.75rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Custom cursor -->
-  <div id="cursor"></div>
+    <div id="aura"></div>
 
-  <!-- Ambient aura -->
-  <div id="aura"></div>
+    <nav id="mainnav">
+        <a class="nav-logo" href="index.html">PRAPANCH <span>KOKKALEMADA</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="act">About</a></li>
+            <li><a href="index.html#section-cases">Work</a></li>
+        </ul>
+        <a class="nav-cta" href="mailto:prapanch@example.com"><span>Let's Connect ↗</span></a>
+    </nav>
 
-  <!-- Nav -->
-  <nav class="mainnav">
-    <a class="nav-logo" href="index.html">PRAPANCH <span>K</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="act">About</a></li>
-      <li><a href="index.html#section-cases">Work</a></li>
-    </ul>
-    <a class="nav-cta" href="mailto:prapanch@example.com">Let's Connect ↗</a>
-  </nav>
-
-  <!-- Infinite arena -->
-  <div id="viewport">
-    <div id="images"></div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="ft-logo">Prapanch Kokkalemada © 2026</div>
-    <div>
-      <a class="ft-link" href="https://linkedin.com/in/prapanch" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="ft-link" href="mailto:prapanch@example.com">E-Mail</a>
+    <div id="viewport">
+        <div id="images"></div>
     </div>
-  </footer>
 
-  <!-- GSAP (CDN, no SplitText plugin needed) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <footer class="site-footer">
+        <div class="ft-logo">PRAPANCH KOKKALEMADA © 2026</div>
+        <div><a href="#" class="ft-link">LINKEDIN</a><a href="#" class="ft-link">E-MAIL</a></div>
+    </footer>
 
-  <script>
-(() => {
-  /* ── DATA ──────────────────────────────────────────────────── */
-  const gridData = [
-    { x:  150, y:  150, w: 400, src: '1.png',            year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
-    { x:  850, y:  550, w: 380, src: '2.png',            year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimisation.' },
-    { x: 1550, y:  250, w: 420, src: '3.png',            year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
-    { x:  450, y: 1100, w: 380, src: '4.png',            year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
-    { x: 1250, y: 1400, w: 350, src: '5.png',            year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
-    { x: 1950, y:  850, w: 390, src: 'GSA.jpg',          year: '2021', desc: 'Engineering Lead. Bridging the gap between technical systems and business growth.' },
-    { x:  250, y: 1950, w: 410, src: 'MBAA.jpg',         year: '2020', desc: 'Foundational Engineering. Core specialisation in systems architecture.' },
-    { x: 1050, y: 2150, w: 380, src: 'Professional.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
-    { x: 1750, y: 1850, w: 360, src: 'Hero.jpg',         year: '2018', desc: 'The Origin. Focus on large-scale data modelling and process automation.' },
-  ];
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        const gridData = [
+            { x: 150, y: 150, w: 400, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador focusing on Strategic Operations.' },
+            { x: 850, y: 550, w: 380, src: '2.png', year: '2025', desc: 'Strategy Associate. Developed frameworks for market entry and P&L optimization.' },
+            { x: 1550, y: 250, w: 420, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations and manufacturing bottlenecks.' },
+            { x: 450, y: 1100, w: 380, src: '4.png', year: '2023', desc: 'Operations Specialist. Automated workflows using Power BI, SQL, and Lean.' },
+            { x: 1250, y: 1400, w: 350, src: '5.png', year: '2022', desc: 'Consulting Projects. Solving commercial challenges for global infrastructure clients.' },
+            { x: 1950, y: 850, w: 390, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Bridging the gap between technical system and business growth.' },
+            { x: 250, y: 1950, w: 410, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Core specialization in systems architecture.' },
+            { x: 1050, y: 2150, w: 380, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery in global environments.' },
+            { x: 1750, y: 1850, w: 360, src: 'market.jpeg', year: '2018', desc: 'The Origin. Focus on large-scale data modeling and process automation.' }
+        ];
 
-  /* ── ELEMENTS ──────────────────────────────────────────────── */
-  const container = document.getElementById('images');
-  const auraEl    = document.getElementById('aura');
-  const cursorEl  = document.getElementById('cursor');
+        const container = document.getElementById('images');
+        const aura = document.getElementById('aura');
+        let winW = window.innerWidth, winH = window.innerHeight;
+        let isMobile = winW < 768;
 
-  /* ── STATE ─────────────────────────────────────────────────── */
-  let winW     = window.innerWidth;
-  let winH     = window.innerHeight;
-  let isMobile = winW < 768;
+        let tileSize = { w: 2800, h: 2800 };
+        let items = [];
+        const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
+        const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.05 };
+        const drag = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
+        let ax = winW/2, ay = winH/2, mx = ax, my = ay;
 
-  const ARENA_W = isMobile ? winW * 2.5 : 2800;
-  const ARENA_H = isMobile ? winH * 2.5 : 2800;
-
-  /* ── DAMPENED SCROLL STATE ─────────────────────────────────── *
-   *
-   *  Each axis has three values:
-   *    .target  – where we WANT the velocity to be (set by input)
-   *    .current – the smoothed, actual velocity driving the items
-   *    .pos     – accumulated position (unused for display; for wrapping math)
-   *
-   *  On every frame:
-   *    1. current lerps toward target  (input smoothing / ease-in)
-   *    2. target  lerps toward 0       (natural deceleration / ease-out)
-   *
-   *  This two-stage lerp means:
-   *    – a quick flick builds up then glides to a stop (no abrupt cut-off)
-   *    – horizontal-only scrolls don't bleed into Y and vice-versa
-   *    – drag release inherits current velocity and decays naturally
-   */
-  const vel = {
-    x: { target: 0, current: 0 },
-    y: { target: 0, current: 0 },
-  };
-
-  // How fast input is ABSORBED into current velocity (higher = snappier start)
-  const EASE_IN   = 0.14;
-  // How fast the target velocity decays to zero (lower = longer glide)
-  const EASE_OUT  = 0.072;
-  // Dead-zone: stop jittering when velocity is tiny
-  const DEADZONE  = 0.08;
-
-  /* Pointer position (normalised 0–1) */
-  const mouse = { x: { t: 0.5, c: 0.5 }, y: { t: 0.5, c: 0.5 } };
-  /* Press state (0 = up, 1 = down) */
-  const press = { t: 0, c: 0 };
-  /* Aura smoothed position in px */
-  const aura  = {
-    x: { t: winW * 0.5, c: winW * 0.5 },
-    y: { t: winH * 0.5, c: winH * 0.5 },
-  };
-
-  /* Drag */
-  const drag = {
-    active: false,
-    prevX: 0, prevY: 0,   // previous frame pointer, for velocity-on-release
-    currX: 0, currY: 0,
-  };
-
-  let items = [];
-
-  /* ── INTERSECTION OBSERVER ─────────────────────────────────── */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
-  });
-
-  /* ── LERP HELPER ───────────────────────────────────────────── */
-  const lerp = (a, b, t) => a + (b - a) * t;
-
-  /* ── BUILD GRID ────────────────────────────────────────────── */
-  function buildGrid() {
-    container.innerHTML = '';
-    items = [];
-
-    gridData.forEach(({ x, y, w, src, year, desc }) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        const ratio = img.naturalHeight / img.naturalWidth;
-        const cardW = isMobile ? w * 0.72 : w;
-        const cardH = cardW * ratio;
-
-        const el = document.createElement('div');
-        el.className = 'item';
-        el.style.cssText = `width:${cardW}px`;
-        el.innerHTML = `
-          <div class="item-wrapper">
-            <div class="tw-card">
-              <img src="${src}" alt="${desc}" loading="lazy">
-              <div class="item-overlay">
-                <div class="item-year">${year}</div>
-                <div class="item-desc">${desc}</div>
-              </div>
-            </div>
-          </div>`;
-
-        container.appendChild(el);
-        observer.observe(el);
-
-        const depthEase = Math.random() * 0.06 + 0.04;
-
-        items.push({
-          el,
-          wrapper: el.querySelector('.item-wrapper'),
-          x: isMobile ? Math.random() * winW * 0.8 : x % ARENA_W,
-          y: isMobile ? items.length * 400 % ARENA_H  : y % ARENA_H,
-          w: cardW,
-          h: cardH,
-          ease: depthEase,
+        document.addEventListener('mousemove', e => { 
+            mx = e.clientX; my = e.clientY; 
+            mouse.tX = e.clientX / winW; mouse.tY = e.clientY / winH;
         });
 
-        if (items.length === gridData.length) {
-          setTimeout(introAnimation, 400);
+        function buildGrid() {
+            container.innerHTML = ''; items = [];
+            const repsX = [0, tileSize.w], repsY = [0, tileSize.h];
+            gridData.forEach((d) => {
+                const img = new Image(); img.src = d.src;
+                img.onload = () => {
+                    const ratio = img.naturalHeight / img.naturalWidth;
+                    repsX.forEach((ox) => {
+                        repsY.forEach((oy) => {
+                            const el = document.createElement('div');
+                            el.className = 'item';
+                            el.style.width = `${isMobile ? d.w * 0.8 : d.w}px`;
+                            el.innerHTML = `
+                                <div class="item-wrapper">
+                                    <div class="tw-card">
+                                        <img src="${d.src}">
+                                        <div class="item-overlay">
+                                            <div class="item-year">${d.year}</div>
+                                            <div class="item-desc">${d.desc}</div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            container.appendChild(el);
+                            items.push({ 
+                                el, x: (isMobile ? winW * 0.1 : d.x) + ox, 
+                                y: (isMobile ? (items.length * 500) % tileSize.h : d.y) + oy, 
+                                w: d.w, h: d.w * ratio, ex: 0, ey: 0 
+                            });
+                        });
+                    });
+                };
+            });
         }
-      };
-    });
-  }
 
-  /* ── INTRO ANIMATION ───────────────────────────────────────── */
-  function introAnimation() {
-    const wrappers = items.map(d => d.wrapper);
+        function render() {
+            ax += (mx - ax) * 0.04; ay += (my - ay) * 0.04;
+            aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
 
-    const fromVars = items.map(({ x, y }) => ({
-      x: x < winW * 0.5 ? -winW * 0.4 : winW * 0.4,
-      y: y < winH * 0.5 ? -winH * 0.4 : winH * 0.4,
-    }));
+            mouse.x += (mouse.tX - mouse.x) * 0.05;
+            mouse.y += (mouse.tY - mouse.y) * 0.05;
 
-    wrappers.forEach((w, i) => gsap.set(w, fromVars[i]));
+            // Tilt AWAY from cursor logic
+            const rotY = (mouse.x - 0.5) * -12;
+            const rotX = (mouse.y - 0.5) * 12;
 
-    gsap.to(wrappers,   { x: 0, y: 0, duration: 1.8, ease: 'expo.inOut', stagger: 0.04, clearProps: 'x,y' });
-    gsap.fromTo(wrappers,
-      { opacity: 0, scale: 0.88 },
-      { opacity: 1, scale: 1,   duration: 1.4, ease: 'expo.out',  stagger: 0.04 }
-    );
-  }
+            scroll.x += (scroll.tX - scroll.x) * scroll.ease;
+            scroll.y += (scroll.tY - scroll.y) * scroll.ease;
 
-  /* ── RENDER LOOP ───────────────────────────────────────────── */
-  function render() {
-    requestAnimationFrame(render);
+            items.forEach(item => {
+                let px = item.x + scroll.x + item.ex;
+                let py = item.y + scroll.y + item.ey;
 
-    /* — Mouse & aura — */
-    mouse.x.c = lerp(mouse.x.c, mouse.x.t, 0.06);
-    mouse.y.c = lerp(mouse.y.c, mouse.y.t, 0.06);
-    press.c   = lerp(press.c,   press.t,   0.10);
+                if (px > winW + 600) item.ex -= tileSize.w;
+                if (px + item.w < -600) item.ex += tileSize.w;
+                if (py > winH + 600) item.ey -= tileSize.h;
+                if (py + item.h < -600) item.ey += tileSize.h;
 
-    aura.x.c = lerp(aura.x.c, aura.x.t, 0.055);
-    aura.y.c = lerp(aura.y.c, aura.y.t, 0.055);
-    auraEl.style.transform = `translate(calc(${aura.x.c}px - 50%), calc(${aura.y.c}px - 50%))`;
+                item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+            });
+            requestAnimationFrame(render);
+        }
 
-    cursorEl.style.left = aura.x.t + 'px';
-    cursorEl.style.top  = aura.y.t + 'px';
+        window.addEventListener('wheel', e => { scroll.tX -= e.deltaX; scroll.tY -= e.deltaY; }, { passive: true });
+        window.addEventListener('pointerdown', e => { drag.active = true; drag.sx = e.clientX; drag.sy = e.clientY; drag.scrollX = scroll.tX; drag.scrollY = scroll.tY; });
+        window.addEventListener('pointerup', () => drag.active = false);
+        window.addEventListener('pointermove', e => { if (drag.active) { scroll.tX = drag.scrollX + (e.clientX - drag.sx) * 1.5; scroll.tY = drag.scrollY + (e.clientY - drag.sy) * 1.5; } });
 
-    /* — Two-stage inertia dampener — */
-    // Stage 1: smooth the input → current velocity (ease-in)
-    vel.x.current = lerp(vel.x.current, vel.x.target, EASE_IN);
-    vel.y.current = lerp(vel.y.current, vel.y.target, EASE_IN);
-
-    // Stage 2: decay the target back to zero (ease-out / glide)
-    vel.x.target = lerp(vel.x.target, 0, EASE_OUT);
-    vel.y.target = lerp(vel.y.target, 0, EASE_OUT);
-
-    // Dead-zone snap to prevent micro-jitter at rest
-    if (Math.abs(vel.x.current) < DEADZONE) vel.x.current = 0;
-    if (Math.abs(vel.y.current) < DEADZONE) vel.y.current = 0;
-
-    /* — Arena tilt — */
-    const tiltY     = (mouse.x.c - 0.5) * 18;
-    const tiltX     = (mouse.y.c - 0.5) * -12;
-    const pressScale = 1 - press.c * 0.025;
-
-    /* — Move + wrap items — */
-    items.forEach(item => {
-      // Each item drifts at its own depth-scaled rate
-      item.x += vel.x.current * item.ease * 18;
-      item.y += vel.y.current * item.ease * 18;
-
-      // Infinite wrapping
-      const hw = ARENA_W * 0.6;
-      const hh = ARENA_H * 0.6;
-      if (item.x >  hw) item.x -= ARENA_W;
-      if (item.x < -hw) item.x += ARENA_W;
-      if (item.y >  hh) item.y -= ARENA_H;
-      if (item.y < -hh) item.y += ARENA_H;
-
-      item.el.style.transform =
-        `translate3d(${item.x}px, ${item.y}px, 0)
-         rotateY(${tiltY}deg) rotateX(${tiltX}deg)
-         scale(${pressScale})`;
-    });
-  }
-
-  /* ── INPUT EVENTS ──────────────────────────────────────────── */
-
-  /* Wheel — accumulate into target (not directly into current) */
-  window.addEventListener('wheel', e => {
-    vel.x.target -= e.deltaX * 0.55;
-    vel.y.target -= e.deltaY * 0.55;
-  }, { passive: true });
-
-  /* Drag — track per-frame delta so release carries momentum */
-  window.addEventListener('pointerdown', e => {
-    drag.active = true;
-    drag.prevX  = drag.currX = e.clientX;
-    drag.prevY  = drag.currY = e.clientY;
-    press.t = 1;
-    cursorEl.classList.add('press');
-  });
-
-  window.addEventListener('pointermove', e => {
-    mouse.x.t = e.clientX / winW;
-    mouse.y.t = e.clientY / winH;
-    aura.x.t  = e.clientX;
-    aura.y.t  = e.clientY;
-
-    if (!drag.active) return;
-
-    drag.prevX = drag.currX;
-    drag.prevY = drag.currY;
-    drag.currX = e.clientX;
-    drag.currY = e.clientY;
-
-    // Feed frame-delta into target velocity (NOT current) so the dampener still applies
-    vel.x.target += (drag.currX - drag.prevX) * 1.6;
-    vel.y.target += (drag.currY - drag.prevY) * 1.6;
-  });
-
-  window.addEventListener('pointerup', () => {
-    drag.active = false;
-    press.t = 0;
-    cursorEl.classList.remove('press');
-    // No manual velocity transfer needed — target already holds the momentum
-    // and EASE_OUT will glide it to zero naturally
-  });
-
-  /* Resize */
-  window.addEventListener('resize', () => {
-    winW     = window.innerWidth;
-    winH     = window.innerHeight;
-    isMobile = winW < 768;
-    buildGrid();
-  });
-
-  /* ── BOOT ──────────────────────────────────────────────────── */
-  buildGrid();
-  render();
-})();
-</script>
+        buildGrid();
+        render();
+    </script>
 </body>
 </html>
