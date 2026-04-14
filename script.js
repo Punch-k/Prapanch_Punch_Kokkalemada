@@ -1762,20 +1762,6 @@ if(tlLine&&expSection){
   },{passive:true});
 })();
 
- // 3. Author Fade
-const author = document.querySelector('.aq-author');
-if (author) {
-    gsap.fromTo(author,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, scrollTrigger: { trigger: section, start: "center 70%", end: "center 50%", scrub: 1.2 } }
-    );
-}
-        }
-            ScrollTrigger.refresh();
-        }
-    }, 100);
-});
-
 // 24. FLOATING CONNECT PILL -- appears after hero
 const floatCta=document.getElementById('float-cta');
 const readTime=document.getElementById('read-time');
@@ -2125,10 +2111,8 @@ window.addEventListener('load', () => {
     const quoteInterval = setInterval(() => {
         if (document.body.classList.contains('loaded') || !document.getElementById('preloader')) {
             clearInterval(quoteInterval);
-            
             const section = document.getElementById('agency-quote');
             const lines = document.querySelectorAll('.aq-line, .aq-author');
-
             if (!section || lines.length === 0 || typeof gsap === 'undefined') return;
 
             gsap.registerPlugin(ScrollTrigger);
@@ -2137,39 +2121,19 @@ window.addEventListener('load', () => {
             gsap.to('.agency-quote-wrap', {
                 y: 80,
                 ease: "none",
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
+                scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true }
             });
 
             // 2. 3D Cascade: Folds the words up out of the darkness
             lines.forEach((line) => {
                 const words = line.querySelectorAll('.aq-word');
-                gsap.fromTo(words, 
-                    { 
-                        opacity: 0, 
-                        filter: "blur(16px)", 
-                        y: 40, 
-                        rotationX: -50, 
-                        transformOrigin: "50% 100%" 
-                    },
-                    {
-                        opacity: 1, 
-                        filter: "blur(0px)", 
-                        y: 0, 
-                        rotationX: 0, 
-                        stagger: 0.1,
-                        scrollTrigger: {
-                            trigger: line,
-                            start: "top 90%",
-                            end: "top 50%",
-                            scrub: 1.2
-                        }
+                gsap.fromTo(words,
+                    { opacity: 0, filter: "blur(16px)", y: 40, rotationX: -50, transformOrigin: "50% 100%" },
+                    { opacity: 1, filter: "blur(0px)", y: 0, rotationX: 0, stagger: 0.1,
+                        scrollTrigger: { trigger: line, start: "top 90%", end: "top 50%", scrub: 1.2 }
                     }
                 );
             });
-
-               
+        }
+    }, 100);
+});
