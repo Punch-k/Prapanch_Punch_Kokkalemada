@@ -30,14 +30,6 @@
   overflow: hidden;
   overscroll-behavior: none;
   cursor: none;
-}
-
-/* ─── BACKGROUND IMAGE ───────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
   background:
     /* dark overlay so cards/text stay legible */
     linear-gradient(
@@ -52,7 +44,7 @@ body::before {
   will-change: transform;
   transform: scale(1.06); /* slight over-scale so edges never show on tilt */
 }
-
+    }
     /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
     #cursor {
       position: fixed;
