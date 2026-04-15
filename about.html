@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,15 +37,15 @@
         #mainnav { 
             position: fixed; top: 0; left: 0; right: 0; z-index: 99999; 
             padding: 1.65rem 3rem; display: flex; justify-content: space-between; 
-            align-items: center; background: rgba(10,11,13,.92); 
+            align-items: center; background: rgba(10,11,13,.95); 
             backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
         }
         .nav-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
         .nav-logo span { color: var(--gold); }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(237, 233, 224, .35); text-decoration: none; transition: color .2s; }
+        .nav-links a { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(237,233,224,.35); text-decoration: none; transition: color .2s; }
         .nav-links a:hover, .nav-links a.act { color: var(--fg); }
-        .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237, 233, 224, .2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
+        .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
         .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
         /* ─── INFINITE ARENA ────────────────────────────────────── */
@@ -53,50 +53,45 @@
             perspective: 2000px; width: 100vw; height: 100vh; overflow: hidden; 
             position: relative; z-index: 5;
             background: linear-gradient(rgba(10,11,13,0.9), rgba(10,11,13,0.9)), 
-                        url('https://plus.unsplash.com/premium_photo-1763741255302-be9885844ce4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+                        url('https://plus.unsplash.com/premium_photo-1673541168090-26775e19c437?q=80&w=872&auto=format&fit=crop') center/cover no-repeat;
         }
         #images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
 
         .item { position: absolute; top: 0; left: 0; will-change: transform; pointer-events: auto; }
-        .item-wrapper { transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(.16,1,.3,1); }
+        .item-wrapper { transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(.16,1,.3,1); height: 100%; }
 
-        /* IMAGE OVERLAY CARDS */
+        /* IMAGE REVEALING WINDOWS */
         .tw-card {
-        position: relative; 
-        border-radius: 1.2rem; 
-        overflow: hidden; /* This makes it a window */
-        border: 1px solid rgba(201,168,76,.15);
-        box-shadow: 0 15px 45px rgba(0,0,0,0.7);
-        background: #000;
+            position: relative; border-radius: 1.2rem; overflow: hidden;
+            border: 1px solid rgba(201,168,76,.15);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+            background: #000; height: 100%;
         }
-    
         .tw-card img { 
-        width: 120%;  /* Increased size for the "fill" effect */
-        height: 120%; /* Increased size for the "fill" effect */
-        object-fit: cover;
-        position: absolute;
-        top: -10%; /* Center the oversized image */
-        left: -10%; 
-        filter: grayscale(100%) brightness(0.7); 
-        will-change: transform; /* Smoothness boost */
-}
+            width: 140%; height: 140%; object-fit: cover; 
+            position: absolute; top: -20%; left: -20%;
+            filter: grayscale(100%) brightness(0.7); 
+            transition: filter .8s; 
+        }
+
         .item-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
             display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 2.5rem 2rem; opacity: 0.8; transition: opacity .4s;
+            padding: 2.5rem 2rem; opacity: 0.85; transition: opacity .4s;
+            pointer-events: none;
         }
 
-        .item-year { font-family: var(--display); font-size: 4.5rem; color: var(--gold); line-height: 0.85; margin-bottom: 10px; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .item-year { font-family: var(--display); font-size: 4.5rem; color: var(--gold); line-height: 0.85; margin-bottom: 10px; }
         .item-desc { font-size: 0.85rem; color: var(--fg); line-height: 1.6; font-weight: 300; }
 
-        .item:hover .tw-card { border-color: var(--gold); box-shadow: 0 0 40px rgba(201,168,76,0.2); }
+        .item:hover .tw-card { border-color: var(--gold); }
         .item:hover img { filter: grayscale(0%) brightness(1); }
         .item:hover .item-overlay { opacity: 1; }
 
         /* ─── FOOTER ────────────────────────────────────────────── */
-        .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10, 11, 13, .9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
-        .ft-logo { font-size: 0.75rem; color: rgba(237, 233, 224, .3); text-transform: uppercase; }
+        .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
+        .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; }
         .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; }
 
         @media (max-width: 768px) {
@@ -138,16 +133,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
         const gridData = [
-    { x: 100, y: 100, w: 320, h: 450, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU.' },
-    { x: 600, y: 400, w: 450, h: 300, src: '2.png', year: '2025', desc: 'Strategy Associate.' },
-    { x: 1100, y: 150, w: 300, h: 300, src: '3.png', year: '2024', desc: 'Systems Engineer.' },
-    { x: 300, y: 800, w: 400, h: 250, src: '4.png', year: '2023', desc: 'Operations Specialist.' },
-    { x: 900, y: 1000, w: 280, h: 420, src: '5.png', year: '2022', desc: 'Consulting Projects.' },
-    { x: 1400, y: 650, w: 450, h: 320, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead.' },
-    { x: 150, y: 1400, w: 380, h: 380, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering.' },
-    { x: 700, y: 1600, w: 420, h: 280, src: 'class.jpg', year: '2019', desc: 'Project Management.' },
-    { x: 1250, y: 1400, w: 300, h: 450, src: 'market.jpeg', year: '2018', desc: 'The Origin.' }
-];
+            { x: 100, y: 100, w: 320, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador.' },
+            { x: 600, y: 400, w: 450, src: '2.png', year: '2025', desc: 'Strategy Associate. Frameworks for market entry.' },
+            { x: 1100, y: 150, w: 300, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations.' },
+            { x: 300, y: 800, w: 400, src: '4.png', year: '2023', desc: 'Operations Specialist. Automated workflows.' },
+            { x: 900, y: 1000, w: 280, src: '5.png', year: '2022', desc: 'Consulting Projects. Solving commercial challenges.' },
+            { x: 1400, y: 650, w: 450, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Technical system performance.' },
+            { x: 150, y: 1400, w: 380, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Systems architecture.' },
+            { x: 700, y: 1600, w: 420, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery.' },
+            { x: 1250, y: 1400, w: 320, src: 'market.jpeg', year: '2018', desc: 'The Origin. Large-scale data modeling.' }
+        ];
 
         const container = document.getElementById('images');
         const aura = document.getElementById('aura');
@@ -159,42 +154,12 @@
         let tileSize = { w: 2000, h: 2000 };
         let items = [];
         
+        let mx = winW/2, my = winH/2, ax = mx, ay = my;
         const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
-        const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.05 };
-        const drag = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
-        // Add this below the drag object
+        const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.025 };
         const pan = { x: 0, y: 0, tX: 0, tY: 0 };
-        
-        let ax = winW/2, ay = winH/2, mx = ax, my = ay;
+        const drag = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
         let isPressed = false;
-
-        document.addEventListener('mousemove', e => {
-    mx = e.clientX; 
-    my = e.clientY; 
-    mouse.tX = e.clientX / winW; 
-    mouse.tY = e.clientY / winH;
-
-    // ADD THIS: Calculates how far the wall should shift based on cursor
-    // 0.3 is the intensity. Increase to 1.0 for "same distance" 1:1 mapping.
-    pan.tX = (e.clientX - winW / 2) * 0.3; 
-    pan.tY = (e.clientY - winH / 2) * 0.3;
-});
-
-        // ─── PRESS EFFECT ───
-        window.addEventListener('mousedown', () => { 
-            isPressed = true; 
-            cring.style.width = '70px'; 
-            cring.style.height = '70px'; 
-            cring.style.borderColor = 'var(--gold)';
-            cring.style.borderWidth = '2px';
-        });
-        window.addEventListener('mouseup', () => { 
-            isPressed = false; 
-            cring.style.width = '40px'; 
-            cring.style.height = '40px'; 
-            cring.style.borderColor = 'rgba(255,255,255,0.3)';
-            cring.style.borderWidth = '1px';
-        });
 
         function buildGrid() {
             container.innerHTML = ''; items = [];
@@ -202,90 +167,101 @@
             gridData.forEach((d) => {
                 const img = new Image(); img.src = d.src;
                 img.onload = () => {
+                    const ratio = img.naturalHeight / img.naturalWidth;
                     const calculatedH = d.w * ratio;
-                    const width = isMobile ? d.w * 0.8 : d.w;
                     repsX.forEach((ox) => {
                         repsY.forEach((oy) => {
                             const el = document.createElement('div');
                             el.className = 'item';
                             el.style.width = `${isMobile ? d.w * 0.8 : d.w}px`;
-                            el.style.height = `${calculatedH}px`;
+                            el.style.height = `${isMobile ? calculatedH * 0.8 : calculatedH}px`;
                             el.innerHTML = `
-            <div class="item-wrapper" style="height:100%">
-                <div class="tw-card" style="height:100%">
-                    <img src="${d.src}">
-                    <div class="item-overlay">
-                        <div class="item-year">${d.year}</div>
-                        <div class="item-desc">${d.desc}</div>
-                    </div>
-                </div>
-            </div>`;
-                container.appendChild(el);
-        
-                items.push({ 
-                    el, 
-                    wrapper: el.querySelector('.item-wrapper'),
-                    img: el.querySelector('img'), // Store image ref here for render()
-                    x: (isMobile ? winW * 0.1 : d.x) + ox, 
-                    y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
-                    w: width, 
-                    h: calculatedH, 
-                    ex: 0, 
-                    ey: 0
+                                <div class="item-wrapper">
+                                    <div class="tw-card">
+                                        <img src="${d.src}">
+                                        <div class="item-overlay">
+                                            <div class="item-year">${d.year}</div>
+                                            <div class="item-desc">${d.desc}</div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            container.appendChild(el);
+                            items.push({ 
+                                el, img: el.querySelector('img'),
+                                x: (isMobile ? winW * 0.1 : d.x) + ox, 
+                                y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
+                                w: d.w, h: calculatedH, ex: 0, ey: 0
+                            });
+                        });
                     });
-                });
-                });                
                 };
             });
         }
 
         function render() {
-            // Cursor Follow
+            // Cursor Smoothing
             ax += (mx - ax) * 0.1; ay += (my - ay) * 0.1;
             cdot.style.left = `${mx}px`; cdot.style.top = `${my}px`;
             cring.style.left = `${ax}px`; cring.style.top = `${ay}px`;
             aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
 
+            // Pan/Dampening
+            pan.x += (pan.tX - pan.x) * 0.02;
+            pan.y += (pan.tY - pan.y) * 0.02;
+
             mouse.x += (mouse.tX - mouse.x) * 0.05;
             mouse.y += (mouse.tY - mouse.y) * 0.05;
-            pan.x += (pan.tX - pan.x) * 0.05; 
-            pan.y += (pan.tY - pan.y) * 0.05;
 
-            const rotY = (mouse.x - 0.5) * -12;
-            const rotX = (mouse.y - 0.5) * 12;
+            // Tilt Intensity (Match Codrops Arena Feel)
+            const rotY = (mouse.x - 0.5) * -25;
+            const rotX = (mouse.y - 0.5) * 25;
 
             scroll.x += (scroll.tX - scroll.x) * scroll.ease;
             scroll.y += (scroll.tY - scroll.y) * scroll.ease;
 
             items.forEach(item => {
-                let px = item.x + scroll.x + item.ex + pan.x; 
+                let px = item.x + scroll.x + item.ex + pan.x;
                 let py = item.y + scroll.y + item.ey + pan.y;
 
-                // Use item.w and item.h as the threshold instead of 400
+                // Seamless Wrapping
                 if (px > winW + item.w) item.ex -= tileSize.w;
                 if (px + item.w < -item.w) item.ex += tileSize.w;
                 if (py > winH + item.h) item.ey -= tileSize.h;
                 if (py + item.h < -item.h) item.ey += tileSize.h;
                 
-                // Press Scaling Effect
                 const pressScale = isPressed ? 1.08 : 1;
                 item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${pressScale})`;
-                const imgX = px * -0.1;
-        const imgY = py * -0.1;
-        
-        const img = item.el.querySelector('img');
-        if (img) {
-            // This moves the image inside the frame in the opposite direction
-            img.style.transform = `translate3d(${imgX}px, ${imgY}px, 0) scale(1.2)`;
-        }           
+
+                // The Revealing Window (Counter-Parallax)
+                const imgX = px * -0.15;
+                const imgY = py * -0.15;
+                if (item.img) {
+                    item.img.style.transform = `translate3d(${imgX}px, ${imgY}px, 0) scale(1.3)`;
+                }
             });
             requestAnimationFrame(render);
         }
+
+        // Listeners
+        document.addEventListener('mousemove', e => { 
+            mx = e.clientX; my = e.clientY; 
+            mouse.tX = e.clientX / winW; mouse.tY = e.clientY / winH;
+            pan.tX = (e.clientX - winW / 2) * 1.0; 
+            pan.tY = (e.clientY - winH / 2) * 1.0;
+        });
+
+        window.addEventListener('mousedown', () => { 
+            isPressed = true; cring.style.width = '70px'; cring.style.height = '70px'; cring.style.borderColor = 'var(--gold)';
+        });
+        window.addEventListener('mouseup', () => { 
+            isPressed = false; cring.style.width = '40px'; cring.style.height = '40px'; cring.style.borderColor = 'rgba(255,255,255,0.3)';
+        });
 
         window.addEventListener('wheel', e => { scroll.tX -= e.deltaX; scroll.tY -= e.deltaY; }, { passive: true });
         window.addEventListener('pointerdown', e => { drag.active = true; drag.sx = e.clientX; drag.sy = e.clientY; drag.scrollX = scroll.tX; drag.scrollY = scroll.tY; });
         window.addEventListener('pointerup', () => drag.active = false);
         window.addEventListener('pointermove', e => { if (drag.active) { scroll.tX = drag.scrollX + (e.clientX - drag.sx) * 1.5; scroll.tY = drag.scrollY + (e.clientY - drag.sy) * 1.5; } });
+        window.addEventListener('resize', () => { winW = window.innerWidth; winH = window.innerHeight; isMobile = winW < 768; buildGrid(); });
 
         buildGrid();
         requestAnimationFrame(render);
