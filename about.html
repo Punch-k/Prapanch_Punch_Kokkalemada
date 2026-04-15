@@ -202,31 +202,39 @@
             gridData.forEach((d) => {
                 const img = new Image(); img.src = d.src;
                 img.onload = () => {
-                    const ratio = img.naturalHeight / img.naturalWidth;
+                    const calculatedH = d.w * ratio;
+                    const width = isMobile ? d.w * 0.8 : d.w;
                     repsX.forEach((ox) => {
                         repsY.forEach((oy) => {
                             const el = document.createElement('div');
                             el.className = 'item';
                             el.style.width = `${isMobile ? d.w * 0.8 : d.w}px`;
+                            el.style.height = `${calculatedH}px`;
                             el.innerHTML = `
-                                <div class="item-wrapper">
-                                    <div class="tw-card">
-                                        <img src="${d.src}">
-                                        <div class="item-overlay">
-                                            <div class="item-year">${d.year}</div>
-                                            <div class="item-desc">${d.desc}</div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                            container.appendChild(el);
-                            items.push({ 
-                                el, wrapper: el.querySelector('.item-wrapper'),
-                                x: (isMobile ? winW * 0.1 : d.x) + ox, 
-                                y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
-                                w: d.w, h: d.w * ratio, ex: 0, ey: 0
-                            });
-                        });
+            <div class="item-wrapper" style="height:100%">
+                <div class="tw-card" style="height:100%">
+                    <img src="${d.src}">
+                    <div class="item-overlay">
+                        <div class="item-year">${d.year}</div>
+                        <div class="item-desc">${d.desc}</div>
+                    </div>
+                </div>
+            </div>`;
+                container.appendChild(el);
+        
+                items.push({ 
+                    el, 
+                    wrapper: el.querySelector('.item-wrapper'),
+                    img: el.querySelector('img'), // Store image ref here for render()
+                    x: (isMobile ? winW * 0.1 : d.x) + ox, 
+                    y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
+                    w: width, 
+                    h: calculatedH, 
+                    ex: 0, 
+                    ey: 0
                     });
+                });
+                });                
                 };
             });
         }
