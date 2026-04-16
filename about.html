@@ -54,90 +54,60 @@
       overscroll-behavior-y: none;
     }
 
- /* --- Navigation Styling --- */
-    #mainnav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 99999;
-      padding: 30rem 80rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(10, 11, 13, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--line);
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 40rem;
-      list-style: none;
-    }
-    
-    .nav-links a {
-      font-size: 16rem; /* Increased from .65 for readability */
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(237, 233, 224, 0.45);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    
-    .nav-links a:hover, .nav-links a.act {
-      color: var(--fg);
-    }
-    
-    .nav-cta {
-      font-size: 14rem; /* Increased from .65 */
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--fg);
-      text-decoration: none;
-      border: 1px solid rgba(237, 233, 224, 0.2);
-      padding: 10rem 25rem; /* Increased padding for a "normal" button feel */
-      transition: all 0.3s;
-    }
-    
-    .nav-cta:hover {
-      background: var(--gold);
-      color: var(--bg);
-    }
-    
-    /* --- Footer Styling --- */
-    .site-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 99999;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 3rem; /* Matched to a standard height */
-      background: rgba(10, 11, 13, 0.9);
-      border-top: 1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-    
-    .ft-logo {
-      font-size: 0.85rem; /* Standardized */
-      color: rgba(237, 233, 224, 0.4);
-      text-transform: uppercase;
-    }
-    
-    .ft-link {
-      font-size: 0.8rem;
-      color: var(--gold);
-      text-decoration: none;
-      margin-left: 2rem;
-      transition: opacity 0.3s;
-    }
-    
-    .ft-link:hover {
-      opacity: 0.7;
-    }
+ /* --- Navigation (Header) --- */
+#mainnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    /* Ratio: 30px top/bottom, 80px sides */
+    padding: 30rem 80rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 11, 13, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav-links a {
+    font-size: 16rem; /* Proportional to your 0.06vw scale */
+    letter-spacing: 0.12em;
+}
+
+.nav-cta {
+    font-size: 14rem;
+    padding: 10rem 25rem; /* Proportional button size */
+}
+
+/* --- Footer (Sized to match Header ratio) --- */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Ratio: 25px top/bottom to be slightly thinner than header */
+    padding: 25rem 80rem; 
+    background: rgba(10, 11, 13, 0.9);
+    border-top: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+}
+
+.ft-logo {
+    font-size: 14rem; /* Match the nav link size */
+    color: rgba(237, 233, 224, 0.4);
+}
+
+.ft-link {
+    font-size: 13rem;
+    color: var(--gold);
+    margin-left: 30rem; /* Proportional spacing */
+}
     /* --- Infinite Grid Styling --- */
     #hero {
       width: 100%;
