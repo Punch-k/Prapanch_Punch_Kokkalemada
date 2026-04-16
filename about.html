@@ -211,38 +211,38 @@
             aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
 
             // Pan/Dampening
-            pan.x += (pan.tX - pan.x) * 0.02;
-            pan.y += (pan.tY - pan.y) * 0.02;
+            pan.x += (pan.tX - pan.x) * 0.05;
+            pan.y += (pan.tY - pan.y) * 0.05;
 
-            mouse.x += (mouse.tX - mouse.x) * 0.05;
-            mouse.y += (mouse.tY - mouse.y) * 0.05;
+            mouse.x += (mouse.tX - mouse.x) * 0.06;
+            mouse.y += (mouse.tY - mouse.y) * 0.06;
 
-            // Tilt Intensity (Match Codrops Arena Feel)
-            const rotY = isMobile ? 0 : (mouse.x - 0.5) * -25;
-            const rotX = isMobile ? 0 : (mouse.y - 0.5) * 25;
+            const maxShift = 120; // px — increase for more dramatic movement
+            const targetX = -(mouse.x - 0.5) * maxShift * 2;
+            const targetY = -(mouse.y - 0.5) * maxShift * 2;
 
             scroll.x += (scroll.tX - scroll.x) * scroll.ease;
             scroll.y += (scroll.tY - scroll.y) * scroll.ease;
 
             items.forEach(item => {
-                let px = item.x + scroll.x + item.ex + pan.x;
-                let py = item.y + scroll.y + item.ey + pan.y;
+            let px = item.x + scroll.x + item.ex + pan.x;
+            let py = item.y + scroll.y + item.ey + pan.y;
+        
+            // Seamless wrapping (keep your existing wrap logic)
+            if (px > winW + item.w)  item.ex -= tileSize.w;
+            if (px + item.w < -item.w) item.ex += tileSize.w;
+            if (py > winH + item.h)  item.ey -= tileSize.h;
+            if (py + item.h < -item.h) item.ey += tileSize.h;
 
-                // Seamless Wrapping
-                if (px > winW + item.w) item.ex -= tileSize.w;
-                if (px + item.w < -item.w) item.ex += tileSize.w;
-                if (py > winH + item.h) item.ey -= tileSize.h;
-                if (py + item.h < -item.h) item.ey += tileSize.h;
                 
                 const pressScale = isPressed ? 1.08 : 1;
-                item.el.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${pressScale})`;
-
+                item.el.style.transform = `translate(${px}px, ${py}px)`;
+                
                 // The Revealing Window (Counter-Parallax)
-                const imgX = px * -0.15;
-                const imgY = py * -0.15;
-                if (item.img) {
-                    item.img.style.transform = `translate3d(${imgX}px, ${imgY}px, 0) scale(1.3)`;
-                }
+                const depthX = (pan.x / item.w) * 35;
+                const depthY = (pan.y / item.h) * 35;
+                item.el.querySelector('.item-wrapper').style.transform =
+                    `translate(${depthX}%, ${depthY}%)`;
             });
             requestAnimationFrame(render);
         }
