@@ -8,11 +8,6 @@ Welcome to the source code for my professional portfolio. This repository houses
 
 🔗 **[View the Live Portfolio Here](https://punch-k.github.io/Prapanch_Punch_Kokkalemada/)**
 
-<img src="https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2" width="100%" alt="Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**">
-
-### 🦖 The Last-Mile Survival Game
-**The Concept:** Operations is a lot like the classic Chrome Dino game—doing things perfectly is just the baseline expectation, but mistakes compound quickly.  
-
 ## 🏗️ Architecture & Tech Stack
 This project was built to ensure lightning-fast load times and complete control over the UI/UX.
 
@@ -48,6 +43,12 @@ The Concept: DCF is a financial valuation method that estimates the true, intrin
 
 4. Route Optimization (The Last-Mile Problem) [WIP]
 The Concept: Often related to the classic "Traveling Salesperson Problem," this models the most efficient way to navigate a network of stops while balancing physical constraints like fuel limits, traffic patterns, and strict delivery windows.
+
+5. <img src="https://github.com/user-attachments/assets/04adec47-41b9-4468-9c04-71aef78266a2" width="100%" alt="Chrome Dino inspired Logistics Mini-Game (**Vanilla JavaScript** and **HTML5 `<canvas>`**">
+
+### 🦖 The Last-Mile Survival Game
+**The Concept:** Operations is a lot like the classic Chrome Dino game—doing things perfectly is just the baseline expectation, but mistakes compound quickly.  
+
 
 
 ## 📬 ENGINEER | 2026 MBA Marketing & Operations | Implementation
