@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5" />
   <meta name="format-detection" content="telephone=no" />
-  <title>PRAPANCH KOKKALEMADA | Portfolio</title>
+  <title>PRAPANCH KOKKALEMADA | ABOUT | Gallery View </title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -54,91 +54,90 @@
       overscroll-behavior-y: none;
     }
 
-    /* --- Navigation Styling --- */
-    #mainnav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 99999; /* Keeps it above the images */
-        padding: 1.65rem 3rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(10, 11, 13, 0.95);
-        backdrop-filter: blur(20px); /* Premium glass effect */
-        border-bottom: 1px solid var(--line);
-    }
+ /* --- Navigation Styling --- */
+#mainnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  padding: 1.65rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 11, 13, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
 
-    .nav-logo {
-        font-family: var(--display);
-        font-size: 1.1rem;
-        letter-spacing: .1em;
-        color: var(--fg);
-        text-decoration: none;
-    }
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
 
-    .nav-logo span { color: var(--gold); }
+.nav-links a {
+  font-size: 0.9rem; /* Increased from .65 for readability */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(237, 233, 224, 0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
 
-    .nav-links {
-        display: flex;
-        gap: 2.5rem;
-        list-style: none;
-    }
+.nav-links a:hover, .nav-links a.act {
+  color: var(--fg);
+}
 
-    .nav-links a {
-        font-size: .65rem;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        color: rgba(237, 233, 224, 0.35);
-        text-decoration: none;
-        transition: color 0.2s;
-    }
+.nav-cta {
+  font-size: 0.85rem; /* Increased from .65 */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  border: 1px solid rgba(237, 233, 224, 0.2);
+  padding: 0.7rem 1.5rem; /* Increased padding for a "normal" button feel */
+  transition: all 0.3s;
+}
 
-    .nav-links a:hover, .nav-links a.act { color: var(--fg); }
+.nav-cta:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
 
-    .nav-cta {
-        font-size: .65rem;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        color: var(--fg);
-        text-decoration: none;
-        border: 1px solid rgba(237, 233, 224, 0.2);
-        padding: .5rem 1.2rem;
-        transition: background 0.3s, color 0.3s;
-    }
+/* --- Footer Styling --- */
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem; /* Matched to a standard height */
+  background: rgba(10, 11, 13, 0.9);
+  border-top: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
 
-    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+.ft-logo {
+  font-size: 0.85rem; /* Standardized */
+  color: rgba(237, 233, 224, 0.4);
+  text-transform: uppercase;
+}
 
-    /* --- Footer Styling --- */
-    .site-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 99999;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.2rem 3rem;
-        background: rgba(10, 11, 13, 0.9);
-        border-top: 1px solid var(--line);
-        backdrop-filter: blur(10px);
-    }
+.ft-link {
+  font-size: 0.8rem;
+  color: var(--gold);
+  text-decoration: none;
+  margin-left: 2rem;
+  transition: opacity 0.3s;
+}
 
-    .ft-logo {
-        font-size: 0.75rem;
-        color: rgba(237, 233, 224, 0.3);
-        text-transform: uppercase;
-    }
-
-    .ft-link {
-        font-size: 0.65rem;
-        color: var(--gold);
-        text-decoration: none;
-        margin-left: 2rem;
-    }
-
+.ft-link:hover {
+  opacity: 0.7;
+}
     /* --- Infinite Grid Styling --- */
     #hero {
       width: 100%;
