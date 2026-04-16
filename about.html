@@ -54,60 +54,91 @@
       overscroll-behavior-y: none;
     }
 
- /* --- Navigation (Header) --- */
-#mainnav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 99999;
-    /* Ratio: 30px top/bottom, 80px sides */
-    padding: 30rem 80rem; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(10, 11, 13, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--line);
-}
-
-.nav-links a {
-    font-size: 16rem; /* Proportional to your 0.06vw scale */
-    letter-spacing: 0.12em;
-}
-
-.nav-cta {
-    font-size: 14rem;
-    padding: 10rem 25rem; /* Proportional button size */
-}
-
-/* --- Footer (Sized to match Header ratio) --- */
-.site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 99999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* Ratio: 25px top/bottom to be slightly thinner than header */
-    padding: 25rem 80rem; 
-    background: rgba(10, 11, 13, 0.9);
-    border-top: 1px solid var(--line);
-    backdrop-filter: blur(10px);
-}
-
-.ft-logo {
-    font-size: 14rem; /* Match the nav link size */
-    color: rgba(237, 233, 224, 0.4);
-}
-
-.ft-link {
-    font-size: 13rem;
-    color: var(--gold);
-    margin-left: 30rem; /* Proportional spacing */
-}
+    /* --- Corrected Navigation (Matches Main Page Proportions) --- */
+    #mainnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99999;
+      /* Proportional to 1.65rem / 3rem in style.css */
+      padding: 26rem 48rem; 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 11, 13, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+    }
+    
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 16rem; /* Matches 1rem logo size */
+      letter-spacing: .1em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    
+    .nav-logo span { color: var(--gold); }
+    
+    .nav-links {
+      display: flex;
+      gap: 40rem; /* Matches 2.5rem gap */
+      list-style: none;
+    }
+    
+    .nav-links a {
+      font-size: 10.5rem; /* Matches .65rem link size */
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(237, 233, 224, 0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover, .nav-links a.act { color: var(--fg); }
+    
+    .nav-cta {
+      font-size: 10.5rem; /* Matches .65rem button text */
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+      border: 1px solid rgba(237, 233, 224, 0.2);
+      padding: 8rem 20rem; /* Matches .5rem / 1.2rem button size */
+      transition: all 0.3s;
+    }
+    
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+    
+    /* --- Corrected Footer (Matches Main Page Proportions) --- */
+    .site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* Proportional to 1.5rem / 2rem in style.css */
+      padding: 24rem 48rem; 
+      background: rgba(10, 11, 13, 0.9);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+    
+    .ft-logo {
+      font-size: 16rem; /* Matches footer copyright size */
+      color: rgba(237, 233, 224, 0.4);
+    }
+    
+    .ft-link {
+      font-size: 10rem; /* Matches .63rem footer link size */
+      color: var(--gold);
+      margin-left: 32rem; /* Matches 2rem spacing */
+      text-decoration: none;
+    }
     /* --- Infinite Grid Styling --- */
     #hero {
       width: 100%;
@@ -156,27 +187,21 @@
 </head>
 <body>
 
-  <nav id="mainnav">
+   <nav id="mainnav">
       <a class="nav-logo" href="index.html">PRAPANCH <span>KOKKALEMADA</span></a>
       <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="act">About</a></li>
-          <li><a href="index.html#section-cases">Work</a></li>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html" class="act">ABOUT</a></li>
+          <li><a href="index.html#section-cases">WORK</a></li>
       </ul>
-      <a class="nav-cta" href="mailto:prapanch@kokkalemada.com"><span>Let's Connect &#8599;</span></a>
+      <a class="nav-cta" href="mailto:prapanch@example.com">LET'S CONNECT &#8599;</a>
   </nav>
-
-  <main id="main">
-    <section id="hero">
-      <div id="images"></div>
-    </section>
-  </main>
-
+  
   <footer class="site-footer">
       <div class="ft-logo">PRAPANCH KOKKALEMADA &copy; 2026</div>
       <div>
-          <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank" rel="noopener">LINKEDIN</a>
-          <a href="mailto:prapanch@kokkalemada.com" class="ft-link">E-MAIL</a>
+          <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank">LINKEDIN</a>
+          <a href="mailto:prapanch@example.com" class="ft-link">E-MAIL</a>
       </div>
   </footer>
 
