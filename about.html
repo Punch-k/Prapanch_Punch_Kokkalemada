@@ -1,215 +1,429 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prapanch Kokkalemada | About</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Prapanch Kokkalemada | About</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --margin: 30rem;
+      --gap: 20rem;
+      --column: calc((var(--rvw) * 100 - var(--margin) * 2 - var(--gap) * 9) / 10);
+    }
+    @media (max-width: 1024px) {
+      :root {
+        --margin: 15px;
+        --gap: 10rem;
+        --column: calc((100vw - var(--margin) * 2 - var(--gap) * 5) / 6);
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      background: white;
+      color: #000;
+      font-size: .0694444444vw;
+      overflow: hidden;
+    }
+    @media (max-width: 1024px) { html { font-size: 1px; } }
+    body {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12rem;
+      font-weight: 400;
+      line-height: 1.21;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior-y: none;
+    }
+    a { text-decoration: none; color: inherit; }
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    .frame {
+      width: 100%;
+      position: fixed;
+      padding: var(--margin);
+      top: 0;
+      z-index: 9;
+      font-size: 12rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .frame .frame-left { display: flex; align-items: center; gap: 20rem; }
+    .frame .frame-left > a, .frame .frame-left h1 a { position: relative; }
+    .frame .frame-left > a:after, .frame .frame-left h1 a:after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: 0% 50%;
+      transition: transform 1s cubic-bezier(.35,.42,0,1);
+    }
+    .frame .frame-left > a:hover:after, .frame .frame-left h1 a:hover:after {
+      transform: scaleX(1);
+      transform-origin: 100% 50%;
+    }
+    .frame h1 { font-size: inherit; font-weight: 400; }
     
-    <style>
-        /* ─── FOUNDATION & FLUID SCALE ─── */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c;
-            --line: rgba(237,233,224,.1); --sans: 'DM Sans', sans-serif;
-            --display: 'Bebas Neue', sans-serif;
-            --margin: 48rem; /* Matches your main page side margins */
-        }
+    @media (max-width: 1024px) {
+      .frame { font-size: 10px; flex-direction: column; }
+      .frame .frame-left { width: 100%; flex-wrap: wrap; gap: 5px; justify-content: center; margin-bottom: 5px; }
+      .frame .frame-left h1 { width: 100%; order: 9; text-align: center; }
+    }
 
-        /* 1rem = 1px scaling factor seen on your screen */
-        html { font-size: .0694444444vw; scroll-behavior: smooth; }
-        @media (max-width: 1024px) { html { font-size: 1px; } }
-
-        body { 
-            background: var(--bg); color: var(--fg); font-family: var(--sans); 
-            overflow: hidden; -webkit-font-smoothing: antialiased;
-        }
-
-        /* ─── ORIGINAL HEADER (FIXED SELECTORS) ─── */
-        .frame {
-            width: 100%; position: fixed; top: 0; left: 0; z-index: 999;
-            padding: 26rem var(--margin); /* 26rem = 26px height */
-            display: flex; align-items: center; justify-content: space-between;
-            background: rgba(10, 11, 13, 0.95); backdrop-filter: blur(20px);
-            border-bottom: 1rem solid var(--line);
-        }
-
-        .frame .frame-left { display: flex; align-items: center; gap: 40rem; }
-        
-        .frame .logo { 
-            font-family: var(--display); font-size: 18rem; 
-            letter-spacing: .1em; text-transform: uppercase; 
-            text-decoration: none; color: var(--fg); 
-        }
-        .frame .logo span { color: var(--gold); }
-
-        .nav-links { display: flex; gap: 30rem; list-style: none; }
-        .nav-links a { 
-            font-size: 11rem; text-transform: uppercase; letter-spacing: 0.1em;
-            color: rgba(237,233,224,0.4); text-decoration: none; transition: color 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--fg); }
-
-        .nav-cta {
-            font-size: 11rem; text-transform: uppercase; color: var(--fg);
-            border: 1rem solid rgba(237,233,224,0.2); padding: 8rem 20rem;
-            text-decoration: none; transition: all 0.3s;
-        }
-        .nav-cta:hover { background: var(--gold); color: var(--bg); }
-
-        /* ─── ARENA / GRID ─── */
-        #hero { width: 100vw; height: 100vh; overflow: hidden; position: relative; z-index: 5; }
-        #images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; will-change: transform; }
-        
-        .item { position: absolute; top: 0; left: 0; will-change: transform; }
-        .item-image { 
-            width: 100%; height: 100%; overflow: hidden; border-radius: 4rem;
-            border: 1rem solid rgba(201,168,76,0.15); background: #000;
-        }
-        .item-image img { 
-            width: 150%; height: 150%; object-fit: cover; position: absolute; 
-            top: -25%; left: -25%; filter: grayscale(1) brightness(0.7); 
-            transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .item:hover img { filter: grayscale(0) brightness(1); }
-
-        .item-content {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9)); pointer-events: none;
-        }
-        .item-year { font-family: var(--display); font-size: 32rem; color: var(--gold); }
-        .item-title { font-size: 12rem; font-weight: 300; line-height: 1.4; color: var(--fg); }
-
-        /* ─── ORIGINAL FOOTER ─── */
-        .site-footer {
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 24rem var(--margin); background: rgba(10, 11, 13, 0.9);
-            border-top: 1rem solid var(--line); backdrop-filter: blur(10px);
-        }
-        .ft-copyright { font-size: 11rem; color: rgba(237, 233, 224, 0.3); text-transform: uppercase; }
-        .ft-links { display: flex; gap: 25rem; }
-        .ft-links a { font-size: 11rem; color: var(--gold); text-decoration: none; }
-    </style>
+    #hero {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      cursor: grab;
+    }
+    #hero #images {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      white-space: nowrap;
+      position: relative;
+    }
+    #hero #images .item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      will-change: transform;
+      white-space: normal;
+    }
+    #hero #images .item .item-wrapper { will-change: transform; }
+    #hero #images .item .item-image { overflow: hidden; }
+    #hero #images .item .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+    #hero #images .item small {
+      width: 100%;
+      display: block;
+      font-size: 8rem;
+      line-height: 1.25;
+      margin-top: 12rem;
+    }
+    #hero #images .item small .line-mask,
+    #hero #images .item small .line-mask .line {
+      transition: transform 2s cubic-bezier(.6,.14,0,1);
+    }
+    #hero #images .item small:not(.visible) .line-mask { transform: translateY(100%); }
+    #hero #images .item small:not(.visible) .line-mask .line { transform: translateY(110%); }
+    html.dragging #hero { cursor: grabbing; }
+  </style>
 </head>
 <body>
-
+  <main id="main">
     <header class="frame">
-        <div class="frame-left">
-            <a href="index.html" class="logo">PRAPANCH <span>KOKKALEMADA</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="index.html#work">Work</a></li>
-            </ul>
-        </div>
-        <a href="mailto:prapanch@example.com" class="nav-cta">Connect &#8599;</a>
+      <div class="frame-left">
+        <h1> Infinite Layers Grid </h1>
+      </div>
     </header>
+    <section id="hero">
+      <div id="images"></div>
+    </section>
+  </main>
 
-    <div id="hero">
-        <div id="images"></div>
-    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 
-    <footer class="site-footer">
-        <div class="ft-copyright">Prapanch Kokkalemada &copy; 2026</div>
-        <div class="ft-links">
-            <a href="https://linkedin.com/in/prapanch" target="_blank">LinkedIn</a>
-            <a href="mailto:prapanch@example.com">Email</a>
-        </div>
-    </footer>
+  <script>
+    /* --- Premium SplitText Plugin (Minified text kept from your paste) --- */
+    let se,$t,si,_s=()=>si||Ci.register(window.gsap),Vi=typeof Intl<"u"?new Intl.Segmenter:0,De=a=>typeof a=="string"?De(document.querySelectorAll(a)):"length"in a?Array.from(a):[a],$i=a=>De(a).filter(t=>t instanceof HTMLElement),oi=[],Ue=function(){},ds=/\s+/g,qi=new RegExp("\\p{RI}\\p{RI}|\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?(\\u{200D}\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?)*|.","gu"),Gi={left:0,top:0,width:0,height:0},ji=(a,t)=>{if(t){let e=new Set(a.join("").match(t)||oi),i=a.length,r,n,s,o;if(e.size)for(;--i>-1;){n=a[i];for(s of e)if(s.startsWith(n)&&s.length>n.length){for(r=0,o=n;s.startsWith(o+=a[i+ ++r])&&o.length<s.length;);if(r&&o.length===s.length){a[i]=s,a.splice(i+1,r);break}}}}return a},Hi=a=>window.getComputedStyle(a).display==="inline"&&(a.style.display="inline-block"),qt=(a,t,e)=>t.insertBefore(typeof a=="string"?document.createTextNode(a):a,e),ai=(a,t,e)=>{let i=t[a+"sClass"]||"",{tag:r="div",aria:n="auto",propIndex:s=!1}=t,o=a==="line"?"block":"inline-block",l=i.indexOf("++")>-1,h=u=>{let c=document.createElement(r),_=e.length+1;return i&&(c.className=i+(l?" "+i+_:"")),s&&c.style.setProperty("--"+a,_+""),n!=="none"&&c.setAttribute("aria-hidden","true"),r!=="span"&&(c.style.position="relative",c.style.display=o),c.textContent=u,e.push(c),c};return l&&(i=i.replace("++","")),h.collection=e,h},ps=(a,t,e,i)=>{let r=ai("line",e,i),n=window.getComputedStyle(a).textAlign||"left";return(s,o)=>{let l=r("");for(l.style.textAlign=n,a.insertBefore(l,t[s]);s<o;s++)l.appendChild(t[s]);l.normalize()}},Hr=(a,t,e,i,r,n,s,o,l,h)=>{var u;let c=Array.from(a.childNodes),_=0,{wordDelimiter:d,reduceWhiteSpace:p=!0,prepareText:f}=t,g=a.getBoundingClientRect(),y=g,w=!p&&window.getComputedStyle(a).whiteSpace.substring(0,3)==="pre",b=0,T=e.collection,m,S,P,v,x,E,k,C,O,z,A,D,R,q,X,L,Z,G;for(typeof d=="object"?(P=d.delimiter||d,S=d.replaceWith||""):S=d===""?"":d||" ",m=S!==" ";_<c.length;_++)if(v=c[_],v.nodeType===3){for(X=v.textContent||"",p?X=X.replace(ds," "):w&&(X=X.replace(/\n/g,S+`\n`)),f&&(X=f(X,a)),v.textContent=X,x=S||P?X.split(P||S):X.match(o)||oi,Z=x[x.length-1],C=m?Z.slice(-1)===" ":!Z,Z||x.pop(),y=g,k=m?x[0].charAt(0)===" ":!x[0],k&&qt(" ",a,v),x[0]||x.shift(),ji(x,l),n&&h||(v.textContent=""),O=1;O<=x.length;O++)if(L=x[O-1],!p&&w&&L.charAt(0)===`\n`&&((u=v.previousSibling)==null||u.remove(),qt(document.createElement("br"),a,v),L=L.slice(1)),!p&&L==="")qt(S,a,v);else if(L===" ")a.insertBefore(document.createTextNode(" "),v);else{if(m&&L.charAt(0)===" "&&qt(" ",a,v),b&&O===1&&!k&&T.indexOf(b.parentNode)>-1?(E=T[T.length-1],E.appendChild(document.createTextNode(i?"":L))):(E=e(i?"":L),qt(E,a,v),b&&O===1&&!k&&E.insertBefore(b,E.firstChild)),i)for(A=Vi?ji([...Vi.segment(L)].map(gt=>gt.segment),l):L.match(o)||oi,G=0;G<A.length;G++)E.appendChild(A[G]===" "?document.createTextNode(" "):i(A[G]));if(n&&h){if(X=v.textContent=X.substring(L.length+1,X.length),z=E.getBoundingClientRect(),z.top>y.top&&z.left<=y.left){for(D=a.cloneNode(),R=a.childNodes[0];R&&R!==E;)q=R,R=R.nextSibling,D.appendChild(q);a.parentNode.insertBefore(D,a),r&&Hi(D)}y=z}(O<x.length||C)&&qt(O>=x.length?" ":m&&L.slice(-1)===" "?" "+S:S,a,v)}a.removeChild(v),b=0}else v.nodeType===1&&(s&&s.indexOf(v)>-1?(T.indexOf(v.previousSibling)>-1&&T[T.length-1].appendChild(v),b=v):(Hr(v,t,e,i,r,n,s,o,l,!0),b=0),r&&Hi(v))};const Kr=class Qr{constructor(t,e){this.isSplit=!1,_s(),this.elements=$i(t),this.chars=[],this.words=[],this.lines=[],this.masks=[],this.vars=e,this._split=()=>this.isSplit&&this.split(this.vars);let i=[],r,n=()=>{let s=i.length,o;for(;s--;){o=i[s];let l=o.element.offsetWidth;if(l!==o.width){o.width=l,this._split();return}}};this._data={orig:i,obs:typeof ResizeObserver<"u"&&new ResizeObserver(()=>{clearTimeout(r),r=setTimeout(n,200)})},Ue(this),this.split(e)}split(t){this.isSplit&&this.revert(),this.vars=t=t||this.vars||{};let{type:e="chars,words,lines",aria:i="auto",deepSlice:r=!0,smartWrap:n,onSplit:s,autoSplit:o=!1,specialChars:l,mask:h}=this.vars,u=e.indexOf("lines")>-1,c=e.indexOf("chars")>-1,_=e.indexOf("words")>-1,d=c&&!_&&!u,p=l&&("push"in l?new RegExp("(?:"+l.join("|")+")","gu"):l),f=p?new RegExp(p.source+"|"+qi.source,"gu"):qi,g=!!t.ignore&&$i(t.ignore),{orig:y,animTime:w,obs:b}=this._data,T;return(c||_||u)&&(this.elements.forEach((m,S)=>{y[S]={element:m,html:m.innerHTML,ariaL:m.getAttribute("aria-label"),ariaH:m.getAttribute("aria-hidden")},i==="auto"?m.setAttribute("aria-label",(m.textContent||"").trim()):i==="hidden"&&m.setAttribute("aria-hidden","true");let P=[],v=[],x=[],E=c?ai("char",t,P):null,k=ai("word",t,v),C,O,z,A;if(Hr(m,t,k,E,d,r&&(u||d),g,f,p,!1),u){let D=De(m.childNodes),R=ps(m,D,t,x),q,X=[],L=0,Z=D.map(gt=>gt.nodeType===1?gt.getBoundingClientRect():Gi),G=Gi;for(C=0;C<D.length;C++)q=D[C],q.nodeType===1&&(q.nodeName==="BR"?(X.push(q),R(L,C+1),L=C+1,G=Z[L]):(C&&Z[C].top>G.top&&Z[C].left<=G.left&&(R(L,C),L=C),G=Z[C]));L<C&&R(L,C),X.forEach(gt=>{var ft;return(ft=gt.parentNode)==null?void 0:ft.removeChild(gt)})}if(!_){for(C=0;C<v.length;C++)if(O=v[C],c||!O.nextSibling||O.nextSibling.nodeType!==3)if(n&&!u){for(z=document.createElement("span"),z.style.whiteSpace="nowrap";O.firstChild;)z.appendChild(O.firstChild);O.replaceWith(z)}else O.replaceWith(...O.childNodes);else A=O.nextSibling,A&&A.nodeType===3&&(A.textContent=(O.textContent||"")+(A.textContent||""),O.remove());v.length=0,m.normalize()}this.lines.push(...x),this.words.push(...v),this.chars.push(...P)}),h&&this[h]&&this.masks.push(...this[h].map(m=>{let S=m.cloneNode();return m.replaceWith(S),S.appendChild(m),m.className&&(S.className=m.className.replace(/(\b\w+\b)/g,"$1-mask")),S.style.overflow="clip",S}))),this.isSplit=!0,$t&&(o?$t.addEventListener("loadingdone",this._split):$t.status==="loading"&&console.warn("SplitText called before fonts loaded")),(T=s&&s(this))&&T.totalTime&&(this._data.anim=w?T.totalTime(w):T),u&&o&&this.elements.forEach((m,S)=>{y[S].width=m.offsetWidth,b&&b.observe(m)}),this}revert(){var t,e;let{orig:i,anim:r,obs:n}=this._data;return n&&n.disconnect(),i.forEach(({element:s,html:o,ariaL:l,ariaH:h})=>{s.innerHTML=o,l?s.setAttribute("aria-label",l):s.removeAttribute("aria-label"),h?s.setAttribute("aria-hidden",h):s.removeAttribute("aria-hidden")}),this.chars.length=this.words.length=this.lines.length=i.length=this.masks.length=0,this.isSplit=!1,$t==null||$t.removeEventListener("loadingdone",this._split),r&&(this._data.animTime=r.totalTime(),r.revert()),(e=(t=this.vars).onRevert)==null||e.call(t,this),this}static create(t,e){return new Qr(t,e)}static register(t){se=se||t||window.gsap,se&&(De=se.utils.toArray,Ue=se.core.context||Ue),!si&&window.innerWidth>0&&($t=document.fonts,si=!0)}};Kr.version="3.13.0";let Ci=Kr;gsap.registerPlugin(Ci);
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script>
-        const gridData = [
-            { x: 100, y: 150, w: 350, h: 500, src: '1.png', year: '2026', title: 'Full-Time MBA, MSU' },
-            { x: 600, y: 450, w: 500, h: 350, src: '2.png', year: '2025', title: 'Corporate Strategy Frameworks' },
-            { x: 1200, y: 200, w: 320, h: 480, src: '3.png', year: '2024', title: 'Systems Engineering Lead' },
-            { x: 250, y: 850, w: 450, h: 300, src: '4.png', year: '2023', title: 'Supply Chain Optimization' },
-            { x: 950, y: 1000, w: 300, h: 450, src: '5.png', year: '2022', title: 'Global Case Competitions' },
-            { x: 1500, y: 700, w: 480, h: 320, src: 'GSA.jpg', year: '2021', title: 'GSA Student Ambassador' },
-            { x: 150, y: 1450, w: 400, h: 400, src: 'MBAA.jpg', year: '2020', title: 'Technical Strategy' },
-            { x: 750, y: 1650, w: 450, h: 300, src: 'class.jpg', year: '2019', title: 'Business Operations' },
-            { x: 1300, y: 1450, w: 350, h: 500, src: 'market.jpeg', year: '2018', title: 'Market Analysis' }
-        ];
-
-        const container = document.getElementById('images');
-        let winW = window.innerWidth, winH = window.innerHeight;
-        let items = [], TILE_W = 1800, TILE_H = 1500;
+    /* --- Core Infinite Grid Setup (Formatted) --- */
+    class gs {
+      constructor({ el: t, sources: e, data: i, originalSize: r }) {
+        this.$container = t;
+        this.sources = e;
+        this.data = i;
+        this.originalSize = r;
         
-        const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
-        const scroll = { x: 0, y: 0, tX: 0, tY: 0 };
-
-        function buildGrid() {
-            container.innerHTML = ''; items = [];
-            const repsX = [-TILE_W, 0, TILE_W], repsY = [-TILE_H, 0, TILE_H];
-            gridData.forEach((d) => {
-                repsX.forEach((ox) => {
-                    repsY.forEach((oy) => {
-                        const el = document.createElement('div');
-                        el.className = 'item';
-                        el.style.width = d.w + 'rem'; el.style.height = d.h + 'rem';
-                        el.innerHTML = `
-                            <div class="item-image">
-                                <img src="${d.src}" loading="eager">
-                                <div class="item-content">
-                                    <div class="item-year">${d.year}</div>
-                                    <div class="item-title">${d.title}</div>
-                                </div>
-                            </div>`;
-                        container.appendChild(el);
-                        items.push({ el, img: el.querySelector('img'), x: d.x, y: d.y, ox, oy, w: d.w, h: d.h });
-                    });
-                });
-            });
-        }
-
-        function render() {
-            mouse.x += (mouse.tX - mouse.x) * 0.05;
-            mouse.y += (mouse.tY - mouse.y) * 0.05;
-            scroll.x += (scroll.tX - scroll.x) * 0.05;
-            scroll.y += (scroll.tY - scroll.y) * 0.05;
-
-            const rotY = (mouse.x - 0.5) * -20;
-            const rotX = (mouse.y - 0.5) * 20;
-
-            items.forEach(item => {
-                let px = item.x + item.ox + scroll.x;
-                let py = item.y + item.oy + scroll.y;
-
-                // Infinite Wrapping Math
-                while(px < -TILE_W) px += TILE_W * 3;
-                while(px > TILE_W * 2) px -= TILE_W * 3;
-                while(py < -TILE_H) py += TILE_H * 3;
-                while(py > TILE_H * 2) py -= TILE_H * 3;
-
-                item.el.style.transform = `translate3d(${px}rem, ${py}rem, 0) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-                // Parallax Window Effect
-                item.img.style.transform = `translate3d(${px * -0.1}rem, ${py * -0.1}rem, 0) scale(1.3)`;
-            });
-            requestAnimationFrame(render);
-        }
-
-        window.addEventListener('mousemove', e => {
-            mouse.tX = e.clientX / winW;
-            mouse.tY = e.clientY / winH;
+        this.scroll = {
+          ease: 0.06,
+          current: { x: 0, y: 0 },
+          target: { x: 0, y: 0 },
+          last: { x: 0, y: 0 },
+          delta: { x: { c: 0, t: 0 }, y: { c: 0, t: 0 } }
+        };
+        
+        this.isDragging = false;
+        this.drag = { startX: 0, startY: 0, scrollX: 0, scrollY: 0 };
+        this.mouse = {
+          x: { t: 0.5, c: 0.5 },
+          y: { t: 0.5, c: 0.5 },
+          press: { t: 0, c: 0 }
+        };
+        
+        this.items = [];
+        
+        this.onResize = this.onResize.bind(this);
+        this.onWheel = this.onWheel.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
+        this.render = this.render.bind(this);
+        
+        window.addEventListener("resize", this.onResize);
+        window.addEventListener("wheel", this.onWheel, { passive: false });
+        window.addEventListener("mousemove", this.onMouseMove);
+        this.$container.addEventListener("mousedown", this.onMouseDown);
+        window.addEventListener("mouseup", this.onMouseUp);
+        
+        this.observer = new IntersectionObserver(n => {
+          n.forEach(s => {
+            s.target.classList.toggle("visible", s.isIntersecting);
+          });
         });
-
-        window.addEventListener('wheel', e => {
-            scroll.tX -= e.deltaX * 0.5;
-            scroll.tY -= e.deltaY * 0.5;
-        }, { passive: true });
-
-        window.addEventListener('resize', () => {
-            winW = window.innerWidth; winH = window.innerHeight;
-            buildGrid();
+        
+        this.onResize();
+        this.render();
+        this.initIntro();
+        this.intro();
+      }
+      
+      initIntro() {
+        this.introItems = [...this.$container.querySelectorAll(".item-wrapper")].filter(t => {
+          const e = t.getBoundingClientRect();
+          return e.x > -e.width && e.x < window.innerWidth + e.width && e.y > -e.height && e.y < window.innerHeight + e.height;
         });
-
-        buildGrid();
-        render();
-    </script>
+        this.introItems.forEach(t => {
+          const e = t.getBoundingClientRect(),
+                i = -e.x + window.innerWidth * 0.5 - e.width * 0.5,
+                r = -e.y + window.innerHeight * 0.5 - e.height * 0.5;
+          gsap.set(t, { x: i, y: r });
+        });
+      }
+      
+      intro() {
+        gsap.to(this.introItems.reverse(), { duration: 2, ease: "expo.inOut", x: 0, y: 0, stagger: 0.05 });
+      }
+      
+      onResize() {
+        this.winW = window.innerWidth;
+        this.winH = window.innerHeight;
+        this.tileSize = {
+          w: this.winW,
+          h: this.winW * (this.originalSize.h / this.originalSize.w)
+        };
+        
+        this.scroll.current = { x: 0, y: 0 };
+        this.scroll.target = { x: 0, y: 0 };
+        this.scroll.last = { x: 0, y: 0 };
+        this.$container.innerHTML = "";
+        
+        const t = this.data.map((r, n) => {
+          const s = this.tileSize.w / this.originalSize.w,
+                o = this.tileSize.h / this.originalSize.h,
+                l = this.sources[n % this.sources.length];
+          return { src: l.src, caption: l.caption, x: r.x * s, y: r.y * o, w: r.w * s, h: r.h * o };
+        });
+        
+        this.items = [];
+        const e = [0, this.tileSize.w],
+              i = [0, this.tileSize.h];
+              
+        t.forEach(r => {
+          e.forEach(n => {
+            i.forEach(s => {
+              const o = document.createElement("div");
+              o.classList.add("item");
+              o.style.width = `${r.w}px`;
+              
+              const l = document.createElement("div");
+              l.classList.add("item-wrapper");
+              o.appendChild(l);
+              
+              const h = document.createElement("div");
+              h.classList.add("item-image");
+              h.style.width = `${r.w}px`;
+              h.style.height = `${r.h}px`;
+              l.appendChild(h);
+              
+              const u = new Image();
+              // Changed this line to handle external image URLs 
+              u.src = r.src.startsWith('http') ? r.src : `./img/${r.src}`;
+              h.appendChild(u);
+              
+              const c = document.createElement("small");
+              c.innerHTML = r.caption;
+              new Ci(c, { type: "lines", mask: "lines", linesClass: "line" }).lines.forEach((d, p) => {
+                d.style.transitionDelay = `${p * 0.15}s`;
+                d.parentElement.style.transitionDelay = `${p * 0.15}s`;
+              });
+              
+              l.appendChild(c);
+              this.$container.appendChild(o);
+              this.observer.observe(c);
+              
+              this.items.push({
+                el: o, container: h, wrapper: l, img: u,
+                x: r.x + n, y: r.y + s, w: r.w, h: r.h,
+                extraX: 0, extraY: 0,
+                rect: o.getBoundingClientRect(),
+                ease: Math.random() * 0.5 + 0.5
+              });
+            });
+          });
+        });
+        
+        this.tileSize.w *= 2;
+        this.tileSize.h *= 2;
+        this.scroll.current.x = this.scroll.target.x = this.scroll.last.x = -this.winW * 0.1;
+        this.scroll.current.y = this.scroll.target.y = this.scroll.last.y = -this.winH * 0.1;
+      }
+      
+      onWheel(t) {
+        t.preventDefault();
+        const e = 0.4;
+        this.scroll.target.x -= t.deltaX * e;
+        this.scroll.target.y -= t.deltaY * e;
+      }
+      
+      onMouseDown(t) {
+        t.preventDefault();
+        this.isDragging = true;
+        document.documentElement.classList.add("dragging");
+        this.mouse.press.t = 1;
+        this.drag.startX = t.clientX;
+        this.drag.startY = t.clientY;
+        this.drag.scrollX = this.scroll.target.x;
+        this.drag.scrollY = this.scroll.target.y;
+      }
+      
+      onMouseUp() {
+        this.isDragging = false;
+        document.documentElement.classList.remove("dragging");
+        this.mouse.press.t = 0;
+      }
+      
+      onMouseMove(t) {
+        this.mouse.x.t = t.clientX / this.winW;
+        this.mouse.y.t = t.clientY / this.winH;
+        if (this.isDragging) {
+          const e = t.clientX - this.drag.startX,
+                i = t.clientY - this.drag.startY;
+          this.scroll.target.x = this.drag.scrollX + e;
+          this.scroll.target.y = this.drag.scrollY + i;
+        }
+      }
+      
+      render() {
+        this.scroll.current.x += (this.scroll.target.x - this.scroll.current.x) * this.scroll.ease;
+        this.scroll.current.y += (this.scroll.target.y - this.scroll.current.y) * this.scroll.ease;
+        
+        this.scroll.delta.x.t = this.scroll.current.x - this.scroll.last.x;
+        this.scroll.delta.y.t = this.scroll.current.y - this.scroll.last.y;
+        this.scroll.delta.x.c += (this.scroll.delta.x.t - this.scroll.delta.x.c) * 0.04;
+        this.scroll.delta.y.c += (this.scroll.delta.y.t - this.scroll.delta.y.c) * 0.04;
+        
+        this.mouse.x.c += (this.mouse.x.t - this.mouse.x.c) * 0.04;
+        this.mouse.y.c += (this.mouse.y.t - this.mouse.y.c) * 0.04;
+        this.mouse.press.c += (this.mouse.press.t - this.mouse.press.c) * 0.04;
+        
+        const t = this.scroll.current.x > this.scroll.last.x ? "right" : "left",
+              e = this.scroll.current.y > this.scroll.last.y ? "down" : "up";
+              
+        this.items.forEach(i => {
+          const r = 5 * this.scroll.delta.x.c * i.ease + (this.mouse.x.c - 0.5) * i.rect.width * 0.6,
+                n = 5 * this.scroll.delta.y.c * i.ease + (this.mouse.y.c - 0.5) * i.rect.height * 0.6,
+                s = this.scroll.current.x,
+                o = this.scroll.current.y,
+                l = i.x + s + i.extraX + r,
+                h = i.y + o + i.extraY + n,
+                u = l > this.winW,
+                c = l + i.rect.width < 0;
+                
+          if (t === "right" && u) i.extraX -= this.tileSize.w;
+          if (t === "left" && c) i.extraX += this.tileSize.w;
+          
+          const _ = h > this.winH,
+                d = h + i.rect.height < 0;
+                
+          if (e === "down" && _) i.extraY -= this.tileSize.h;
+          if (e === "up" && d) i.extraY += this.tileSize.h;
+          
+          const p = i.x + s + i.extraX + r,
+                f = i.y + o + i.extraY + n;
+                
+          i.el.style.transform = `translate(${p}px, ${f}px)`;
+          i.img.style.transform = `scale(${1.2 + 0.2 * this.mouse.press.c * i.ease}) translate(${-this.mouse.x.c * i.ease * 10}%, ${-this.mouse.y.c * i.ease * 10}%)`;
+        });
+        
+        this.scroll.last.x = this.scroll.current.x;
+        this.scroll.last.y = this.scroll.current.y;
+        requestAnimationFrame(this.render);
+      }
+      
+      destroy() {
+        window.removeEventListener("resize", this.onResize);
+        window.removeEventListener("wheel", this.onWheel);
+        window.removeEventListener("mousemove", this.onMouseMove);
+        this.$container.removeEventListener("mousedown", this.onMouseDown);
+        window.removeEventListener("mouseup", this.onMouseUp);
+        this.observer.disconnect();
+      }
+    }
+    
+    /* --- Data and Initiation --- */
+    class ms {
+      constructor() {
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+        
+        // I swapped local images for picsum placeholders so you can test it immediately
+        this.sources = [
+          { src: "https://picsum.photos/400/270?random=1", caption: "30 knots <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/540/360?random=2", caption: "Sad Mis-Step <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/400/270?random=3", caption: "Mini Orange <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/260/195?random=4", caption: "After Storm <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/260/290?random=5", caption: "Untitled <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/205/154?random=6", caption: "Toilet Paper <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/260/350?random=7", caption: "Cocoa Eggplant Tomato <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/400/300?random=8", caption: "Toilet Paper <br>12 x 16 inch C type hand print" },
+          { src: "https://picsum.photos/350/260?random=9", caption: "Production Fun Fact (Eggs) <br>12 x 16 inch C type hand print" }
+        ];
+        
+        this.data = [
+          { x: 71, y: 58, w: 400, h: 270 },
+          { x: 211, y: 255, w: 540, h: 360 },
+          { x: 631, y: 158, w: 400, h: 270 },
+          { x: 1191, y: 245, w: 260, h: 195 },
+          { x: 351, y: 687, w: 260, h: 290 },
+          { x: 751, y: 824, w: 205, h: 154 },
+          { x: 911, y: 540, w: 260, h: 350 },
+          { x: 1051, y: 803, w: 400, h: 300 },
+          { x: 71, y: 922, w: 350, h: 260 }
+        ];
+        
+        new gs({
+          el: document.querySelector("#images"),
+          sources: this.sources,
+          data: this.data,
+          originalSize: { w: 1522, h: 1238 }
+        });
+      }
+      
+      resize() {
+        document.documentElement.style.setProperty("--rvw", `${document.documentElement.clientWidth / 100}px`);
+      }
+    }
+    
+    window.addEventListener("load", () => {
+      new ms();
+    });
+  </script>
 </body>
 </html>
