@@ -191,7 +191,7 @@
     ];
 
     /* ---- CONSTANTS -------------------------------------------------------- */
-    var TILE_W    = 1084;   // tile repeat width  (px)
+    var TILE_W    = 1484;   // tile repeat width  (px)
     var TILE_H    = 882;    // tile repeat height (px)
     var MAX_SHIFT = 100;    // max pan distance from center (px)
     var GRID_EASE = 0.055;  // pan inertia (Codrops feel)
@@ -224,8 +224,8 @@
         container.innerHTML = '';
         items = [];
 
-        var repsX = [0, TILE_W];
-        var repsY = [0, TILE_H];
+        var repsX = [-TILE_W, 0, TILE_W]; 
+        var repsY = [-TILE_H, 0, TILE_H];
 
         gridData.forEach(function(d) {
             var probe = new Image();
@@ -246,9 +246,11 @@
                         var frame    = document.createElement('div');
                         frame.className = 'item-frame';
 
-                        var imgEl    = document.createElement('img');
-                        imgEl.src    = d.src;
-                        imgEl.alt    = d.desc;
+                       var imgEl = document.createElement('img');
+                        imgEl.src = d.src;
+                        imgEl.alt = d.desc;
+                        imgEl.loading = "eager";      // Force early load
+                        imgEl.decoding = "async";     // Don't block the UI thread while decoding
 
                         var overlay  = document.createElement('div');
                         overlay.className = 'item-overlay';
