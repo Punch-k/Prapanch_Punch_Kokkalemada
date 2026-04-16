@@ -4,40 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prapanch Kokkalemada | About</title>
-    
+    <meta name="description" content="About Prapanch Kokkalemada — MBA Candidate, Strategy and Operations.">
+    <meta property="og:title" content="Prapanch Kokkalemada | About">
+    <meta property="og:description" content="MBA Candidate at Michigan State Broad College of Business. Strategy, Operations and GTM.">
+    <meta property="og:url" content="https://punchkokkalemada.com/about.html">
+    <meta property="og:type" content="website">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    
+
     <style>
-        /* ─── FOUNDATION ────────────────────────────────────────── */
-        * , *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        /* FOUNDATION */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c; 
+            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c;
             --line: rgba(237,233,224,.1); --sans: 'DM Sans', sans-serif;
             --display: 'Bebas Neue', sans-serif;
         }
-        html, body { 
-            width: 100%; height: 100%; background: var(--bg); color: var(--fg); 
-            font-family: var(--sans); overflow: hidden; overscroll-behavior: none; 
-            cursor: none; 
+        html, body {
+            width: 100%; height: 100%; background: var(--bg); color: var(--fg);
+            font-family: var(--sans); overflow: hidden; overscroll-behavior: none;
         }
+        @media (pointer: fine) { html, body { cursor: none; } }
 
-        /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
-        #cdot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #fff; border-radius: 50%; z-index: 100000; pointer-events: none; transform: translate(-50%,-50%); }
-        #cring { 
-            position: fixed; top: 0; left: 0; width: 40px; height: 40px; 
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; 
-            z-index: 100000; pointer-events: none; transform: translate(-50%,-50%); 
+        /* CUSTOM CURSOR */
+        #cdot {
+            position: fixed; top: 0; left: 0; width: 6px; height: 6px;
+            background: #fff; border-radius: 50%; z-index: 100000;
+            pointer-events: none; transform: translate(-50%,-50%);
+        }
+        #cring {
+            position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+            z-index: 100000; pointer-events: none; transform: translate(-50%,-50%);
             transition: width 0.3s, height 0.3s, border-color 0.3s, border-width 0.3s;
         }
-        #aura { position: fixed; top: 0; left: 0; width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 1; transform: translate(-50%,-50%); mix-blend-mode: screen; will-change: transform; }
+        #aura {
+            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: 1;
+            transform: translate(-50%,-50%); mix-blend-mode: screen; will-change: transform;
+        }
 
-        /* ─── MAIN NAV ────────────────────────────────────────────── */
-        #mainnav { 
-            position: fixed; top: 0; left: 0; right: 0; z-index: 99999; 
-            padding: 1.65rem 3rem; display: flex; justify-content: space-between; 
-            align-items: center; background: rgba(10,11,13,.95); 
+        /* MAIN NAV */
+        #mainnav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+            padding: 1.65rem 3rem; display: flex; justify-content: space-between;
+            align-items: center; background: rgba(10,11,13,.95);
             backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
         }
         .nav-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
@@ -48,67 +62,90 @@
         .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
         .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
-        /* ─── INFINITE ARENA ────────────────────────────────────── */
-        #viewport { 
-            perspective: 2000px; width: 100vw; height: 100vh; overflow: hidden; 
-            position: relative; z-index: 5;
-            background: linear-gradient(rgba(10,11,13,0.9), rgba(10,11,13,0.9)), 
-                        url('https://plus.unsplash.com/premium_photo-1673541168090-26775e19c437?q=80&w=872&auto=format&fit=crop') center/cover no-repeat;
+        /* INFINITE ARENA */
+        #viewport {
+            width: 100vw; height: 100vh; overflow: hidden;
+            position: relative; z-index: 5; background: var(--bg);
         }
-        #images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
-
-        .item { position: absolute; top: 0; left: 0; will-change: transform; pointer-events: auto; }
-        .item-wrapper { transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(.16,1,.3,1); height: 100%; }
-
-        /* IMAGE REVEALING WINDOWS */
-        .tw-card {
-            position: relative; border-radius: 1.2rem; overflow: hidden;
-            border: 1px solid rgba(201,168,76,.15);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
-            background: #000; height: 100%;
-        }
-        .tw-card img { 
-            width: 140%; height: 140%; object-fit: cover; 
-            position: absolute; top: -20%; left: -20%;
-            filter: grayscale(100%) brightness(0.7); 
-            transition: filter .8s; 
+        #images {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            will-change: transform;
         }
 
+        /* ITEM — the moving tile container */
+        .item {
+            position: absolute; top: 0; left: 0;
+            will-change: transform; pointer-events: auto;
+        }
+
+        /* FRAME — fixed-size window, clips the image */
+        .item-frame {
+            width: 100%; height: 100%;
+            overflow: hidden;
+            border-radius: 3px;
+            border: 1px solid rgba(201,168,76,.18);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            background: #000;
+            position: relative;
+        }
+
+        /* IMAGE — oversized so it can pan inside the frame */
+        .item-frame img {
+            width: 130%; height: 130%;
+            object-fit: cover;
+            position: absolute;
+            top: -15%; left: -15%;
+            will-change: transform;
+            filter: grayscale(60%) brightness(0.8);
+            transition: filter 0.6s ease;
+            display: block;
+        }
+        .item:hover .item-frame img {
+            filter: grayscale(0%) brightness(1);
+        }
+
+        /* CAPTION overlay */
         .item-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
             display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 2.5rem 2rem; opacity: 0.85; transition: opacity .4s;
+            padding: 1.2rem 1rem;
             pointer-events: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+        .item:hover .item-overlay { opacity: 1; }
+        .item-year {
+            font-family: var(--display); font-size: 2.8rem;
+            color: var(--gold); line-height: 0.9; margin-bottom: 5px;
+        }
+        .item-desc {
+            font-size: 0.7rem; color: var(--fg);
+            line-height: 1.4; font-weight: 300;
         }
 
-        .item-year { font-family: var(--display); font-size: 4.5rem; color: var(--gold); line-height: 0.85; margin-bottom: 10px; }
-        .item-desc { font-size: 0.85rem; color: var(--fg); line-height: 1.6; font-weight: 300; }
-
-        .item:hover .tw-card { border-color: var(--gold); }
-        .item:hover img { filter: grayscale(0%) brightness(1); }
-        .item:hover .item-overlay { opacity: 1; }
-
-        /* ─── FOOTER ────────────────────────────────────────────── */
-        .site-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,11,13,.9); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
+        /* FOOTER */
+        .site-footer {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 3rem; background: rgba(10,11,13,.9);
+            border-top: 1px solid var(--line); backdrop-filter: blur(10px);
+        }
         .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; }
         .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; }
 
         @media (max-width: 768px) {
             #cdot, #cring, #aura { display: none !important; }
-    html, body { cursor: auto; }
             #mainnav { padding: 1rem 1.5rem; }
             .nav-links { gap: 1rem; }
-    .nav-links a { font-size: 0.55rem; color: var(--fg); }
-    .nav-cta { display: none; } /* Keep CTA hidden to save space */
-
-    .item-year { font-size: 2.5rem; }
-    .item-desc { font-size: 0.7rem; line-height: 1.3; }
-}
+            .nav-links a { font-size: 0.55rem; color: var(--fg); }
+            .nav-cta { display: none; }
+            .item-year { font-size: 2rem; }
+            .item-desc { font-size: 0.65rem; }
+        }
     </style>
 </head>
 <body>
-
     <div id="cdot"></div>
     <div id="cring"></div>
     <div id="aura"></div>
@@ -120,7 +157,7 @@
             <li><a href="about.html" class="act">About</a></li>
             <li><a href="index.html#section-cases">Work</a></li>
         </ul>
-        <a class="nav-cta" href="mailto:prapanch@example.com"><span>Let's Connect ↗</span></a>
+        <a class="nav-cta" href="mailto:prapanch@kokkalemada.com"><span>Let's Connect &#8599;</span></a>
     </nav>
 
     <div id="viewport">
@@ -128,148 +165,240 @@
     </div>
 
     <footer class="site-footer">
-        <div class="ft-logo">PRAPANCH KOKKALEMADA © 2026</div>
+        <div class="ft-logo">PRAPANCH KOKKALEMADA &copy; 2026</div>
         <div>
-            <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank">LINKEDIN</a>
-            <a href="mailto:prapanch@example.com" class="ft-link">E-MAIL</a>
+            <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank" rel="noopener">LINKEDIN</a>
+            <a href="mailto:prapanch@kokkalemada.com" class="ft-link">E-MAIL</a>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
-        const gridData = [
-            { x: 100, y: 100, w: 320, src: '1.png', year: '2026', desc: 'MBA Candidate at MSU. Global Student Ambassador.' },
-            { x: 600, y: 400, w: 450, src: '2.png', year: '2025', desc: 'Strategy Associate. Frameworks for market entry.' },
-            { x: 1100, y: 150, w: 300, src: '3.png', year: '2024', desc: 'Systems Engineer. Leading agile transformations.' },
-            { x: 300, y: 800, w: 400, src: '4.png', year: '2023', desc: 'Operations Specialist. Automated workflows.' },
-            { x: 900, y: 1000, w: 280, src: '5.png', year: '2022', desc: 'Consulting Projects. Solving commercial challenges.' },
-            { x: 1400, y: 650, w: 450, src: 'GSA.jpg', year: '2021', desc: 'Engineering Lead. Technical system performance.' },
-            { x: 150, y: 1400, w: 380, src: 'MBAA.jpg', year: '2020', desc: 'Foundational Engineering. Systems architecture.' },
-            { x: 700, y: 1600, w: 420, src: 'class.jpg', year: '2019', desc: 'Project Management. Mastery of Scrum delivery.' },
-            { x: 1250, y: 1400, w: 320, src: 'market.jpeg', year: '2018', desc: 'The Origin. Large-scale data modeling.' }
-        ];
+    /* ---- GRID DATA --------------------------------------------------------
+       Tile size ~1084x882 mirrors Codrops density.
+       w = frame width in px; height is auto-computed from image aspect ratio.
+       x,y positions are within one tile and repeat seamlessly.
+    ----------------------------------------------------------------------- */
+    var gridData = [
+        { x: -30,  y: -20,  w: 260, src: '1.png',       year: '2026', desc: 'MBA Candidate at MSU Broad. Global Student Ambassador.' },
+        { x:  50,  y: 120,  w: 360, src: '2.png',       year: '2025', desc: 'Strategy Associate. Frameworks for market entry.' },
+        { x: 330,  y:  50,  w: 240, src: '3.png',       year: '2024', desc: 'Systems Engineer. Leading agile transformations.' },
+        { x: 130,  y: 400,  w: 170, src: '4.png',       year: '2023', desc: 'Operations Specialist. Automated workflows.' },
+        { x: 540,  y: 310,  w: 170, src: '5.png',       year: '2022', desc: 'Consulting Projects. Commercial challenges.' },
+        { x: 620,  y: 100,  w: 340, src: 'GSA.jpg',     year: '2021', desc: 'Global Ambassador. Engineering lead.' },
+        { x: -40,  y: 560,  w: 220, src: 'MBAA.jpg',    year: '2020', desc: 'MBA Association. Systems architecture.' },
+        { x: 320,  y: 560,  w: 330, src: 'class.jpg',   year: '2019', desc: 'Project Management. Scrum delivery.' },
+        { x: 650,  y: 490,  w: 200, src: 'market.jpeg', year: '2018', desc: 'The Origin. Large-scale data modeling.' }
+    ];
 
-        const container = document.getElementById('images');
-        const aura = document.getElementById('aura');
-        const cdot = document.getElementById('cdot');
-        const cring = document.getElementById('cring');
+    /* ---- CONSTANTS -------------------------------------------------------- */
+    var TILE_W    = 1084;   // tile repeat width  (px)
+    var TILE_H    = 882;    // tile repeat height (px)
+    var MAX_SHIFT = 100;    // max pan distance from center (px)
+    var GRID_EASE = 0.055;  // pan inertia (Codrops feel)
+    var MOUSE_EASE = 0.06;  // normalized-mouse lerp speed
+    var IMG_DEPTH = 0.18;   // fraction of pan applied to image counter-move
+    var DRAG_MULT = 1.5;    // drag scroll multiplier
 
-        let winW = window.innerWidth, winH = window.innerHeight;
-        let isMobile = winW < 768;
-        let tileSize = { w: 2000, h: 2000 };
-        let items = [];
-        
-        let mx = winW/2, my = winH/2, ax = mx, ay = my;
-        const mouse = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
-        const scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.025 };
-        const pan = { x: 0, y: 0, tX: 0, tY: 0 };
-        const drag = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
-        let isPressed = false;
+    /* ---- STATE ------------------------------------------------------------ */
+    var container = document.getElementById('images');
+    var aura  = document.getElementById('aura');
+    var cdot  = document.getElementById('cdot');
+    var cring = document.getElementById('cring');
 
-        function buildGrid() {
-            container.innerHTML = ''; items = [];
-            const repsX = [0, tileSize.w], repsY = [0, tileSize.h];
-            gridData.forEach((d) => {
-                const img = new Image(); img.src = d.src;
-                img.onload = () => {
-                    const ratio = img.naturalHeight / img.naturalWidth;
-                    const calculatedH = d.w * ratio;
-                    repsX.forEach((ox) => {
-                        repsY.forEach((oy) => {
-                            const el = document.createElement('div');
-                            el.className = 'item';
-                            el.style.width = `${isMobile ? d.w * 0.8 : d.w}px`;
-                            el.style.height = `${isMobile ? calculatedH * 0.8 : calculatedH}px`;
-                            el.innerHTML = `
-                                <div class="item-wrapper">
-                                    <div class="tw-card">
-                                        <img src="${d.src}">
-                                        <div class="item-overlay">
-                                            <div class="item-year">${d.year}</div>
-                                            <div class="item-desc">${d.desc}</div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                            container.appendChild(el);
-                            items.push({ 
-                                el, img: el.querySelector('img'),
-                                x: (isMobile ? winW * 0.1 : d.x) + ox, 
-                                y: (isMobile ? (items.length * 450) % tileSize.h : d.y) + oy, 
-                                w: d.w, h: calculatedH, ex: 0, ey: 0
-                            });
+    var winW = window.innerWidth;
+    var winH = window.innerHeight;
+    var isMobile = winW < 768;
+
+    var mx = winW / 2, my = winH / 2;   // raw cursor
+    var ax = mx, ay = my;                // smoothed cursor (for ring lag)
+
+    var mouse  = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
+    var scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.028 };
+    var pan    = { x: 0, y: 0 };
+    var panTargetX = 0, panTargetY = 0;
+    var drag   = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
+    var items  = [];
+
+    /* ---- BUILD GRID ------------------------------------------------------- */
+    function buildGrid() {
+        container.innerHTML = '';
+        items = [];
+
+        var repsX = [0, TILE_W];
+        var repsY = [0, TILE_H];
+
+        gridData.forEach(function(d) {
+            var probe = new Image();
+            probe.src = d.src;
+
+            function spawn() {
+                var ratio = probe.naturalHeight / probe.naturalWidth || 0.75;
+                var fw = isMobile ? Math.round(d.w * 0.75) : d.w;
+                var fh = Math.round(fw * ratio);
+
+                repsX.forEach(function(ox) {
+                    repsY.forEach(function(oy) {
+                        var el       = document.createElement('div');
+                        el.className = 'item';
+                        el.style.width  = fw + 'px';
+                        el.style.height = fh + 'px';
+
+                        var frame    = document.createElement('div');
+                        frame.className = 'item-frame';
+
+                        var imgEl    = document.createElement('img');
+                        imgEl.src    = d.src;
+                        imgEl.alt    = d.desc;
+
+                        var overlay  = document.createElement('div');
+                        overlay.className = 'item-overlay';
+
+                        var yearEl   = document.createElement('div');
+                        yearEl.className = 'item-year';
+                        yearEl.textContent = d.year;
+
+                        var descEl   = document.createElement('div');
+                        descEl.className = 'item-desc';
+                        descEl.textContent = d.desc;
+
+                        overlay.appendChild(yearEl);
+                        overlay.appendChild(descEl);
+                        frame.appendChild(imgEl);
+                        frame.appendChild(overlay);
+                        el.appendChild(frame);
+                        container.appendChild(el);
+
+                        items.push({
+                            el:  el,
+                            img: imgEl,
+                            x:   d.x + ox,
+                            y:   d.y + oy,
+                            w:   fw,
+                            h:   fh,
+                            ex:  0,
+                            ey:  0
                         });
                     });
-                };
-            });
+                });
+            }
+
+            if (probe.complete && probe.naturalWidth > 0) {
+                spawn();
+            } else {
+                probe.onload = spawn;
+            }
+        });
+    }
+
+    /* ---- RENDER LOOP ------------------------------------------------------ */
+    function render() {
+        /* 1. Smooth cursor dot/ring */
+        ax += (mx - ax) * 0.12;
+        ay += (my - ay) * 0.12;
+        cdot.style.left  = mx + 'px';
+        cdot.style.top   = my + 'px';
+        cring.style.left = ax + 'px';
+        cring.style.top  = ay + 'px';
+        aura.style.transform = 'translate(calc(' + ax + 'px - 50%), calc(' + ay + 'px - 50%))';
+
+        /* 2. Lerp normalized mouse */
+        mouse.x += (mouse.tX - mouse.x) * MOUSE_EASE;
+        mouse.y += (mouse.tY - mouse.y) * MOUSE_EASE;
+
+        /* 3. Derive pan target — cursor right moves grid left (camera look-around) */
+        panTargetX = -(mouse.x - 0.5) * MAX_SHIFT * 2;
+        panTargetY = -(mouse.y - 0.5) * MAX_SHIFT * 2;
+
+        /* 4. Ease pan (heavy inertia = Codrops feel) */
+        pan.x += (panTargetX - pan.x) * GRID_EASE;
+        pan.y += (panTargetY - pan.y) * GRID_EASE;
+
+        /* 5. Scroll inertia */
+        scroll.x += (scroll.tX - scroll.x) * scroll.ease;
+        scroll.y += (scroll.tY - scroll.y) * scroll.ease;
+
+        /* 6. Position items and counter-move image inside frame */
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var px = item.x + scroll.x + item.ex + pan.x;
+            var py = item.y + scroll.y + item.ey + pan.y;
+
+            /* Seamless tile wrapping */
+            if (px > winW + item.w)    item.ex -= TILE_W;
+            if (px + item.w < -item.w) item.ex += TILE_W;
+            if (py > winH + item.h)    item.ey -= TILE_H;
+            if (py + item.h < -item.h) item.ey += TILE_H;
+
+            /* Move the whole tile (grid pan + scroll) */
+            item.el.style.transform = 'translate(' + px + 'px,' + py + 'px)';
+
+            /* Counter-parallax: image slides OPPOSITE to pan inside the fixed frame.
+               IMG_DEPTH controls how much the image moves relative to the frame.
+               Clamped so the oversized image never exposes a gap edge. */
+            var pctX = ((-pan.x * IMG_DEPTH) / item.w) * 100;
+            var pctY = ((-pan.y * IMG_DEPTH) / item.h) * 100;
+            pctX = Math.max(-12, Math.min(12, pctX));
+            pctY = Math.max(-12, Math.min(12, pctY));
+            item.img.style.transform = 'translate(' + pctX + '%,' + pctY + '%)';
         }
 
-        function render() {
-            // Cursor Smoothing
-            ax += (mx - ax) * 0.1; ay += (my - ay) * 0.1;
-            cdot.style.left = `${mx}px`; cdot.style.top = `${my}px`;
-            cring.style.left = `${ax}px`; cring.style.top = `${ay}px`;
-            aura.style.transform = `translate(calc(${ax}px - 50%), calc(${ay}px - 50%))`;
-
-            // Pan/Dampening
-            pan.x += (pan.tX - pan.x) * 0.05;
-            pan.y += (pan.tY - pan.y) * 0.05;
-
-            mouse.x += (mouse.tX - mouse.x) * 0.06;
-            mouse.y += (mouse.tY - mouse.y) * 0.06;
-
-            const maxShift = 120; // px — increase for more dramatic movement
-            const targetX = -(mouse.x - 0.5) * maxShift * 2;
-            const targetY = -(mouse.y - 0.5) * maxShift * 2;
-
-            scroll.x += (scroll.tX - scroll.x) * scroll.ease;
-            scroll.y += (scroll.tY - scroll.y) * scroll.ease;
-
-            items.forEach(item => {
-            let px = item.x + scroll.x + item.ex + pan.x;
-            let py = item.y + scroll.y + item.ey + pan.y;
-        
-            // Seamless wrapping (keep your existing wrap logic)
-            if (px > winW + item.w)  item.ex -= tileSize.w;
-            if (px + item.w < -item.w) item.ex += tileSize.w;
-            if (py > winH + item.h)  item.ey -= tileSize.h;
-            if (py + item.h < -item.h) item.ey += tileSize.h;
-
-                
-                const pressScale = isPressed ? 1.08 : 1;
-                item.el.style.transform = `translate(${px}px, ${py}px)`;
-                
-                // The Revealing Window (Counter-Parallax)
-                const depthX = (pan.x / item.w) * 35;
-                const depthY = (pan.y / item.h) * 35;
-                item.el.querySelector('.item-wrapper').style.transform =
-                    `translate(${depthX}%, ${depthY}%)`;
-            });
-            requestAnimationFrame(render);
-        }
-
-        // Listeners
-        document.addEventListener('mousemove', e => { 
-            mx = e.clientX; my = e.clientY; 
-            mouse.tX = e.clientX / winW; mouse.tY = e.clientY / winH;
-            pan.tX = (e.clientX - winW / 2) * 1.0; 
-            pan.tY = (e.clientY - winH / 2) * 1.0;
-        });
-
-        window.addEventListener('mousedown', () => { 
-            isPressed = true; cring.style.width = '70px'; cring.style.height = '70px'; cring.style.borderColor = 'var(--gold)';
-        });
-        window.addEventListener('mouseup', () => { 
-            isPressed = false; cring.style.width = '40px'; cring.style.height = '40px'; cring.style.borderColor = 'rgba(255,255,255,0.3)';
-        });
-
-        window.addEventListener('wheel', e => { scroll.tX -= e.deltaX; scroll.tY -= e.deltaY; }, { passive: true });
-        window.addEventListener('pointerdown', e => { drag.active = true; drag.sx = e.clientX; drag.sy = e.clientY; drag.scrollX = scroll.tX; drag.scrollY = scroll.tY; });
-        window.addEventListener('pointerup', () => drag.active = false);
-        window.addEventListener('pointermove', e => { if (drag.active) { scroll.tX = drag.scrollX + (e.clientX - drag.sx) * 1.5; scroll.tY = drag.scrollY + (e.clientY - drag.sy) * 1.5; } });
-        window.addEventListener('resize', () => { winW = window.innerWidth; winH = window.innerHeight; isMobile = winW < 768; buildGrid(); });
-
-        buildGrid();
         requestAnimationFrame(render);
+    }
+
+    /* ---- EVENT LISTENERS -------------------------------------------------- */
+    document.addEventListener('mousemove', function(e) {
+        mx = e.clientX;
+        my = e.clientY;
+        mouse.tX = e.clientX / winW;
+        mouse.tY = e.clientY / winH;
+    });
+
+    window.addEventListener('mousedown', function() {
+        cring.style.width       = '70px';
+        cring.style.height      = '70px';
+        cring.style.borderColor = 'var(--gold)';
+    });
+
+    window.addEventListener('mouseup', function() {
+        cring.style.width       = '40px';
+        cring.style.height      = '40px';
+        cring.style.borderColor = 'rgba(255,255,255,0.3)';
+    });
+
+    window.addEventListener('wheel', function(e) {
+        scroll.tX -= e.deltaX;
+        scroll.tY -= e.deltaY;
+    }, { passive: true });
+
+    window.addEventListener('pointerdown', function(e) {
+        drag.active  = true;
+        drag.sx      = e.clientX;
+        drag.sy      = e.clientY;
+        drag.scrollX = scroll.tX;
+        drag.scrollY = scroll.tY;
+    });
+
+    window.addEventListener('pointerup', function() {
+        drag.active = false;
+    });
+
+    window.addEventListener('pointermove', function(e) {
+        if (drag.active) {
+            scroll.tX = drag.scrollX + (e.clientX - drag.sx) * DRAG_MULT;
+            scroll.tY = drag.scrollY + (e.clientY - drag.sy) * DRAG_MULT;
+        }
+    });
+
+    window.addEventListener('resize', function() {
+        winW     = window.innerWidth;
+        winH     = window.innerHeight;
+        isMobile = winW < 768;
+        buildGrid();
+    });
+
+    /* ---- INIT ------------------------------------------------------------- */
+    buildGrid();
+    requestAnimationFrame(render);
     </script>
 </body>
 </html>
