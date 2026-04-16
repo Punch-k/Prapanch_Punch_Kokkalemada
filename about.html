@@ -1,406 +1,502 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prapanch Kokkalemada | About</title>
-    <meta name="description" content="About Prapanch Kokkalemada — MBA Candidate, Strategy and Operations.">
-    <meta property="og:title" content="Prapanch Kokkalemada | About">
-    <meta property="og:description" content="MBA Candidate at Michigan State Broad College of Business. Strategy, Operations and GTM.">
-    <meta property="og:url" content="https://punchkokkalemada.com/about.html">
-    <meta property="og:type" content="website">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>PRAPANCH KOKKALEMADA | Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Infinite Grid Variables */
+      --margin: 30rem;
+      --gap: 20rem;
+      --column: calc((var(--rvw) * 100 - var(--margin) * 2 - var(--gap) * 9) / 10);
+      
+      /* Theme Variables based on your CSS */
+      --bg: #0A0B0D;
+      --fg: #EDE9E0;
+      --gold: #D4AF37; 
+      --line: rgba(237, 233, 224, 0.2);
+      --display: 'Roboto Mono', monospace;
+    }
+    
+    @media (max-width: 1024px) {
+      :root {
+        --margin: 15px;
+        --gap: 10rem;
+        --column: calc((100vw - var(--margin) * 2 - var(--gap) * 5) / 6);
+      }
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html {
+      background: var(--bg);
+      color: var(--fg);
+      font-size: .0694444444vw;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 1024px) { html { font-size: 1px; } }
+    
+    body {
+      font-family: var(--display);
+      font-size: 12rem;
+      font-weight: 400;
+      line-height: 1.21;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior-y: none;
+    }
 
-    <style>
-        /* FOUNDATION */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0a0b0d; --fg: #ede9e0; --gold: #c9a84c;
-            --line: rgba(237,233,224,.1); --sans: 'DM Sans', sans-serif;
-            --display: 'Bebas Neue', sans-serif;
-        }
-        html, body {
-            width: 100%; height: 100%; background: var(--bg); color: var(--fg);
-            font-family: var(--sans); overflow: hidden; overscroll-behavior: none;
-        }
-        @media (pointer: fine) { html, body { cursor: none; } }
+    /* --- Navigation Styling --- */
+    #mainnav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999; /* Keeps it above the images */
+        padding: 1.65rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(10, 11, 13, 0.95);
+        backdrop-filter: blur(20px); /* Premium glass effect */
+        border-bottom: 1px solid var(--line);
+    }
 
-        /* CUSTOM CURSOR */
-        #cdot {
-            position: fixed; top: 0; left: 0; width: 6px; height: 6px;
-            background: #fff; border-radius: 50%; z-index: 100000;
-            pointer-events: none; transform: translate(-50%,-50%);
-        }
-        #cring {
-            position: fixed; top: 0; left: 0; width: 40px; height: 40px;
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
-            z-index: 100000; pointer-events: none; transform: translate(-50%,-50%);
-            transition: width 0.3s, height 0.3s, border-color 0.3s, border-width 0.3s;
-        }
-        #aura {
-            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%);
-            border-radius: 50%; pointer-events: none; z-index: 1;
-            transform: translate(-50%,-50%); mix-blend-mode: screen; will-change: transform;
-        }
+    .nav-logo {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .1em;
+        color: var(--fg);
+        text-decoration: none;
+    }
 
-        /* MAIN NAV */
-        #mainnav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
-            padding: 1.65rem 3rem; display: flex; justify-content: space-between;
-            align-items: center; background: rgba(10,11,13,.95);
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
-        }
-        .nav-logo { font-family: var(--display); font-size: 1.1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
-        .nav-logo span { color: var(--gold); }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(237,233,224,.35); text-decoration: none; transition: color .2s; }
-        .nav-links a:hover, .nav-links a.act { color: var(--fg); }
-        .nav-cta { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid rgba(237,233,224,.2); padding: .5rem 1.2rem; transition: background .3s, color .3s; }
-        .nav-cta:hover { background: var(--gold); color: var(--bg); }
+    .nav-logo span { color: var(--gold); }
 
-        /* INFINITE ARENA */
-        #viewport {
-            width: 100vw; height: 100vh; overflow: hidden;
-            position: relative; z-index: 5; background: var(--bg);
-        }
-        #images {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            will-change: transform;
-        }
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+    }
 
-        /* ITEM — the moving tile container */
-        .item {
-            position: absolute; top: 0; left: 0;
-            will-change: transform; pointer-events: auto;
-        }
+    .nav-links a {
+        font-size: .65rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgba(237, 233, 224, 0.35);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
 
-        /* FRAME — fixed-size window, clips the image */
-        .item-frame {
-            width: 100%; height: 100%;
-            overflow: hidden;
-            border-radius: 3px;
-            border: 1px solid rgba(201,168,76,.18);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-            background: #000;
-            position: relative;
-        }
+    .nav-links a:hover, .nav-links a.act { color: var(--fg); }
 
-        /* IMAGE — oversized so it can pan inside the frame */
-        .item-frame img {
-            width: 130%; height: 130%;
-            object-fit: cover;
-            position: absolute;
-            top: -15%; left: -15%;
-            will-change: transform;
-            filter: grayscale(60%) brightness(0.8);
-            transition: filter 0.6s ease;
-            display: block;
-        }
-        .item:hover .item-frame img {
-            filter: grayscale(0%) brightness(1);
-        }
+    .nav-cta {
+        font-size: .65rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--fg);
+        text-decoration: none;
+        border: 1px solid rgba(237, 233, 224, 0.2);
+        padding: .5rem 1.2rem;
+        transition: background 0.3s, color 0.3s;
+    }
 
-        /* CAPTION overlay */
-        .item-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
-            display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 1.2rem 1rem;
-            pointer-events: none;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-        }
-        .item:hover .item-overlay { opacity: 1; }
-        .item-year {
-            font-family: var(--display); font-size: 2.8rem;
-            color: var(--gold); line-height: 0.9; margin-bottom: 5px;
-        }
-        .item-desc {
-            font-size: 0.7rem; color: var(--fg);
-            line-height: 1.4; font-weight: 300;
-        }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
-        /* FOOTER */
-        .site-footer {
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 3rem; background: rgba(10,11,13,.9);
-            border-top: 1px solid var(--line); backdrop-filter: blur(10px);
-        }
-        .ft-logo { font-size: 0.75rem; color: rgba(237,233,224,.3); text-transform: uppercase; }
-        .ft-link { font-size: 0.65rem; color: var(--gold); text-decoration: none; margin-left: 2rem; }
+    /* --- Footer Styling --- */
+    .site-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 3rem;
+        background: rgba(10, 11, 13, 0.9);
+        border-top: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+    }
 
-        @media (max-width: 768px) {
-            #cdot, #cring, #aura { display: none !important; }
-            #mainnav { padding: 1rem 1.5rem; }
-            .nav-links { gap: 1rem; }
-            .nav-links a { font-size: 0.55rem; color: var(--fg); }
-            .nav-cta { display: none; }
-            .item-year { font-size: 2rem; }
-            .item-desc { font-size: 0.65rem; }
-        }
-    </style>
+    .ft-logo {
+        font-size: 0.75rem;
+        color: rgba(237, 233, 224, 0.3);
+        text-transform: uppercase;
+    }
+
+    .ft-link {
+        font-size: 0.65rem;
+        color: var(--gold);
+        text-decoration: none;
+        margin-left: 2rem;
+    }
+
+    /* --- Infinite Grid Styling --- */
+    #hero {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      cursor: grab;
+    }
+    #hero #images {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      white-space: nowrap;
+      position: relative;
+    }
+    #hero #images .item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      will-change: transform;
+      white-space: normal;
+    }
+    #hero #images .item .item-wrapper { will-change: transform; }
+    #hero #images .item .item-image { overflow: hidden; }
+    #hero #images .item .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+    #hero #images .item small {
+      width: 100%;
+      display: block;
+      font-size: 8rem;
+      line-height: 1.25;
+      margin-top: 12rem;
+    }
+    #hero #images .item small .line-mask,
+    #hero #images .item small .line-mask .line {
+      transition: transform 2s cubic-bezier(.6,.14,0,1);
+    }
+    #hero #images .item small:not(.visible) .line-mask { transform: translateY(100%); }
+    #hero #images .item small:not(.visible) .line-mask .line { transform: translateY(110%); }
+    html.dragging #hero { cursor: grabbing; }
+  </style>
 </head>
 <body>
-    <div id="cdot"></div>
-    <div id="cring"></div>
-    <div id="aura"></div>
 
-    <nav id="mainnav">
-        <a class="nav-logo" href="index.html">PRAPANCH <span>KOKKALEMADA</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="act">About</a></li>
-            <li><a href="index.html#section-cases">Work</a></li>
-        </ul>
-        <a class="nav-cta" href="mailto:prapanch@kokkalemada.com"><span>Let's Connect &#8599;</span></a>
-    </nav>
+  <nav id="mainnav">
+      <a class="nav-logo" href="index.html">PRAPANCH <span>KOKKALEMADA</span></a>
+      <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="act">About</a></li>
+          <li><a href="index.html#section-cases">Work</a></li>
+      </ul>
+      <a class="nav-cta" href="mailto:prapanch@kokkalemada.com"><span>Let's Connect &#8599;</span></a>
+  </nav>
 
-    <div id="viewport">
-        <div id="images"></div>
-    </div>
+  <main id="main">
+    <section id="hero">
+      <div id="images"></div>
+    </section>
+  </main>
 
-    <footer class="site-footer">
-        <div class="ft-logo">PRAPANCH KOKKALEMADA &copy; 2026</div>
-        <div>
-            <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank" rel="noopener">LINKEDIN</a>
-            <a href="mailto:prapanch@kokkalemada.com" class="ft-link">E-MAIL</a>
-        </div>
-    </footer>
+  <footer class="site-footer">
+      <div class="ft-logo">PRAPANCH KOKKALEMADA &copy; 2026</div>
+      <div>
+          <a href="https://linkedin.com/in/prapanch" class="ft-link" target="_blank" rel="noopener">LINKEDIN</a>
+          <a href="mailto:prapanch@kokkalemada.com" class="ft-link">E-MAIL</a>
+      </div>
+  </footer>
 
-    <script>
-    /* ---- GRID DATA --------------------------------------------------------
-       Tile size ~1084x882 mirrors Codrops density.
-       w = frame width in px; height is auto-computed from image aspect ratio.
-       x,y positions are within one tile and repeat seamlessly.
-    ----------------------------------------------------------------------- */
-    var gridData = [
-        { x: -30,  y: -20,  w: 260, src: '1.png',       year: '2026', desc: 'MBA Candidate at MSU Broad. Global Student Ambassador.' },
-        { x:  50,  y: 120,  w: 360, src: '2.png',       year: '2025', desc: 'Strategy Associate. Frameworks for market entry.' },
-        { x: 330,  y:  50,  w: 240, src: '3.png',       year: '2024', desc: 'Systems Engineer. Leading agile transformations.' },
-        { x: 130,  y: 400,  w: 170, src: '4.png',       year: '2023', desc: 'Operations Specialist. Automated workflows.' },
-        { x: 540,  y: 310,  w: 170, src: '5.png',       year: '2022', desc: 'Consulting Projects. Commercial challenges.' },
-        { x: 620,  y: 100,  w: 340, src: 'GSA.jpg',     year: '2021', desc: 'Global Ambassador. Engineering lead.' },
-        { x: -40,  y: 560,  w: 220, src: 'MBAA.jpg',    year: '2020', desc: 'MBA Association. Systems architecture.' },
-        { x: 320,  y: 560,  w: 330, src: 'class.jpg',   year: '2019', desc: 'Project Management. Scrum delivery.' },
-        { x: 650,  y: 490,  w: 200, src: 'market.jpeg', year: '2018', desc: 'The Origin. Large-scale data modeling.' }
-    ];
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 
-    /* ---- CONSTANTS -------------------------------------------------------- */
-    var TILE_W    = 1484;   // tile repeat width  (px)
-    var TILE_H    = 882;    // tile repeat height (px)
-    var MAX_SHIFT = 100;    // max pan distance from center (px)
-    var GRID_EASE = 0.055;  // pan inertia (Codrops feel)
-    var MOUSE_EASE = 0.06;  // normalized-mouse lerp speed
-    var IMG_DEPTH = 0.18;   // fraction of pan applied to image counter-move
-    var DRAG_MULT = 1.5;    // drag scroll multiplier
+  <script>
+    /* --- Premium SplitText Plugin --- */
+    let se,$t,si,_s=()=>si||Ci.register(window.gsap),Vi=typeof Intl<"u"?new Intl.Segmenter:0,De=a=>typeof a=="string"?De(document.querySelectorAll(a)):"length"in a?Array.from(a):[a],$i=a=>De(a).filter(t=>t instanceof HTMLElement),oi=[],Ue=function(){},ds=/\s+/g,qi=new RegExp("\\p{RI}\\p{RI}|\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?(\\u{200D}\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?)*|.","gu"),Gi={left:0,top:0,width:0,height:0},ji=(a,t)=>{if(t){let e=new Set(a.join("").match(t)||oi),i=a.length,r,n,s,o;if(e.size)for(;--i>-1;){n=a[i];for(s of e)if(s.startsWith(n)&&s.length>n.length){for(r=0,o=n;s.startsWith(o+=a[i+ ++r])&&o.length<s.length;);if(r&&o.length===s.length){a[i]=s,a.splice(i+1,r);break}}}}return a},Hi=a=>window.getComputedStyle(a).display==="inline"&&(a.style.display="inline-block"),qt=(a,t,e)=>t.insertBefore(typeof a=="string"?document.createTextNode(a):a,e),ai=(a,t,e)=>{let i=t[a+"sClass"]||"",{tag:r="div",aria:n="auto",propIndex:s=!1}=t,o=a==="line"?"block":"inline-block",l=i.indexOf("++")>-1,h=u=>{let c=document.createElement(r),_=e.length+1;return i&&(c.className=i+(l?" "+i+_:"")),s&&c.style.setProperty("--"+a,_+""),n!=="none"&&c.setAttribute("aria-hidden","true"),r!=="span"&&(c.style.position="relative",c.style.display=o),c.textContent=u,e.push(c),c};return l&&(i=i.replace("++","")),h.collection=e,h},ps=(a,t,e,i)=>{let r=ai("line",e,i),n=window.getComputedStyle(a).textAlign||"left";return(s,o)=>{let l=r("");for(l.style.textAlign=n,a.insertBefore(l,t[s]);s<o;s++)l.appendChild(t[s]);l.normalize()}},Hr=(a,t,e,i,r,n,s,o,l,h)=>{var u;let c=Array.from(a.childNodes),_=0,{wordDelimiter:d,reduceWhiteSpace:p=!0,prepareText:f}=t,g=a.getBoundingClientRect(),y=g,w=!p&&window.getComputedStyle(a).whiteSpace.substring(0,3)==="pre",b=0,T=e.collection,m,S,P,v,x,E,k,C,O,z,A,D,R,q,X,L,Z,G;for(typeof d=="object"?(P=d.delimiter||d,S=d.replaceWith||""):S=d===""?"":d||" ",m=S!==" ";_<c.length;_++)if(v=c[_],v.nodeType===3){for(X=v.textContent||"",p?X=X.replace(ds," "):w&&(X=X.replace(/\n/g,S+`\n`)),f&&(X=f(X,a)),v.textContent=X,x=S||P?X.split(P||S):X.match(o)||oi,Z=x[x.length-1],C=m?Z.slice(-1)===" ":!Z,Z||x.pop(),y=g,k=m?x[0].charAt(0)===" ":!x[0],k&&qt(" ",a,v),x[0]||x.shift(),ji(x,l),n&&h||(v.textContent=""),O=1;O<=x.length;O++)if(L=x[O-1],!p&&w&&L.charAt(0)===`\n`&&((u=v.previousSibling)==null||u.remove(),qt(document.createElement("br"),a,v),L=L.slice(1)),!p&&L==="")qt(S,a,v);else if(L===" ")a.insertBefore(document.createTextNode(" "),v);else{if(m&&L.charAt(0)===" "&&qt(" ",a,v),b&&O===1&&!k&&T.indexOf(b.parentNode)>-1?(E=T[T.length-1],E.appendChild(document.createTextNode(i?"":L))):(E=e(i?"":L),qt(E,a,v),b&&O===1&&!k&&E.insertBefore(b,E.firstChild)),i)for(A=Vi?ji([...Vi.segment(L)].map(gt=>gt.segment),l):L.match(o)||oi,G=0;G<A.length;G++)E.appendChild(A[G]===" "?document.createTextNode(" "):i(A[G]));if(n&&h){if(X=v.textContent=X.substring(L.length+1,X.length),z=E.getBoundingClientRect(),z.top>y.top&&z.left<=y.left){for(D=a.cloneNode(),R=a.childNodes[0];R&&R!==E;)q=R,R=R.nextSibling,D.appendChild(q);a.parentNode.insertBefore(D,a),r&&Hi(D)}y=z}(O<x.length||C)&&qt(O>=x.length?" ":m&&L.slice(-1)===" "?" "+S:S,a,v)}a.removeChild(v),b=0}else v.nodeType===1&&(s&&s.indexOf(v)>-1?(T.indexOf(v.previousSibling)>-1&&T[T.length-1].appendChild(v),b=v):(Hr(v,t,e,i,r,n,s,o,l,!0),b=0),r&&Hi(v))};const Kr=class Qr{constructor(t,e){this.isSplit=!1,_s(),this.elements=$i(t),this.chars=[],this.words=[],this.lines=[],this.masks=[],this.vars=e,this._split=()=>this.isSplit&&this.split(this.vars);let i=[],r,n=()=>{let s=i.length,o;for(;s--;){o=i[s];let l=o.element.offsetWidth;if(l!==o.width){o.width=l,this._split();return}}};this._data={orig:i,obs:typeof ResizeObserver<"u"&&new ResizeObserver(()=>{clearTimeout(r),r=setTimeout(n,200)})},Ue(this),this.split(e)}split(t){this.isSplit&&this.revert(),this.vars=t=t||this.vars||{};let{type:e="chars,words,lines",aria:i="auto",deepSlice:r=!0,smartWrap:n,onSplit:s,autoSplit:o=!1,specialChars:l,mask:h}=this.vars,u=e.indexOf("lines")>-1,c=e.indexOf("chars")>-1,_=e.indexOf("words")>-1,d=c&&!_&&!u,p=l&&("push"in l?new RegExp("(?:"+l.join("|")+")","gu"):l),f=p?new RegExp(p.source+"|"+qi.source,"gu"):qi,g=!!t.ignore&&$i(t.ignore),{orig:y,animTime:w,obs:b}=this._data,T;return(c||_||u)&&(this.elements.forEach((m,S)=>{y[S]={element:m,html:m.innerHTML,ariaL:m.getAttribute("aria-label"),ariaH:m.getAttribute("aria-hidden")},i==="auto"?m.setAttribute("aria-label",(m.textContent||"").trim()):i==="hidden"&&m.setAttribute("aria-hidden","true");let P=[],v=[],x=[],E=c?ai("char",t,P):null,k=ai("word",t,v),C,O,z,A;if(Hr(m,t,k,E,d,r&&(u||d),g,f,p,!1),u){let D=De(m.childNodes),R=ps(m,D,t,x),q,X=[],L=0,Z=D.map(gt=>gt.nodeType===1?gt.getBoundingClientRect():Gi),G=Gi;for(C=0;C<D.length;C++)q=D[C],q.nodeType===1&&(q.nodeName==="BR"?(X.push(q),R(L,C+1),L=C+1,G=Z[L]):(C&&Z[C].top>G.top&&Z[C].left<=G.left&&(R(L,C),L=C),G=Z[C]));L<C&&R(L,C),X.forEach(gt=>{var ft;return(ft=gt.parentNode)==null?void 0:ft.removeChild(gt)})}if(!_){for(C=0;C<v.length;C++)if(O=v[C],c||!O.nextSibling||O.nextSibling.nodeType!==3)if(n&&!u){for(z=document.createElement("span"),z.style.whiteSpace="nowrap";O.firstChild;)z.appendChild(O.firstChild);O.replaceWith(z)}else O.replaceWith(...O.childNodes);else A=O.nextSibling,A&&A.nodeType===3&&(A.textContent=(O.textContent||"")+(A.textContent||""),O.remove());v.length=0,m.normalize()}this.lines.push(...x),this.words.push(...v),this.chars.push(...P)}),h&&this[h]&&this.masks.push(...this[h].map(m=>{let S=m.cloneNode();return m.replaceWith(S),S.appendChild(m),m.className&&(S.className=m.className.replace(/(\b\w+\b)/g,"$1-mask")),S.style.overflow="clip",S}))),this.isSplit=!0,$t&&(o?$t.addEventListener("loadingdone",this._split):$t.status==="loading"&&console.warn("SplitText called before fonts loaded")),(T=s&&s(this))&&T.totalTime&&(this._data.anim=w?T.totalTime(w):T),u&&o&&this.elements.forEach((m,S)=>{y[S].width=m.offsetWidth,b&&b.observe(m)}),this}revert(){var t,e;let{orig:i,anim:r,obs:n}=this._data;return n&&n.disconnect(),i.forEach(({element:s,html:o,ariaL:l,ariaH:h})=>{s.innerHTML=o,l?s.setAttribute("aria-label",l):s.removeAttribute("aria-label"),h?s.setAttribute("aria-hidden",h):s.removeAttribute("aria-hidden")}),this.chars.length=this.words.length=this.lines.length=i.length=this.masks.length=0,this.isSplit=!1,$t==null||$t.removeEventListener("loadingdone",this._split),r&&(this._data.animTime=r.totalTime(),r.revert()),(e=(t=this.vars).onRevert)==null||e.call(t,this),this}static create(t,e){return new Qr(t,e)}static register(t){se=se||t||window.gsap,se&&(De=se.utils.toArray,Ue=se.core.context||Ue),!si&&window.innerWidth>0&&($t=document.fonts,si=!0)}};Kr.version="3.13.0";let Ci=Kr;gsap.registerPlugin(Ci);
 
-    /* ---- STATE ------------------------------------------------------------ */
-    var container = document.getElementById('images');
-    var aura  = document.getElementById('aura');
-    var cdot  = document.getElementById('cdot');
-    var cring = document.getElementById('cring');
-
-    var winW = window.innerWidth;
-    var winH = window.innerHeight;
-    var isMobile = winW < 768;
-
-    var mx = winW / 2, my = winH / 2;   // raw cursor
-    var ax = mx, ay = my;                // smoothed cursor (for ring lag)
-
-    var mouse  = { x: 0.5, y: 0.5, tX: 0.5, tY: 0.5 };
-    var scroll = { x: 0, y: 0, tX: 0, tY: 0, ease: 0.028 };
-    var pan    = { x: 0, y: 0 };
-    var panTargetX = 0, panTargetY = 0;
-    var drag   = { active: false, sx: 0, sy: 0, scrollX: 0, scrollY: 0 };
-    var items  = [];
-
-    /* ---- BUILD GRID ------------------------------------------------------- */
-    function buildGrid() {
-        container.innerHTML = '';
-        items = [];
-
-        var repsX = [-TILE_W, 0, TILE_W]; 
-        var repsY = [-TILE_H, 0, TILE_H];
-
-        gridData.forEach(function(d) {
-            var probe = new Image();
-            probe.src = d.src;
-
-            function spawn() {
-                var ratio = probe.naturalHeight / probe.naturalWidth || 0.75;
-                var fw = isMobile ? Math.round(d.w * 0.75) : d.w;
-                var fh = Math.round(fw * ratio);
-
-                repsX.forEach(function(ox) {
-                    repsY.forEach(function(oy) {
-                        var el       = document.createElement('div');
-                        el.className = 'item';
-                        el.style.width  = fw + 'px';
-                        el.style.height = fh + 'px';
-
-                        var frame    = document.createElement('div');
-                        frame.className = 'item-frame';
-
-                       var imgEl = document.createElement('img');
-                        imgEl.src = d.src;
-                        imgEl.alt = d.desc;
-                        imgEl.loading = "eager";      // Force early load
-                        imgEl.decoding = "async";     // Don't block the UI thread while decoding
-
-                        var overlay  = document.createElement('div');
-                        overlay.className = 'item-overlay';
-
-                        var yearEl   = document.createElement('div');
-                        yearEl.className = 'item-year';
-                        yearEl.textContent = d.year;
-
-                        var descEl   = document.createElement('div');
-                        descEl.className = 'item-desc';
-                        descEl.textContent = d.desc;
-
-                        overlay.appendChild(yearEl);
-                        overlay.appendChild(descEl);
-                        frame.appendChild(imgEl);
-                        frame.appendChild(overlay);
-                        el.appendChild(frame);
-                        container.appendChild(el);
-
-                        items.push({
-                            el:  el,
-                            img: imgEl,
-                            x:   d.x + ox,
-                            y:   d.y + oy,
-                            w:   fw,
-                            h:   fh,
-                            ex:  0,
-                            ey:  0
-                        });
-                    });
-                });
-            }
-
-            if (probe.complete && probe.naturalWidth > 0) {
-                spawn();
-            } else {
-                probe.onload = spawn;
-            }
+    /* --- Core Infinite Grid Setup --- */
+    class gs {
+      constructor({ el: t, sources: e, data: i, originalSize: r }) {
+        this.$container = t;
+        this.sources = e;
+        this.data = i;
+        this.originalSize = r;
+        
+        this.scroll = {
+          ease: 0.06,
+          current: { x: 0, y: 0 },
+          target: { x: 0, y: 0 },
+          last: { x: 0, y: 0 },
+          delta: { x: { c: 0, t: 0 }, y: { c: 0, t: 0 } }
+        };
+        
+        this.isDragging = false;
+        this.drag = { startX: 0, startY: 0, scrollX: 0, scrollY: 0 };
+        this.mouse = {
+          x: { t: 0.5, c: 0.5 },
+          y: { t: 0.5, c: 0.5 },
+          press: { t: 0, c: 0 }
+        };
+        
+        this.items = [];
+        
+        this.onResize = this.onResize.bind(this);
+        this.onWheel = this.onWheel.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
+        this.render = this.render.bind(this);
+        
+        window.addEventListener("resize", this.onResize);
+        window.addEventListener("wheel", this.onWheel, { passive: false });
+        window.addEventListener("mousemove", this.onMouseMove);
+        this.$container.addEventListener("mousedown", this.onMouseDown);
+        window.addEventListener("mouseup", this.onMouseUp);
+        
+        this.observer = new IntersectionObserver(n => {
+          n.forEach(s => {
+            s.target.classList.toggle("visible", s.isIntersecting);
+          });
         });
-    }
-
-    /* ---- RENDER LOOP ------------------------------------------------------ */
-    function render() {
-        /* 1. Smooth cursor dot/ring */
-        ax += (mx - ax) * 0.12;
-        ay += (my - ay) * 0.12;
-        cdot.style.left  = mx + 'px';
-        cdot.style.top   = my + 'px';
-        cring.style.left = ax + 'px';
-        cring.style.top  = ay + 'px';
-        aura.style.transform = 'translate(calc(' + ax + 'px - 50%), calc(' + ay + 'px - 50%))';
-
-        /* 2. Lerp normalized mouse */
-        mouse.x += (mouse.tX - mouse.x) * MOUSE_EASE;
-        mouse.y += (mouse.tY - mouse.y) * MOUSE_EASE;
-
-        /* 3. Derive pan target — cursor right moves grid left (camera look-around) */
-        panTargetX = -(mouse.x - 0.5) * MAX_SHIFT * 2;
-        panTargetY = -(mouse.y - 0.5) * MAX_SHIFT * 2;
-
-        /* 4. Ease pan (heavy inertia = Codrops feel) */
-        pan.x += (panTargetX - pan.x) * GRID_EASE;
-        pan.y += (panTargetY - pan.y) * GRID_EASE;
-
-        /* 5. Scroll inertia */
-        scroll.x += (scroll.tX - scroll.x) * scroll.ease;
-        scroll.y += (scroll.tY - scroll.y) * scroll.ease;
-
-        /* 6. Position items and counter-move image inside frame */
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            var px = item.x + scroll.x + item.ex + pan.x;
-            var py = item.y + scroll.y + item.ey + pan.y;
-
-            /* Seamless tile wrapping */
-            if (px > winW + item.w)    item.ex -= TILE_W;
-            if (px + item.w < -item.w) item.ex += TILE_W;
-            if (py > winH + item.h)    item.ey -= TILE_H;
-            if (py + item.h < -item.h) item.ey += TILE_H;
-
-            /* Move the whole tile (grid pan + scroll) */
-            item.el.style.transform = 'translate(' + px + 'px,' + py + 'px)';
-
-            /* Counter-parallax: image slides OPPOSITE to pan inside the fixed frame.
-               IMG_DEPTH controls how much the image moves relative to the frame.
-               Clamped so the oversized image never exposes a gap edge. */
-            var pctX = ((-pan.x * IMG_DEPTH) / item.w) * 100;
-            var pctY = ((-pan.y * IMG_DEPTH) / item.h) * 100;
-            pctX = Math.max(-12, Math.min(12, pctX));
-            pctY = Math.max(-12, Math.min(12, pctY));
-            item.img.style.transform = 'translate(' + pctX + '%,' + pctY + '%)';
+        
+        this.onResize();
+        this.render();
+        this.initIntro();
+        this.intro();
+      }
+      
+      initIntro() {
+        this.introItems = [...this.$container.querySelectorAll(".item-wrapper")].filter(t => {
+          const e = t.getBoundingClientRect();
+          return e.x > -e.width && e.x < window.innerWidth + e.width && e.y > -e.height && e.y < window.innerHeight + e.height;
+        });
+        this.introItems.forEach(t => {
+          const e = t.getBoundingClientRect(),
+                i = -e.x + window.innerWidth * 0.5 - e.width * 0.5,
+                r = -e.y + window.innerHeight * 0.5 - e.height * 0.5;
+          gsap.set(t, { x: i, y: r });
+        });
+      }
+      
+      intro() {
+        gsap.to(this.introItems.reverse(), { duration: 2, ease: "expo.inOut", x: 0, y: 0, stagger: 0.05 });
+      }
+      
+      onResize() {
+        this.winW = window.innerWidth;
+        this.winH = window.innerHeight;
+        this.tileSize = {
+          w: this.winW,
+          h: this.winW * (this.originalSize.h / this.originalSize.w)
+        };
+        
+        this.scroll.current = { x: 0, y: 0 };
+        this.scroll.target = { x: 0, y: 0 };
+        this.scroll.last = { x: 0, y: 0 };
+        this.$container.innerHTML = "";
+        
+        const t = this.data.map((r, n) => {
+          const s = this.tileSize.w / this.originalSize.w,
+                o = this.tileSize.h / this.originalSize.h,
+                l = this.sources[n % this.sources.length];
+          return { src: l.src, caption: l.caption, x: r.x * s, y: r.y * o, w: r.w * s, h: r.h * o };
+        });
+        
+        this.items = [];
+        const e = [0, this.tileSize.w],
+              i = [0, this.tileSize.h];
+              
+        t.forEach(r => {
+          e.forEach(n => {
+            i.forEach(s => {
+              const o = document.createElement("div");
+              o.classList.add("item");
+              o.style.width = `${r.w}px`;
+              
+              const l = document.createElement("div");
+              l.classList.add("item-wrapper");
+              o.appendChild(l);
+              
+              const h = document.createElement("div");
+              h.classList.add("item-image");
+              h.style.width = `${r.w}px`;
+              h.style.height = `${r.h}px`;
+              l.appendChild(h);
+              
+              const u = new Image();
+              u.src = r.src.startsWith('http') ? r.src : `./img/${r.src}`;
+              h.appendChild(u);
+              
+              const c = document.createElement("small");
+              c.innerHTML = r.caption;
+              new Ci(c, { type: "lines", mask: "lines", linesClass: "line" }).lines.forEach((d, p) => {
+                d.style.transitionDelay = `${p * 0.15}s`;
+                d.parentElement.style.transitionDelay = `${p * 0.15}s`;
+              });
+              
+              l.appendChild(c);
+              this.$container.appendChild(o);
+              this.observer.observe(c);
+              
+              this.items.push({
+                el: o, container: h, wrapper: l, img: u,
+                x: r.x + n, y: r.y + s, w: r.w, h: r.h,
+                extraX: 0, extraY: 0,
+                rect: o.getBoundingClientRect(),
+                ease: Math.random() * 0.5 + 0.5
+              });
+            });
+          });
+        });
+        
+        this.tileSize.w *= 2;
+        this.tileSize.h *= 2;
+        this.scroll.current.x = this.scroll.target.x = this.scroll.last.x = -this.winW * 0.1;
+        this.scroll.current.y = this.scroll.target.y = this.scroll.last.y = -this.winH * 0.1;
+      }
+      
+      onWheel(t) {
+        t.preventDefault();
+        const e = 0.4;
+        this.scroll.target.x -= t.deltaX * e;
+        this.scroll.target.y -= t.deltaY * e;
+      }
+      
+      onMouseDown(t) {
+        t.preventDefault();
+        this.isDragging = true;
+        document.documentElement.classList.add("dragging");
+        this.mouse.press.t = 1;
+        this.drag.startX = t.clientX;
+        this.drag.startY = t.clientY;
+        this.drag.scrollX = this.scroll.target.x;
+        this.drag.scrollY = this.scroll.target.y;
+      }
+      
+      onMouseUp() {
+        this.isDragging = false;
+        document.documentElement.classList.remove("dragging");
+        this.mouse.press.t = 0;
+      }
+      
+      onMouseMove(t) {
+        this.mouse.x.t = t.clientX / this.winW;
+        this.mouse.y.t = t.clientY / this.winH;
+        if (this.isDragging) {
+          const e = t.clientX - this.drag.startX,
+                i = t.clientY - this.drag.startY;
+          this.scroll.target.x = this.drag.scrollX + e;
+          this.scroll.target.y = this.drag.scrollY + i;
         }
-
-        requestAnimationFrame(render);
+      }
+      
+      render() {
+        this.scroll.current.x += (this.scroll.target.x - this.scroll.current.x) * this.scroll.ease;
+        this.scroll.current.y += (this.scroll.target.y - this.scroll.current.y) * this.scroll.ease;
+        
+        this.scroll.delta.x.t = this.scroll.current.x - this.scroll.last.x;
+        this.scroll.delta.y.t = this.scroll.current.y - this.scroll.last.y;
+        this.scroll.delta.x.c += (this.scroll.delta.x.t - this.scroll.delta.x.c) * 0.04;
+        this.scroll.delta.y.c += (this.scroll.delta.y.t - this.scroll.delta.y.c) * 0.04;
+        
+        this.mouse.x.c += (this.mouse.x.t - this.mouse.x.c) * 0.04;
+        this.mouse.y.c += (this.mouse.y.t - this.mouse.y.c) * 0.04;
+        this.mouse.press.c += (this.mouse.press.t - this.mouse.press.c) * 0.04;
+        
+        const t = this.scroll.current.x > this.scroll.last.x ? "right" : "left",
+              e = this.scroll.current.y > this.scroll.last.y ? "down" : "up";
+              
+        this.items.forEach(i => {
+          const r = 5 * this.scroll.delta.x.c * i.ease + (this.mouse.x.c - 0.5) * i.rect.width * 0.6,
+                n = 5 * this.scroll.delta.y.c * i.ease + (this.mouse.y.c - 0.5) * i.rect.height * 0.6,
+                s = this.scroll.current.x,
+                o = this.scroll.current.y,
+                l = i.x + s + i.extraX + r,
+                h = i.y + o + i.extraY + n,
+                u = l > this.winW,
+                c = l + i.rect.width < 0;
+                
+          if (t === "right" && u) i.extraX -= this.tileSize.w;
+          if (t === "left" && c) i.extraX += this.tileSize.w;
+          
+          const _ = h > this.winH,
+                d = h + i.rect.height < 0;
+                
+          if (e === "down" && _) i.extraY -= this.tileSize.h;
+          if (e === "up" && d) i.extraY += this.tileSize.h;
+          
+          const p = i.x + s + i.extraX + r,
+                f = i.y + o + i.extraY + n;
+                
+          i.el.style.transform = `translate(${p}px, ${f}px)`;
+          i.img.style.transform = `scale(${1.2 + 0.2 * this.mouse.press.c * i.ease}) translate(${-this.mouse.x.c * i.ease * 10}%, ${-this.mouse.y.c * i.ease * 10}%)`;
+        });
+        
+        this.scroll.last.x = this.scroll.current.x;
+        this.scroll.last.y = this.scroll.current.y;
+        requestAnimationFrame(this.render);
+      }
+      
+      destroy() {
+        window.removeEventListener("resize", this.onResize);
+        window.removeEventListener("wheel", this.onWheel);
+        window.removeEventListener("mousemove", this.onMouseMove);
+        this.$container.removeEventListener("mousedown", this.onMouseDown);
+        window.removeEventListener("mouseup", this.onMouseUp);
+        this.observer.disconnect();
+      }
     }
-
-    /* ---- EVENT LISTENERS -------------------------------------------------- */
-    document.addEventListener('mousemove', function(e) {
-        mx = e.clientX;
-        my = e.clientY;
-        mouse.tX = e.clientX / winW;
-        mouse.tY = e.clientY / winH;
+    
+    /* --- Data and Initiation --- */
+    class ms {
+      constructor() {
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+        
+        // Image Placeholders
+        this.sources = [
+          { src: "https://picsum.photos/400/270?random=1", caption: "Project 01 <br>Description of the project" },
+          { src: "https://picsum.photos/540/360?random=2", caption: "Project 02 <br>Description of the project" },
+          { src: "https://picsum.photos/400/270?random=3", caption: "Project 03 <br>Description of the project" },
+          { src: "https://picsum.photos/260/195?random=4", caption: "Project 04 <br>Description of the project" },
+          { src: "https://picsum.photos/260/290?random=5", caption: "Project 05 <br>Description of the project" },
+          { src: "https://picsum.photos/205/154?random=6", caption: "Project 06 <br>Description of the project" },
+          { src: "https://picsum.photos/260/350?random=7", caption: "Project 07 <br>Description of the project" },
+          { src: "https://picsum.photos/400/300?random=8", caption: "Project 08 <br>Description of the project" },
+          { src: "https://picsum.photos/350/260?random=9", caption: "Project 09 <br>Description of the project" }
+        ];
+        
+        this.data = [
+          { x: 71, y: 58, w: 400, h: 270 },
+          { x: 211, y: 255, w: 540, h: 360 },
+          { x: 631, y: 158, w: 400, h: 270 },
+          { x: 1191, y: 245, w: 260, h: 195 },
+          { x: 351, y: 687, w: 260, h: 290 },
+          { x: 751, y: 824, w: 205, h: 154 },
+          { x: 911, y: 540, w: 260, h: 350 },
+          { x: 1051, y: 803, w: 400, h: 300 },
+          { x: 71, y: 922, w: 350, h: 260 }
+        ];
+        
+        new gs({
+          el: document.querySelector("#images"),
+          sources: this.sources,
+          data: this.data,
+          originalSize: { w: 1522, h: 1238 }
+        });
+      }
+      
+      resize() {
+        document.documentElement.style.setProperty("--rvw", `${document.documentElement.clientWidth / 100}px`);
+      }
+    }
+    
+    window.addEventListener("load", () => {
+      new ms();
     });
-
-    window.addEventListener('mousedown', function() {
-        cring.style.width       = '70px';
-        cring.style.height      = '70px';
-        cring.style.borderColor = 'var(--gold)';
-    });
-
-    window.addEventListener('mouseup', function() {
-        cring.style.width       = '40px';
-        cring.style.height      = '40px';
-        cring.style.borderColor = 'rgba(255,255,255,0.3)';
-    });
-
-    window.addEventListener('wheel', function(e) {
-        scroll.tX -= e.deltaX;
-        scroll.tY -= e.deltaY;
-    }, { passive: true });
-
-    window.addEventListener('pointerdown', function(e) {
-        drag.active  = true;
-        drag.sx      = e.clientX;
-        drag.sy      = e.clientY;
-        drag.scrollX = scroll.tX;
-        drag.scrollY = scroll.tY;
-    });
-
-    window.addEventListener('pointerup', function() {
-        drag.active = false;
-    });
-
-    window.addEventListener('pointermove', function(e) {
-        if (drag.active) {
-            scroll.tX = drag.scrollX + (e.clientX - drag.sx) * DRAG_MULT;
-            scroll.tY = drag.scrollY + (e.clientY - drag.sy) * DRAG_MULT;
-        }
-    });
-
-    window.addEventListener('resize', function() {
-        winW     = window.innerWidth;
-        winH     = window.innerHeight;
-        isMobile = winW < 768;
-        buildGrid();
-    });
-
-    /* ---- INIT ------------------------------------------------------------- */
-    buildGrid();
-    requestAnimationFrame(render);
-    </script>
+  </script>
 </body>
 </html>
