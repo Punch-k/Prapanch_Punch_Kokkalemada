@@ -135,11 +135,10 @@
     }
     #hero #images .item small:not(.visible) .line-mask { transform: translateY(100%); }
     #hero #images .item small:not(.visible) .line-mask .line { transform: translateY(110%); }
-      /* This makes the photos glow and lift when you click/drag */
-    html.dragging .item .item-image {
-      filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.4)); /* The Glow */
-      transform: scale(1.05); /* The Lift */
+      html.dragging #hero {
+      cursor: grabbing; /* Simple and clean, lets the glow stand out */
     }
+    
   </style>
 </head>
 <body>
