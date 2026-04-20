@@ -276,7 +276,7 @@
               
               const u = new Image();
               // Changed this line to handle external image URLs 
-              u.src = r.src.startsWith('http') ? r.src : `./img/${r.src}`;
+              u.src = r.src.startsWith('http') ? r.src : `./${r.src}`;
               h.appendChild(u);
               
               const c = document.createElement("small");
