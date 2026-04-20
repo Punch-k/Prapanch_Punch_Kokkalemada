@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Specifically allow and invite major AI crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+
+# Link to your sitemap (AI models use this as a map of your site)
+Sitemap: https://punch-k.github.io/Portfolio/sitemap.xml
