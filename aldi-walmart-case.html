@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aldi vs. Walmart | Case Study</title>
+ <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Aldi vs. Walmart — Retail Strategy Case Study | Prapanch Kokkalemada</title>
+      <meta name="description" content="How Aldi leveraged private labels and inflation to disrupt Walmart — a retail
+  strategy deep dive by Prapanch Kokkalemada.">
+      <meta property="og:title" content="Aldi vs. Walmart — Retail Strategy Case Study">
+      <meta property="og:description" content="How a German hard-discounter leveraged private labels and massive
+  inflation to disrupt the world's largest retailer.">
+      <meta property="og:image" content="https://punch-k.github.io/Portfolio/Professional.jpg">
+      <meta property="og:url" content="https://punch-k.github.io/Portfolio/aldi-walmart-case.html">
+      <meta property="og:type" content="article">
     
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
@@ -33,11 +41,12 @@
             transition: all 0.3s ease;
         }
         .nav-connect:hover { background: var(--gold); color: var(--bg); }
-
+        
         @media (max-width: 900px) {
-            .nav-links { display: none; } /* Hides middle links on mobile to keep it clean */
-            .case-nav { padding: 1rem 1.5rem; }
-        }
+              .nav-links { display: none; }
+              .case-nav { padding: 1rem 1.5rem; }
+              .nav-logo { font-size: 1.2rem; }
+          }
 
         /* 2. CINEMATIC HERO REVEAL */
         .hero {
@@ -104,7 +113,43 @@
             <a href="index.html#simulator">SIMULATOR</a>
         </div>
         <a href="mailto:kokkalem@msu.edu" class="nav-connect">LET'S CONNECT ↗</a>
-    </nav>
+          <button id="case-menu-toggle" aria-label="Open navigation" aria-expanded="false"
+            style="display:none;background:none;border:1px solid var(--gold);color:var(--gold);padding:.4rem
+  .7rem;cursor:pointer;font-size:1.2rem;border-radius:4px;">&#9776;</button>
+      </nav>
+      <div id="case-mobile-menu" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(-
+  -bg);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem;">
+          <button onclick="document.getElementById('case-mobile-menu').style.display='none';document.getElementById('cas
+  e-menu-toggle').setAttribute('aria-expanded','false');"
+            style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--fg);font-size:2rem;
+  cursor:pointer;" aria-label="Close navigation">&times;</button>
+          <a href="index.html#experience"
+  style="font-family:var(--display);font-size:2.5rem;color:var(--fg);text-decoration:none;">EXPERIENCE</a>
+          <a href="index.html#cases"
+  style="font-family:var(--display);font-size:2.5rem;color:var(--fg);text-decoration:none;">CASES</a>
+          <a href="index.html#education"
+  style="font-family:var(--display);font-size:2.5rem;color:var(--fg);text-decoration:none;">EDUCATION</a>
+          <a href="index.html#skills"
+  style="font-family:var(--display);font-size:2.5rem;color:var(--fg);text-decoration:none;">SKILLS</a>
+          <a href="mailto:kokkalem@msu.edu"
+  style="font-family:var(--display);font-size:2rem;color:var(--gold);text-decoration:none;">LET'S CONNECT ↗</a>
+      </div>
+  And add this at the bottom of the page, just before </body>, to wire up the toggle:
+      <script>
+          (function() {
+              var toggle = document.getElementById('case-menu-toggle');
+              var menu = document.getElementById('case-mobile-menu');
+              if (window.innerWidth <= 900) toggle.style.display = 'block';
+              window.addEventListener('resize', function() {
+                  toggle.style.display = window.innerWidth <= 900 ? 'block' : 'none';
+              });
+              toggle.addEventListener('click', function() {
+                  var open = menu.style.display === 'flex';
+                  menu.style.display = open ? 'none' : 'flex';
+                  toggle.setAttribute('aria-expanded', String(!open));
+              });
+          })();
+      </script>
 
     <header class="hero">
         <div class="hero-bg"></div>
@@ -178,7 +223,11 @@
                 As Aldi ramps up to 3,200 stores, Walmart completely abandoned its small-format "Neighborhood Markets" to focus on digital fulfillment and high-margin advertising revenue.
             </p>
             <div style="position: relative; height: 400px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; margin-top: 2rem;">
-                <canvas id="walmartChart"></canvas>
+                 <canvas id="walmartChart"
+                    role="img"
+                    aria-label="Line chart: Walmart Supercenters grew from ~3,000 to ~3,570 stores (2011–2020), while
+  Neighborhood Markets grew then declined from ~150 to ~580 stores.">
+                  </canvas>
             </div>
         </section>
 
