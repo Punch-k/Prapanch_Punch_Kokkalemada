@@ -30,11 +30,23 @@
             z-index: 100; border-bottom: 1px solid rgba(237,233,224,0.05);
             box-sizing: border-box;
         }
-        .nav-logo { font-family: var(--display); font-size: 1.5rem; color: var(--fg); text-decoration: none; line-height: 1; letter-spacing: 0.05em; }
-        .nav-logo span { color: var(--gold); }
+       .nav-container {
+       max-width: 1400px;
+       margin: 0 auto;
+     }
+          
+          .nav-logo {
+                  font-weight: 700 !important;
+                  letter-spacing: 0.1em !important;
+                  font-family: 'Bebas Neue', sans-serif;
+                }
+     .nav-logo span { color: var(--gold); }
         .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.15em; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
+        .nav-links a {
+                      font-weight: 500;
+                      font-size: 0.75rem !important;
+                    }
+     .nav-links a:hover { color: var(--gold); }
         .nav-connect {
             border: 1px solid var(--gold); color: var(--gold); padding: 0.6rem 1.5rem;
             border-radius: 50px; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em;
@@ -47,7 +59,9 @@
               .case-nav { padding: 1rem 1.5rem; }
               .nav-logo { font-size: 1.2rem; }
           }
-
+         details summary::-webkit-details-marker { 
+           display: none; 
+         }
         /* 2. CINEMATIC HERO REVEAL */
         .hero {
             height: 85vh; display: flex; flex-direction: column; justify-content: center;
@@ -104,19 +118,19 @@
 <body>
 
     <nav class="case-nav">
-        <a href="index.html" class="nav-logo">PUNCH <span>KOKKALEMADA</span></a>
-        <div class="nav-links">
-            <a href="index.html#experience">EXPERIENCE</a>
-            <a href="index.html#cases">CASES</a>
-            <a href="index.html#education">EDUCATION</a>
-            <a href="index.html#skills">SKILLS</a>
-            <a href="index.html#simulator">SIMULATOR</a>
-        </div>
-        <a href="mailto:kokkalem@msu.edu" class="nav-connect">LET'S CONNECT ↗</a>
-          <button id="case-menu-toggle" aria-label="Open navigation" aria-expanded="false"
-            style="display:none;background:none;border:1px solid var(--gold);color:var(--gold);padding:.4rem
-  .7rem;cursor:pointer;font-size:1.2rem;border-radius:4px;">&#9776;</button>
-      </nav>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">PRAPANCH <span>KOKKALEMADA</span></a>
+    
+    <div class="nav-links">
+      <a href="about.html">ABOUT</a>
+      <a href="aldi-walmart-case.html">RESEARCH</a>
+      <a href="index.html#section-experience">EXPERIENCE</a>
+      <a href="index.html#simulator">SIMULATOR</a>
+    </div>
+
+    <a href="mailto:kokkalem@msu.edu" class="nav-connect">LET'S CONNECT ↗</a>
+  </div>
+</nav>
       <div id="case-mobile-menu" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(-
   -bg);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem;">
           <button onclick="document.getElementById('case-mobile-menu').style.display='none';document.getElementById('cas
@@ -231,9 +245,32 @@
             </div>
         </section>
 
-        <div style="text-align: center; margin-top: 6rem; border-top: 1px solid var(--line); padding-top: 4rem;">
-            <a href="index.html" style="color: var(--gold); text-decoration: none; font-family: var(--display); font-size: 2rem; letter-spacing: 0.1em; transition: color 0.3s;">← RETURN TO PORTFOLIO</a>
-        </div>
+        <section class="reveal" style="margin-top: 8rem; border-top: 1px solid var(--line); padding-top: 6rem;">
+  <p style="color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">Let's Connect</p>
+  <h2 style="font-family: var(--display); font-size: 4rem; margin-bottom: 3rem;">Initiate Dialogue.</h2>
+
+  <div class="qa-container">
+    <details open style="border-bottom: 1px solid var(--line); padding: 1.5rem 0;">
+      <summary style="font-size: 1.1rem; cursor: pointer; list-style: none; color: var(--gold);">Q1. How do you bridge the gap between technical engineering and business strategy? +</summary>
+      <p style="padding-top: 1rem; opacity: 0.8; line-height: 1.6;">My foundation in Civil Engineering allows me to understand complex infrastructure, while my Broad MBA provides the framework to translate technical realities into C-suite value. I specialize in taking "bottom-up" operational data and turning it into "top-down" strategies.</p>
+    </details>
+
+    <details style="border-bottom: 1px solid var(--line); padding: 1.5rem 0;">
+      <summary style="font-size: 1.1rem; cursor: pointer; list-style: none; color: var(--gold);">Q2. What is your status regarding US Work Authorization? +</summary>
+      <p style="padding-top: 1rem; opacity: 0.8; line-height: 1.6;">I am a Canadian Citizen eligible for TN status under the USMCA. This allows for immediate work authorization as a Management Consultant or Engineer, bypassing the H-1B lottery and traditional sponsorship costs.</p>
+    </details>
+  </div>
+</section>
+
+<footer style="margin-top: 10rem; padding: 4rem 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; letter-spacing: 0.1em;">
+  <div>MBA CANDIDATE &copy; 2026 · BROAD COLLEGE OF BUSINESS</div>
+  <div style="display: flex; gap: 2rem;">
+    <a href="mailto:kokkalem@msu.edu">E-MAIL</a>
+    <a href="https://www.linkedin.com/in/prapanchkokkalemada/" target="_blank">LINKEDIN</a>
+    <a href="#hero">↑ TOP</a>
+  </div>
+</footer>
+  
 
     </main>
 
@@ -287,5 +324,7 @@
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#ede9e0' } } }, scales: { y: { grid: { color: 'rgba(237,233,224,0.1)' }, ticks: { color: 'rgba(237,233,224,0.6)' } }, x: { grid: { display: false }, ticks: { color: 'rgba(237,233,224,0.6)' } } } }
         });
     </script>
+ 
+ 
 </body>
 </html>
