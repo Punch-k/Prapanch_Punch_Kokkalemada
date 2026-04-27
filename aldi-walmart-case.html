@@ -20,19 +20,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <style>
-        /* ─── CASE STUDY SPECIFIC STYLES ─── */
-        body { background: var(--bg); color: var(--fg); font-family: var(--sans); margin: 0; padding: 0; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--fg); font-family: var(--sans); margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* 1. READING PROGRESS BAR */
+        /* ── ARTICLE UTILITIES ── */
         #reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--gold); width: 0%; z-index: 1000; transition: width 0.1s ease; }
+        
+        #back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--fg); color: var(--bg); border: none; padding: 1rem; border-radius: 50%; cursor: pointer; z-index: 999; opacity: 0; transform: translateY(20px); transition: all 0.3s ease; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; }
+        #back-to-top.visible { opacity: 1; transform: translateY(0); }
+        #back-to-top:hover { background: var(--gold); }
 
-        /* 2. SEAMLESS NAVIGATION BAR */
-        .case-nav {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 4rem; 
-            display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(10, 11, 13, 0.85); backdrop-filter: blur(12px); 
-            z-index: 100; border-bottom: 1px solid rgba(237,233,224,0.05); box-sizing: border-box; 
-        }
+        /* ── SEAMLESS NAVIGATION ── */
+        .case-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 11, 13, 0.85); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(237,233,224,0.05); box-sizing: border-box; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .nav-logo { font-family: 'Bebas Neue', sans-serif !important; font-weight: 700 !important; font-size: 1.5rem; letter-spacing: 0.1em !important; text-decoration: none; color: #fff; }
         .nav-logo span { color: var(--gold); }
@@ -43,33 +41,81 @@
         .nav-connect:hover { background: var(--gold); color: var(--bg); }
         @media (max-width: 900px) { .nav-links { display: none; } .case-nav { padding: 1rem 1.5rem; } }
 
-        /* 3. CINEMATIC HERO REVEAL */
-        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 2rem; border-bottom: 1px solid var(--line); }
+        /* ── HERO & BREADCRUMBS ── */
+        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 2rem; border-bottom: 1px solid var(--line); }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop'); background-size: cover; background-position: center; opacity: 0; filter: grayscale(90%) brightness(0.25); z-index: 0; }
         .hero-content { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+        .breadcrumbs { display: flex; gap: 0.5rem; color: rgba(237,233,224,0.6); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; opacity: 0; }
+        .breadcrumbs a { color: var(--gold); text-decoration: none; }
         
-        /* 4. ARTICLE FEATURES & FORMATTING */
-        .article-meta { display: flex; gap: 1.5rem; color: var(--gold); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; opacity: 0; transform: translateY(20px); }
-        .exec-summary { background: rgba(201,168,76,0.05); border-left: 4px solid var(--gold); padding: 2.5rem; margin: -3rem auto 4rem; position: relative; z-index: 20; max-width: 800px; border-radius: 0 8px 8px 0; backdrop-filter: blur(10px); }
+        .exec-summary { background: rgba(201,168,76,0.05); border-left: 4px solid var(--gold); padding: 2.5rem; margin: -3rem auto 4rem; position: relative; z-index: 20; max-width: 1000px; border-radius: 0 8px 8px 0; backdrop-filter: blur(10px); }
         .exec-summary h3 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); margin-top: 0; font-size: 1.5rem; letter-spacing: 0.1em; }
-        .article-body { max-width: 800px; margin: 0 auto; padding: 0 2rem 6rem; }
-        .article-body h2 { font-family: var(--display); font-size: 3rem; color: var(--fg); margin-top: 4rem; margin-bottom: 1.5rem; line-height: 1.1; }
+
+        /* ── GRID LAYOUT: SIDEBAR + CONTENT ── */
+        .case-layout { display: grid; grid-template-columns: 250px 1fr; gap: 5rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem 6rem; align-items: start; }
+        
+        /* Sticky Sidebar */
+        .case-sidebar { position: sticky; top: 120px; display: flex; flex-direction: column; gap: 3rem; }
+        .toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; border-left: 1px solid var(--line); }
+        .toc-list li a { text-decoration: none; color: rgba(237,233,224,0.5); font-size: 0.9rem; transition: all 0.3s ease; padding-left: 1.5rem; display: block; position: relative; }
+        .toc-list li a::before { content: ''; position: absolute; left: -1px; top: 0; height: 100%; width: 2px; background: transparent; transition: background 0.3s ease; }
+        .toc-list li a:hover { color: var(--fg); }
+        .toc-list li a.active { color: var(--gold); font-weight: 500; }
+        .toc-list li a.active::before { background: var(--gold); }
+        
+        .meta-block { font-size: 0.8rem; color: rgba(237,233,224,0.6); }
+        .meta-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.1em; color: var(--fg); margin-bottom: 0.5rem; display: block; font-size: 1rem; }
+        .print-btn { background: none; border: 1px solid var(--line); color: var(--fg); padding: 0.5rem 1rem; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; transition: all 0.3s; margin-top: 1rem; width: 100%; text-align: left; }
+        .print-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        @media (max-width: 900px) { .case-layout { grid-template-columns: 1fr; } .case-sidebar { display: none; } }
+
+        /* ── CONTENT STYLES ── */
+        .article-body h2 { font-family: var(--display); font-size: 2.8rem; color: var(--fg); margin-top: 0; margin-bottom: 1.5rem; line-height: 1.1; position: relative; padding-top: 4rem; }
         .article-body p { font-size: 1.15rem; color: rgba(237,233,224,0.8); line-height: 1.8; margin-bottom: 2rem; font-weight: 300; }
-        
         .gsap-reveal { opacity: 0; transform: translateY(40px); }
-        
+
+        /* ── INTERACTIVE TABS ── */
+        .comp-tabs { display: flex; gap: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+        .comp-tab { background: none; border: none; color: rgba(237,233,224,0.5); font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; padding: 1rem 2rem; cursor: pointer; transition: all 0.3s; position: relative; }
+        .comp-tab::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: transparent; transition: background 0.3s; }
+        .comp-tab.active { color: var(--gold); }
+        .comp-tab.active::after { background: var(--gold); }
+        .comp-panel { display: none; animation: fadeIn 0.5s ease; }
+        .comp-panel.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ── PULL QUOTE ── */
+        .pull-quote { margin: 4rem 0; padding: 3rem; border: 1px solid var(--line); text-align: center; background: rgba(255,255,255,0.02); }
+        .pull-quote p { font-family: var(--display); font-size: 2rem; color: var(--gold); line-height: 1.3; margin: 0 0 1rem 0; font-style: italic; }
+        .pull-quote span { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.1em; color: rgba(237,233,224,0.5); }
+
+        /* ── STATS & CHARTS ── */
         .stat-banner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; background: rgba(255,255,255,0.02); border: 1px solid var(--line); padding: 3rem; border-radius: 8px; margin: 4rem 0; }
         .stat-num { font-family: var(--display); font-size: 4rem; color: var(--gold); line-height: 1; }
         .stat-label { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,233,224,0.6); margin-top: 0.5rem; }
 
-        .tilt-card { background: rgba(255,255,255,0.02); border: 1px solid var(--line); padding: 3rem; border-radius: 12px; transition: all 0.4s; }
-        .tilt-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(201,168,76,0.1); }
-        .tilt-card h3 { font-family: var(--display); font-size: 2.2rem; color: var(--gold); margin-top: 0; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+        /* ── NEXT PROJECT LOOP ── */
+        .next-project { margin-top: 8rem; border-top: 1px solid var(--line); padding: 6rem 2rem; text-align: center; background: linear-gradient(180deg, transparent, rgba(201,168,76,0.03)); transition: background 0.4s; display: block; text-decoration: none; }
+        .next-project:hover { background: rgba(201,168,76,0.08); }
+        .next-project span { display: block; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,233,224,0.6); margin-bottom: 1rem; }
+        .next-project h2 { font-family: var(--display); font-size: clamp(3rem, 5vw, 5rem); color: var(--gold); margin: 0; transition: transform 0.4s; }
+        .next-project:hover h2 { transform: translateY(-10px); }
+
+        @media print {
+            body { background: white; color: black; }
+            .case-nav, #reading-progress, .case-sidebar, .next-project, #section-get-in-touch, .site-footer, #back-to-top { display: none !important; }
+            .case-layout { grid-template-columns: 1fr; margin: 0; padding: 0; }
+            .article-body h2 { color: black; padding-top: 2rem; }
+            .pull-quote p, .stat-num { color: black; }
+            .exec-summary { border-left-color: black; background: #f9f9f9; }
+        }
     </style>
 </head>
 <body>
 
 <div id="reading-progress"></div>
+<button id="back-to-top" aria-label="Scroll to top" onclick="window.scrollTo(0,0)">↑</button>
 
 <nav class="case-nav">
     <div class="nav-container">
@@ -96,12 +142,8 @@
 <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-        <div class="article-meta hero-anim">
-            <span>Strategy Deep Dive</span>
-            <span>•</span>
-            <span>5 Min Read</span>
-            <span>•</span>
-            <span>Published: April 2026</span>
+        <div class="breadcrumbs hero-anim">
+            <a href="index.html">Portfolio</a> / <a href="index.html#section-cases">Research</a> / Strategy
         </div>
         <h1 class="hero-anim" style="font-family: var(--display); font-size: clamp(3.5rem, 8vw, 7rem); color: var(--gold); margin: 0; line-height: 1;">ALDI VS. WALMART</h1>
         <p class="hero-anim" style="font-size: 1.2rem; max-width: 650px; margin-top: 2rem; line-height: 1.8; color: var(--fg); font-weight: 300;">
@@ -117,56 +159,96 @@
     </p>
 </div>
 
-<main class="article-body">
-    <section class="gsap-reveal">
-        <h2>I. THE BASELINE COLLISION</h2>
-        <p>Historically, Walmart dominated through its massive Vendor-Managed Inventory (VMI) logistics network and "Everyday Low Prices." By 2019, Aldi asserted itself as a genuine threat, opening locations aggressively near Walmart Supercenters.</p>
-        <p>While a standard Walmart carried 150,000 SKUs, Aldi utilized a hyper-efficient model with only 1,400 curated items per store—eliminating choice to maximize operational velocity and purchasing power. This forces a direct operational clash: scale-through-volume vs. margin-through-simplicity.</p>
-    </section>
+<div class="case-layout">
+    
+    <aside class="case-sidebar">
+        <nav aria-label="Table of Contents">
+            <span class="meta-title">CONTENTS</span>
+            <ul class="toc-list" id="toc-list">
+                <li><a href="#baseline-collision" class="active">I. Baseline Collision</a></li>
+                <li><a href="#operational-models">II. Operational Models</a></li>
+                <li><a href="#the-escalation">III. The 2026 Escalation</a></li>
+                <li><a href="#data-trajectory">IV. Data Trajectory</a></li>
+            </ul>
+        </nav>
 
-    <section class="gsap-reveal">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 4rem 0;">
-            <div class="tilt-card">
-                <h3>THE ALDI MODEL</h3>
-                <p>80% Private Label units. Relies on pallet-based displays and multi-sided barcodes to maximize labor efficiency at checkout and restocking.</p>
+        <div class="meta-block">
+            <span class="meta-title">CASE DETAILS</span>
+            <p style="margin: 0 0 0.5rem 0;"><strong>Date:</strong> April 2026</p>
+            <p style="margin: 0 0 0.5rem 0;"><strong>Read Time:</strong> 5 Minutes</p>
+            <p style="margin: 0;"><strong>Focus:</strong> Supply Chain, GTM Strategy</p>
+            <button class="print-btn" onclick="window.print()">🖨️ Print Case Study</button>
+        </div>
+    </aside>
+
+    <main class="article-body">
+        
+        <section id="baseline-collision" class="scroll-section gsap-reveal">
+            <h2>I. THE BASELINE COLLISION</h2>
+            <p>Historically, Walmart dominated through its massive Vendor-Managed Inventory (VMI) logistics network and "Everyday Low Prices." By 2019, Aldi asserted itself as a genuine threat, opening locations aggressively near Walmart Supercenters.</p>
+            <p>While a standard Walmart carried 150,000 SKUs, Aldi utilized a hyper-efficient model with only 1,400 curated items per store—eliminating choice to maximize operational velocity and purchasing power. This forces a direct operational clash: scale-through-volume vs. margin-through-simplicity.</p>
+        </section>
+
+        <blockquote class="pull-quote gsap-reveal">
+            <p>"Aldi isn't just selling groceries; they are selling back the customer's time through the paradox of limited choice."</p>
+            <span>— Operations Strategy Insight</span>
+        </blockquote>
+
+        <section id="operational-models" class="scroll-section gsap-reveal">
+            <h2>II. OPERATIONAL MODELS</h2>
+            <p>To understand the disruption, we must isolate the specific mechanics each retailer uses to drive profitability. Select a model below to explore the strategic differences.</p>
+            
+            <div class="comp-tabs">
+                <button class="comp-tab active" onclick="openTab(event, 'aldi-model')">The Aldi Model</button>
+                <button class="comp-tab" onclick="openTab(event, 'walmart-model')">The Walmart Pivot</button>
             </div>
-            <div class="tilt-card">
-                <h3>THE WALMART PIVOT</h3>
-                <p>Transitioned from aggressive physical expansion to digital mastery, prioritizing Click-and-Collect operations and high-margin retail media networks.</p>
+            
+            <div id="aldi-model" class="comp-panel active">
+                <p><strong>Lean Inventory & Labor:</strong> Aldi operations are defined by 80% Private Label units. By relying on pallet-based displays and multi-sided barcodes, they eliminate the need for aisle-stocking labor and drastically increase checkout velocity. Their real estate footprint remains small (under 20,000 sq ft), keeping capital expenditures low.</p>
             </div>
-        </div>
-    </section>
+            
+            <div id="walmart-model" class="comp-panel">
+                <p><strong>Digital Ecosystem & Volume:</strong> Walmart recognized the physical threat and transitioned from aggressive footprint expansion to digital mastery. They prioritized Click-and-Collect operations, massive supply chain automation, and leveraging their customer data to build high-margin retail media networks to subsidize low grocery margins.</p>
+            </div>
+        </section>
 
-    <section class="gsap-reveal">
-        <h2 style="color: var(--gold);">II. THE 2026 ESCALATION</h2>
-        <p>Inflation acted as an accelerant for Aldi. In 2025 alone, Aldi saw 17 million new customers, pushing grocery market share from 4.3% to 5.7%. With the acquisition of Southeastern Grocers, Aldi is committing to 180 new stores in 2026, targeting the Sunbelt region specifically.</p>
-    </section>
+        <section id="the-escalation" class="scroll-section gsap-reveal">
+            <h2 style="color: var(--gold);">III. THE 2026 ESCALATION</h2>
+            <p>Inflation acted as an accelerant for Aldi. In 2025 alone, Aldi saw 17 million new customers, pushing grocery market share from 4.3% to 5.7%. With the acquisition of Southeastern Grocers, Aldi is committing to 180 new stores in 2026, targeting the Sunbelt region specifically.</p>
+        </section>
 
-    <section class="stat-banner gsap-reveal">
-        <div class="stat-box" style="text-align: center;">
-            <div class="stat-num counter" data-target="180">0</div>
-            <div class="stat-label">New Stores in 2026</div>
-        </div>
-        <div class="stat-box" style="text-align: center;">
-            <div class="stat-num counter" data-target="17">0</div>
-            <div class="stat-label">Million New Users</div>
-        </div>
-        <div class="stat-box" style="text-align: center;">
-            <div class="stat-num counter" data-target="3200">0</div>
-            <div class="stat-label">Store Goal by 2028</div>
-        </div>
-    </section>
+        <section class="stat-banner gsap-reveal">
+            <div class="stat-box" style="text-align: center;">
+                <div class="stat-num counter" data-target="180">0</div>
+                <div class="stat-label">New Stores in 2026</div>
+            </div>
+            <div class="stat-box" style="text-align: center;">
+                <div class="stat-num counter" data-target="17">0</div>
+                <div class="stat-label">Million New Users</div>
+            </div>
+            <div class="stat-box" style="text-align: center;">
+                <div class="stat-num counter" data-target="3200">0</div>
+                <div class="stat-label">Store Goal by 2028</div>
+            </div>
+        </section>
 
-    <section class="gsap-reveal">
-        <h2>III. THE DATA TRAJECTORY</h2>
-        <p>Visualizing the physical footprint growth reveals Aldi's strategy: relentless, steady expansion compared to Walmart's saturated, flat-lining physical footprint.</p>
-        <div style="height: 400px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; margin-top: 2rem;">
-            <canvas id="walmartChart"></canvas>
-        </div>
-    </section>
-</main>
+        <section id="data-trajectory" class="scroll-section gsap-reveal">
+            <h2>IV. THE DATA TRAJECTORY</h2>
+            <p>Visualizing the physical footprint growth reveals Aldi's strategy: relentless, steady expansion compared to Walmart's saturated, flat-lining physical footprint.</p>
+            <div style="height: 400px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; margin-top: 2rem;">
+                <canvas id="walmartChart"></canvas>
+            </div>
+        </section>
 
-<section id="section-get-in-touch" class="contact-section-shell" aria-labelledby="contact-heading" style="margin-top: 4rem;">
+    </main>
+</div>
+
+<a href="YOUR_LINK_HERE_2" class="next-project">
+    <span>Next Case Study</span>
+    <h2>TechSmith GTM Execution →</h2>
+</a>
+
+<section id="section-get-in-touch" class="contact-section-shell" aria-labelledby="contact-heading">
     <div class="connect-grid">
         <div class="ct-content gsap-reveal">
             <div class="sec-eyebrow-row">
@@ -232,16 +314,54 @@
     </nav>
 </footer>
 
-<script src="script.js"></script> <script>
-    // 1. READING PROGRESS BAR
+<script>
+    // 1. READING PROGRESS & BACK TO TOP
     window.addEventListener('scroll', () => {
         const scrollTop = document.documentElement.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const progress = (scrollTop / scrollHeight) * 100;
         document.getElementById('reading-progress').style.width = progress + '%';
+        
+        // Show back to top button after scrolling 50%
+        const backToTop = document.getElementById('back-to-top');
+        if (progress > 50) { backToTop.classList.add('visible'); } 
+        else { backToTop.classList.remove('visible'); }
     });
 
-    // 2. GSAP ANIMATIONS
+    // 2. STICKY TOC HIGHLIGHTING
+    const sections = document.querySelectorAll('.scroll-section');
+    const navLinks = document.querySelectorAll('.toc-list li a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // 3. TAB LOGIC
+    function openTab(evt, tabName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("comp-panel");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+        tablinks = document.getElementsByClassName("comp-tab");
+        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // 4. GSAP ANIMATIONS
     gsap.registerPlugin(ScrollTrigger);
 
     // Hero Timeline
@@ -257,7 +377,7 @@
         });
     });
 
-    // 3. STAT COUNTERS (Triggered via GSAP)
+    // 5. STAT COUNTERS (Triggered via GSAP)
     ScrollTrigger.create({
         trigger: ".stat-banner",
         start: "top 80%",
@@ -280,7 +400,7 @@
         }
     });
 
-    // 4. CHART.JS
+    // 6. CHART.JS
     const ctx = document.getElementById('walmartChart').getContext('2d');
     let chartRendered = false;
 
@@ -315,7 +435,7 @@
         }
     });
 
-    // 5. MOBILE MENU & ACCORDION (Fallback Logic)
+    // 7. MOBILE MENU & ACCORDION
     const toggle = document.getElementById('case-menu-toggle');
     const menu = document.getElementById('case-mobile-menu');
     toggle.addEventListener('click', () => { menu.style.display = 'flex'; });
