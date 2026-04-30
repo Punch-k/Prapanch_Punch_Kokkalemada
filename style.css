@@ -148,7 +148,7 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .nav-logo {
   font-family: 'EB Garamond', serif !important;
   font-weight: 600 !important;
-  font-size: 1.8rem;
+  font-size: 1.3rem; /* Shrunk down to fit perfectly in the nav bar */
   letter-spacing: 0.05em !important; 
   text-decoration: none;
   color: #fff;
@@ -176,8 +176,20 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 .word.show { transform: translateY(0); }
 .hero-eyebrow { font-size: .65rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,168,76,.85); margin-bottom: 2rem; opacity: 0; transform: translateY(10px); transition: opacity .65s .15s, transform .65s .15s var(--ease); }
 .hero-eyebrow.show { opacity: 1; transform: none; }
-.hero-hl { font-family: var(--display); font-size: clamp(3.8rem,10vw,9rem); line-height: .92; letter-spacing: .02em; margin-bottom: 2.2rem; }
-.hero-hl em { font-family: var(--serif); font-style: italic; font-size: .82em; color: rgba(237,233,224,.48); }
+.hero-hl { 
+  font-family: 'Bebas Neue', sans-serif; /* Forces ONLY "Fix the Ops." to be bold block letters */
+  font-size: clamp(3.8rem,10vw,9rem); 
+  line-height: .92; 
+  letter-spacing: .02em; 
+  margin-bottom: 2.2rem; 
+}
+
+.hero-hl em { 
+  font-family: 'EB Garamond', serif; /* Keeps "Scale the Business." in the elegant italic serif */
+  font-style: italic; 
+  font-size: .82em; 
+  color: rgba(237,233,224,.48); 
+}
 .hero-sub { max-width: 580px; font-size: 1rem; color: rgba(237,233,224,.54); line-height: 1.78; margin-bottom: 2.8rem; opacity: 0; transform: translateY(14px); transition: opacity .7s .85s, transform .7s .85s var(--ease); }
 .hero-sub.show { opacity: 1; transform: none; }
 .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; opacity: 0; transform: translateY(14px); transition: opacity .7s 1.05s, transform .7s 1.05s var(--ease); }
