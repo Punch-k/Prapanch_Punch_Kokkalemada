@@ -1895,7 +1895,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
     function drawTruck(x, y, wheelPhase) {
         ctx.fillStyle = '#e8e8e4'; ctx.beginPath(); ctx.roundRect(x, y - 40, 70, 38, 3); ctx.fill();
         ctx.fillStyle = '#d0ccc5'; ctx.fillRect(x + 2, y - 22, 66, 4);
-        ctx.fillStyle = '#2a2a2a'; ctx.font = 'bold 8px "Bebas Neue", sans-serif';
+        ctx.fillStyle = '#2a2a2a'; ctx.font = 'bold 8px "EB Garamond", sans-serif';
         ctx.fillText('SUPPLY &', x + 8, y - 26); ctx.fillText('CO.', x + 8, y - 16);
         ctx.fillStyle = GOLD; ctx.beginPath(); ctx.roundRect(x + 70, y - 34, 38, 32, [3, 6, 3, 3]); ctx.fill();
         ctx.fillStyle = '#1a2535'; ctx.beginPath(); ctx.roundRect(x + 76, y - 30, 22, 14, 2); ctx.fill();
@@ -1946,7 +1946,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
             ctx.fillStyle = '#222'; ctx.fillRect(bx + bw - 22, by - 100, 12, 100);
             ctx.fillStyle = GOLD; ctx.fillRect(bx, by - 100, bw, 24);
             ctx.fillStyle = '#222'; ctx.fillRect(bx, by - 79, bw, 3);
-            ctx.fillStyle = '#111'; ctx.font = 'bold 12px "Bebas Neue", sans-serif';
+            ctx.fillStyle = '#111'; ctx.font = 'bold 12px "EB Garamond", sans-serif';
             ctx.fillText('DO NOT JUMP', bx + 12, by - 84);
         }
     }
@@ -1985,7 +1985,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
     function drawOverlay() {
         if (state === 'idle') {
             ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fillRect(0, 0, W, H);
-            ctx.fillStyle = GOLD; ctx.font = 'bold 36px "Bebas Neue", sans-serif'; ctx.textAlign = 'center';
+            ctx.fillStyle = GOLD; ctx.font = 'bold 36px "EB Garamond", sans-serif'; ctx.textAlign = 'center';
             ctx.fillText('CLICK TO START ROUTE', W/2, H/2 - 10);
             ctx.fillStyle = '#888'; ctx.font = '13px "Share Tech Mono", monospace';
             ctx.fillText('JUMP OVER HOLES. DUCK UNDER BRIDGES.', W/2, H/2 + 18);
@@ -1994,7 +1994,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
             ctx.fillStyle = 'rgba(0,0,0,0.85)';
             ctx.fillRect(0, 0, W, H);
             ctx.textAlign = 'center';
-            ctx.font = 'bold 40px "Bebas Neue", sans-serif';
+            ctx.font = 'bold 40px "EB Garamond", sans-serif';
 
             ctx.fillStyle = RED;
             ctx.fillText('SUPPLY CHAIN DISRUPTED', W / 2, H / 2 - 14);
@@ -2091,7 +2091,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
         
         floaters.forEach(f => {
             ctx.globalAlpha = Math.max(0, f.life); ctx.fillStyle = f.color;
-            ctx.font = 'bold 15px "Bebas Neue", sans-serif'; ctx.fillText(f.text, f.x, f.y);
+            ctx.font = 'bold 15px "EB Garamond", sans-serif'; ctx.fillText(f.text, f.x, f.y);
             ctx.globalAlpha = 1; f.y -= 0.8; f.life -= 0.018;
         });
         floaters = floaters.filter(f => f.life > 0);
