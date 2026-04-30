@@ -1997,7 +1997,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
             ctx.font = 'bold 40px "EB Garamond", sans-serif';
 
             ctx.fillStyle = RED;
-            ctx.fillText('SUPPLY CHAIN DISRUPTED', W / 2, H / 2 - 14);
+            ctx.fillText('SUPPLY DISRUPTED', W / 2, H / 2 - 14);
             ctx.fillStyle = '#888';
             ctx.font = '13px "Share Tech Mono", monospace';
             ctx.fillText('FINAL DISTANCE: ' + Math.floor(distance) + 'm  |  HI-SCORE: ' + Math.floor(highScore) + 'm', W / 2, H / 2 + 12);
