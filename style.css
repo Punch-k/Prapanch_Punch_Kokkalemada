@@ -7,8 +7,8 @@
   --ease: cubic-bezier(.16,1,.3,1);
   --ease-io: cubic-bezier(.76,0,.24,1);
   --sans: 'DM Sans', sans-serif;
-  --serif: 'DM Serif Display', Georgia, serif;
-  --display: 'Bebas Neue', sans-serif;
+  --serif: 'EB Garamond', Georgia, serif;
+  --display: 'EB Garamond', serif;
 }
 html {
     scroll-behavior: smooth;
@@ -145,7 +145,15 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 /* ─── MAIN NAV ────────────────────────────────────────────── */
 #mainnav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.65rem 3rem; display: flex; justify-content: space-between; align-items: center; transition: background .45s, backdrop-filter .45s, padding .4s; }
 #mainnav.stk { background: rgba(10,11,13,.88); backdrop-filter: blur(20px); padding: 1rem 3rem; border-bottom: 1px solid var(--line); }
-.nav-logo { font-family: var(--display); font-size: 1rem; letter-spacing: .1em; color: var(--fg); text-decoration: none; transition: opacity .2s; }
+.nav-logo {
+  font-family: 'EB Garamond', serif !important;
+  font-weight: 600 !important;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em !important; 
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+}
 .nav-logo span { color: var(--gold); }
 .nav-logo:hover { opacity: .65; }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
