@@ -310,12 +310,12 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
    AGENCY QUOTE — "THE CINEMATIC FOCUS PULL"
    ============================================================ */
 .agency-quote-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8rem 2rem;
-    position: relative;
-    overflow: hidden;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 12rem 2rem; /* Massive vertical breathing room to center it */
+  position: relative; 
+  overflow: hidden; 
 }
 
 .agency-quote-wrap {
@@ -332,16 +332,22 @@ body::after { content: ''; position: fixed; inset: -100%; width: 300%; height: 3
 }
 
 .aq-word {
-    display: inline-block;
-    font-family: var(--display);
-    font-size: clamp(2.8rem, 6.5vw, 6.5rem);
-    line-height: 1.05;
-    color: var(--gold);
-    /* Start state: dim, offset upward, blurred */
-    opacity: 0.08;
-    filter: blur(14px);
-    transform: translateY(28px);
-    will-change: opacity, filter, transform;
+  display: inline-block; 
+  font-family: 'Averia Libre', serif; /* The new font */
+  font-size: clamp(2.5rem, 5vw, 4.5rem); /* Resized to fit the screen elegantly */
+  line-height: 1.1; 
+  color: #ffffff; /* Bright white by default */
+  /* GSAP Start state: dim, offset upward, blurred */
+  opacity: 0.08; 
+  filter: blur(14px); 
+  transform: translateY(28px); 
+  will-change: opacity, filter, transform; 
+}
+
+/* This targets the <em> tags we added to the HTML to make key words Gold */
+.aq-word em {
+  color: var(--gold);
+  font-style: italic;
 }
 
 .aq-attribution {
